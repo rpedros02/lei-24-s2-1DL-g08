@@ -20,14 +20,16 @@ public class Collaborator {
 
     // Default values for Collaborator attributes
     private final String NAME_BY_OMISSION = "no name";
-    private final Date BIRTH_DATE_BY_OMISSION = new Date(70, 3, 22);
-    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10,10,1975);
+    private final Date BIRTH_DATE_BY_OMISSION = new Date(25, 3, 2000);
+    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10, 10, 2020);
     private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
     private final String EMAIL_BY_OMISSION = "nomail@mail.com";
     private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;
     private final String ID_NUMBER_BY_OMISSION = "11111111";
-    private final Address ADDRESS_BY_OMISSION = new Address("no street", 12,"no city", "4000-400", "no country");
+    private final Address ADDRESS_BY_OMISSION = new Address("no street", 12, "1442-454", "4000-400", "no country");
     private final Job JOB_BY_OMISSION = new Job("no title");
+
+    private final int TAX_PAYER_NUMBER_BY_OMISSION = 252694384;
 
     // Collaborator attributes
     private String name;
@@ -57,16 +59,16 @@ public class Collaborator {
      * @param job            The job of the collaborator.
      */
     public Collaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
-        setName(name);
-        setBirthDate(birthDate);
-        setAdmissionDate(admissionDate);
-        setMobileNumber(mobileNumber);
-        setEmail(email);
-        setTaxPayerNumber(taxPayerNumber);
-        setIdDocType(idDocType);
-        setIdNumber(idNumber);
-        this.address = new Address(address);
-        this.job = new Job(job);
+        this.name = name;
+        this.birthDate = birthDate;
+        this.admissionDate = admissionDate;
+        this.mobileNumber = mobileNumber;
+        this.email = email;
+        this.taxPayerNumber = taxPayerNumber;
+        this.idDocType = idDocType;
+        this.idNumber = idNumber;
+        this.address = address;
+        this.job = job;
         this.assignedSkills = new ArrayList<>();
     }
 
@@ -84,8 +86,8 @@ public class Collaborator {
         setTaxPayerNumber(taxPayerNumber);
         setIdDocType(ID_DOC_TYPE_BY_OMISSION);
         setIdNumber(ID_NUMBER_BY_OMISSION);
-        this.address = new Address(ADDRESS_BY_OMISSION);
-        this.job = new Job(JOB_BY_OMISSION);
+        this.address = ADDRESS_BY_OMISSION;
+        this.job = JOB_BY_OMISSION;
         this.assignedSkills = new ArrayList<>();
     }
 
@@ -95,11 +97,11 @@ public class Collaborator {
         setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
         setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
         setEmail(email.getEmail());
-        setTaxPayerNumber(taxPayerNumber);
+        setTaxPayerNumber(TAX_PAYER_NUMBER_BY_OMISSION);
         setIdDocType(ID_DOC_TYPE_BY_OMISSION);
         setIdNumber(ID_NUMBER_BY_OMISSION);
-        this.address = new Address(ADDRESS_BY_OMISSION);
-        this.job = new Job(JOB_BY_OMISSION);
+        this.address = ADDRESS_BY_OMISSION;
+        this.job = JOB_BY_OMISSION;
         this.assignedSkills = new ArrayList<>();
     }
 
@@ -120,7 +122,9 @@ public class Collaborator {
         return mobileNumber;
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
     public int getTaxPayerNumber() {
         return taxPayerNumber;
@@ -135,7 +139,7 @@ public class Collaborator {
     }
 
     public Address getAddress() {
-        return new Address(address);
+        return this.address;
     }
 
     public Job getJob() {
@@ -214,21 +218,32 @@ public class Collaborator {
      * @return True if the birthdate corresponds to an age of at least 18 years old, otherwise false.
      */
     public static boolean isAtLeast18YearsOld(Date birthDate) {
-        Calendar birthCalendar = Calendar.getInstance();
-        birthCalendar.setTime(birthDate);
-
+        int birthYear = birthDate.year;
+        int birthMonth = birthDate.month;
+        int birthDay = birthDate.day;
         Calendar currentDate = Calendar.getInstance();
 
-        int age = currentDate.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR);
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH); // Note: Months are zero-based (January is 0)
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
 
-        if (currentDate.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH)) {
-            age--;
-        } else if (currentDate.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH)
-                && currentDate.get(Calendar.DAY_OF_MONTH) < birthCalendar.get(Calendar.DAY_OF_MONTH)) {
-            age--;
+
+        if (year - birthYear > 18) {
+            return true;
+        }
+        if (year - birthYear < 18) {
+            return false;
         }
 
-        return age >= 18;
+        if (month > birthMonth) return true;
+
+        if (month < birthMonth) return false;
+
+        if (day >= birthDay) return true;
+
+        if (day < birthDay) return false;
+
+        return false;
     }
 
     /**
@@ -259,19 +274,19 @@ public class Collaborator {
      */
     // https://pt.wikipedia.org/wiki/N%C3%BAmero_de_identifica%C3%A7%C3%A3o_fiscal#Exemplo_de_valida%C3%A7%C3%A3o_em_Java[8]
     public static boolean isValidTaxPayerNumber(String number) {
-        final int max=9;
+        final int max = 9;
         //check if is numeric and has 9 numbers
-        if (!number.matches("[0-9]+") || number.length()!=max) return false;
-        int checkSum=0;
+        if (!number.matches("[0-9]+") || number.length() != max) return false;
+        int checkSum = 0;
         //calculate checkSum
-        for (int i=0; i<max-1; i++){
-            checkSum+=(number.charAt(i)-'0')*(max-i);
+        for (int i = 0; i < max - 1; i++) {
+            checkSum += (number.charAt(i) - '0') * (max - i);
         }
-        int checkDigit=11-(checkSum % 11);
+        int checkDigit = 11 - (checkSum % 11);
         //if checkDigit is higher than 9 set it to zero
-        if (checkDigit>9) checkDigit=0;
+        if (checkDigit > 9) checkDigit = 0;
         //compare checkDigit with the last number of NIF
-        return checkDigit==number.charAt(max-1)-'0';
+        return checkDigit == number.charAt(max - 1) - '0';
     }
 
     public boolean hasSkill(Skill skill) {

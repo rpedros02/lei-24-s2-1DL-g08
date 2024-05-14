@@ -1,7 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 
@@ -13,14 +15,17 @@ public class RegisterCollaboratorUI implements Runnable {
 
     private final CreateCollaboratorController controller;
     private String name;
-    private String admissionDate;
-    private String birthdate;
-    private String address;
+    private Date admissionDate;
+    private Date birthdate;
+    private Address address;
     private int mobileNumber;
     private String email;
     private int taxpayerNumber;
-    private int idNumber;
+    private String idNumber;
     private IdDocType idType;
+
+    private Job job;
+
     public RegisterCollaboratorUI() {
         controller = new CreateCollaboratorController();
     }
@@ -39,7 +44,7 @@ public class RegisterCollaboratorUI implements Runnable {
     }
 
     private void submitData() {
-        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, admissionDate, birthdate, address, mobileNumber, email, taxpayerNumber, idNumber, idType);
+        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, birthdate, admissionDate, mobileNumber, email, taxpayerNumber, idType, idNumber, address, job);
     }
 
 
@@ -53,6 +58,7 @@ public class RegisterCollaboratorUI implements Runnable {
         address = requestAddress();
         mobileNumber = requestMobileNumber();
         admissionDate = requestAdmissionDate();
+        job = requestJob();
     }
 
     private Job requestJob() {
@@ -61,10 +67,17 @@ public class RegisterCollaboratorUI implements Runnable {
         return new Job(input.nextLine());
     }
 
-    private int requestIdNumber() {
+    private String requestIdNumber() {
         Scanner input = new Scanner(System.in);
         System.out.println("ID Doc Number: ");
-        return input.nextInt();
+        int val = input.nextInt();
+        try{
+            return String.valueOf(val);
+        }
+        catch (Exception e){
+            System.out.println("Please enter an int for the id number");
+            return requestIdNumber();
+        }
     }
 
     private int requestTaxpayer() {
@@ -111,22 +124,45 @@ public class RegisterCollaboratorUI implements Runnable {
         return input.nextInt();
     }
 
-    private String requestAddress() {
+    private Address requestAddress() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Full Address: ");
-        return input.nextLine();
+        System.out.println("Street: ");
+        String street = input.nextLine();
+        System.out.println("City: ");
+        String city = input.nextLine();
+        System.out.println("Postal Code: ");
+        String postalCode = input.nextLine();
+        System.out.println("Street Number: ");
+        int streetNumber = input.nextInt();
+        System.out.println("District: ");
+        String district = input.nextLine();
+        return new Address(street, streetNumber, postalCode, city,district);
     }
 
-    private String requestAdmissionDate() {
+    private Date requestAdmissionDate() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Admission date (format: dd/mm/yyyy): ");
-        return input.nextLine();
+        System.out.println("Admission Date (format: dd/mm/yyyy): ");
+        String[] values = input.nextLine().split("/");
+        while (values.length != 3) {
+            System.out.println("Use the correct format: (dd/mm/yyyy) ");
+            values = input.nextLine().split("/");
+        }
+
+        return new Date(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
+
     }
 
-    private String requestBirthdate() {
+    private Date requestBirthdate() {
         Scanner input = new Scanner(System.in);
         System.out.println("Birthdate (format: dd/mm/yyyy): ");
-        return input.nextLine();
+        String[] values = input.nextLine().split("/");
+        while (values.length != 3) {
+            System.out.println("Use the correct format: (dd/mm/yyyy) ");
+            values = input.nextLine().split("/");
+        }
+
+        return new Date(Integer.parseInt(values[0]), Integer.parseInt(values[1]), Integer.parseInt(values[2]));
+
     }
 
     private String requestName() {
