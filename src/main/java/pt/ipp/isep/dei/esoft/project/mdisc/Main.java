@@ -63,13 +63,13 @@ public class Main {
 
         // Write .csv file for the minimum cost tree
         String minimumCostTreeFileName = "minimum_cost_tree.csv";
-        CSVReader.writeCSV(kruskalResult.getGeneratedTree(), minimumCostTreeFileName, kruskalResult.getTotalCost());
+        CSVReader.writeCSV(kruskalResult.getSpanningTree(), minimumCostTreeFileName, kruskalResult.getTotalCost());
 
         // Print the graph
         printGraph(csvData);
 
         // Print the subgraph
-        printSubGraph(kruskalResult.getGeneratedTree(), kruskalResult.getTotalCost());
+        printSubGraph(kruskalResult.getSpanningTree(), kruskalResult.getTotalCost());
     }
 
 

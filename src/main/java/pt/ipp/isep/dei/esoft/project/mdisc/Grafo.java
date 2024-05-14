@@ -94,7 +94,7 @@ public class Grafo {
         // Set to store visited vertices
         DisjointSet disjointSet = new DisjointSet(this.vertices.size());
 
-        for (Aresta edge : sortedArestas) {
+        for (Aresta aresta : sortedArestas) {
             Vertice start = aresta.getStart();
             Vertice end = aresta.getEnd();
 
@@ -106,7 +106,7 @@ public class Grafo {
                     disjointSet.find(vertices.indexOf(start)) !=
                             disjointSet.find(vertices.indexOf(end))) {
                 spanningTree.add(aresta);
-                totalCost += edge.getWeight();
+                totalCost += aresta.getWeight();
                 disjointSet.union(vertices.indexOf(start), vertices.indexOf(end));
             }
         }
