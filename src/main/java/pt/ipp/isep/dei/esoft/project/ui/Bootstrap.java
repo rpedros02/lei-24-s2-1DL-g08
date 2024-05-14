@@ -1,11 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
@@ -117,7 +114,7 @@ public class Bootstrap implements Runnable {
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
-        collaboratorRepository.add("Johnny boy", "13/12/2005", "16/06/1999","Rua Manuel de Azevedo 221", 923456890, "balala@gmail.com",789789,1234, IdDocType.CC, new Job("Gardener"));
+        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC, "balala@gmail.com",new Address(),new Job("Jardineiro"));
 
     }
 //registei manualmente um colaborador para terem uma ideia para a us3: register a collaborator
