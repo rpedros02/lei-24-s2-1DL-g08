@@ -4,6 +4,7 @@ skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
 'skinparam linetype orto
+title US006 Class Diagram
 
 skinparam classAttributeIconSize 0
 
@@ -20,111 +21,64 @@ class UserSession
     + getUserEmail()
 }
 
-class Employee {
-    - name
-    - email
-    - position
-    - phone
+
+class Vehicle{
+   - String plateId;
+   - String brand;
+   - String model;
+   - String type;
+   - double tare;
+   - double weight;
+   - int mileage;
+   - Date register_date;
+   - Date acquisition_date;
+   - int maintenance_frequency;
+
 }
 
-class Task {
-    - String reference
-    - String description
-    - String informalDescription
-    - String technicalDescription
-    - Integer duration
-    - Double cost
 
-    + Task(reference, description,\ninformalDescription, technicalDescription,\nduration, cost, createdBy, taskCategory)
+class VehicleRepository {
+    -List<Vehicle> vehicles
+    +VehicleRepository()
+    +add(String plateId, String brand, String model, String type, double tare, double weight, int mileage, Date register_date, Date acquisition_date, int maintenance_frequency)
+    +remove(String plateId)
+    +exists(String plateId)
+
+
 }
 
-class TaskCategory {
-    - String description
-
-    + TaskCategory(description)
-}
-
-class Organization {
-    - String name
-    - String vatNumber
-    - String website
-    - String phone
-    - String email
-
-    - addTask(task)
-    - validateTask(task)
-    + anyEmployeeHasEmail(email)
-    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
-    + createTask(reference, description, informalDesccription,\ntechnicalDescription, duration, cost, taskCategoryDescription)
-    - getEmployeeByEmail(email)
-
-'  +saveTask(task)
-}
-
-class TaskCategoryRepository {
-    + getTaskCategoryByDescription(description)
-}
-
-class OrganizationRepository {
-    + getOrganizationByEmployeeEmail(email)
-}
 
 class Repositories {
     - Repositories()
     + getInstance() : Repositories
-    + getTaskCategoryRepository()
-    + getOrganizationRepository()
 }
 
-class CreateTaskController {
-    + CreateTaskController(organizationRepository, taskCategoryRepository)
-    + getTaskCategories()
-    + createTask(userEmail, reference, description,\ninformalDescription, technicalDescription,\nduration, cost, categoryDescription)
-    - getTaskCategoryByDescription(taskCategoryDescription)
-    - getEmployeeFromSession()
+class VehicleController {
+    -VehicleRepository vehicleRepository
+    -getVehicleRepository()
+    +createVehicle(String plateId, String brand, String model,String type, double tare, double weight, int mileage,Date register_date, Date acquisition_date, int maintenance_frequency)
+    +plateExists(plateId)
 }
 
-note right of CreateTaskController
-    - userEmail is obtained
-    from the user session
-    - categoryDescription
-    is retrieved from selected data
-end note
-
-note bottom of TaskCategoryRepository
-    - used for displaying
-    the category list
-end note
-
-class CreateTaskUI {
+class CreateVehicleUI {
 }
 
 Repositories -> Repositories : instance
 ApplicationSession -> ApplicationSession : instance
 
-CreateTaskUI .> CreateTaskController
+CreateVehicleUI .> VehicleController
 
-CreateTaskController .> Repositories : repositories
+VehicleController .> Repositories : repositories
 
-Repositories -> "1" TaskCategoryRepository
+Repositories -> "1" VehicleRepository
 
-CreateTaskController ..> TaskCategory
-CreateTaskController ..> OrganizationRepository : organizationRepository
-CreateTaskController ..> TaskCategoryRepository : TaskCategoryRepository
+VehicleController ..> VehicleRepository : vehiclesRepository
 
-Repositories --> "1" OrganizationRepository
-
-OrganizationRepository --> "*" Organization
 ApplicationSession --> "1" UserSession : userSession
+VehicleController ..> ApplicationSession
+VehicleController ..> UserSession
+VehicleController --> Skill : uses
+VehicleRepository --> Skill : manages
 
-CreateTaskController ..> "1" Organization : organization
-CreateTaskController ..> ApplicationSession
-CreateTaskController ..> UserSession
-Task "*" --> "1" TaskCategory : taskCategory
-TaskCategoryRepository "1" --> "*" TaskCategory : taskCategory
-Organization "1" --> "*" Task : tasks
-Task --> Employee : createdBy
-
-Organization --> "*" Employee : employs
 
 @enduml
