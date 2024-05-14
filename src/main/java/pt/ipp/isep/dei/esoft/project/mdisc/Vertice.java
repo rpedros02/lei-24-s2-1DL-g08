@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.mdisc;
 
-import java.util.Objects;
-
 public class Vertice {
     private final String name;
 

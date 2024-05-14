@@ -1,12 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.mdisc;
-import pt.ipp.isep.dei.esoft.project.mdisc.Aresta;
-import pt.ipp.isep.dei.esoft.project.mdisc.Grafo;
-import pt.ipp.isep.dei.esoft.project.mdisc.GraphPrinter;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {

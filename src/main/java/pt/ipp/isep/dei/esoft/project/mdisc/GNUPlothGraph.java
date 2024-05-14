@@ -3,8 +3,6 @@ package pt.ipp.isep.dei.esoft.project.mdisc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import static javax.swing.UIManager.getColor;
 public class GNUPlothGraph {
 
     public static void generateGNUPlotGraph(String dataFilePath, String outputFilePath) {

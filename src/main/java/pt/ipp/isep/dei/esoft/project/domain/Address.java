@@ -8,14 +8,17 @@ public class Address {
     private String city;
     private String district;
 
-    public void Address(String street, int streetNumber, String postalCode, String city, String district) {
-        this.street = street;
-        this.streetNumber = streetNumber;
-        this.postalCode = postalCode;
-        this.city = city;
-        this.district = district;
+    public Address(Address address) {
+        this.street = address.street;
+        this.streetNumber = address.streetNumber;
+        this.postalCode = address.postalCode;
+        this.city = address.city;
+        this.district = address.district;
     }
 
+    public Address() {
+
+    }
 
 
     private enum PostalCodeValidationResults {

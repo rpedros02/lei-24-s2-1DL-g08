@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ class OrganizationRepositoryTest {
     void ensureGetOrganizationByEmployeeWorks() {
         OrganizationRepository organizationRepository = new OrganizationRepository();
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organizationRepository.add(organization);
 
@@ -37,11 +38,11 @@ class OrganizationRepositoryTest {
     void ensureGetOrganizationByEmployeeFails() {
         OrganizationRepository organizationRepository = new OrganizationRepository();
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organizationRepository.add(organization);
 
-        Collaborator collaborator2 = new Collaborator("jane.doe@this.company.com");
+        Collaborator collaborator2 = new Collaborator(new Email("jane.doe@this.company.com"));
         Optional<Organization> result = organizationRepository.getOrganizationByCollaborator(collaborator2);
 
         assertTrue(result.isEmpty());
@@ -51,7 +52,7 @@ class OrganizationRepositoryTest {
     void ensureGetOrganizationByEmailWorks() {
         OrganizationRepository organizationRepository = new OrganizationRepository();
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organizationRepository.add(organization);
 
@@ -65,7 +66,7 @@ class OrganizationRepositoryTest {
     void ensureAddOrganizationWorks() {
         OrganizationRepository organizationRepository = new OrganizationRepository();
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
 
         organizationRepository.add(organization);
@@ -84,7 +85,7 @@ class OrganizationRepositoryTest {
     void ensureAddOrganizationDuplicateFails() {
         OrganizationRepository organizationRepository = new OrganizationRepository();
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organizationRepository.add(organization);
 

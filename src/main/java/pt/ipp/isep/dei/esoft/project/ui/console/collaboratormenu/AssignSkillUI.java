@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
+package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
@@ -94,13 +94,13 @@ public class AssignSkillUI implements Runnable {
     private void displaySkillList(List<Skill> skillList) {
         int i = 1;
         for (Skill skill : skillList) {
-            System.out.println("  " + i + " - " + skill.getName());
+            System.out.println("  " + i + " - " + skill.getSkillName());
             i++;
         }
     }
 
     private Collaborator selectCollaborator(List<Collaborator> collaboratorList) {
-        String idNumber = collaborator.getIdNumber();
+        int idNumber = collaborator.getIDNumber();
         while (!collaboratorRepository.checkIfTheCollaboratorExists(idNumber)) {
             if (collaboratorRepository.checkIfTheCollaboratorExists(idNumber)) {
                 return collaborator;

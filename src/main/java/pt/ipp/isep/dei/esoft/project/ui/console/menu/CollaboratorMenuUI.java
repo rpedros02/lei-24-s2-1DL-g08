@@ -4,7 +4,6 @@ import pt.ipp.isep.dei.esoft.project.ui.console.ShowTextUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.CreateJobUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.RegisterCollaboratorUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
-import pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu.CreateVehicleUI;
 
 import java.util.ArrayList;
 import java.util.List;

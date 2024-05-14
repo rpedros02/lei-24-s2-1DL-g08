@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 

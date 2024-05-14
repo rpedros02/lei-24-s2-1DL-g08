@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.jupiter.api.Test;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.Optional;
 
@@ -84,7 +85,7 @@ class OrganizationTest {
     void testThatCreateTaskWorks() {
         Organization organization = new Organization("123456789");
 
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
 
         Task expected = new Task("Task Description", "Task Category Description", "informal description",
@@ -103,7 +104,7 @@ class OrganizationTest {
     void ensureAddingDuplicateTaskFails() {
         //Arrange
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         //Add the first task
         Optional<Task> originalTask =
@@ -123,7 +124,7 @@ class OrganizationTest {
     @Test
     void ensureEmploysFails() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
 
         assertFalse(organization.addCollaborator(collaborator));
 
@@ -132,7 +133,7 @@ class OrganizationTest {
     @Test
     void ensureEmploysSuccess() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         assertTrue(organization.addCollaborator(collaborator));
     }
@@ -140,7 +141,7 @@ class OrganizationTest {
     @Test
     void ensureAnyEmployeeHasEmailFails() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         assertFalse(organization.anyCollaboratorHasEmail("jane.doe@this.company.com"));
     }
@@ -148,7 +149,7 @@ class OrganizationTest {
     @Test
     void ensureAnyEmployeeHasEmailWorks() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         assertTrue(organization.anyCollaboratorHasEmail("john.doe@this.company.com"));
     }
@@ -156,7 +157,7 @@ class OrganizationTest {
     @Test
     void ensureAddDuplicateEmployeeFails() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         assertTrue(organization.addCollaborator(collaborator));
         assertFalse(organization.addCollaborator(collaborator));
     }
@@ -164,14 +165,14 @@ class OrganizationTest {
     @Test
     void ensureAddEmployeeWorks() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         assertTrue(organization.addCollaborator(collaborator));
     }
 
     @Test
     void ensureCloneWorks() {
         Organization organization = new Organization("123456789");
-        Collaborator collaborator = new Collaborator("john.doe@this.company.com");
+        Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organization.createTask("Task Description", "Task Category Description", "informal description",
                 "technical description", 1, 1d, new TaskCategory("Task Category Description"), collaborator);
