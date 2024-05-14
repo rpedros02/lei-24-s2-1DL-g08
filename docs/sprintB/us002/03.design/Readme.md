@@ -23,13 +23,13 @@ _**Note that SSD - Alternative One is adopted.**_
 
 According to the taken rationale, the conceptual classes promoted to software classes are: 
 
-* Organization
-* Task
+* JobRepository
+* CreateJobUI
 
 Other software classes (i.e. Pure Fabrication) identified: 
 
-* CreateTaskUI  
-* CreateTaskController
+* Job
+* CreateJobController
 
 
 ## 3.2. Sequence Diagram (SD)

@@ -2,71 +2,71 @@
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to create an instance of the Task class with null values. 
+**Test 1:** Ensure Job Is Created Successfully. 
 
-	@Test(expected = IllegalArgumentException.class)
-		public void ensureNullIsNotAllowed() {
-		Task instance = new Task(null, null, null, null, null, null, null);
-	}
+	@Test 
+     void ensureJobIsCreatedSuccessfully() {
+     Job job = new Job("name");
+    }
 	
 
-**Test 2:** Check that it is not possible to create an instance of the Task class with a reference containing less than five chars. 
+**Test 2:** Check that it is not possible to create an instance of the Job class with null values.
 
 	@Test(expected = IllegalArgumentException.class)
-		public void ensureReferenceMeetsAC2() {
-		Category cat = new Category(10, "Category 10");
-		
-		Task instance = new Task("Ab1", "Task Description", "Informal Data", "Technical Data", 3, 3780, cat);
+      public void ensureNullIsNotAllowed() {
+		Job instance = new Job(null);
 	}
-**Test 3:** Check that the system rejects a task with an existing reference and the user must be able to modify the typed reference.
-**Test 4:** Check that the system provides confirmation to the user, indicating that the job has been successfully registered upon successful registration of a job.
-**Test 5:** Check that the system has proper input validation for all fields to prevent invalid or malicious data from being entered.
-**Test 6:** Check that it is not possible to register a job with special characters or numbers.
-_It is also recommended to organize this content by subsections._ 
+
+**Test 3:** Check that it is not possible to register a job with special characters or numbers.
+
+    @Test(expected = IllegalArgumentException.class)
+     public void ensureReferenceMeetsAC1() {
+     Job instance = new Job("g$%");
+    }
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CreateJobController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+public Optional<Job> createJob(String jobName) {
+        Optional<Job> newJob = Optional.empty();
+        boolean operationSuccess = false;
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
+        if (Job.validateNameOfJob(jobName)) {
+           newJob = jobRepository.createJob(new Job(jobName));
+           if (newJob.isPresent()) {
+              System.out.println("Job \""  + jobName + "\" registered successfully.");
+           } else {
+             System.out.println("Error: Failed to register job.");
+           }
+        }else {
+           System.out.println("Error: Job name can't have special characters or digits.");
+        }
 
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
-    
-	return newTask;
+        return newJob;
 }
 ```
 
-### Class Organization
+### Class JobRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
-
-    addTask(task);
-        
-    return task;
+public Optional<Job> createJob(Job job) {
+        Optional<Job> newJob = Optional.empty();
+        if (validateJob(job)) {
+           newJob = Optional.of(job);
+           jobs.add(job);
+        }
+        return newJob;
 }
 ```
 
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
-
-* For demo purposes some tasks are bootstrapped while system starts.
+* A new option on the HRM UI menu options was added to allow registering a job.
 
 
 ## 7. Observations
