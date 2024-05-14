@@ -62,20 +62,15 @@ public class GenerateTeamController {
     }
 
 
-    public Team generateTeam(int minMembers, int maxMembers, String[] teamSkills) {
+    public Team generateTeam(int minMembers, int maxMembers, List<Skill> teamSkills) {
 
-        List<Skill> skills = new ArrayList<>();
-        for (String skill : teamSkills) {
-            skills.add(new Skill(skill));
-        }
-
-        Team team = new Team(minMembers, maxMembers, skills);
+        Team team = new Team(minMembers, maxMembers, teamSkills);
         collaborators = new ArrayList<>(getCollaboratorRepository().getCollaboratorList());
 
         int skillIndex = 0;
         while(collaborators.size() >= minMembers) {
             if (team.getNumberOfTeamMembers() < maxMembers) {
-                Optional<Collaborator> OptCollaborator = getCollaborator(teamSkills[skillIndex]);
+                Optional<Collaborator> OptCollaborator = getCollaborator(teamSkills.get(skillIndex).getName());
                 if (OptCollaborator.isPresent()) {
                     collaborators.remove(OptCollaborator);
                     team.addTeamMember(OptCollaborator.get());
