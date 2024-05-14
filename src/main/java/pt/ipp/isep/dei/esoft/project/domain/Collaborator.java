@@ -346,4 +346,8 @@ public class Collaborator {
     public boolean hasEmail(String email) {
         return this.email.equals(email);
     }
+
+    public int getIDNumber() {
+        return Integer.parseInt(this.idNumber);
+    }
 }

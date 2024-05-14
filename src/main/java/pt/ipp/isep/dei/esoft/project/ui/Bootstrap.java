@@ -7,6 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
 import pt.ipp.isep.dei.esoft.project.repository.*;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 public class Bootstrap implements Runnable {
 
@@ -25,8 +26,8 @@ public class Bootstrap implements Runnable {
         //get organization repository
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("This Company");
-        organization.addCollaborator(new Collaborator("admin@this.app"));
-        organization.addCollaborator(new Collaborator("employee@this.app"));
+        organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
+        organization.addCollaborator(new Collaborator(new Email("employee@this.app")));
         organizationRepository.add(organization);
     }
 
