@@ -1,0 +1,48 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+skinparam classAttributeIconSize 0
+'left to right direction
+
+
+CreateCheckupUI ..> CreateCheckupController
+CreateCheckupController ..> Repositories
+Repositories --> CheckupRepository
+CheckupRepository --> Checkup
+CreateCheckupController ..> CheckupRepository
+CreateCheckupController ..> Organization
+
+
+class CreateCheckupUI {
+}
+
+class CreateCheckupController {
+    +getVehicles()
+    +createCheckup(vehicle, plateNumber,\n date, currentKm)
+}
+
+class Organization {
+    +validateCheckup(checkup)
+    +addCheckup(checkup)
+}
+
+class Checkup {
+    +create(vehicle, plateNumber, date, currentKm)
+}
+
+
+
+class Repositories {
+    +getInstance()
+    +getOrganizationRepository()
+    +getVehicleRepository()
+}
+
+class CheckupRepository {
+    +getVehicles()
+}
+
+@enduml

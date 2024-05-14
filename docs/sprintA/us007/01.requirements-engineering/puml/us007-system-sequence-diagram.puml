@@ -1,0 +1,31 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD)
+
+autonumber
+
+actor "Fleet Manager" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : asks to register a vehicle’s check-up
+    activate System
+
+        System --> Employee : requests data (a plate number, a date, kms at checkup)
+    deactivate System
+
+    Employee -> System : inputs requested data
+    activate System
+
+        System --> Employee : processes input, and displays operation success message
+    deactivate System
+
+
+
+
+
+@enduml

@@ -1,0 +1,126 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "VFM" as ADM
+participant ":CreateCheckupUI" as UI
+participant ":CreateCheckupController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "CheckupRepository:\nCheckupRepository" as CheckupRepository
+participant "organization\n:Organization" as ORG
+participant "checkup\n:Checkup" as TAREFA
+
+activate ADM
+
+        ADM -> UI : asks to register a vehicle’s check-up
+
+        activate UI
+
+'            UI --> ADM : requests data (reference, description,  informal \n description, technical description, duration, cost)
+            'create CTRL
+            UI -> CTRL** : create
+
+            UI -> CTRL : getVehicles()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getVehicleRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: vehicleRepository
+                deactivate PLAT
+
+                CTRL -> CheckupRepository : getVehicles()
+                activate CheckupRepository
+
+                    CheckupRepository --> CTRL : vehicleList
+                deactivate CheckupRepository
+
+                CTRL --> UI : vehiclesList
+            deactivate CTRL
+
+            UI --> ADM : shows the list of vehicles and asks to select one
+        deactivate UI
+
+    ADM -> UI : selects a vehicle
+    activate UI
+
+        UI --> UI : keepVehicle(vehicle)
+
+        UI --> ADM : requests data (a plate number, a date, kms at checkup)
+    deactivate UI
+
+    ADM -> UI : types requested data
+    activate UI
+    UI --> UI : keepData(vehicle, plateNumber,\n date, currentKm)
+
+        UI --> ADM : shows selected vehicle and inputed data and ask confirmation
+    deactivate UI
+
+    ADM -> UI : confirm data
+    activate UI
+
+        UI -> CTRL : createCheckup(vehicle, plateNumber,\n date, currentKm)
+        activate CTRL
+
+            CTRL -> CTRL : getCheckupByDescription(checkupDescription)
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL: repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getCheckupRepository()
+                activate PLAT
+
+                    PLAT -> CTRL : CheckupRepository
+                deactivate PLAT
+
+                CTRL -> CheckupRepository : getCheckupByDescription(checkupDescription)
+                activate CheckupRepository
+
+                    CheckupRepository --> CTRL : checkup
+                deactivate CheckupRepository
+                    CTRL --> CTRL : checkup
+            deactivate CTRL
+
+            CTRL -> ORG: createCheckup(vehicle, plateNumber, date, currentKm)
+            activate ORG
+
+                ORG -> TAREFA**: create(vehicle, plateNumber, date, currentKm)
+                ORG -> ORG: addCheckup(checkup)
+
+
+                activate ORG
+                    ORG -> ORG: validateCheckup(checkup)
+                    activate ORG
+                        ORG --> ORG
+                    deactivate ORG
+
+                    ORG --> ORG
+                deactivate ORG
+
+                ORG --> CTRL : checkup
+
+            deactivate ORG
+
+            CTRL --> UI: checkup
+            deactivate CTRL
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

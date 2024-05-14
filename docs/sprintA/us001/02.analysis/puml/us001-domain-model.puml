@@ -1,0 +1,50 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model
+
+
+class Skills{
+    skill id
+    skill description
+}
+
+class HRM {
+    hrm id
+    username
+    password
+
+}
+
+
+class Collaborator {
+    collaborator id
+    name
+    birthdate
+    admission date
+    address
+    contact info
+    taxpayer
+
+}
+
+class Employee {
+    employee id
+
+}
+
+HRM "1" - "1..*" Collaborator : manages >
+HRM "1" - "1..*" Skills : registers >
+Collaborator "1" - "1" Employee : is a >
+Employee "1" - "1..*" Skills : has >
+
+
+
+
+@enduml

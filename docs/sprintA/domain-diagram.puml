@@ -1,0 +1,128 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+title Domain Model
+
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+
+class GreenSpaces {
+    plant_material
+    urban_furniture
+    irrigation_systems_and_drinking_fountains
+    lighting_systems_and_the_respective_power_supply
+    rainwater_conduction_and_drainage_systems
+}
+
+class Garden {
+
+}
+
+class MediumSizedPark {
+    wooded_area
+    infrastructures
+}
+
+class LargeSizedPark {
+    garden_spaces
+    woods
+    equipment_and_services
+}
+
+class Employee {
+
+}
+
+class job{
+    job description
+}
+
+class Skills{
+    skill description
+}
+
+class Task {
+    description_of_the_task
+    team
+}
+
+class Team {
+    employees
+}
+
+class Vehicle {
+    brand
+    model
+    type
+    tare
+    gross weight
+    current km
+    register date
+    acquistion date
+    maintance/checkup
+}
+
+class Machine {
+    type_of_machine
+}
+
+class Equipment {
+    type_of_equipment
+}
+
+class HRM {
+
+}
+
+class VFM {
+
+}
+
+class Collaborator {
+
+}
+
+class GSM {
+
+}
+
+class GSU {
+
+}
+
+
+Organization "1" - "0..*" GreenSpaces: administers >
+
+GreenSpaces "1" - "1" Garden : can be
+GreenSpaces "1" - "0..*" MediumSizedPark : can be
+GreenSpaces "1" - "0..*" LargeSizedPark : can be
+
+LargeSizedPark "1" - "1..*" Garden : can have
+
+Tasks "1" - "1..*" GreenSpaces : are carried out
+Tasks "1" - "1..*" Team : are carried out
+
+Team "1" - "1..*" Employees : consists of
+
+HRM "1" - "1..*" Team : forms >
+HRM "1" - "1..*" Employee : manages >
+VFM "1" - "1..*" Vehicle : manages >
+Tasks "1" - "1..*" Vehicle : needs >
+Collaborator "1" - "1" Employee : can be >
+Employee "1" - "1..*" Skills : has >
+HRM "1" - "1..*" Skills : registers >
+HRM "1" - "1..*" Job : registers >
+
+
+@enduml

@@ -1,0 +1,116 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+
+title Domain Model
+
+class Employee {
+    employee id
+}
+
+class Job {
+    job id
+    job title
+}
+
+class Skills {
+    skill id
+    skill description
+}
+
+class HRM {
+    hrm id
+    username
+    password
+}
+
+class Collaborator {
+    collaborator id
+    name
+    birthdate
+    admission date
+    address
+    contact info
+    taxpayer
+}
+
+class FM {
+    fm id
+    username
+    password
+
+}
+
+class Vehicle {
+    plate id
+    brand
+    model
+    type
+    tare
+    gross weight
+    current km
+    register date
+    acquistion date
+}
+
+class Checkup {
+    plate id
+    date
+
+}
+
+class Organization {
+    name
+    vatNumber
+    website
+    phoneNumber
+    email
+}
+
+class GreenSpaces {
+    plant_material
+    urban_furniture
+    irrigation_systems_and_drinking_fountains
+    lighting_systems_and_the_respective_power_supply
+    rainwater_conduction_and_drainage_systems
+}
+
+class Team{
+    list of employees
+
+
+}
+
+class Task {
+    description_of_the_task
+    team
+}
+
+
+
+
+FM "1" - "1..*" Vehicle : registers and manages >
+Vehicle "1" -- "1..*" Checkup : has >
+
+Employee "1" -- "1" Job : has >
+Employee "1" - "1..*" Skills : has >
+HRM "1" -- "1..*" Collaborator : registers and manages >
+HRM "1" -- "1..*" Job : registers >
+HRM "1" - "1..*" Skills : registers >
+Team "1" -- "1..*" Employee : consists of >
+Task "1" -- "1..*" Vehicle : needs >
+Task "1" -- "1..*" GreenSpaces : are carried out >
+Task "1" -- "1..*" Team : carries out <
+Collaborator "1" --- "1..*" Vehicle : uses >
+Collaborator "1" - "1" Employee : is a >
+Organization "1" - "1..*" GreenSpaces: administers >
+HRM "1" - "1..*" Team : forms >
+
+
+@enduml

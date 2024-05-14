@@ -1,0 +1,85 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class HRM {
+    - name
+    - email
+    - position
+    - phone
+}
+
+class Job {
+    - String reference
+    - String designation
+
+}
+
+
+class Organization {
+    - String name
+    - String vatNumber
+    - String website
+    - String phone
+    - String email
+
+    - addJob(job)
+    - validateJob(job)
+    + anyHRMHasEmail(email)
+    + Organization(name, vatNumber, webSite, phone, email, postalAddress, manager)
+    + createJob(reference, designation)
+    - getEmployeeByEmail(email)
+
+'  +saveJob(job)
+}
+
+
+class OrganizationRepository {
+    + getOrganizationByHRMEmail(email)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getOrganizationRepository()
+}
+
+class CreateJobController {
+    + CreateJobController(organizationRepository)
+    + createJob(userEmail, reference, designation)
+    - getHRMFromSession()
+}
+
+
+
+class CreateJobUI {
+}
+
+CreateJobUI .> CreateJobController
+
+CreateJobController .> Repositories : repositories
+
+
+
+CreateJobController ..> OrganizationRepository : organizationRepository
+
+
+Repositories --> "1" OrganizationRepository
+
+OrganizationRepository --> "*" Organization
+
+CreateJobController ..> "1" Organization
+Organization "1" --> "*" Job : jobs
+Job --> HRM : createdBy
+
+Organization --> "*" HRM : employes
+
+@enduml

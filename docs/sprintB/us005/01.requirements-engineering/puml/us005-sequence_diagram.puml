@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+header US005
+title Generate Team Proposal
+actor HRM as hrm
+participant System as sys
+skinparam sequenceMessageAlign center
+activate hrm
+
+note right of sys: US003 ensures collaborators\n are inserted into the database.
+hrm -> sys: Team Generation Request
+activate sys
+sys --> hrm: Request for input Data \n (Team size & Set of Skills Required)
+hrm -> sys: Sends requested data.
+deactivate sys
+
+note right of sys: System checks for flaws on \nthe received data.
+sys --> hrm: Shows all data and\n requests confirmation.
+activate sys
+
+hrm -> sys: Confirms data.
+sys --> hrm: Displays operation success.
+deactivate sys
+@enduml

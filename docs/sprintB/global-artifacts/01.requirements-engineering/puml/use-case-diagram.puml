@@ -1,0 +1,62 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+'skinparam shadowing false
+
+
+'title Use Case Diagram
+
+left to right direction
+
+
+    actor "HRM"   as hrm
+    actor "VFM" as vfm
+    actor Collaborator
+    actor GSM
+    actor GSU
+
+
+rectangle "Not yet concrete use cases"{
+note right of Collaborator
+    Actor identified but still
+    no concrete use cases
+end note
+
+note right of GSM
+    Actor identified but still
+    no concrete use cases
+end note
+
+
+note right of GSU
+    Actor identified but still
+    no concrete use cases
+end note
+ }
+
+
+rectangle "Employees and team management" as emp{
+    usecase "UC1 - To register a skill" as UC1
+    usecase "UC2 - To register a job" as UC2
+    usecase "UC3 - To register a collaborator" as UC3
+    usecase "UC4 - To assign skills to a collaborator" as UC4
+    usecase "UC5 - To generate a team proposal" as UC5
+    hrm --> UC1
+    hrm --> UC2
+    hrm --> UC3
+    hrm --> UC4
+    hrm --> UC5
+
+}
+
+rectangle "Vehicles and machines management"{
+    usecase "UC6 - To register a vehicle" as UC6
+    usecase "UC7 - To register a vehicle's check-up" as UC7
+    usecase "UC8 - To list the vehicles in need of check-up" as UC8
+     vfm --> UC6
+     vfm --> UC7
+     vfm --> UC8
+
+}
+
+@enduml

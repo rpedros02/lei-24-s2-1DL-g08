@@ -1,0 +1,136 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Human Resources Manager (HRM)" as HRM
+participant ":AssignSkillsUI" as UI
+participant ":AssignSkillsController" as CTRL
+participant ":Repositories" as REP
+participant "repositories\n:Repositories" as PLAT
+participant "colaboratorRepository:\nColaboratorRepository" as CREP
+participant "skillRepository:\nSkillRepository" as SKREP
+participant "collaborator:\nCollaborator" as collaborator
+
+
+activate HRM
+
+        HRM -> UI : asks to add a skill to a collaborator
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getCollaborators()
+            activate CTRL
+
+                CTRL -> REP : getInstance()
+                activate REP
+
+                    REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT : getCollaboratorsRepository()
+                activate PLAT
+
+                    PLAT --> CTRL: getCollaboratorsRepository
+                deactivate PLAT
+
+                CTRL -> CREP : getCollaboratorsList()
+                activate CREP
+
+                    CREP --> CTRL : collaboratorsList
+                deactivate CREP
+
+                CTRL --> UI : collaboratorsList
+            deactivate CTRL
+
+
+
+            UI --> HRM: type the IDnumber of the Collaborator to assign the skills
+        deactivate UI
+
+
+        HRM -> UI : selects a colaborator and request to assign one or more skills to a collaborator
+
+        activate UI
+        UI -> CTRL : getSkillList()
+           activate CTRL
+
+            CTRL -> REP: getInstance()
+
+                activate REP
+
+                REP --> CTRL: repositories
+                deactivate REP
+
+                CTRL -> PLAT: getSkillRepository()
+                                   activate PLAT
+
+                                           PLAT --> CTRL: skillRepository
+                                   deactivate PLAT
+                                   CTRL -> SKREP: listSkills()
+                                   activate SKREP
+
+                                           SKREP --> CTRL: skills
+
+                                   deactivate SKREP
+
+                                   CTRL --> UI: skills
+                           deactivate CTRL
+           UI --> HRM: shows all types of skills that can be assigned and asks to select one
+           deactivate UI
+
+        loop
+
+        HRM -> UI : selects a skills
+        activate UI
+
+                UI --> HRM: asks if you want to add more skills\n or continue the program
+        deactivate UI
+        end
+        HRM -> UI : selects the skills (skill)
+
+        activate UI
+
+         UI -> CTRL: assignSkill(skill, IDnumberOfColaborator)
+
+
+                activate CTRL
+
+                        CTRL -> CREP: assignSkill(skill, IDnumberOfColaborator)
+                        activate CREP
+
+                                CREP -> collaborator** : assignSkill(skill, IDnumberOfColaborator)
+                                activate collaborator
+                                        collaborator -> collaborator: validateSkills(skills)
+                                        activate collaborator
+
+                                                collaborator -> collaborator: addCollaboratorSkills(skills)
+
+                                                activate collaborator
+
+                                                        collaborator --> CREP: collaborator
+                                                deactivate collaborator
+
+                                    deactivate collaborator
+
+                                deactivate collaborator
+                                CREP --> CTRL: collaborator
+                        deactivate CREP
+                        CTRL --> UI: collaborator
+                deactivate CTRL
+
+
+        deactivate CREP
+        UI --> HRM : displays operation success
+            deactivate UI
+
+
+
+
+deactivate HRM
+
+@enduml
