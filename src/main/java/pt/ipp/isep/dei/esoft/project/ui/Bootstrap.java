@@ -114,7 +114,7 @@ public class Bootstrap implements Runnable {
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
-        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC, "balala@gmail.com",new Address(),new Job("Jardineiro"));
+        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC,"123456789",new Address("rua rua",12,"4425-299","City","District"),new Job("Jardineiro"));
 
     }
 //registei manualmente um colaborador para terem uma ideia para a us3: register a collaborator

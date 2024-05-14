@@ -20,13 +20,14 @@ public class Collaborator {
 
     // Default values for Collaborator attributes
     private final String NAME_BY_OMISSION = "no name";
-    private final Date BIRTH_DATE_BY_OMISSION = new Date(70, 3, 22);
-    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10,10,1975);
+    private final Date BIRTH_DATE_BY_OMISSION = new Date(12, 3, 1975);
+    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10,10,2002);
     private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
     private final String EMAIL_BY_OMISSION = "nomail@mail.com";
     private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;
     private final String ID_NUMBER_BY_OMISSION = "11111111";
-    private final Address ADDRESS_BY_OMISSION = new Address("no street", 12,"no city", "4000-400", "no country");
+    private final int TAX_PAYER_NUMBER_BY_OMISSION = 240726286;
+    private final Address ADDRESS_BY_OMISSION = new Address("no street", 12,"4000-400","no city", "no country");
     private final Job JOB_BY_OMISSION = new Job("no title");
 
     // Collaborator attributes
@@ -56,7 +57,16 @@ public class Collaborator {
      * @param address        The address of the collaborator.
      * @param job            The job of the collaborator.
      */
-    public Collaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
+    public Collaborator(String name,
+                        Date birthDate,
+                        Date admissionDate,
+                        int mobileNumber,
+                        String email,
+                        int taxPayerNumber,
+                        IdDocType idDocType,
+                        String idNumber,
+                        Address address,
+                        Job job) {
         setName(name);
         setBirthDate(birthDate);
         setAdmissionDate(admissionDate);
@@ -95,7 +105,7 @@ public class Collaborator {
         setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
         setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
         setEmail(email.getEmail());
-        setTaxPayerNumber(taxPayerNumber);
+        setTaxPayerNumber(TAX_PAYER_NUMBER_BY_OMISSION);
         setIdDocType(ID_DOC_TYPE_BY_OMISSION);
         setIdNumber(ID_NUMBER_BY_OMISSION);
         this.address = new Address(ADDRESS_BY_OMISSION);
@@ -214,21 +224,7 @@ public class Collaborator {
      * @return True if the birthdate corresponds to an age of at least 18 years old, otherwise false.
      */
     public static boolean isAtLeast18YearsOld(Date birthDate) {
-        Calendar birthCalendar = Calendar.getInstance();
-        birthCalendar.setTime(birthDate);
-
-        Calendar currentDate = Calendar.getInstance();
-
-        int age = currentDate.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR);
-
-        if (currentDate.get(Calendar.MONTH) < birthCalendar.get(Calendar.MONTH)) {
-            age--;
-        } else if (currentDate.get(Calendar.MONTH) == birthCalendar.get(Calendar.MONTH)
-                && currentDate.get(Calendar.DAY_OF_MONTH) < birthCalendar.get(Calendar.DAY_OF_MONTH)) {
-            age--;
-        }
-
-        return age >= 18;
+        return Calendar.getInstance().get(Calendar.YEAR) - birthDate.getYear() >= 18;
     }
 
     /**

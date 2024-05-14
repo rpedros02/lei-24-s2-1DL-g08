@@ -14,7 +14,7 @@ public class CollaboratorRepository {
         this.collaborator = new ArrayList<>();
     }
 
-    public boolean addCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, int idNumber, Address address, Job job) {
+    public boolean addCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
         if (collaborator.isEmpty()) {
             collaborator.add(new Collaborator(name,birthDate,admissionDate,mobileNumber,email,taxPayerNumber,idDocType,idNumber,address,job));
             return true;
@@ -27,9 +27,9 @@ public class CollaboratorRepository {
         return false;
     }
 
-    public boolean checkIfTheCollaboratorExists(int idNumber) {
+    public boolean checkIfTheCollaboratorExists(String idNumber) {
         for (Collaborator collaborator : this.collaborator) {
-            if (collaborator.getIdNumber() == idNumber) {
+            if (collaborator.getIdNumber().equals(idNumber)) {
                 return true;
             }
         }
