@@ -5,7 +5,6 @@ import pt.ipp.isep.dei.esoft.project.application.controller.VehicleCheckupContro
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
-
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.Scanner;

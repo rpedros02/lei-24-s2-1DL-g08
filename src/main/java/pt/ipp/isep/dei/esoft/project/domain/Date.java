@@ -7,7 +7,6 @@ public class Date extends java.util.Date {
     int day;
     int month;
     int year;
-    String date;
 
     public Date(int day, int month,int year) {
         if (!isValid(day, month, year)) {
@@ -18,6 +17,14 @@ public class Date extends java.util.Date {
         this.year = year;
     }
 
+    public Date(String date) {
+        if (!isValid(Integer.parseInt(date.substring(0, 2)), Integer.parseInt(date.substring(3, 5)), Integer.parseInt(date.substring(6, 10))) || date.length() != 10) {
+            throw new IllegalArgumentException("Invalid date.");
+        }
+        this.day = Integer.parseInt(date.substring(0, 2));
+        this.month = Integer.parseInt(date.substring(3, 5));
+        this.year = Integer.parseInt(date.substring(6, 10));
+    }
 
     private boolean isValid(int day, int month, int year) {
         boolean flag = false;

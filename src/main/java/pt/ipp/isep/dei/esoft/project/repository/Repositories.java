@@ -1,12 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Employee;
-import pt.ipp.isep.dei.esoft.project.domain.Team;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class Repositories {
 
     private static Repositories instance;

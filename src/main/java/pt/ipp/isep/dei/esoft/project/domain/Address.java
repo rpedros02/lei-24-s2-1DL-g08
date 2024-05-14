@@ -16,10 +16,6 @@ public class Address {
         this.district = address.district;
     }
 
-    public Address() {
-
-    }
-
 
     private enum PostalCodeValidationResults {
         EMPTY,

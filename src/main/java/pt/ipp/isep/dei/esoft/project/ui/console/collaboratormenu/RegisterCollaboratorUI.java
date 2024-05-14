@@ -1,10 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
-
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -13,14 +14,15 @@ public class RegisterCollaboratorUI implements Runnable {
 
     private final CreateCollaboratorController controller;
     private String name;
-    private String admissionDate;
-    private String birthdate;
-    private String address;
+    private Date admissionDate;
+    private Date birthDate;
+    private Address address;
     private int mobileNumber;
     private String email;
-    private int taxpayerNumber;
+    private int taxPayerNumber;
     private int idNumber;
     private IdDocType idType;
+    private Job job;
     public RegisterCollaboratorUI() {
         controller = new CreateCollaboratorController();
     }
@@ -39,7 +41,7 @@ public class RegisterCollaboratorUI implements Runnable {
     }
 
     private void submitData() {
-        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, admissionDate, birthdate, address, mobileNumber, email, taxpayerNumber, idNumber, idType);
+        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, birthDate,admissionDate, mobileNumber, email,taxPayerNumber, idType, idNumber, address, job);
     }
 
 
@@ -47,9 +49,9 @@ public class RegisterCollaboratorUI implements Runnable {
         name = requestName();
         idType = requestIdType();
         idNumber = requestIdNumber();
-        taxpayerNumber = requestTaxpayer();
+        taxPayerNumber = requestTaxpayer();
         email = requestEmail();
-        birthdate = requestBirthdate();
+        birthDate = requestBirthdate();
         address = requestAddress();
         mobileNumber = requestMobileNumber();
         admissionDate = requestAdmissionDate();
@@ -111,22 +113,57 @@ public class RegisterCollaboratorUI implements Runnable {
         return input.nextInt();
     }
 
-    private String requestAddress() {
+    private Date requestBirthdate() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Full Address: ");
+        System.out.println("Birthdate (format: dd-mm-yyyy): ");
+        return new Date(input.nextLine());
+    }
+
+    private Address requestAddress() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n--- Address ---\n");
+        String street = requestStreet();
+        int nbr = requestStreetNumber();
+        String postalCode = requestPostalCode();
+        String city = requestCity();
+        String district = requestDistrict();
+        return new Address(street, nbr, city, postalCode, district);
+    }
+
+    private String requestDistrict() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nDistrict: ");
         return input.nextLine();
     }
 
-    private String requestAdmissionDate() {
+    private String requestCity() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Admission date (format: dd/mm/yyyy): ");
+        System.out.println("\nCity: ");
         return input.nextLine();
     }
 
-    private String requestBirthdate() {
+    private String requestPostalCode() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Birthdate (format: dd/mm/yyyy): ");
+        System.out.println("\nPostal Code: ");
         return input.nextLine();
+    }
+
+    private int requestStreetNumber() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nStreet Number: ");
+        return input.nextInt();
+    }
+
+    private String requestStreet() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\nStreet: ");
+        return input.nextLine();
+    }
+
+    private Date requestAdmissionDate() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Admission Date (format: dd-mm-yyyy): ");
+        return new Date(input.nextLine());
     }
 
     private String requestName() {
