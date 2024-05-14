@@ -1,8 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -28,7 +27,7 @@ public class CreateCollaboratorController {
     }
 
 
-    public Optional<Collaborator> createCollaborator(String name, String admission_data, String birthdate, String address, int mobileNumber, String email, int taxpayer_number, int IDNumber, IdDocType IDType) {
-        return Organization.getInstance("000000000").createCollaborator( name,  admission_data,  birthdate,  address,  mobileNumber, email, taxpayer_number, IDNumber,  IDType);
+    public Optional<Collaborator> createCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
+        return Organization.getInstance("000000000").createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
     }
 }

@@ -86,7 +86,7 @@ public class  CreateTaskController {
 
     private Collaborator getCollaboratorFromSession() {
         Email email = getAuthenticationRepository().getCurrentUserSession().getUserId();
-        return new Collaborator(email.getEmail());
+        return new Collaborator(email);
     }
 
     private TaskCategory getTaskCategoryByDescription(String taskCategoryDescription) {

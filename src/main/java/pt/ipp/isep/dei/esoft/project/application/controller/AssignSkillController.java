@@ -32,7 +32,7 @@ public class AssignSkillController {
 
     }
 
-    public boolean checkIfTheCollaboratorExists(int idNumber) {
+    public boolean checkIfTheCollaboratorExists(String idNumber) {
         return collaboratorRepository.checkIfTheCollaboratorExists(idNumber);
     }
 

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
+import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,6 +81,20 @@ public class Collaborator {
         setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
         setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
         setEmail(EMAIL_BY_OMISSION);
+        setTaxPayerNumber(taxPayerNumber);
+        setIdDocType(ID_DOC_TYPE_BY_OMISSION);
+        setIdNumber(ID_NUMBER_BY_OMISSION);
+        this.address = new Address(ADDRESS_BY_OMISSION);
+        this.job = new Job(JOB_BY_OMISSION);
+        this.assignedSkills = new ArrayList<>();
+    }
+
+    public Collaborator(Email email) {
+        setName(NAME_BY_OMISSION);
+        setBirthDate(BIRTH_DATE_BY_OMISSION);
+        setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
+        setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
+        setEmail(email.getEmail());
         setTaxPayerNumber(taxPayerNumber);
         setIdDocType(ID_DOC_TYPE_BY_OMISSION);
         setIdNumber(ID_NUMBER_BY_OMISSION);
@@ -328,4 +343,7 @@ public class Collaborator {
     }
 
 
+    public boolean hasEmail(String email) {
+        return this.email.equals(email);
+    }
 }

@@ -222,10 +222,10 @@ public class Organization {
         return clone;
     }
 
-    public Optional<Collaborator> createCollaborator(String name, String admission_data, String birthdate, String address, int mobileNumber, String email, int taxpayer_number, int IDNumber, IdDocType IDType) {
+    public Optional<Collaborator> createCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
         Optional<Collaborator> optionalValue = Optional.empty();
 
-        Collaborator collaborator = new Collaborator( name,  admission_data,  birthdate,  address,  mobileNumber, email, taxpayer_number, IDNumber,  IDType);
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
         if(addCollaborator(collaborator)){
             optionalValue = Optional.of(collaborator);
         }
