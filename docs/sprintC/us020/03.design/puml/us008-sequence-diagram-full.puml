@@ -1,0 +1,47 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US008 - List the vehicles needing check-up
+header US008
+autonumber
+
+actor "FM" as fm
+participant ":VehicleListUI" as ui
+participant ":VehicleController" as vc
+participant ":SortingRepository" as sr
+participant ":VehicleRepository" as vr
+
+activate fm
+    fm -> ui : Request list.
+    activate ui
+        ui --> vc : getSorting()
+        activate vc
+        vc -> sr : getSorting()
+            activate sr
+            sr --> vc : sorting
+            deactivate sr
+        vc --> ui : sorting
+        deactivate vc
+    ui --> fm : shows sorting possibilities and requests one
+    deactivate ui
+    fm -> ui : Selects pretended sorting.
+    activate ui
+        ui --> ui : keepSorting(sorting)
+        ui --> vc : getVehicle(VehicleID)
+        activate vc
+            group loop until all vehicles retrieved
+                vc -> vr : getVehicle(VehicleID)
+                activate vr
+                vr --> vc : vehicle
+                end
+                vc --> vc : sortVehicles(sorting)
+                deactivate vr
+            vc --> ui : vehicleList
+        deactivate vc
+        ui --> fm : Displays the list.
+    deactivate ui
+
+
+@enduml
