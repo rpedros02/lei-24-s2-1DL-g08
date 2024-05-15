@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant ":TeamController" as tc
+participant ":Organization" as org
+participant ":TeamRequest" as tr
+
+activate tc
+        tc -> org : generateTeamRequest(maxSize, skillList)
+        activate org
+            org -> tr** : generateTeamRequest(maxSize, skillList)
+            org --> org : addTeamRequest(teamRequest)
+            org --> org : validateTeamRequest(teamRequest)
+            org --> tc : teamRequest
+        deactivate org
+@enduml

@@ -1,0 +1,94 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Successful Registration of a Vehicle Process
+
+autonumber
+
+'hide footbox
+actor "HRM" as ADM
+participant ":CreateVehiclelUI" as UI
+participant ":VehicleController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "VehicleRepository" as REP
+
+
+
+
+activate ADM
+
+        ADM -> UI : asks to register a Vehicle
+
+        activate UI
+
+
+            UI -> CTRL** : create
+            activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getVehicleRepository()
+            activate PLAT
+
+            PLAT --> CTRL: vehicleRepository
+            deactivate PLAT
+            CTRL --> UI
+            deactivate CTRL
+
+            loop if boolean == false
+            UI --> ADM : requests plate Id
+                        deactivate UI
+                        ADM -> UI : inputs plate Id
+                        activate UI
+
+            UI -> CTRL : plateExists(plateId)
+            activate CTRL
+
+                CTRL -> REP : exists(plateId)
+                activate REP
+
+                    REP --> CTRL : returns boolean
+                deactivate REP
+
+                CTRL --> UI : returns boolean
+            deactivate CTRL
+            end
+
+            UI --> ADM : asks for the rest of the details of the vehicle
+            deactivate UI
+            ADM -> UI : inputs the details
+            activate UI
+
+           UI --> ADM : asks for confirmation on the registration
+           deactivate UI
+           ADM --> UI : confirms
+           activate UI
+
+           UI -> CTRL : createVehicle(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency)
+           activate CTRL
+
+           CTRL -> REP : add(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency)
+           deactivate CTRL
+           activate REP
+
+           REP --> CTRL : returns success status
+           deactivate REP
+           activate CTRL
+
+           CTRL --> UI : returns success status
+           deactivate CTRL
+
+
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

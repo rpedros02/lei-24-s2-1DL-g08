@@ -1,0 +1,91 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+actor "Human Resources Manager (HRM)" as HRM
+participant ":AssignSkillsUI" as UI
+participant ":AssignSkillsController" as CTRL
+participant "colaboratorRepository:\nColaboratorRepository" as CREP
+
+
+
+activate HRM
+
+        HRM -> UI : asks to add a skill to a collaborator
+
+        activate UI
+
+            UI -> CTRL** : create
+
+            UI -> CTRL : getCollaborators()
+                        activate CTRL
+
+                                ref over CTRL
+                                        Get a Collaborator
+                                end
+                                CTRL --> UI: collaboratorsList
+                        deactivate CTRL
+
+
+            deactivate CTRL
+
+
+
+            UI --> HRM: type the IDnumber of the Collaborator to assign the skills
+        deactivate UI
+
+
+        HRM -> UI : selects a colaborator and request to assign one or more skills to a collaborator
+
+        activate UI
+            UI -> CTRL : getSkillList()
+            activate CTRL
+                    ref over CTRL
+                    Skills list
+                    end
+                    CTRL --> UI: skills
+                    deactivate CTRL
+            UI --> HRM: shows all types of skills that can be assigned and asks to select one
+        deactivate UI
+
+        loop
+
+        HRM -> UI : selects a skills
+        activate UI
+
+                UI --> HRM: asks if you want to add more skills\nor continue the program
+        deactivate UI
+        end
+        HRM -> UI : selects a skill (skill)
+
+        activate UI
+
+         UI -> CTRL: assignSkill(skill, IDnumberOfColaborator)
+
+
+                activate CTRL
+
+                        CTRL -> CREP: assignSkill(skill, IDnumberOfColaborator)
+                        activate CREP
+
+                            ref over CREP
+                                 Assign Skills
+                            end
+
+                            CREP --> CTRL: collaborator
+                        deactivate CREP
+                        CTRL --> UI: collaborator
+                deactivate CTRL
+        deactivate CREP
+        UI --> HRM : displays operation success
+            deactivate UI
+
+
+
+
+deactivate HRM
+
+@enduml

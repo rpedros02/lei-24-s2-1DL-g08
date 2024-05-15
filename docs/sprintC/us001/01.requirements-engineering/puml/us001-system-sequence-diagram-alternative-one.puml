@@ -1,0 +1,46 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "HRM" as Employee
+participant ":System" as System
+
+activate Employee
+
+Employee -> System : asks to register a new skill
+activate System
+
+System --> Employee : requests data (skill name)
+deactivate System
+
+Employee -> System : types requested data
+activate System
+
+
+alt if data_contains_invalid_characters
+loop
+    System --> Employee : prompts to re-enter skill without invalid characters
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+end
+else if data_inserted_is_valid
+    System --> Employee : shows all data and asks for confirmation
+    deactivate System
+end
+
+
+
+Employee -> System : confirms data
+activate System
+
+System --> Employee : displays operation success
+deactivate System
+
+@enduml

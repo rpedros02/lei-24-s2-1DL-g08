@@ -1,0 +1,56 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+
+class Collaborator {
+    + create(name, birthdate, admissionData,\n address, email, mobileNumber, taxpayerNumber,\n idDocType, respectiveNumber, hrm)
+}
+
+class Address {
+
+}
+
+class Organization {
+    + createCollaborator(name, birthdate, admissionData, address, email,\n mobileNumber, taxpayerNumber, idDocType, respectiveNumber, hrm, job)
+    + addCollaborator(collaborator)
+    + validateCollaborator(collaborator)
+}
+
+class JobRepository {
+    + getJobs()
+    + getJobById(jobId)
+}
+
+class Repositories {
+    + getInstance()
+    + getJobRepository()
+    + getOrganizationRepository(email)
+}
+
+class CreateCollaboratorController {
+    + getJobs()
+    + createCollaborator(name, birthdate, admissionData, address, email,\n mobileNumber, taxpayerNumber, idDocType, respectiveNumber)
+    + getHRMFromSession()
+}
+
+class CreateCollaboratorUI {
+}
+
+
+CreateCollaboratorUI .right.> CreateCollaboratorController
+CreateCollaboratorController ..> Organization
+Organization -down-> Collaborator
+CreateCollaboratorController ..> JobRepository
+CreateCollaboratorController ..> Collaborator
+CreateCollaboratorController ..> Repositories
+Repositories --> JobRepository
+
+
+
+@enduml

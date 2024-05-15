@@ -1,0 +1,68 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class Team {
+    - id
+    - max-size
+    - skills
+    - employees
+
+    + Team(id, max-size, skills)
+    + getTeamById(id)
+}
+
+class Skill {
+    - int id
+    - String skillName
+
+    + getSkillById(id)
+    + getSkillByName(skillName)
+}
+
+class SkillsRepository {
+    + getSkillById(id)
+}
+
+class TeamRepository {
+    + getTeamById(id)
+}
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+    + getTe
+    + getTeamById(id)
+}
+
+
+class TeamUI {
+}
+
+class CreateTeamController {
+    + CreateTeamProposal(TeamRepository)
+    - getSkillById(id)
+}
+
+TeamUI .> CreateTeamController
+
+CreateTeamController .> Repositories : repositories
+
+Repositories -> Repositories : instance
+
+Repositories --> "1" SkillsRepository
+SkillsRepository "1" --> "*" Skill
+Repositories --> "*" TeamRepository
+TeamRepository "1" --> "*" Team
+CreateTeamController  .>  Team
+CreateTeamController .> "has" SkillList
+SkillList .> Skill
+@enduml

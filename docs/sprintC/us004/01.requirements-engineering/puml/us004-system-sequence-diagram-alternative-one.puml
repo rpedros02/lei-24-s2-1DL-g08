@@ -1,0 +1,44 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Main Solution
+
+autonumber
+
+actor "Human Resources\n Mananger" as HRM
+participant ":System" as System
+
+activate HRM
+
+    HRM -> System : asks to add a skill to a collaborator
+    activate System
+
+        System --> HRM : resquests data (collaborator id)
+    deactivate System
+
+    HRM -> System : types requests data
+    activate System
+
+        System --> HRM : shows all types of skills that can be assigned \n and asks to select one
+    deactivate System
+
+
+    loop
+    HRM -> System : selects a skill
+    activate System
+
+        System --> HRM :asks if you want to add more skills\n or continue the program
+    deactivate System
+    end
+
+
+    HRM -> System : selects the skills
+        activate System
+
+            System --> HRM :  validates and displays operation success
+        deactivate System
+@enduml
+
+@enduml
