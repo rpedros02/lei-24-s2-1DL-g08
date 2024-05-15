@@ -5,9 +5,7 @@
 
 ### 1.1. User Story Description
 
-As a Green Space Manager (GSM), I want to register a green
-space (garden, medium-sized park or large-sized park) and its respective
-area.
+As a Green Space Manager (GSM), I want to register a green space (garden, medium-sized park or large-sized park) and its respective area.
 
 
 ### 1.2. Customer Specifications and Clarifications 
@@ -41,8 +39,7 @@ multiple hectares (e.g., in Porto, there are the Parque da Cidade - City Park - 
 
 ### 1.4. Found out Dependencies
 
-* No dependencies were found.
-
+* There is a dependency on "US27 - As a GSM, I need to list all green spaces managed by me." because, to register a new green space, the Green Space Manager (GSM) needs to first view a list of all the green spaces they manage.
 ### 1.5 Input and Output Data
 	
 * Selected data:
