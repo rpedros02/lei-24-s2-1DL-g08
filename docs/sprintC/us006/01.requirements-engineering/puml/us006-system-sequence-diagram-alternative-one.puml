@@ -1,0 +1,122 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "FM" as Employee
+participant ":System" as System
+
+activate Employee
+
+
+    Employee -> System : asks to create a new vehicle
+    activate System
+
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests plate id
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+    activate System
+    loop loops if invalid characters for that field
+        System --> Employee : requests brand
+    deactivate System
+
+    Employee -> System : types requested data
+    activate System
+
+    end
+
+
+        loop loops if invalid characters for that field
+                System --> Employee : requests model
+            deactivate System
+
+            Employee -> System : types requested data
+            activate System
+
+            end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests type
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests tare
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests gross weight
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests current kms
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests register date
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests acquistion date
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    loop loops if invalid characters for that field
+            System --> Employee : requests maintenance check
+        deactivate System
+
+        Employee -> System : types requested data
+        activate System
+
+        end
+
+    activate System
+
+        System --> Employee : shows the newly created vehicle details and requests confirmation
+    deactivate System
+
+    Employee -> System : confirms data
+    activate System
+
+        System --> Employee : displays operation success
+    deactivate System
+
+@enduml

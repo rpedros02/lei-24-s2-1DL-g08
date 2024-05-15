@@ -1,0 +1,107 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title Successful Registration of a Skill Process
+
+autonumber
+
+'hide footbox
+actor "HRM" as ADM
+participant ":CreateTaskUI" as UI
+participant ":CreateTaskController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant "repositories\n:Repositories" as PLAT
+participant "SkillsRepository" as REP
+
+
+
+
+activate ADM
+
+        ADM -> UI : asks to register a Skill
+
+        activate UI
+
+
+            UI -> CTRL** : create
+            activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+            RepositorySingleton --> CTRL: repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getSkillsRepository()
+            activate PLAT
+
+            PLAT --> CTRL: skillsRepository
+            deactivate PLAT
+            CTRL --> UI
+            deactivate CTRL
+
+            loop if boolean == false
+            UI --> ADM : requests skill Id
+                        deactivate UI
+                        ADM -> UI : inputs skill Id
+                        activate UI
+
+            UI -> CTRL : skillExists(skillId)
+            activate CTRL
+
+                CTRL -> REP : exists(skillId)
+                activate REP
+
+                    REP --> CTRL : returns boolean
+                deactivate REP
+
+                CTRL --> UI : returns boolean
+            deactivate CTRL
+            end
+
+            loop if boolean == false
+            UI --> ADM : asks for the skill name
+            deactivate UI
+            ADM -> UI : inputs skill name
+            activate UI
+
+            UI -> CTRL : nameExists(name)
+            activate CTRL
+
+            CTRL -> REP : exists(name)
+            activate REP
+
+            REP --> CTRL : returns boolean
+            deactivate REP
+
+           CTRL --> UI : returns boolean
+           deactivate CTRL
+           end
+           UI --> ADM : asks for confirmation on the registration
+           deactivate UI
+           ADM --> UI : confirms
+           activate UI
+
+           UI -> CTRL : registerSkill(skillId,name)
+           activate CTRL
+
+           CTRL -> REP : add(skillId,name)
+           deactivate CTRL
+           activate REP
+
+           REP --> CTRL : returns success status
+           deactivate REP
+           activate CTRL
+
+           CTRL --> UI : returns success status
+           deactivate CTRL
+
+
+            UI --> ADM: displays operation success
+    deactivate UI
+
+deactivate ADM
+
+@enduml

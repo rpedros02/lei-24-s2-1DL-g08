@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+header US005
+title US005 - Generate Team Proposal
+actor HRM as hrm
+participant ":TeamUI" as tui
+participant ":TeamController" as tc
+participant ":Organization" as org
+participant ":TeamRequest" as tr
+skinparam sequenceMessageAlign center
+activate hrm
+
+hrm -> tui : generation request
+activate tui
+    tui -> tc : create
+    tui --> hrm : requests team's max size
+deactivate tui
+
+hrm -> tui : types requested data(max team size)
+activate tui
+    tui --> tui : KeepData(max-size)
+    group loop until all skills inserted
+        tui --> hrm : request skill needed
+        hrm -> tui  : types requested data(skill)
+        tui --> tui : KeepData(skillList)
+    end group
+    tui --> hrm : shows inserted data and requests confirmation
+deactivate tui
+hrm -> tui : confirms and submits data
+activate tui
+    |||
+    tui -> tc : generateTeamRequest(maxSize, skillList)
+    activate tc
+        tc -> org : generateTeamRequest(maxSize, skillList)
+        activate org
+            org -> tr** : generateTeamRequest(maxSize, skillList)
+            org --> org : addTeamRequest(teamRequest)
+            org --> org : validateTeamRequest(teamRequest)
+            org --> tc : teamRequest
+        deactivate org
+        tc --> tui : teamRequest
+    deactivate tc
+    tui --> hrm : displays operation success
+deactivate tui
+deactivate hrm
+@enduml

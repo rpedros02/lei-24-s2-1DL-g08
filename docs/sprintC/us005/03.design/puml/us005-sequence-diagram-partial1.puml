@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor HRM as hrm
+participant ":TeamUI" as tui
+participant ":TeamController" as tc
+activate hrm
+hrm -> tui : generation request
+
+activate tui
+    tui -> tc : create
+    tui --> hrm : requests team's max size
+deactivate tui
+
+hrm -> tui : types requested data(max team size)
+activate tui
+    tui --> tui : KeepData(max-size)
+    group loop until all skills inserted
+        tui --> hrm : request skill needed
+        hrm -> tui  : types requested data(skill)
+        tui --> tui : KeepData(skillList)
+    end group
+    tui --> hrm : shows inserted data and requests confirmation
+deactivate tui
+@enduml

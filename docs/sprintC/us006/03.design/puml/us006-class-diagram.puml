@@ -1,0 +1,84 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+title US006 Class Diagram
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+class ApplicationSession
+{
+    + static getInstance()
+    + getCurrentSession()
+}
+
+class UserSession
+{
+    + getUserEmail()
+}
+
+
+class Vehicle{
+   - String plateId;
+   - String brand;
+   - String model;
+   - String type;
+   - double tare;
+   - double weight;
+   - int mileage;
+   - Date register_date;
+   - Date acquisition_date;
+   - int maintenance_frequency;
+
+}
+
+
+class VehicleRepository {
+    -List<Vehicle> vehicles
+    +VehicleRepository()
+    +add(String plateId, String brand, String model, String type, double tare, double weight, int mileage, Date register_date, Date acquisition_date, int maintenance_frequency)
+    +remove(String plateId)
+    +exists(String plateId)
+
+
+}
+
+
+class Repositories {
+    - Repositories()
+    + getInstance() : Repositories
+}
+
+class VehicleController {
+    -VehicleRepository vehicleRepository
+    -getVehicleRepository()
+    +createVehicle(String plateId, String brand, String model,String type, double tare, double weight, int mileage,Date register_date, Date acquisition_date, int maintenance_frequency)
+    +plateExists(plateId)
+}
+
+class CreateVehicleUI {
+}
+
+Repositories -> Repositories : instance
+ApplicationSession -> ApplicationSession : instance
+
+CreateVehicleUI .> VehicleController
+
+VehicleController .> Repositories : repositories
+
+Repositories -> "1" VehicleRepository
+
+VehicleController ..> VehicleRepository : vehiclesRepository
+
+ApplicationSession --> "1" UserSession : userSession
+VehicleController ..> ApplicationSession
+VehicleController ..> UserSession
+VehicleController --> Skill : uses
+VehicleRepository --> Skill : manages
+
+
+@enduml
