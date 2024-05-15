@@ -1,11 +1,11 @@
-# US008 - List the vehicles in need off check-up. 
+# US026 - Assign one or more vehicles to an entry in the Agenda.
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I want to assign one or more vehicles to an entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -52,6 +52,6 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us008](svg/us026-sequence_diagram.svg)
 
 

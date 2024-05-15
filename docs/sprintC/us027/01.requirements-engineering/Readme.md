@@ -1,11 +1,11 @@
-# US008 - List the vehicles in need off check-up. 
+# US008 - List all green spaces managed by the GSM
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I need to list all green spaces managed by me.
 
 ### 1.2. Customer Specifications and Clarifications 
 

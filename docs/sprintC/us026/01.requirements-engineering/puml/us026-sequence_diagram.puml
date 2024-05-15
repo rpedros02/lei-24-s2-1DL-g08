@@ -3,21 +3,30 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US008 - List the vehicles needing check-up
-header US008
+title US026 - Assign one or more vehicles to an entry in the Agenda.
+header US026
 autonumber
-
-actor "FM" as fm
+actor "GSM" as gsm
 participant ":System" as System
 
-activate fm
+activate gsm
 
-    fm -> System : Request list of vehicles needing check-up.
+    gsm -> System : Request list of available vehicles.
     activate System
-        fm -> System : Selects order in which to view the list.
-        System --> System : Retrieval of vehicle\n information.
-        note right System : Lists the vehicles details:\nPlate number\nBrand\nModel\nReason
-        System -> fm : Returns the list.
+        System --> System : Retrieve list of available vehicles.
+        note right of System : Lists the vehicle details:\nPlate number\nBrand\nModel\nAvailability
+        System -> gsm : Returns the list of available vehicles.
     deactivate System
+
+    gsm -> System : Selects vehicle(s) and agenda entry.
+    activate System
+        System --> System : Validate vehicle(s) availability for the selected time slot.
+        note right of System : Check if the selected vehicle(s) are available for the selected time slot.
+        System -> System : Update agenda entry with selected vehicle(s).
+        note right of System : Save the assignment of vehicle(s) to the agenda entry.
+        System -> gsm : Confirmation of assignment.
+    deactivate System
+
+deactivate gsm
 
 @enduml
