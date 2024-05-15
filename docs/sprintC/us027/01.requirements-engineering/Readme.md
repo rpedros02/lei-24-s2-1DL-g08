@@ -1,14 +1,23 @@
-# US008 - List all green spaces managed by the GSM
+# US027 - List all green spaces managed by the GSM
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As a GSM, I need to list all green spaces managed by me.
+As a GSM, I need to list all green spaces managed by the GSM.
 
 ### 1.2. Customer Specifications and Clarifications 
 
+**From the specifications document:**
+
+> "Green Spaces Manager (GSM) - the person responsible for managing the green spaces in charge of the organization."
+
+> "The green spaces management aims (within the available budget) to design,
+build and maintain parks and gardens that meet the requirements of the
+common citizen who wants to be informed."
+
+> 
 **From the client clarifications:**
 
 > **Question:** What are the requests/ input data to list the vehicles needing the check-up?
@@ -22,36 +31,39 @@ As a GSM, I need to list all green spaces managed by me.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
+* **AC1:** Display Green Spaces List
+* The system must provide a user interface that lists all green spaces managed by the GSM
+* Each entry in the list must display key details of the green space, including:
+  * Name of the green space
+  * Location (address or coordinates)
+  * Size or area of the green space
+  * Description(optional)
 
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
   
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
+* **AC2:** Search and Filter Functionality:
 
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
+  * The system must allow the GSM to search for green spaces by name or location.
+  * The system must provide filter options based on green space type and size range.
 
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* 
 
 ### 1.5 Input and Output Data
 	
-* Selected data:
-    * order in which to show the vehicles. 
+**Input data:**
+
+* Opcional filters
+* Sorting Preferences
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
-* (In)Success of the operation
+* List of Green Spaces
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us026](svg/us027-sequence_diagram.svg)
 
 
