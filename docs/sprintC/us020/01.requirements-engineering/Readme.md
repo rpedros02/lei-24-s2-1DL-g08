@@ -1,13 +1,22 @@
-# US008 - List the vehicles in need off check-up. 
+# US020 - Register a green space 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a Green Space Manager (GSM), I want to register a green
+space (garden, medium-sized park or large-sized park) and its respective
+area.
+
 
 ### 1.2. Customer Specifications and Clarifications 
+
+**From the specifications document:**
+>  Green spaces for collective use can vary significantly in dimensions and
+available amenities. They may range from small landscaped areas, parks
+with trees and some amenities like benches or playgrounds, to parks with
+multiple hectares (e.g., in Porto, there are the Parque da Cidade - City Park - the Parque Oriental - the Oriental Park), wooded areas, lakes, and various facilities and installations.
 
 **From the client clarifications:**
 
@@ -22,33 +31,28 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
+* **AC1:** The registration form should require the GSM to input the necessary details for the green space, including but not limited to:
+  * Name of the green space
+  * Location (address or coordinates)
+  * Size or area of the green space
+  * Description (optional)
   
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC2:** The registration form should include validation checks to ensure that all required fields are filled out appropriately.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* No dependencies were found.
 
 ### 1.5 Input and Output Data
 	
 * Selected data:
-    * order in which to show the vehicles. 
+    * Name of the green space
+    * Location (address or coordinates)
+    * Size or area of the green space
+    * Description (optional)
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
-* (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 

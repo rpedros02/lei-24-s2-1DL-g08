@@ -1,0 +1,35 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Alternative One
+
+autonumber
+
+actor "GSM" as Employee
+participant ":System" as System
+
+activate Employee
+
+    Employee -> System : request to add a new entry to the To-Do List
+    activate System
+
+        System --> Employee : present list of green spaces for selection
+    deactivate System
+
+    Employee -> System : select a green space for the new entry
+    activate System
+
+        System --> Employee : request for details of the new entry
+    deactivate System
+
+    Employee -> System : provide details of the new entry
+    activate System
+
+        System --> Employee : validate the entry details
+
+        System --> Employee : displays operation success
+    deactivate System
+
+@enduml
