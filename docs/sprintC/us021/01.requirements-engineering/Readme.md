@@ -1,15 +1,25 @@
-# US008 - List the vehicles in need off check-up. 
+# US021 - Adding Entries for GSM. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I want to add a new entry to the To-Do List.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the client clarifications:**
+
+**From the specifications document:**
+
+> The Agenda is a crucial mechanism for planning the week’s work. Each entry
+in the Agenda defines a task (that was previously included in the to-do list).
+
+>  The management of green areas for public use requires the timely management and completion of multiple tasks throughout the year. In the daily
+management, the GSM uses two essential tools: the Agenda and the Task
+List (aka To-Do List). The To-Do List comprises all the tasks required to
+be done in order to assure the proper functioning of the parks.
 
 > **Question:** What are the requests/ input data to list the vehicles needing the check-up?
 > Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
@@ -22,23 +32,12 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
-  
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC1:** The new entry must be associated with a green space managed by the GSM.
+* **AC2:** The green space for the new entry should be chosen from a list presented to the GSM.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* There is a dependency on "US22 - As a GSM, I want to add a new entry in the Agenda with dependencies on existing To-Do List entries and associated green spaces." as due to the requirement of ensuring that new entries in the agenda align with the tasks already planned in the to-do list and the associated green spaces. 
 
 ### 1.5 Input and Output Data
 	

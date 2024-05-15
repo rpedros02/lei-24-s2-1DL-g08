@@ -14,23 +14,34 @@ The resulting software solution, composed of Java applications, must adhere to t
 The project not only challenges students to apply theoretical concepts in a practical setting but also aims to deliver a proof-of-concept that meets the real-world requirements provided by MS, thereby contributing to the sustainable management of urban green spaces.
 
 ## 3. System Overview
-The Green Spaces User Portal application aims to achieve several key objectives:
+The Integrative Project Assignment aims to develop an IT solution for managing green spaces for collective use, such as gardens and parks, within urban contexts. The project involves students organized in teams, following an iterative and incremental development process based on SCRUM methodology. The solution is to be developed using Java applications following Test-Driven Development (TDD) principles.
 
-Multidisciplinary Team Management: Facilitates the organization and coordination of teams with diverse skills required for designing, constructing, and maintaining green spaces.
+1. Problem Statement:
 
-Allocation of Teams to Green Spaces: Provides functionality to assign teams to specific tasks in various green spaces based on their availability, required skills, and priorities.
+* Green Spaces for Collective Use: Urban green spaces are essential for public well-being. MusgoSublime (MS) is tasked with planning, constructing, and maintaining such spaces.
+* Collaborators, Tasks, and Teams: MS employs various workers with different skills to carry out tasks in green spaces.
+* Vehicles, Machines, and Equipment: MS utilizes a range of vehicles, machines, and equipment for tasks.
+* Agenda: The Agenda is used for planning and tracking tasks.
+* Green Spaces User Portal: A portal allows users to provide feedback and report faults.
+* System Users: Various users interact with the system, including HR Manager, Fleet Manager, Collaborator, Green Spaces Manager, and User.
 
-Fleet, Machines, and Equipment Management: Manages the organization's fleet of vehicles, machines, and equipment, ensuring proper maintenance and efficient assignment to tasks.
+2. Minimal Viable Product (PVM):
 
-Optimization of Irrigation and Lighting Systems: Supports the optimization of irrigation and lighting systems through data analysis and scheduling algorithms, aiming for efficient resource usage.
+* Sprint 1: Develops functionalities for Teams and Vehicle Fleet Management.
+* Sprint 2: Enhances functionalities for Teams and Vehicle Fleet Management, adds KPIs and Statistical Analysis, and begins Planning and Building Irrigation Systems.
+* Sprint 3: Focuses on Data Analysis, Emergency Plans, and Task Management.
 
-Production of Statistical Indicators: Generates statistical indicators to measure the performance of activities related to green space management, such as productivity metrics, resource utilization, and maintenance effectiveness.
+3. Non-functional Requirements:
 
-Agile Development Using SCRUM: Follows an iterative and incremental development process, utilizing SCRUM methodology to manage teamwork in regular sprints.
+* Business rules validation, OO design practices, Java implementation, JavaFX GUI, password authentication, English documentation, coding standards adherence, and unit testing.
 
-Test-Driven Development (TDD): Adheres to the Test-Driven Development approach to ensure software maintainability.
+The project is divided into three sprints, each focusing on specific functionalities and requirements, with an emphasis on iterative development, adherence to best practices, and user involvement throughout the process.
 
-The application is structured into several modules, including Multidisciplinary Team Management, Fleet and Equipment Management, Optimization of Irrigation and Lighting Systems, Production of Statistical Indicators, and Green Spaces User Portal. Each module performs specific functions to achieve the outlined objectives. Key modules also include User Interface, Feedback Management, User Authentication and Authorization, Database Integration, Notification and Alert, Administrative Dashboard, and API Integration. These modules collectively provide a comprehensive solution for effective communication, engagement, and management of public green spaces.
+
+
+
+
+
 
 ## 4. Features
 
