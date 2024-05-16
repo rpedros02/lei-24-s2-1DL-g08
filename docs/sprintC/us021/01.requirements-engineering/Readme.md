@@ -21,26 +21,35 @@ management, the GSM uses two essential tools: the Agenda and the Task
 List (aka To-Do List). The To-Do List comprises all the tasks required to
 be done in order to assure the proper functioning of the parks.
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** And when it comes to To-Do List entries, we identified a state (planned, postponed, completed, canceled), a green space, a title, and a description as inputs for a To-Do List entry. But are there any more?
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
+> **Answer:** In the text you can find: the degree of urgency (High, Medium,and Low), and the approximate expected duration.
 
-> **Question:** Are there acceptance criteria when asking for the list?
+> **Question:** When a new entry is added to the ToDo list, the default status of that task will be "pending" or no status at all is considered on ToDo list?
+Similarly, when a new entry is added to the Agenda, the status of that task will be, by default, set to "planned", right?
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** "Pending" as default for to-do list entries and "Planned" as default for Agenda entries, sounds good;
 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** The new entry must be associated with a green space managed by the GSM.
 * **AC2:** The green space for the new entry should be chosen from a list presented to the GSM.
+* **AC3:** The To-Do List entries are: a state (planned, postponed, completed, canceled), a green space, a title, a description, the degree of urgency (High, Medium,and Low) and the approximate expected duration.
 
 ### 1.4. Found out Dependencies
 
 * There is a dependency on "US22 - As a GSM, I want to add a new entry in the Agenda with dependencies on existing To-Do List entries and associated green spaces." as due to the requirement of ensuring that new entries in the agenda align with the tasks already planned in the to-do list and the associated green spaces. 
 
 ### 1.5 Input and Output Data
-	
+
+* Typed data:
+  * a stat(planned, postponed, completed, canceled)
+  * a green space
+  * a title
+  * a description
+  * the degree of urgency (High, Medium,and Low)
+  * approximate expected duration
+
 * Selected data:
     * order in which to show the vehicles. 
 

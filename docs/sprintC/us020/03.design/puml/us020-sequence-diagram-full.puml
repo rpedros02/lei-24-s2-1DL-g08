@@ -1,0 +1,90 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+autonumber
+
+'hide footbox
+actor "GSM" as ADM
+participant ":RegisterGreenSpaceUI" as UI
+participant ":RegisterGreenSpaceController" as CTRL
+participant ":Repositories" as RepositorySingleton
+participant ":repositories\n:Repositories" as PLAT
+
+participant ":GreenSpaceTypeRepository" as GSTR
+participant ":GreenSpaceRepository" as GSR
+participant "greenSpace\n:GreenSpace" as GS
+
+activate ADM
+
+    ADM -> UI : asks to register a green space and its respective area
+    activate UI
+
+            UI -> CTRL : getGreenSpaceTypeList()
+            activate CTRL
+
+                CTRL -> RepositorySingleton : getInstance()
+                activate RepositorySingleton
+
+                    RepositorySingleton --> CTRL : repositories
+                deactivate RepositorySingleton
+
+                CTRL -> PLAT : getGreenSpaceTypeRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : GreenSpaceTypeRepository
+                deactivate PLAT
+
+                CTRL -> GSTR : getGreenSpaceTypeList()
+                activate GSTR
+
+                    GSTR --> CTRL : greenSpaceTypeList
+                deactivate GSTR
+
+                CTRL --> UI : getGreenSpaceTypeList
+            deactivate CTRL
+
+            UI --> ADM : shows list of Green Space types and asks to select one
+    deactivate UI
+
+    ADM -> UI : selects a Green Space type
+    activate UI
+
+        UI --> ADM : requests data (a name, a location, an area)
+    deactivate UI
+
+    ADM -> UI : types data
+    activate UI
+
+        UI --> ADM : shows all data and requests confirmation
+    deactivate UI
+
+    ADM -> UI : confirms data
+    activate UI
+
+            UI -> CTRL : registerGreenSpace(name, location, area)
+            activate CTRL
+
+                CTRL -> PLAT : getGreenSpaceRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : greenSpaceRepository
+                deactivate PLAT
+
+                CTRL -> GSR : registerGreenSpace(name, location, area)
+                activate GSR
+
+                    GSR -> GS** : registerGreenSpace(name, location, area)
+                    GSR --> GSR : validateGreenSpace(greenSpace)
+                    GSR --> GSR : saveGreenSpace(greenSpace)
+                    GSR --> CTRL : boolean
+                deactivate GSR
+
+                CTRL --> UI : boolean
+            deactivate CTRL
+        UI --> ADM : displays operation success
+
+deactivate ADM
+
+@enduml

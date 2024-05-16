@@ -15,19 +15,25 @@ activate Employee
     Employee -> System : asks to register a new green space
     activate System
 
+        System --> Employee : shows list of Green Space types and asks to select one
+    deactivate System
+
+    Employee -> System : selects a Green Space type
+    activate System
+
         System --> Employee : requests data (a name, a location, an area)
     deactivate System
 
-    Employee -> System : types requested data
+    Employee -> System : types data
     activate System
 
         System --> Employee : shows all data and requests confirmation
     deactivate System
 
     Employee -> System : confirms data
-    activate System
+        activate System
 
         System --> Employee : displays operation success
-    deactivate System
+            deactivate System
 
 @enduml

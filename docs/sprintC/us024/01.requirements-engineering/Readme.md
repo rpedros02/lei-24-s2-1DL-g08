@@ -1,11 +1,12 @@
-# US008 - List the vehicles in need off check-up. 
+# US24 - Postpone an entry in the Agenda to a specific future date. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I want to Postpone an entry in the Agenda to a
+specific future date.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -52,6 +53,6 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us024](svg/us024-sequence_diagram.svg)
 
 

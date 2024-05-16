@@ -1,0 +1,53 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+
+class GreenSpace {
+    + registerGreenSpace(name, location, area)
+}
+
+class GreenSpaceRepository {
+    + registerGreenSpace(name, location, area)
+    + validateGreenSpace(greenSpace)
+    + saveGreenSpace(greenSpace)
+
+}
+
+class Repositories {
+    + getInstance()
+    + getGreenSpaceTypeRepository()
+    + getGreenSpaceRepository()
+
+}
+
+class GreenSpaceTypeRepository {
+    + getGreenSpaceTypeList()
+
+}
+
+class RegisterGreenSpaceController {
+    + getGreenSpaceTypeList()
+
+}
+
+class RegisterGreenSpaceUI {
+}
+
+
+RegisterGreenSpaceUI .right.> RegisterGreenSpaceController
+RegisterGreenSpaceController ..> GreenSpaceRepository
+RegisterGreenSpaceController ..> GreenSpace
+RegisterGreenSpaceController ..> Repositories
+RegisterGreenSpaceController ..> GreenSpaceTypeRepository
+GreenSpaceRepository ..> GreenSpace
+
+
+
+
+@enduml

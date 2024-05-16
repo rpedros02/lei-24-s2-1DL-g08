@@ -1,4 +1,4 @@
-`# US008 - List the vehicles in need off check-up. 
+`# US021 - Adding Entries for GSM.
 `
 ## 3. Design - User Story Realization 
 

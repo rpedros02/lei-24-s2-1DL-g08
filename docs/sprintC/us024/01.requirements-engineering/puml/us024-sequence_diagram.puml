@@ -1,0 +1,21 @@
+@startuml
+skinparam monochrome false
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US024 - System Sequence Diagram (SSD)
+header US024
+autonumber
+
+actor "GSM" as gsm
+participant ":System" as System
+
+activate gsm
+
+    gsm -> System : Request data
+    activate System
+        gsm -> System :
+        System -> gsm : Returns the list..
+    deactivate System
+
+@enduml
