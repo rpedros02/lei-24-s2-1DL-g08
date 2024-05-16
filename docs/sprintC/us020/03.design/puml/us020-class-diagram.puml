@@ -7,74 +7,47 @@ skinparam linetype polyline
 
 skinparam classAttributeIconSize 0
 
-'left to right direction
 
-
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
+class GreenSpace {
+    + registerGreenSpace(name, location, area)
 }
 
-class Sorting {
-    - String description
+class GreenSpaceRepository {
+    + registerGreenSpace(name, location, area)
+    + validateGreenSpace(greenSpace)
+    + saveGreenSpace(greenSpace)
 
-    + Sorting(description)
-    + getSortingByDescription(description)
-}
-
-class SortingRepository {
-    + getSortingByDescription(description)
-}
-
-class VehicleRepository {
-    + getVehicleByPlateId(id)
 }
 
 class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
+    + getInstance()
+    + getGreenSpaceTypeRepository()
+    + getGreenSpaceRepository()
+
 }
 
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
+class GreenSpaceTypeRepository {
+    + getGreenSpaceTypeList()
 
-class VehicleListUI {
 }
 
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
+class RegisterGreenSpaceController {
+    + getGreenSpaceTypeList()
+
 }
 
-VehicleListUI .> CreateVehicleController
+class RegisterGreenSpaceUI {
+}
 
-CreateVehicleController .> Repositories : repositories
 
-Repositories -> Repositories : instance
+RegisterGreenSpaceUI .right.> RegisterGreenSpaceController
+RegisterGreenSpaceController ..> GreenSpaceRepository
+RegisterGreenSpaceController ..> GreenSpace
+RegisterGreenSpaceController ..> Repositories
+RegisterGreenSpaceController ..> GreenSpaceTypeRepository
+GreenSpaceRepository ..> GreenSpace
 
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
 
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
 
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
+
 @enduml
