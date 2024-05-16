@@ -6,7 +6,7 @@ skinparam shadowing false
 autonumber
 
 'hide footbox
-actor "HRM" as HRM
+actor "GSM" as GSM
 participant ":CreateCollaboratorUI" as UI
 participant ":CreateCollaboratorController" as CTRL
 participant ":Repositories" as RepositorySingleton

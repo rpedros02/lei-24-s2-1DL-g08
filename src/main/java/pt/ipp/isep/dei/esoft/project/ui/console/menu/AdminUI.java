@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 
 import pt.ipp.isep.dei.esoft.project.ui.console.CreateTaskUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.AssignSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.RegisterSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
@@ -22,6 +23,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Team Menu", new TeamMenuUI()));
         options.add(new MenuItem("Create Task", new CreateTaskUI()));
         options.add(new MenuItem("Register a Skill", new RegisterSkillUI()));
+        options.add(new MenuItem("Assign Skill to a Collaborator", new AssignSkillUI()));
 
         int option = 0;
         do {
