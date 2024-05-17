@@ -21,13 +21,17 @@ activate Employee
     Employee -> System : select a green space for the new entry
     activate System
 
-        System --> Employee : request for details of the new entry
+        System --> Employee : request for details of the new entry (a state, a green space,\n a description, a degree of urgency, a duration)
     deactivate System
 
     Employee -> System : provide details of the new entry
     activate System
 
-        System --> Employee : validate the entry details
+        System --> Employee : shows all data and requests confirmation
+    deactivate System
+
+    Employee -> System : confirms data
+        activate System
 
         System --> Employee : displays operation success
     deactivate System

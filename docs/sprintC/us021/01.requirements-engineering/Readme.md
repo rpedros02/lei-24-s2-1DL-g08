@@ -34,7 +34,7 @@ Similarly, when a new entry is added to the Agenda, the status of that task will
 
 * **AC1:** The new entry must be associated with a green space managed by the GSM.
 * **AC2:** The green space for the new entry should be chosen from a list presented to the GSM.
-* **AC3:** The To-Do List entries are: a state (planned, postponed, completed, canceled), a green space, a title, a description, the degree of urgency (High, Medium,and Low) and the approximate expected duration.
+* **AC3:** The To-Do List entries are: a state (planned, postponed, completed, canceled), a green space, a description, the degree of urgency (High, Medium,and Low) and the approximate expected duration.
 
 ### 1.4. Found out Dependencies
 
@@ -43,9 +43,8 @@ Similarly, when a new entry is added to the Agenda, the status of that task will
 ### 1.5 Input and Output Data
 
 * Typed data:
-  * a stat(planned, postponed, completed, canceled)
+  * a state(planned, postponed, completed, canceled)
   * a green space
-  * a title
   * a description
   * the degree of urgency (High, Medium,and Low)
   * approximate expected duration
