@@ -24,6 +24,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Create Task", new CreateTaskUI()));
         options.add(new MenuItem("Register a Skill", new RegisterSkillUI()));
         options.add(new MenuItem("Assign Skill to a Collaborator", new AssignSkillUI()));
+        options.add(new MenuItem("Register a Collaborator", new CollaboratorMenuUI()));
 
         int option = 0;
         do {

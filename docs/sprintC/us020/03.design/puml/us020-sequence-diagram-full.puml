@@ -85,6 +85,6 @@ activate ADM
             deactivate CTRL
         UI --> ADM : displays operation success
 
-deactivate ADM
+deactivate
 
 @enduml

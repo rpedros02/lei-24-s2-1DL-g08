@@ -5,18 +5,20 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.ArrayList;
 import java.util.List;
 public class GreenSpaceController {
-    private GreenSpaceRepository repository;
-
-    public GreenSpaceController(GreenSpaceRepository repository) {
-        this.repository = repository;
-    }
-
-    public void registerGreenSpace(String name, int locationCoordinates, double area) {
-        GreenSpace greenSpace = new GreenSpace(name, locationCoordinates, area);
-        repository.addGreenSpace(greenSpace);
-    }
-
-    public List<GreenSpace> getAllGreenSpaces() {
-        return repository.getAllGreenSpaces();
-    }
+//    private Repositories repositories;
+//
+//    public RegisterGreenSpaceController() {
+//        this.repositories = Repositories.getInstance();
+//    }
+//
+//    public List<String> getGreenSpaceTypeList() {
+//        GreenSpaceTypeRepository greenSpaceTypeRepo = repositories.getGreenSpaceTypeRepository();
+//        return greenSpaceTypeRepo.getGreenSpaceTypeList();
+//    }
+//
+//    public boolean registerGreenSpace(String name, int location, double area) {
+//        GreenSpaceRepository greenSpaceRepo = repositories.getGreenSpaceRepository();
+//        GreenSpace greenSpace = new GreenSpace(name, location, area);
+//        return greenSpaceRepo.registerGreenSpace(greenSpace);
+//    }
 }

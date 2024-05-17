@@ -4,13 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreenSpaceRepository {
-    private final List<GreenSpace> greenSpaces = new ArrayList<>();
+        private List<GreenSpace> greenSpaces;
 
-    public void addGreenSpace(GreenSpace greenSpace) {
-        greenSpaces.add(greenSpace);
-    }
+        public GreenSpaceRepository() {
+            this.greenSpaces = new ArrayList<>();
+        }
 
-    public List<GreenSpace> getAllGreenSpaces() {
-        return new ArrayList<>(greenSpaces);
-    }
+        public boolean registerGreenSpace(GreenSpace greenSpace) {
+            if (validateGreenSpace(greenSpace)) {
+                saveGreenSpace(greenSpace);
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        private boolean validateGreenSpace(GreenSpace greenSpace) {
+            // Add validation logic
+            return greenSpace.getName() != null && !greenSpace.getName().isEmpty() &&
+                    greenSpace.getLocationCoordinates() > 0 &&
+                    greenSpace.getArea() > 0;
+        }
+
+        private void saveGreenSpace(GreenSpace greenSpace) {
+            greenSpaces.add(greenSpace);
+        }
 }
