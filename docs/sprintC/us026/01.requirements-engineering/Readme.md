@@ -22,14 +22,15 @@ passengers or mixed, light or heavy, open box or closed vans or trucks."
 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** Todos os veículos da empresa devem estar disponíveis para os atribuir a uma entrada da agenda, ou só os veículos com a manutenção em dia?
+> 
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
+> **Answer:** Todos os veiculos que não estejam assignados a uma tarefa no mesmo periodo.
+Num contexto real precisariamos de gerir também (in)disponibilidade dos veiculos por revisões ou avarias mas não é necessário nesta prova-de-conceito.
 
-> **Question:** Are there acceptance criteria when asking for the list?
+> **Question:** 
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** 
 
 ### 1.3. Acceptance Criteria
 

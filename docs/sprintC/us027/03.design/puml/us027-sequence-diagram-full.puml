@@ -1,47 +1,27 @@
 @startuml
-skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
-
-title US008 - List the vehicles needing check-up
-header US008
+title Design for US027 - List all green spaces managed by the GSM
+header Design for US027
 autonumber
 
-actor "FM" as fm
-participant ":VehicleListUI" as ui
-participant ":VehicleController" as vc
-participant ":SortingRepository" as sr
-participant ":VehicleRepository" as vr
+actor GSM as GSM
+participant "UI" as UI
+participant "GreenSpaceController" as GreenSpaceController
+participant "GreenSpaceRepository" as GreenSpaceRepo
 
-activate fm
-    fm -> ui : Request list.
-    activate ui
-        ui --> vc : getSorting()
-        activate vc
-        vc -> sr : getSorting()
-            activate sr
-            sr --> vc : sorting
-            deactivate sr
-        vc --> ui : sorting
-        deactivate vc
-    ui --> fm : shows sorting possibilities and requests one
-    deactivate ui
-    fm -> ui : Selects pretended sorting.
-    activate ui
-        ui --> ui : keepSorting(sorting)
-        ui --> vc : getVehicle(VehicleID)
-        activate vc
-            group loop until all vehicles retrieved
-                vc -> vr : getVehicle(VehicleID)
-                activate vr
-                vr --> vc : vehicle
-                end
-                vc --> vc : sortVehicles(sorting)
-                deactivate vr
-            vc --> ui : vehicleList
-        deactivate vc
-        ui --> fm : Displays the list.
-    deactivate ui
+activate GSM
 
+GSM -> UI: Request list of managed green spaces
+activate UI
+UI -> GreenSpaceController: Request list of managed green spaces
+activate GreenSpaceController
+GreenSpaceController -> GreenSpaceRepo: Retrieve managed green spaces
+activate GreenSpaceRepo
+GreenSpaceRepo --> GreenSpaceController: List of managed green spaces
+deactivate GreenSpaceRepo
+GreenSpaceController --> UI: List of managed green spaces
+deactivate GreenSpaceController
+UI --> GSM: Display filtered green spaces
+deactivate UI
 
+deactivate GSM
 @enduml

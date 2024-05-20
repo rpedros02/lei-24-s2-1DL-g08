@@ -49,7 +49,10 @@ common citizen who wants to be informed."
 
 ### 1.4. Found out Dependencies
 
-* 
+* There is a dependency on " US020- As a Green Space Manager (GSM), I want to register a green
+  space (garden, medium-sized park or large-sized park) and its respective
+  area."
+
 
 ### 1.5 Input and Output Data
 	
