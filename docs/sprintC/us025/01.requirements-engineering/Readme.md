@@ -52,6 +52,6 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us008](svg/us025-sequence_diagram.svg)
 
 

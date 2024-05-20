@@ -3,28 +3,26 @@ skinparam monochrome false
 skinparam packageStyle rectangle
 skinparam shadowing true
 
-title US024 - Postpone an entry in the Agenda to a specific future date.
-header US024
+title US025 - Cancel an entry in the Agenda
+header US025
 autonumber
 actor "GSM" as gsm
 participant ":System" as System
 
 activate gsm
 
-    gsm -> System : Request to postpone an agenda entry
+    gsm -> System : Request to cancel an agenda entry
     activate System
         System --> System : Retrieve current agenda entry details
         note right of System : Includes task, team, equipment, duration, status, etc.
         System -> gsm : Returns current agenda entry details
     deactivate System
 
-    gsm -> System : Provide new date and reason for postponement
+    gsm -> System : Confirm cancellation of the agenda entry
     activate System
-        System --> System : Validate new date
-
-        System -> System : Update agenda entry with new date and status
-        note right of System : Change status to "Postponed"
-        System -> gsm : Confirmation of postponement
+        System --> System : Validate the cancellation request
+        System -> System : Update agenda entry status to "Canceled"
+        System -> gsm : Confirmation of cancellation
     deactivate System
 
 deactivate gsm
