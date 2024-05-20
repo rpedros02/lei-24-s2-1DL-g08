@@ -1,47 +1,64 @@
 @startuml
-skinparam monochrome true
-skinparam packageStyle rectangle
-skinparam shadowing false
+actor "Green Space Manager" as gsm
+participant "Agenda UI" as AgendaUI
+participant "Agenda Controller" as AgendaController
+participant "Agenda Repository" as AgendaRepo
+participant "Vehicle Repository" as VehicleRepo
+participant "Agenda Entry" as AgendaEntry
+title US026 - Assign one or more vehicles to an entry in the Agenda.
+header US026
+activate gsm
 
-title US008 - List the vehicles needing check-up
-header US008
-autonumber
-
-actor "FM" as fm
-participant ":VehicleListUI" as ui
-participant ":VehicleController" as vc
-participant ":SortingRepository" as sr
-participant ":VehicleRepository" as vr
-
-activate fm
-    fm -> ui : Request list.
-    activate ui
-        ui --> vc : getSorting()
-        activate vc
-        vc -> sr : getSorting()
-            activate sr
-            sr --> vc : sorting
-            deactivate sr
-        vc --> ui : sorting
-        deactivate vc
-    ui --> fm : shows sorting possibilities and requests one
-    deactivate ui
-    fm -> ui : Selects pretended sorting.
-    activate ui
-        ui --> ui : keepSorting(sorting)
-        ui --> vc : getVehicle(VehicleID)
-        activate vc
-            group loop until all vehicles retrieved
-                vc -> vr : getVehicle(VehicleID)
-                activate vr
-                vr --> vc : vehicle
-                end
-                vc --> vc : sortVehicles(sorting)
-                deactivate vr
-            vc --> ui : vehicleList
-        deactivate vc
-        ui --> fm : Displays the list.
-    deactivate ui
+gsm -> AgendaUI : Request to assign vehicle(s) to an agenda entry
+activate AgendaUI
+AgendaUI -> AgendaController : Retrieve list of available entries
+activate AgendaController
+AgendaController -> AgendaRepo : Retrieve list of available entries
+activate AgendaRepo
+AgendaRepo --> AgendaController : List of available entries
+deactivate AgendaRepo
+AgendaController --> AgendaUI : List of available entries
+deactivate AgendaController
+AgendaUI --> gsm : Shows available agenda entries\n and asks for the selection of one
+deactivate AgendaUI
+gsm -> AgendaUI : Selects one agenda entry
+activate AgendaUI
+AgendaUI -> AgendaController : Requests vehicles list
+activate AgendaController
+AgendaController -> VehicleRepo : Requests vehicles list
+activate VehicleRepo
+VehicleRepo --> AgendaController : List of available vehicles
+deactivate VehicleRepo
+deactivate AgendaRepo
+AgendaController --> AgendaUI : List of available vehicles
+deactivate AgendaController
 
 
+AgendaUI --> gsm : List of available vehicles
+deactivate AgendaController
+
+
+loop While there are vehicles to be added
+AgendaUI --> gsm : Asks for the selection of a vehicle
+
+gsm -> AgendaUI : Selects vehicle
+
+AgendaUI -> AgendaController : Add vehicle to agenda entry
+activate AgendaController
+AgendaController -> AgendaRepo : Add vehicle to agenda entry
+activate AgendaRepo
+AgendaRepo -> AgendaEntry : Add vehicle
+activate AgendaEntry
+AgendaEntry --> AgendaRepo : updated entry
+deactivate AgendaEntry
+AgendaRepo --> AgendaController : updated entry
+
+deactivate AgendaRepo
+AgendaController --> AgendaUI : updated entry
+deactivate AgendaController
+end loop
+AgendaUI --> gsm : Confirmation of assignment
+deactivate AgendaUI
+
+deactivate gsm
 @enduml
