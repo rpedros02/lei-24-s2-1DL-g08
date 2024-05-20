@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateJobController;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 import java.util.Scanner;
 
@@ -27,9 +28,7 @@ public class CreateJobUI implements Runnable{
 
     private void submitData() {
 
-        boolean isCreated = false ; // controller.createJob(jobName);
-
-        if (isCreated) {
+       if (getController().generateJob(jobName)) {
             System.out.println("\nJob created!");
         } else {
             System.out.println("\nCreation failed!");
