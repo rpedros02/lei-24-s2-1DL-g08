@@ -60,3 +60,4 @@ AssignSkillController .u.> "1" SkillRepository : skillRepository
 HRM "1" ---> "1" Skill
 
 @enduml
+

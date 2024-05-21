@@ -1,80 +1,42 @@
 @startuml
-'skinparam monochrome true
+skinparam monochrome false
 skinparam packageStyle rectangle
-skinparam shadowing false
-skinparam linetype polyline
-'skinparam linetype orto
-
+skinparam shadowing true
 skinparam classAttributeIconSize 0
 
-'left to right direction
-
-
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
+class PostponeEntryUI {
 }
 
-class Sorting {
-    - String description
-
-    + Sorting(description)
-    + getSortingByDescription(description)
-}
-
-class SortingRepository {
-    + getSortingByDescription(description)
-}
-
-class VehicleRepository {
-    + getVehicleByPlateId(id)
+class PostponeEntryController {
+    + PostponeEntryController(agendaRepository)
+    + getAgendaEntries()
+    + postponeEntry(entryID, newDate)
 }
 
 class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
+    Repositories()
+    + getInstance()
+    + getAgendaRepository()
 }
 
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
-
-class VehicleListUI {
+class AgendaRepository {
+    + getAgendaEntries()
+    + postponeEntry(entryID, newDate)
 }
 
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
+class AgendaEntry {
+    entryID
+    taskDescription
+    assignedTeam
+    vehicles
+    duration
+    status
+    + postponeEntry(newDate)
+    + validateNewDate(newDate)
 }
 
-VehicleListUI .> CreateVehicleController
-
-CreateVehicleController .> Repositories : repositories
-
-Repositories -> Repositories : instance
-
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
-
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
-
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
+PostponeEntryUI .> PostponeEntryController
+PostponeEntryController .> Repositories : repositories
+Repositories --> "1" AgendaRepository
+AgendaRepository --> "1" AgendaEntry
 @enduml
