@@ -1,28 +1,36 @@
 @startuml
-class AgendaUI {
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
 
+skinparam classAttributeIconSize 0
+
+class AgendaUI {
 }
 
 class AgendaController {
-
++ retrieveAvailableEntries() : List<AgendaEntry>
++ getVehicleList() : List<Vehicle>
++ addVehicleToEntry()
 }
 
 class AgendaRepository {
-
++ getAvailableEntries() : List<AgendaEntry>
++ addVehicleToEntry()
 }
 
 class VehicleRepository {
-
++ getAvailableVehicles() : List<Vehicle>
 }
 
 class AgendaEntry {
-
++ addVehicle()
 }
 
 AgendaUI --> AgendaController
 AgendaController --> AgendaRepository
 AgendaController --> VehicleRepository
 AgendaRepository --> AgendaEntry
-AgendaController --> AgendaEntry
 
 @enduml

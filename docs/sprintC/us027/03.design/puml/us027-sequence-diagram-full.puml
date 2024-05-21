@@ -4,24 +4,24 @@ header Design for US027
 autonumber
 
 actor GSM as GSM
-participant "UI" as UI
+participant "GreenSpaceUI" as GreenSpaceUI
 participant "GreenSpaceController" as GreenSpaceController
 participant "GreenSpaceRepository" as GreenSpaceRepo
 
 activate GSM
 
-GSM -> UI: Request list of managed green spaces
-activate UI
-UI -> GreenSpaceController: Request list of managed green spaces
+GSM -> GreenSpaceUI: Request list of \nmanaged green spaces
+activate GreenSpaceUI
+GreenSpaceUI -> GreenSpaceController: Request list of \nmanaged green spaces
 activate GreenSpaceController
 GreenSpaceController -> GreenSpaceRepo: Retrieve managed green spaces
 activate GreenSpaceRepo
 GreenSpaceRepo --> GreenSpaceController: List of managed green spaces
 deactivate GreenSpaceRepo
-GreenSpaceController --> UI: List of managed green spaces
+GreenSpaceController --> GreenSpaceUI: List of managed\n green spaces
 deactivate GreenSpaceController
-UI --> GSM: Display filtered green spaces
-deactivate UI
+GreenSpaceUI --> GSM: Green Spaces displayed
+deactivate  GreenSpaceUI
 
 deactivate GSM
 @enduml

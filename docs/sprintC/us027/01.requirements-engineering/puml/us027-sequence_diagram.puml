@@ -14,11 +14,7 @@ activate GSM
 
 GSM -> System: Request list of managed green spaces
 activate System
-    GSM -> System: Navigate to green spaces section
-    System --> GSM: Green spaces interface displayed
-    GSM -> System: Select filter criteria (optional)
-    System --> System: Apply filters
-    System --> GSM: Display filtered green spaces
+    System --> GSM: Green spaces displayed
 deactivate System
 
 @enduml

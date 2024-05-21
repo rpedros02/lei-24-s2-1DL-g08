@@ -10,71 +10,20 @@ skinparam classAttributeIconSize 0
 'left to right direction
 
 
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
+class GreenSpaceUI {
 }
 
-class Sorting {
-    - String description
 
-    + Sorting(description)
-    + getSortingByDescription(description)
+class GreenSpaceController {
++ listAll()  : List<GreenSpace>
++ retrieveManagedGreenSpaces()
+}
+class GreenSpaceRepository {
++ listAll() : List<GreenSpace>
++ getManagedGreenSpaces()
 }
 
-class SortingRepository {
-    + getSortingByDescription(description)
-}
+GreenSpaceUI --> GreenSpaceController
+GreenSpaceController --> GreenSpaceRepository
 
-class VehicleRepository {
-    + getVehicleByPlateId(id)
-}
-
-class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
-}
-
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
-
-class VehicleListUI {
-}
-
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
-}
-
-VehicleListUI .> CreateVehicleController
-
-CreateVehicleController .> Repositories : repositories
-
-Repositories -> Repositories : instance
-
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
-
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
-
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
 @enduml
