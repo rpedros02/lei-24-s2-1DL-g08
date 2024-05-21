@@ -10,9 +10,8 @@ actor "GSM" as ADM
 participant ":RegisterGreenSpaceUI" as UI
 participant ":RegisterGreenSpaceController" as CTRL
 participant ":Repositories" as RepositorySingleton
-participant ":repositories\n:Repositories" as PLAT
+participant "repositories\n:Repositories" as PLAT
 
-participant ":GreenSpaceTypeRepository" as GSTR
 participant ":GreenSpaceRepository" as GSR
 participant "greenSpace\n:GreenSpace" as GS
 
@@ -36,11 +35,11 @@ activate ADM
                     PLAT --> CTRL : GreenSpaceTypeRepository
                 deactivate PLAT
 
-                CTRL -> GSTR : getGreenSpaceTypeList()
-                activate GSTR
+                CTRL -> GSR : getGreenSpaceTypeList()
+                activate GSR
 
-                    GSTR --> CTRL : greenSpaceTypeList
-                deactivate GSTR
+                    GSR --> CTRL : greenSpaceTypeList
+                deactivate GSR
 
                 CTRL --> UI : getGreenSpaceTypeList
             deactivate CTRL
@@ -52,10 +51,9 @@ activate ADM
     activate UI
 
         UI --> ADM : requests data (a name, a location, an area)
-    deactivate UI
 
     ADM -> UI : types data
-    activate UI
+
 
         UI --> ADM : shows all data and requests confirmation
     deactivate UI
