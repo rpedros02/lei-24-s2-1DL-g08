@@ -1,57 +1,61 @@
-# US008 - List the vehicles in need off check-up. 
+# US028 - List assigned tasks between two dates. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a Collaborator, I wish to consult the tasks assigned to me between two dates.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** Could a task belong to different teams and collaborators? I mean,
+> if the status, degree of urgency and expect duration belong to an entry of the to do list
+> and the task is something generic that can be reused, or if the task could belong
+> only to one collaborator, and for another you have to create another one
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
+> **Answer:** No.
+Maybe a distinction should be made between type of task and a task.
+Task type is "Pruning trees", a specific task is "Pruning trees" in specific park in a specific date.
 
-> **Question:** Are there acceptance criteria when asking for the list?
+> **Question:**
+"As a Collaborator, I wish to consult the tasks assigned to me". That means that the collaborator
+> can have more than one task assigned to them. To ensure that, the same task should be available
+> for more than one team, am I right? The reason for that question is so that if a task 
+> is strictly related to only one team, a collaborator will end up being in
+> two teams simultaneously, which cannot happen.
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** A team can have multiple task assigned, hence, if a collaborator belongs to a team.
+Besides, a collaborator can move from a team to another, so during,
+> for instance, a month period a collaborator can belong to multiples teams.
+
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
-  
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC1**: The list of green spaces must be sorted by date.
+* **AC2**: The Collaborator should be able to filter the results by the
+status of the task.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
 
 ### 1.5 Input and Output Data
-	
-* Selected data:
-    * order in which to show the vehicles. 
+
+* **Input Data:**
+  * Two dates (start and end) to filter the tasks.
+
+* **Selected data:**
+    * The status in which to view the Tasks. 
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
+* List of assigned tasks ordered by date.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us028](svg/us028-sequence_diagram.svg)
 
 
