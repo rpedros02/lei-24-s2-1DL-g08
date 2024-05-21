@@ -1,11 +1,11 @@
-# US008 - List the vehicles in need off check-up. 
+# US008 - Cancel an entry in the Agenda. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I want to Cancel an entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
@@ -22,36 +22,28 @@ As an FM, I want to list the vehicles needing the check-up.
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
-  
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC1:** A canceled task should not be deleted but rather change its
+  state.
+* **AC2:** The GSM must be able to select an existing entry in the Agenda for cancellation.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* There is a dependency on US22 because cancellation of an entry in the Agenda requires the entry to exist previously in the Agenda.
+* There is a dependency on US23 Assignment of teams to Agenda entries may be affected by the cancellation of a task.
+
 
 ### 1.5 Input and Output Data
 	
-* Selected data:
-    * order in which to show the vehicles. 
+* Existing Agenda Entry ID:
+  * The identifier of the entry to be canceled in the Agenda.
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
-* (In)Success of the operation
+* Confirmation Message: A confirmation message informing that the entry has been successfully canceled.
+* Error Message: If there is any issue during the cancellation process, such as failure in communication with the system or data validation, an appropriate error message should be provided.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us025-sequence_diagram.svg)
+![us025](svg/us025-sequence_diagram.svg)
 
 
