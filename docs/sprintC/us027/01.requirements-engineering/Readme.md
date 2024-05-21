@@ -20,15 +20,14 @@ common citizen who wants to be informed."
 > 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
->
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
 
-> **Question:** Are there acceptance criteria when asking for the list?
+> **Question:** Dear client, which info about Green Spaces do you want the GSM see when listing? only the name ?
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** Each de team can decide about the aspects related to UX/UI.
 
+> **Question:** 
+>
+>  **Answer:** 
 ### 1.3. Acceptance Criteria
 
 * **AC1:** Display Green Spaces List

@@ -28,9 +28,13 @@ passengers or mixed, light or heavy, open box or closed vans or trucks."
 > **Answer:** Todos os veiculos que não estejam assignados a uma tarefa no mesmo periodo.
 Num contexto real precisariamos de gerir também (in)disponibilidade dos veiculos por revisões ou avarias mas não é necessário nesta prova-de-conceito.
 
-> **Question:** 
+> **Question:** What are the criteries to accept a assign of a Vehicle to a Entry?
+Only Vehicle with no Entry's can be assigned ?
+Only Vehicles with no Entry on the day selected ?
+It is possible to add any kind of vehicles?
 >
-> **Answer:** 
+> **Answer:** The vehicle needs to be available in the period.
+Yes, any can of vehicles can be assigned.
 
 ### 1.3. Acceptance Criteria
 
