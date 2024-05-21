@@ -1,30 +1,23 @@
 @startuml
-skinparam monochrome false
+skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing true
 skinparam classAttributeIconSize 0
 
 class AgendaEntry {
-    entryID: int
-    taskDescription: string
-    assignedTeam: string
-    vehicles: string
-    duration: string
-    status: string
+    entryID
+    taskDescription
+    assignedTeam
+    vehicles
+    duration
+    status
 }
 
 class GSM {
-    gsmID: int
-    username: string
-    password: string
+    gsmID
+    username
+    password
 }
 
-class GreenSpace {
-    spaceID: int
-    spaceType: string
-    area: string
-}
-
-AgendaEntry "1" -- "1..*" GSM : assignedTo >
-AgendaEntry "1" -- "1" GreenSpace : relatesTo >
+GSM "1" -- "1..*" AgendaEntry :
 @enduml

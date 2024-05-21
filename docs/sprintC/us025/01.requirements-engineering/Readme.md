@@ -1,4 +1,4 @@
-# US008 - Cancel an entry in the Agenda. 
+# US025 - Cancel an entry in the Agenda. 
 
 
 ## 1. Requirements Engineering
