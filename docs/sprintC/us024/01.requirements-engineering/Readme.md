@@ -16,6 +16,9 @@ specific future date.
 >
 > **Answer:** No; sometimes, for various reasons (e.g. insufficient staff, faulty equipment or adverse weather conditions) a task has to be postponed to a new date; task duration is not directly related to this.
 
+>**Question:** What are the input to postpone an entry? From my perspective the Green Spaces Manager only needs to select the entry and introduce the new date.
+> 
+> **Answer:** Yes, you are correct!
 
 ### 1.3. Acceptance Criteria
 

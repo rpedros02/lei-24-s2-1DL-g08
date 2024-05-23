@@ -11,15 +11,19 @@ As a GSM, I want to Cancel an entry in the Agenda.
 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** does the task associated with the Agenda entry in which this happens remain in the To-do List or can it be removed, unlike what happens in the Agenda? Or even, would this process be different between a completed task and a canceled task?
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
+> **Answer:** Yes.
+I suppose when a task goes to the Agenda, it leaves the To-Do list but maybe a different flow could be considered.
 
-> **Question:** Are there acceptance criteria when asking for the list?
+> **Question:** When a task is cancelled, is it possible to put it back on the agenda again later?
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** yes.
 
+>**Question:** 
+> When we cancel a task, do we move it again to the To-Do List?
+> 
+> **Answer:** no.
 ### 1.3. Acceptance Criteria
 
 * **AC1:** A canceled task should not be deleted but rather change its

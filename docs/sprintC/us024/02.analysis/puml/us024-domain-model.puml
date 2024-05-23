@@ -19,5 +19,7 @@ class GSM {
     password
 }
 
-GSM "1" -- "1..*" AgendaEntry :
+
+
+AgendaEntry "1" -- "1..*" GSM : Postpone an entry <
 @enduml
