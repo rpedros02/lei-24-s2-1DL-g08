@@ -3,7 +3,7 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
@@ -25,7 +25,7 @@ public class ToDoListController {
         authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
     }
 
-    public boolean addTaskToToDoList(Task task) {
+    public boolean addTaskToToDoList(Entry entry) {
         return toDoListRepository.addTaskToToDoList(task);
     }
 

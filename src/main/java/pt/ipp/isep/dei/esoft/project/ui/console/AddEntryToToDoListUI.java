@@ -3,8 +3,10 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
-import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
+import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 
 import java.util.List;
 
@@ -32,20 +34,20 @@ public class AddEntryToToDoListUI implements Runnable {
         int greenSpaceIndex = Utils.readIntegerFromConsole("Select a green space from the list above:") - 1;
         GreenSpace greenSpace = greenSpaces.get(greenSpaceIndex);
 
-        String taskTitle = Utils.readLineFromConsole("Enter the task title:");
-        String taskDescription = Utils.readLineFromConsole("Enter the task description:");
+        String entryTitle = Utils.readLineFromConsole("Enter the entry title:");
+        String entryDescription = Utils.readLineFromConsole("Enter the entry description:");
         List<String> types = DegreeOfUrgencyRepository.getDegreesOfUrgency();
         String degreeOfUrgencyString = (String) Utils.showAndSelectOne(types, "Select a degree of urgency:");
-        double taskDuration = Utils.readDoubleFromConsole("Enter the task duration:");
-        String taskStatus = "Pending"; // Assuming the task status is "Pending" when it's created
+        double entryDuration = Utils.readDoubleFromConsole("Enter the entry duration:");
+        String entryStatus = "Pending"; // Assuming the entry status is "Pending" when it's created
 
         DegreeOfUrgencyRepository degreeOfUrgency = DegreeOfUrgencyRepository.valueOf(degreeOfUrgencyString.toUpperCase());
-        Task task = new Task(taskTitle, taskDescription, degreeOfUrgency, taskDuration, taskStatus, greenSpace);
+        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, entryDuration, entryStatus, greenSpace);
 
-        if (toDoListController.addTaskToToDoList(task)) {
-            System.out.println("Task successfully added to the To-Do List.");
+        if (toDoListController.addEntryToToDoList(entry)) {
+            System.out.println("Entry successfully added to the To-Do List.");
         } else {
-            System.out.println("Failed to add task to the To-Do List.");
+            System.out.println("Failed to add entry to the To-Do List.");
         }
     }
 }
