@@ -51,7 +51,7 @@ activate ADM
     ADM -> UI : select a green space for the new entry
     activate UI
 
-        UI --> ADM : request for details of the new entry (a state, a green space,\n a description, a degree of urgency, a duration)
+        UI --> ADM : request for details of the new entry (a title, a state, a green space,\n a description, a degree of urgency, a duration)
     deactivate UI
 
     ADM -> UI : provide details of the new entry
@@ -63,7 +63,7 @@ activate ADM
     ADM -> UI : confirms data
     activate UI
 
-        UI -> CTRL : addEntry(a state, a green space,\n a description, a degree of urgency, a duration)
+        UI -> CTRL : addEntry(title, state, greenSpace,\n description, degreeOfUrgency, duration)
         activate CTRL
 
             CTRL -> PLAT : getToDoListRepository()
@@ -72,10 +72,10 @@ activate ADM
                 PLAT --> CTRL : toDoListRepository
             deactivate PLAT
 
-            CTRL -> TDR : addEntry(a state, a green space,\n a description, a degree of urgency, a duration)
+            CTRL -> TDR : addEntry(title, state, greenSpace,\n description, degreeOfUrgency, duration)
             activate TDR
 
-                TDR -> TASK** : createEntry(a state, a green space,\n a description, a degree of urgency, a duration)
+                TDR -> TASK** : createEntry(title, state, greenSpace,\n description, degreeOfUrgency, duration)
                 TDR --> TDR : validateEntry(entry)
                 TDR --> TDR : saveEntry(entry)
                 TDR --> CTRL : boolean
