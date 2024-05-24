@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
-import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.ArrayList;
 import java.util.List;

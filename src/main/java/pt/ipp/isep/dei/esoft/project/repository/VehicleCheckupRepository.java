@@ -8,21 +8,24 @@ import java.util.List;
 import java.util.Optional;
 
 public class VehicleCheckupRepository {
-    private final List<VehicleCheckup> checkUps;
+    private final List<VehicleCheckup> vehicleCheckups;
 
     public VehicleCheckupRepository() {
-        checkUps = new ArrayList<>();
+        vehicleCheckups = new ArrayList<>();
     }
 
-    public Optional<VehicleCheckup> registerCheckUp(String plate, Date date, int lastCheckUpKm) {
-        VehicleCheckup newCheckUp = new VehicleCheckup(plate, date, lastCheckUpKm);
-        for (VehicleCheckup existingCheckUp : checkUps) {
-            if (existingCheckUp.getPlate().equals(plate) && existingCheckUp.getDate().isEqual(date)) {
+    public Optional<VehicleCheckup> registerVehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
+        VehicleCheckup newVehicleCheckup = new VehicleCheckup(plate, date, lastVehicleCheckupKm);
+        for (VehicleCheckup existingVehicleCheckup : vehicleCheckups) {
+            if (existingVehicleCheckup.getPlate().equals(plate) && existingVehicleCheckup.getDate().isEqual(date)) {
                 return Optional.empty();
             }
         }
-        checkUps.add(newCheckUp);
-        return Optional.of(newCheckUp);
+        vehicleCheckups.add(newVehicleCheckup);
+        return Optional.of(newVehicleCheckup);
+    }
+    public void addVehicleCheckup(VehicleCheckup vehicleCheckup) {
+        vehicleCheckups.add(vehicleCheckup);
     }
 
 }

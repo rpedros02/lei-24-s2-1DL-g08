@@ -1,30 +1,31 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
-import pt.ipp.isep.dei.esoft.project.domain.Task;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoListRepository {
     private ToDoList toDoList;
-    private List<Task> tasks;
+    private List<Entry> entries;
 
     public ToDoListRepository() {
         this.toDoList = new ToDoList();
-        this.tasks = new ArrayList<>();
+        this.entries = new ArrayList<>();
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public List<Entry> getEntries() {
+        return entries;
     }
 
-    public boolean addTaskToToDoList(Task task) {
-        this.tasks.add(task);
-        return this.toDoList.addTask(task);
+    public boolean addEntryToToDoList(Entry entry) {
+        this.entries.add(entry);
+        return this.toDoList.addEntry(entry);
     }
 
-    public boolean removeTaskFromToDoList(Task task) {
-        return toDoList.removeTask(task) && tasks.remove(task);
+    public boolean removeEntryFromToDoList(Entry entry) {
+        return toDoList.removeEntry(entry) && entries.remove(entry);
     }
 
     public ToDoList getToDoList() {

@@ -8,6 +8,8 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.isep.lei.esoft.auth.domain.model.Email;
+import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
+import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,21 +27,21 @@ public class ToDoListController {
         authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
     }
 
-    public boolean addTaskToToDoList(Entry entry) {
-        return toDoListRepository.addTaskToToDoList(task);
+    public boolean addEntryToToDoList(Entry entry) {
+        return toDoListRepository.addEntryToToDoList(entry);
     }
 
-    public Optional<Task> createTask(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
+    public Optional<Entry> createEntry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
         Collaborator collaborator = getEmployeeFromSession();
-        Optional<Organization> organization = organizationRepository.getOrganizationByEmployee(collaborator);
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
 
-        Optional<Task> newTask = Optional.empty();
+        Optional<Entry> newEntry = Optional.empty();
 
         if (organization.isPresent()) {
-            newTask = organization.get()
-                    .createTask(title, description, degreeOfUrgency, duration, status, greenSpace);
+            newEntry = organization.get()
+                    .createEntry(title, description, degreeOfUrgency, duration, status, greenSpace);
         }
-        return newTask;
+        return newEntry;
     }
 
     private Collaborator getEmployeeFromSession() {
@@ -47,8 +49,8 @@ public class ToDoListController {
         return new Collaborator(email.getEmail());
     }
 
-    public List<Task> getTasks() {
-        return toDoListRepository.getToDoList().getTasks();
+    public List<Entry> getEntries() {
+        return toDoListRepository.getToDoList().getEntries();
     }
 
 

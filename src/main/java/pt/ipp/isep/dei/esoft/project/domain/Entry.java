@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
+
 import java.util.Objects;
 
 public class Entry {
@@ -10,11 +12,11 @@ public class Entry {
     private String status;
     private GreenSpace greenSpace;
 
-    public Task(String title) {
+    public Entry(String title) {
         this.title = title;
     }
 
-    public Task(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
+    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
         this.title = title;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
@@ -71,30 +73,30 @@ public class Entry {
         this.title = title;
     }
 
-    public boolean validateTask() {
+    public boolean validateEntry() {
         return !title.isEmpty() && !description.isEmpty() && duration > 0;
     }
 
-    public boolean addTask() {
-        return validateTask();
+    public boolean addEntry() {
+        return validateEntry();
     }
 
     @Override
-    public Task clone() {
-        return new Task(title, description, degreeOfUrgency, duration, status, greenSpace);
+    public Entry clone() {
+        return new Entry(title, description, degreeOfUrgency, duration, status, greenSpace);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Task)) return false;
-        Task task = (Task) o;
-        return Double.compare(task.duration, duration) == 0 &&
-                Objects.equals(title, task.title) &&
-                Objects.equals(description, task.description) &&
-                Objects.equals(degreeOfUrgency, task.degreeOfUrgency) &&
-                Objects.equals(status, task.status) &&
-                Objects.equals(greenSpace, task.greenSpace);
+        if (!(o instanceof Entry)) return false;
+        Entry entry = (Entry) o;
+        return Double.compare(entry.duration, duration) == 0 &&
+                Objects.equals(title, entry.title) &&
+                Objects.equals(description, entry.description) &&
+                Objects.equals(degreeOfUrgency, entry.degreeOfUrgency) &&
+                Objects.equals(status, entry.status) &&
+                Objects.equals(greenSpace, entry.greenSpace);
     }
 
     @Override
@@ -104,7 +106,7 @@ public class Entry {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "Entry{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", degreeOfUrgency='" + degreeOfUrgency + '\'' +

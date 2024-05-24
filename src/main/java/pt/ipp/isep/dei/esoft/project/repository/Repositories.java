@@ -10,9 +10,11 @@ public class Repositories {
     private final VehicleRepository vehicleRepository;
     private final VehicleCheckupRepository vehicleCheckupRepository;
     private final JobRepository jobRepository;
-
     private final CollaboratorRepository collaboratorRepository;
     private final TeamRepository teamRepository;
+    private final ToDoListRepository toDoListRepository;
+    private final GreenSpaceRepository greenSpaceRepository;
+
 
     private Repositories() {
         this.jobRepository = new JobRepository();
@@ -24,6 +26,8 @@ public class Repositories {
         this.vehicleRepository = new VehicleRepository();
         this.vehicleCheckupRepository = new VehicleCheckupRepository();
         this.teamRepository = new TeamRepository();
+        this.greenSpaceRepository = new GreenSpaceRepository();
+        this.toDoListRepository = new ToDoListRepository();
     }
 
     public static Repositories getInstance() {
@@ -41,6 +45,12 @@ public class Repositories {
 
     public TaskCategoryRepository getTaskCategoryRepository() {
         return taskCategoryRepository;
+    }
+    public ToDoListRepository getToDoListRepository() {
+        return toDoListRepository;
+    }
+    public GreenSpaceRepository getGreenSpaceRepository() {
+        return greenSpaceRepository;
     }
 
     public AuthenticationRepository getAuthenticationRepository() {

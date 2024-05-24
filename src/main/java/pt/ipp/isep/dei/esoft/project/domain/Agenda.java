@@ -3,18 +3,18 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.List;
 
 public class Agenda {
-    private Task task;
+    private Entry entry;
     private Team team;
     private List<Vehicle> vehicles;
 
-    public Agenda(Task task, Team team, List<Vehicle> vehicles) {
-        this.task = task;
+    public Agenda(Entry entry, Team team, List<Vehicle> vehicles) {
+        this.entry = entry;
         this.team = team;
         this.vehicles = vehicles;
     }
 
-    public Task getTask() {
-        return task;
+    public Entry getEntry() {
+        return entry;
     }
 
     public Team getTeam() {
@@ -25,8 +25,8 @@ public class Agenda {
         return vehicles;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setEntry(Entry entry) {
+        this.entry = entry;
     }
 
     public void setTeam(Team team) {
@@ -53,8 +53,8 @@ public class Agenda {
         return this.team.equals(team);
     }
 
-    public boolean hasTask(Task task) {
-        return this.task.equals(task);
+    public boolean hasEntry(Entry entry) {
+        return this.entry.equals(entry);
     }
 
     public boolean hasVehicles(List<Vehicle> vehicles) {

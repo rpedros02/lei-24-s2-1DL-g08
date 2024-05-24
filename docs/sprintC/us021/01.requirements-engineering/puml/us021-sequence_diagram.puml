@@ -27,10 +27,10 @@ activate Employee
     Employee -> System : provide details of the new entry
     activate System
 
-        System --> Employee : shows all data and requests confirmation
+        System --> Employee : displays degrees of urgency
     deactivate System
 
-    Employee -> System : confirms data
+    Employee -> System : selects degree of urgency, provides duration and status
         activate System
 
         System --> Employee : displays operation success

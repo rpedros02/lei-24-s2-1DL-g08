@@ -1,4 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
+import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 
 import java.util.Objects;
 

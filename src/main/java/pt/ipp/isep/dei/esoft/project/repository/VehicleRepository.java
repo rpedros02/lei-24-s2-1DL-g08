@@ -178,4 +178,18 @@ public class VehicleRepository {
         }
         return Optional.empty();
     }
+    public boolean addVehicle(Vehicle vehicle) {
+        if (validateVehicle(vehicle)) {
+            return this.vehicles.add(vehicle);
+        }
+        return false;
+    }
+    private boolean validateVehicle(Vehicle vehicle) {
+        for (Vehicle existingVehicle : this.vehicles) {
+            if (existingVehicle.getBrand().equals(vehicle.getBrand()) && existingVehicle.getModel().equals(vehicle.getModel())) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
