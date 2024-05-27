@@ -1,0 +1,10 @@
+graph G {label="Cost of a minimum spanning tree = 35.0";
+1 -- 5[label=1.0]
+2 -- 6[label=3.0]
+5 -- 6[label=4.0]
+1 -- 4[label=5.0]
+1 -- 8[label=6.0]
+3 -- 7[label=8.0]
+3 -- 4[label=8.0]
+
+}
