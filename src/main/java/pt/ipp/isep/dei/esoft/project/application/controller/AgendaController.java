@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.application.controller.authorization;
+package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
@@ -36,13 +36,13 @@ public class AgendaController implements Serializable {
      * Method to update an agenda entry
      *
      * @param agenda Agenda entry
-     * @param task        Task
+     * @param entry        Entry
      * @param team        Team
      * @param vehicles    List of vehicles
      * @return True if the agenda entry was updated successfully, false otherwise
      */
-    public boolean updateAgendaEntry(Agenda agenda, Task task, Team team, List<Vehicle> vehicles) {
-        return agendaRepository.updateAgendaEntry(agenda, task, team, vehicles);
+    public boolean updateAgendaEntry(Agenda agenda, Entry entry, Team team, List<Vehicle> vehicles) {
+        return agendaRepository.updateAgendaEntry(agenda, entry, team, vehicles);
     }
 
     /**
