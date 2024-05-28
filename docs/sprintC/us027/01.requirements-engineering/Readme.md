@@ -44,6 +44,11 @@ common citizen who wants to be informed."
   * The system must allow the GSM to search for green spaces by name or location.
   * The system must provide filter options based on green space type and size range.
 
+* **AC3:** 
+* The list of green spaces must be sorted by size in descending
+  order (area in hectares should be used). The sorting algorithm to
+  be used by the application must be defined through a configuration
+  file. At least two sorting algorithms should be available.
 
 
 ### 1.4. Found out Dependencies

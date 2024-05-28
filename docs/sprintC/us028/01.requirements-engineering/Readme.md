@@ -40,6 +40,8 @@ status of the task.
 
 ### 1.4. Found out Dependencies
 
+* There is a dependency on US22 because there's need to have an entry in the Agenda.
+* There is a dependency on US23 a Collaborator needs to be assigned to a team and therefore to a task in the Agenda.
 
 ### 1.5 Input and Output Data
 

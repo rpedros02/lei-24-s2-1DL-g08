@@ -1,57 +1,42 @@
-# US008 - List the vehicles in need off check-up. 
+# US029 - Record the completion of a task. 
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+US29 - As a Collaborator, I want to record the completion of a task.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
->
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
-
-> **Question:** Are there acceptance criteria when asking for the list?
->
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> This "record" refers to the act of only changing the status of the task, or do we want to save a list of the completed tasks within each Collaborator?
+> 
+> **Answer:** It means to record that a task was completed (changing the status) with the finish time
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
-  
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC1:** The system should record the date and time when the task was marked as completed.
+* **AC2:** The Collaborator must be able to sort out the list.
+* **AC3:** The system must show the list of tasks that have been completed.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* There is a dependency on US22 because there's need to have an entry in the Agenda.
+* There is a dependency on US23 a Collaborator needs to be assigned to a team and therefore to a task in the Agenda.
 
 ### 1.5 Input and Output Data
 	
 * Selected data:
-    * order in which to show the vehicles. 
+    * the Task to record as complete.
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us029](svg/us029-sequence_diagram.svg)
 
 

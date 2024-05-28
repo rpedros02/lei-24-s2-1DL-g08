@@ -1,19 +1,25 @@
-`# US008 - List the vehicles in need off check-up. 
+`# US026 - Assign one or more vehicles to an entry in the Agenda.
 `
 ## 3. Design - User Story Realization 
 
 ### 3.1. Rationale
 
 
-| Interaction ID                                                          | Question: Which class is responsible for...          | Answer                | Justification (with patterns) |
-|:------------------------------------------------------------------------|:-----------------------------------------------------|:----------------------|:------------------------------|
-| Step 1 : Request list.  		                                              | ...instantiating the class that handles the UI?      | VehicleListUI         | Pure Fabrication              |
-| Step 2 : Shows the possible ways to sort out data and  waits for input. | ..retrieving possible ways to sort data?             | VehicleController     | IE                            |
-|                                                                         | 	...displaying the possible ways to show data?						 | VehicleListUI         | Pure Fabrication              |
-| Step 3 : Selects pretended sorting.                                     |                                                      |                       |                               |
-| Step 4 : Retrieval of vehicles information and sorting.                 | ...retrieval of vehicles information?                | VehicleController     | IE                            |
-|                                                                         | ...sorting the vehicles?                             | VehicleListController | Controller                    |
-| Step 5 : Return the list.                                               | ...showing the list?                                 | VehicleListUI         | Pure Fabrication              |
+| Interaction ID                                            | Question: Which class is responsible for...                                                  | Answer                       | Justification (with patterns) |
+|:----------------------------------------------------------|:---------------------------------------------------------------------------------------------|:-----------------------------|:------------------------------|
+| Step 1 : Request to assign vehicle(s) to an agenda entry	 | ...handling the initial request from the user?                                               | AgendaUI                     | Pure Fabrication              |
+| Step 2 : Retrieve list of available entries               | ...retrieving the list of available agenda entries?                                          | AgendaController             | IE                            |
+|                                                           | 	...retrieving the data from the repository?					                                            | AgendaRepo                   | IE                            |
+|                                                           | ...displaying the list of available agenda entries to the user?                              | AgendaUI                     | Pure Fabrication              |
+| Step 3 : Selects one agenda entry                         | ...selecting an agenda entry?                                                                | Green Space Manager          | Controller                    |
+| Step 4 : Requests vehicles list                           | ...requesting the list of available vehicles?                                                | AgendaController             | IE                            |
+|                                                           | ...retrieving the vehicle data from the repository?                                          | VehicleRepo                  | IE                            |
+|                                                           | ...displaying the list of available vehicles to the user?                                    | AgendaUI                     | Pure Fabrication              |
+| Step 5 : While there are vehicles to be added             | ...iteratively selecting vehicles to add to the agenda entry?                                | Green Space Manager          | Controller                    |
+|                                                           | ...handling the addition of a vehicle to the agenda entry?                                   | AgendaController             | IE                            |
+|                                                           | ...updating the agenda entry with the selected vehicle?                                      | AgendaRepo                   | IE                            |
+|                                                           | ...storing the updated agenda entry?                                                         | AgendaEntry                  | Entity                        |
+| Step 6: Confirmation of assignment                        | ...confirming the assignment of vehicles to the agenda entry?                                | AgendaUI                     | Pure Fabrication              |
 
 ### Systematization ##
 
@@ -34,9 +40,9 @@ Other software classes (i.e. Pure Fabrication) identified:
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us026-sequence-diagram-full.svg)
 
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us026-class-diagram.svg)
