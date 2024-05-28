@@ -21,7 +21,7 @@ public class VehicleCheckupController {
         if (optVehicle.isPresent()) {
             Vehicle vehicle = optVehicle.get();
             vehicle.updateLastCheckUpKm(lastCheckUpKm);
-            boolean checkUpRegistered = checkUpRepository.registerCheckUp(plate, date, lastCheckUpKm).isPresent();
+            boolean checkUpRegistered = checkUpRepository.registerVehicleCheckup(plate, date, lastCheckUpKm).isPresent();
             if (checkUpRegistered) {
                 vehicleRepository.updateVehicle(vehicle);
                 return true;
