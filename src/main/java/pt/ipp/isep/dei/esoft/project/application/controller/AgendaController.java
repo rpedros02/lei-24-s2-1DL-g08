@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.application.controller.authorization;
+package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.repository.AgendaRepository;
@@ -22,13 +22,13 @@ public class AgendaController implements Serializable {
     /**
      * Method to create an agenda entry
      *
-     * @param task     Task
+     * @param entry     Entry
      * @param team     Team
      * @param vehicles List of vehicles
      * @return True if the agenda entry was created successfully, false otherwise
      */
-    public boolean createAgendaEntry(Task task, Team team, List<Vehicle> vehicles) {
-        Agenda newEntry = new Agenda(task, team, vehicles);
+    public boolean createAgendaEntry(Entry entry, Team team, List<Vehicle> vehicles) {
+        Agenda newEntry = new Agenda(entry, team, vehicles);
         return agendaRepository.addAgendaEntry(newEntry);
     }
 
@@ -36,13 +36,13 @@ public class AgendaController implements Serializable {
      * Method to update an agenda entry
      *
      * @param agenda Agenda entry
-     * @param task        Task
+     * @param entry        Entry
      * @param team        Team
      * @param vehicles    List of vehicles
      * @return True if the agenda entry was updated successfully, false otherwise
      */
-    public boolean updateAgendaEntry(Agenda agenda, Task task, Team team, List<Vehicle> vehicles) {
-        return agendaRepository.updateAgendaEntry(agenda, task, team, vehicles);
+    public boolean updateAgendaEntry(Agenda agenda, Entry entry, Team team, List<Vehicle> vehicles) {
+        return agendaRepository.updateAgendaEntry(agenda, entry, team, vehicles);
     }
 
     /**
@@ -103,13 +103,13 @@ public class AgendaController implements Serializable {
     }
 
     /**
-     * Method to check if a task is in the agenda
+     * Method to check if a entry is in the agenda
      *
-     * @param task Task
-     * @return True if the task is in the agenda, false otherwise
+     * @param entry Entry
+     * @return True if the entries is in the agenda, false otherwise
      */
-    public boolean isTaskInAgenda(Task task) {
-        return agendaRepository.isTaskInAgenda(task);
+    public boolean isTaskInAgenda(Entry entry) {
+        return agendaRepository.isTaskInAgenda(entry);
     }
 
     /**
