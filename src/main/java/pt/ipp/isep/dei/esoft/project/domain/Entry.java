@@ -8,7 +8,8 @@ public class Entry {
     private String title;
     private String description;
     private DegreeOfUrgencyRepository degreeOfUrgency;
-    private double duration;
+    private Date dateBegin;
+    private Date dateEnd;
     private String status;
     private GreenSpace greenSpace;
 
@@ -16,11 +17,12 @@ public class Entry {
         this.title = title;
     }
 
-    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
+    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace) {
         this.title = title;
         this.description = description;
         this.degreeOfUrgency = degreeOfUrgency;
-        this.duration = duration;
+        this.dateBegin = dateBegin;
+        this.dateEnd = dateEnd;
         this.status = status;
         this.greenSpace = greenSpace;
     }
@@ -110,9 +112,26 @@ public class Entry {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", degreeOfUrgency='" + degreeOfUrgency + '\'' +
-                ", duration=" + duration +
+                ", dateBegin=" + dateBegin.toString() +
+                ", dateEnd=" + dateEnd.toString() +
                 ", status='" + status + '\'' +
                 ", greenSpace='" + greenSpace + '\'' +
                 '}';
+    }
+
+    public Date getDateBegin() {
+        return dateBegin;
+    }
+
+    public void setDateBegin(Date dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
     }
 }

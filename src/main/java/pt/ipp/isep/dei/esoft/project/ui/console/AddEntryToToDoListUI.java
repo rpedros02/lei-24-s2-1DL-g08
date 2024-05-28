@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -38,11 +39,13 @@ public class AddEntryToToDoListUI implements Runnable {
         String entryDescription = Utils.readLineFromConsole("Enter the entry description:");
         List<String> types = DegreeOfUrgencyRepository.getDegreesOfUrgency();
         String degreeOfUrgencyString = (String) Utils.showAndSelectOne(types, "Select a degree of urgency:");
-        double entryDuration = Utils.readDoubleFromConsole("Enter the entry duration:");
+        Date dateBegin = Utils.readDateFromConsole("Enter the entry begin date (dd-mm-yyy):");
+        Date dateEnd = Utils.readDateFromConsole("Enter the entry begin date (dd-mm-yyy):");
+
         String entryStatus = "Pending"; // Assuming the entry status is "Pending" when it's created
 
         DegreeOfUrgencyRepository degreeOfUrgency = DegreeOfUrgencyRepository.valueOf(degreeOfUrgencyString.toUpperCase());
-        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, entryDuration, entryStatus, greenSpace);
+        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, dateBegin,dateEnd, entryStatus, greenSpace);
 
         if (toDoListController.addEntryToToDoList(entry)) {
             System.out.println("Entry successfully added to the To-Do List.");
