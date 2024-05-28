@@ -121,46 +121,370 @@ _It is also recommended to organize this content by subsections._
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CreateCollaboratorController 
 
 ```java
-public Task createTask(String reference, String description, String informalDescription, String technicalDescription,
-                       Integer duration, Double cost, String taskCategoryDescription) {
+public class CreateCollaboratorController {
 
-	TaskCategory taskCategory = getTaskCategoryByDescription(taskCategoryDescription);
+    private CollaboratorRepository collaboratorRepository;
 
-	Employee employee = getEmployeeFromSession();
-	Organization organization = getOrganizationRepository().getOrganizationByEmployee(employee);
+    public CreateCollaboratorController(){
+        getCollaboratorRepository();
+    }
+    public CreateCollaboratorController(CollaboratorRepository collaboratorRepository){
+        this.collaboratorRepository = collaboratorRepository;
+    }
+    private CollaboratorRepository getCollaboratorRepository() {
+        if (collaboratorRepository ==null){
+            Repositories repositories= Repositories.getInstance();
 
-	newTask = organization.createTask(reference, description, informalDescription, technicalDescription, duration,
-                                      cost,taskCategory, employee);
+            collaboratorRepository = repositories.getCollaboratorRepository();
+        }
+        return collaboratorRepository;
+    }
+
+
+    public Optional<Collaborator> createCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
+        return Organization.getInstance("000000000").createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
+    }
+}
+
+```
+
+### Class Collaborator
+
+```java
+public class Collaborator {
+    // Regular expressions for validation
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    private static final String POSTAL_CODE_REGEX = "^\\d{4}-\\d{3}$";
+    private static final String NAME_REGEX = "^[a-zA-ZÀ-ÿ-]+(?:\\s[a-zA-ZÀ-ÿ-]+)*$";
+
+    // Default values for Collaborator attributes
+    private final String NAME_BY_OMISSION = "no name";
+    private final Date BIRTH_DATE_BY_OMISSION = new Date(12, 3, 1975);
+    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10,10,2002);
+    private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
+    private final String EMAIL_BY_OMISSION = "nomail@mail.com";
+    private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;
+    private final String ID_NUMBER_BY_OMISSION = "11111111";
+    private final int TAX_PAYER_NUMBER_BY_OMISSION = 240726286;
+    private final Address ADDRESS_BY_OMISSION = new Address("no street", 12,"4000-400","no city", "no country");
+    private final Job JOB_BY_OMISSION = new Job("no title");
+
+    // Collaborator attributes
+    private String name;
+    private Date birthDate;
+    private Date admissionDate;
+    private int mobileNumber;
+    private String email;
+    private int taxPayerNumber;
+    private IdDocType idDocType;
+    private String idNumber;
+    private Address address;
+    private Job job;
+    private List<Skill> assignedSkills;
     
-	return newTask;
+    public Collaborator(String name,
+                        Date birthDate,
+                        Date admissionDate,
+                        int mobileNumber,
+                        String email,
+                        int taxPayerNumber,
+                        IdDocType idDocType,
+                        String idNumber,
+                        Address address,
+                        Job job) {
+        setName(name);
+        setBirthDate(birthDate);
+        setAdmissionDate(admissionDate);
+        setMobileNumber(mobileNumber);
+        setEmail(email);
+        setTaxPayerNumber(taxPayerNumber);
+        setIdDocType(idDocType);
+        setIdNumber(idNumber);
+        this.address = new Address(address);
+        this.job = new Job(job);
+        this.assignedSkills = new ArrayList<>();
+    }
+
+    public Collaborator(int taxPayerNumber) {
+        setName(NAME_BY_OMISSION);
+        setBirthDate(BIRTH_DATE_BY_OMISSION);
+        setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
+        setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
+        setEmail(EMAIL_BY_OMISSION);
+        setTaxPayerNumber(taxPayerNumber);
+        setIdDocType(ID_DOC_TYPE_BY_OMISSION);
+        setIdNumber(ID_NUMBER_BY_OMISSION);
+        this.address = new Address(ADDRESS_BY_OMISSION);
+        this.job = new Job(JOB_BY_OMISSION);
+        this.assignedSkills = new ArrayList<>();
+    }
+
+    public Collaborator(Email email) {
+        setName(NAME_BY_OMISSION);
+        setBirthDate(BIRTH_DATE_BY_OMISSION);
+        setAdmissionDate(ADMISSION_DATE_BY_OMISSION);
+        setMobileNumber(MOBILE_NUMBER_BY_OMISSION);
+        setEmail(email.getEmail());
+        setTaxPayerNumber(TAX_PAYER_NUMBER_BY_OMISSION);
+        setIdDocType(ID_DOC_TYPE_BY_OMISSION);
+        setIdNumber(ID_NUMBER_BY_OMISSION);
+        this.address = new Address(ADDRESS_BY_OMISSION);
+        this.job = new Job(JOB_BY_OMISSION);
+        this.assignedSkills = new ArrayList<>();
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public Date getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public int getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public String getEmail() { return email; }
+
+    public int getTaxPayerNumber() {
+        return taxPayerNumber;
+    }
+
+    public IdDocType getIdDocType() {
+        return idDocType;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public Address getAddress() {
+        return new Address(address);
+    }
+
+    public Job getJob() {
+        return new Job(job);
+    }
+
+    public void setJob(Job job) {
+        this.job = new Job(job);
+    }
+
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty() || !isValidName(name)) {
+            throw new IllegalArgumentException("Name is invalid");
+        }
+        this.name = name;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        if (birthDate == null || !isAtLeast18YearsOld(birthDate)) {
+            throw new IllegalArgumentException("Birth date is invalid");
+        }
+        this.birthDate = birthDate;
+    }
+
+    public void setAdmissionDate(Date admissionDate) {
+        this.admissionDate = admissionDate;
+    }
+
+    public void setMobileNumber(int mobileNumber) {
+        if (mobileNumber < 0 || !isValidMobileNumber(mobileNumber)) {
+            throw new IllegalArgumentException("Mobile number is invalid");
+        }
+        this.mobileNumber = mobileNumber;
+    }
+
+    public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty() || !isValidEmail(email)) {
+            throw new IllegalArgumentException("Email is invalid");
+        }
+        this.email = email;
+    }
+
+    public void setTaxPayerNumber(int taxPayerNumber) {
+        if (taxPayerNumber < 0 || !isValidTaxPayerNumber(String.valueOf(taxPayerNumber))) {
+            throw new IllegalArgumentException("Tax payer number is invalid");
+        }
+        this.taxPayerNumber = taxPayerNumber;
+    }
+
+    public void setIdDocType(IdDocType idDocType) {
+        this.idDocType = idDocType;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public void setAssignedSkills(List<Skill> assignedSkills) {
+        this.assignedSkills = new ArrayList<>(assignedSkills);
+    }
+    
+    public static boolean isValidName(String name) {
+        return name.trim().matches(NAME_REGEX);
+    }
+
+    public static boolean isAtLeast18YearsOld(Date birthDate) {
+        return Calendar.getInstance().get(Calendar.YEAR) - birthDate.getYear() >= 18;
+    }
+    
+    public static boolean isValidMobileNumber(int mobileNumber) {
+        return mobileNumber < 1000000000 && mobileNumber > 99999999;
+    }
+    
+    public static boolean isValidEmail(String email) {
+        return email.matches(EMAIL_REGEX);
+    }
+    
+    public static boolean isValidTaxPayerNumber(String number) {
+        final int max=9;
+        //check if is numeric and has 9 numbers
+        if (!number.matches("[0-9]+") || number.length()!=max) return false;
+        int checkSum=0;
+        //calculate checkSum
+        for (int i=0; i<max-1; i++){
+            checkSum+=(number.charAt(i)-'0')*(max-i);
+        }
+        int checkDigit=11-(checkSum % 11);
+        //if checkDigit is higher than 9 set it to zero
+        if (checkDigit>9) checkDigit=0;
+        //compare checkDigit with the last number of NIF
+        return checkDigit==number.charAt(max-1)-'0';
+    }
+
+    public boolean hasSkill(Skill skill) {
+        return this.assignedSkills.contains(skill);
+    }
+
+    public boolean hasSkill(String skillName) {
+        for (Skill skill : this.assignedSkills) {
+            if (skill.getName().equals(skillName)) return true;
+        }
+        return false;
+    }
+    public static boolean isValidPostalCode(String postalCode) {
+        return postalCode.matches(POSTAL_CODE_REGEX);
+    }
+
+    public boolean addSkill(Skill skill) {
+        if (hasSkill(skill)) {
+            return false;
+        }
+        return this.assignedSkills.add(skill);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Collaborator)) {
+            return false;
+        }
+        Collaborator collaborator = (Collaborator) o;
+        return getTaxPayerNumber() == collaborator.getTaxPayerNumber();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taxPayerNumber, idNumber);
+    }
+
+    @Override
+    public Collaborator clone() {
+        return new Collaborator(this.name, this.birthDate, this.admissionDate, this.mobileNumber, this.email,
+                this.taxPayerNumber, this.idDocType, this.idNumber, this.address, this.job);
+
+    }
+
+    @Override
+    public String toString() {
+        return "Collaborator{" +
+                "name='" + getName() + '\'' +
+                ", birthDate=" + getBirthDate() +
+                ", admissionDate=" + getAdmissionDate() +
+                ", mobileNumber=" + getMobileNumber() +
+                ", email='" + getEmail() + '\'' +
+                ", taxPayerNumber=" + getTaxPayerNumber() +
+                ", idDocType=" + getIdDocType() +
+                ", idNumber=" + getIdNumber() +
+                ", address=" + getAddress() +
+                ", job=" + getJob() +
+                '}';
+    }
+
+
+    public boolean hasEmail(String email) {
+        return this.email.equals(email);
+    }
 }
 ```
 
-### Class Organization
+### Class CollaboratorRepository
 
 ```java
-public Optional<Task> createTask(String reference, String description, String informalDescription,
-                                 String technicalDescription, Integer duration, Double cost, TaskCategory taskCategory,
-                                 Employee employee) {
-    
-    Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                         taskCategory, employee);
+public class CollaboratorRepository {
 
-    addTask(task);
-        
-    return task;
+    private final List<Collaborator> collaborator;
+
+    public CollaboratorRepository() {
+        this.collaborator = new ArrayList<>();
+    }
+
+    public boolean addCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
+        if (collaborator.isEmpty()) {
+            collaborator.add(new Collaborator(name,birthDate,admissionDate,mobileNumber,email,taxPayerNumber,idDocType,idNumber,address,job));
+            return true;
+        }
+
+        if (!checkIfTheCollaboratorExists(idNumber)) {
+            collaborator.add(new Collaborator(name,birthDate,admissionDate,mobileNumber,email,taxPayerNumber,idDocType,idNumber,address,job));
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkIfTheCollaboratorExists(String idNumber) {
+        for (Collaborator collaborator : this.collaborator) {
+            if (collaborator.getIdNumber().equals(idNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean assignSkills(Collaborator collaborator, List<Skill> skills) {
+        boolean success = false;
+        for (Skill s : skills) {
+            success = collaborator.addSkill(s);
+            if (!success) {
+                return false;
+            }
+        }
+        return success;
+    }
+
+    public List<Collaborator> getCollaboratorList() {
+        return collaborator;
+    }
 }
 ```
-
 
 ## 6. Integration and Demo 
 
-* A new option on the Employee menu options was added.
+* A new option on the menu options was added.
 
-* For demo purposes some tasks are bootstrapped while system starts.
+* The user can now register a collaborator.
 
 
 ## 7. Observations

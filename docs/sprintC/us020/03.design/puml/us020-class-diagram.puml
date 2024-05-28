@@ -16,6 +16,7 @@ class GreenSpaceRepository {
     + registerGreenSpace(name, location, area)
     + validateGreenSpace(greenSpace)
     + saveGreenSpace(greenSpace)
+    + getGreenSpaceTypeList()
 
 }
 
@@ -26,13 +27,10 @@ class Repositories {
 
 }
 
-class GreenSpaceTypeRepository {
-    + getGreenSpaceTypeList()
-
-}
 
 class RegisterGreenSpaceController {
     + getGreenSpaceTypeList()
+    + registerGreenSpace(name, location, area)
 
 }
 
@@ -42,9 +40,7 @@ class RegisterGreenSpaceUI {
 
 RegisterGreenSpaceUI .right.> RegisterGreenSpaceController
 RegisterGreenSpaceController ..> GreenSpaceRepository
-RegisterGreenSpaceController ..> GreenSpace
 RegisterGreenSpaceController ..> Repositories
-RegisterGreenSpaceController ..> GreenSpaceTypeRepository
 GreenSpaceRepository ..> GreenSpace
 
 

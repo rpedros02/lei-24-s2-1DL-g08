@@ -7,74 +7,64 @@ skinparam linetype polyline
 
 skinparam classAttributeIconSize 0
 
-'left to right direction
 
-
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
-}
-
-class Sorting {
-    - String description
-
-    + Sorting(description)
-    + getSortingByDescription(description)
-}
-
-class SortingRepository {
-    + getSortingByDescription(description)
-}
-
-class VehicleRepository {
-    + getVehicleByPlateId(id)
-}
 
 class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
+    + getInstance()
+    + getGreenSpaceRepository()
+    + getToDoListRepository()
+
 }
 
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
+class GreenSpaceRepository {
+    + + getGreenSpaces()
 
-class VehicleListUI {
 }
 
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
+class GreenSpaceController {
+    + getGreenSpaces()
+    + getDegreesOfUrgency()
+
 }
 
-VehicleListUI .> CreateVehicleController
+class AddEntryToToDoListUI {
+}
 
-CreateVehicleController .> Repositories : repositories
+class ToDoListController {
+    + createEntry(title, description, degreeOfUrgency, duration, status, greenSpace)
+}
 
-Repositories -> Repositories : instance
+class DegreeOfUrgency {
+    + getDegreesOfUrgency()
+}
 
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
+class ToDoEntryDTO {
+    + create(title, description, degreeOfUrgency, duration, status, greenSpace)
+}
 
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
+class ToDoEntryMapper {
+    + toDomain(toDoEntryDto)
+}
 
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
+class ToDoEntry {
+    + create(title, description, degreeOfUrgency, duration, status, greenSpace)
+    + addEntry()
+    + validateEntry()
+}
+
+
+AddEntryToToDoListUI .right.> GreenSpaceController
+GreenSpaceController ..> GreenSpaceRepository
+GreenSpaceController ..> GreenSpace
+GreenSpaceController ..> DegreeOfUrgency
+GreenSpaceController ..> Repositories
+AddEntryToToDoListUI .left> ToDoListController
+ToDoListController ..> ToDoEntryDTO
+ToDoListController ..> Repositories
+ToDoListController ..> ToDoEntryMapper
+ToDoEntryMapper ..> ToDoEntry
+
+
+
+
 @enduml

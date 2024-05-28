@@ -3,6 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -231,13 +233,11 @@ public class Organization {
         }
         return optionalValue;
     }
-    public boolean addEntryToToDoList(Entry entry) {
-        return addEntry(entry);
-    }
 
     public Optional<Entry> createEntry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, double duration, String status, GreenSpace greenSpace) {
         Entry entry = new Entry(title, description, degreeOfUrgency, duration, status, greenSpace);
-        if (addEntry(entry)) {
+        ToDoList list = Repositories.getInstance().getToDoListRepository().getToDoList();
+        if (list.addEntry(entry)) {
             return Optional.of(entry);
         }
         return Optional.empty();

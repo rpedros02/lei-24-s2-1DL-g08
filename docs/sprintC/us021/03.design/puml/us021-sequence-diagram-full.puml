@@ -76,7 +76,7 @@ activate GSM
     activate UI
 
         UI -> ToDoListController** : create
-        UI -> ToDoListController : createTask(title, description, degreeOfUrgency, duration, status, greenSpace)
+        UI -> ToDoListController : createEntry(title, description, degreeOfUrgency, duration, status, greenSpace)
         activate ToDoListController
 
             ToDoListController -> Repositories : getInstance()
