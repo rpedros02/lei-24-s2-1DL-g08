@@ -1,0 +1,45 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US029 - Record the completion of a task.
+header US029
+autonumber
+
+actor "Collaborator" as cl
+participant ":System" as System
+
+activate cl
+
+    cl -> System : Request list of tasks assigned \n between two dates.
+
+    activate System
+        System -> cl : Request start date.
+    deactivate System
+        cl -> System : Selects start date.
+    activate System
+        System -> System : Keeps the start date.
+        System -> cl : Request end date.
+    deactivate System
+        cl -> System : Selects end date.
+    activate System
+        System -> System : Keeps the end date.
+        System -> cl : Request urgency of the tasks.
+    deactivate System
+        cl -> System : Selects urgency.
+        note right of cl
+            Urgency is optional.
+        end note
+    activate System
+        System -> System : Keeps the urgency.
+        System --> System : Retrieval of Tasks.
+        System -> cl : Returns the list.
+    deactivate System
+    cl -> System : Selects Task to mark as Complete.
+    activate System
+        System -> System : Marks Task as Complete.
+        System -> cl : Returns the list.
+    deactivate System
+deactivate cl
+@enduml
