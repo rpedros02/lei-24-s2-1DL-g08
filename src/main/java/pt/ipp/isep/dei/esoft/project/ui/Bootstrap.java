@@ -83,9 +83,9 @@ public class Bootstrap implements Runnable {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
         AgendaRepository agendaRepository = Repositories.getInstance().getAgendaEntryRepository();
 
-        Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgencyRepository.HIGH, new Date(12,06,2024),new Date(14,06,2024), "In Progress", greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"));
-        Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgencyRepository.MEDIUM,  new Date(22,06,2024),new Date(27,06,2024), "Not Started", greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"));
-        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgencyRepository.LOW,  new Date(31,06,2024),new Date(14,07,2024), "Completed", greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"));
+        Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgencyRepository.HIGH, new Date(12,06,2024),new Date(14,06,2024), "In Progress", greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"), , , );
+        Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgencyRepository.MEDIUM,  new Date(22,06,2024),new Date(27,06,2024), "Not Started", greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"), , , );
+        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgencyRepository.LOW,  new Date(31,06,2024),new Date(14,07,2024), "Completed", greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"), , , );
 
         ToDoList toDoList = new ToDoList();
         toDoList.addEntry(entry1);

@@ -235,7 +235,7 @@ public class Organization {
     }
 
     public Optional<Entry> createEntry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace) {
-        Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace);
+        Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace, , , );
         ToDoList list = Repositories.getInstance().getToDoListRepository().getToDoList();
         if (list.addEntry(entry)) {
             return Optional.of(entry);

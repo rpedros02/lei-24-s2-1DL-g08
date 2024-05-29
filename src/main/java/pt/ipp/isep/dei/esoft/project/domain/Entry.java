@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Entry {
@@ -12,21 +13,30 @@ public class Entry {
     private Date dateEnd;
     private String status;
     private GreenSpace greenSpace;
+    private Team team;
+    private List<Vehicle> vehicles;
+    private Task task;
 
+    //CONSTRUCTOR(S)
     public Entry(String title) {
         this.title = title;
     }
 
-    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace) {
-        this.title = title;
-        this.description = description;
-        this.degreeOfUrgency = degreeOfUrgency;
-        this.dateBegin = dateBegin;
-        this.dateEnd = dateEnd;
-        this.status = status;
-        this.greenSpace = greenSpace;
+    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
+        setTitle(title);
+        setDescription(description);
+        setDegreeOfUrgency(degreeOfUrgency);
+        setDateBegin(dateBegin);
+        setDateEnd(dateEnd);
+        setStatus(status);
+        setGreenSpace(greenSpace);
+        setTeam(team);
+        setVehicles(vehicles);
+        setTask(task);
     }
+    //END CONSTRUCTOR(S)
 
+    // GETTERS AND SETTERS
     public GreenSpace getGreenSpace() {
         return greenSpace;
     }
@@ -47,20 +57,12 @@ public class Entry {
         return degreeOfUrgency;
     }
 
-    public double getDuration() {
-        return duration;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public void setDuration(double duration) {
-        this.duration = duration;
     }
 
     public void setDegreeOfUrgency(DegreeOfUrgencyRepository degreeOfUrgency) {
@@ -75,17 +77,17 @@ public class Entry {
         this.title = title;
     }
 
+    //END GETTERS AND SETTERS
+
+
+    //  VALIDATIONS
     public boolean validateEntry() {
-        return !title.isEmpty() && !description.isEmpty() && duration > 0;
+        return !title.isEmpty() && !description.isEmpty();
     }
-
-    public boolean addEntry() {
-        return validateEntry();
-    }
-
+    //  END VALIDATIONS
     @Override
     public Entry clone() {
-        return new Entry(title, description, degreeOfUrgency, duration, status, greenSpace);
+        return new Entry(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace, , , );
     }
 
     @Override
@@ -93,8 +95,7 @@ public class Entry {
         if (this == o) return true;
         if (!(o instanceof Entry)) return false;
         Entry entry = (Entry) o;
-        return Double.compare(entry.duration, duration) == 0 &&
-                Objects.equals(title, entry.title) &&
+        return  Objects.equals(title, entry.title) &&
                 Objects.equals(description, entry.description) &&
                 Objects.equals(degreeOfUrgency, entry.degreeOfUrgency) &&
                 Objects.equals(status, entry.status) &&
@@ -103,7 +104,7 @@ public class Entry {
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, degreeOfUrgency, duration, status, greenSpace);
+        return Objects.hash(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace);
     }
 
     @Override
@@ -133,5 +134,29 @@ public class Entry {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 }

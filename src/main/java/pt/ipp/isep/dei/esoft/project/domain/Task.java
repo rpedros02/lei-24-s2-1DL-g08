@@ -10,10 +10,9 @@ public class Task {
     private int duration;
     private double cost;
     private TaskCategory taskCategory;
-    private Collaborator collaborator;
 
     public Task(String reference, String description, String informalDescription, String technicalDescription,
-                int duration, double cost, TaskCategory taskCategory, Collaborator collaborator) {
+                int duration, double cost, TaskCategory taskCategory) {
 
         validateReference(reference);
         this.reference = reference;
@@ -23,7 +22,6 @@ public class Task {
         this.duration = duration;
         this.cost = cost;
         this.taskCategory = taskCategory;
-        this.collaborator = collaborator;
     }
 
     private void validateReference(String reference) {
@@ -42,12 +40,12 @@ public class Task {
             return false;
         }
         Task task = (Task) o;
-        return reference.equals(task.reference) && collaborator.equals(task.collaborator);
+        return reference.equals(task.reference);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reference, collaborator);
+        return Objects.hash(reference);
     }
 
 
@@ -58,6 +56,6 @@ public class Task {
      */
     public Task clone() {
         return new Task(this.reference, this.description, this.informalDescription, this.technicalDescription,
-                this.duration, this.cost, this.taskCategory, this.collaborator);
+                this.duration, this.cost, this.taskCategory);
     }
 }
