@@ -1,53 +1,45 @@
-# US008 - List the vehicles in need off check-up. 
+# US022 - Add a new entry in the Agenda
 
 
 ## 1. Requirements Engineering
 
 ### 1.1. User Story Description
 
-As an FM, I want to list the vehicles needing the check-up.
+As a GSM, I want to add a new entry in the Agenda.
 
 ### 1.2. Customer Specifications and Clarifications 
 
 **From the client clarifications:**
 
-> **Question:** What are the requests/ input data to list the vehicles needing the check-up?
-> Type of vehicle, Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient?
+> **Question:** When a To-Do List entry is planned and moves to the Agenda, the status change from "Pending" to "Planned". Should this entry be removed from the To-Do List or just change status to "Planned" as it is on the Agenda?
 >
-> **Answer:** Current Km and Maintenance/Check-up Frequency (in Kms) are sufficient, yes;
+> **Answer:** Changing the status in the To-Do list to Planned seems to be a good approach.
 
-> **Question:** Are there acceptance criteria when asking for the list?
+
+> **Question:** When the GSM plans a task (that was previously in To-Do) into the Agenda, what aditional data/information does he need to input when planning?
 >
-> **Answer:** The list must clearly identify the vehicles through: plate number, brand, model and the that justified the checkup need.
+> **Answer:** The starting date for the task.Later the GSM will be able to add the Team and vehicles (if required).
 
 ### 1.3. Acceptance Criteria
 
-* **AC1:** When a user requests the list of vehicles needing check-up, the system should display the following information for each vehicle:
-
-    * Plate number
-    * Brand 
-    * Model
-    * Reason for check-up need
+* **AC1:** The new entry must be associated with a green space managed by the GSM
   
-* **AC2:** The system should calculate the vehicles needing check-up based on the following criteria:
-
-  * If the current kilometers of a vehicle exceed its maintenance/check-up frequency.
-
-* **AC3:** The FM must be able to sort out the list.
-* **AC4** The list should be easy to understand and navigate, facilitating quick identification of vehicles needing attention.
+* **AC2:** The new entry must exist in the To-Do list.
 
 ### 1.4. Found out Dependencies
 
-* There is a dependency on "US007 - Register vehicle for check-up" as there must be at least one vehicle to create a list.
+* There is a dependency on "US21 - As a GSM, I want to add a new entry to the To-Do List." because the entry needs to be firstly placed on the To-Do list.
 
 ### 1.5 Input and Output Data
-	
+
+**Input Data:**
+
+
 * Selected data:
-    * order in which to show the vehicles. 
+    * Entry
 
 **Output Data:**
 
-* List of existing vehicles needing check-up and their information.
 * (In)Success of the operation
 
 ### 1.6. System Sequence Diagram (SSD)
