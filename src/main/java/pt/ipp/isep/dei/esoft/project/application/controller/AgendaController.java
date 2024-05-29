@@ -108,8 +108,8 @@ public class AgendaController implements Serializable {
      * @param entry Entry
      * @return True if the entries is in the agenda, false otherwise
      */
-    public boolean isTaskInAgenda(Entry entry) {
-        return agendaRepository.isTaskInAgenda(entry);
+    public boolean isEntryInAgenda(Entry entry) {
+        return agendaRepository.isEntryInAgenda(entry);
     }
 
     /**
