@@ -1,15 +1,15 @@
-package pt.ipp.isep.dei.esoft.project.repository;
+package pt.ipp.isep.dei.esoft.project.domain.Enums;
 
 import java.util.List;
 
-public enum DegreeOfUrgencyRepository {
+public enum DegreeOfUrgency {
     HIGH("high"),
     MEDIUM("medium"),
     LOW("low");
 
     private final String type;
 
-    DegreeOfUrgencyRepository(String type) {
+    DegreeOfUrgency(String type) {
         this.type = type;
     }
 

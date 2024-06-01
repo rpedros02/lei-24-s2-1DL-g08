@@ -79,7 +79,7 @@ public class  CreateTaskController {
         if (organization.isPresent()) {
             newTask = organization.get()
                     .createTask(reference, description, informalDescription, technicalDescription, duration, cost,
-                            taskCategory, collaborator);
+                            taskCategory);
         }
         return newTask;
     }

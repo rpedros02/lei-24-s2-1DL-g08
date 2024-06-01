@@ -1,8 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
-import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class Organization {
     private final List<Collaborator> collaborators;
     private final List<Task> tasks;
     private final List<Vehicle> vehicles;
+    private final Agenda agenda;
+    private final ToDoList toDoList;
     private String name;
     private String website;
     private String phone;
@@ -32,6 +35,8 @@ public class Organization {
         collaborators = new ArrayList<>();
         tasks = new ArrayList<>();
         vehicles = new ArrayList<>();
+        agenda = new Agenda();
+        toDoList = new ToDoList();
     }
 
     public static Organization getInstance(String vatNumber) {
@@ -50,10 +55,11 @@ public class Organization {
      * @param collaborator The collaborator to be checked.
      * @return True if the collaborator works for the organization.
      */
-    public boolean collaborators(Collaborator collaborator) {
+    public boolean hasCollaborator(Collaborator collaborator) {
         return collaborators.contains(collaborator);
     }
-    public boolean vehicles(Vehicle vehicle) {
+
+    public boolean hasVehicle(Vehicle vehicle) {
         return vehicles.contains(vehicle);
     }
 
@@ -69,38 +75,51 @@ public class Organization {
      * @param duration             The duration of the task to be created.
      * @param cost                 The cost of the task to be created.
      * @param taskCategory         The task category of the task to be created.
-     * @param collaborator             The collaborator of the task to be created.
+     * @param collaborator         The collaborator of the task to be created.
      * @return optionalValue        The task that was created.
      */
     public Optional<Task> createTask(String reference, String description, String informalDescription,
                                      String technicalDescription, int duration, double cost,
-                                     TaskCategory taskCategory, Collaborator collaborator) {
-
-        //TODO: we could also check if the employee works for the organization before proceeding
-        //checkIfEmployeeWorksForOrganization(employee);
-
-        // When a Task is added, it should fail if the Task already exists in the list of Tasks.
-        // In order to not return null if the operation fails, we use the Optional class.
+                                     TaskCategory taskCategory) {
         Optional<Task> optionalValue = Optional.empty();
 
         Task task = new Task(reference, description, informalDescription, technicalDescription, duration, cost,
-                taskCategory, collaborator);
+                taskCategory);
 
         if (addTask(task)) {
             optionalValue = Optional.of(task);
         }
         return optionalValue;
     }
-    public Optional<Vehicle> createVehicle(String plateId, String brand, String model,
-                                           String type, double tare, double weight, int mileage,int lastCheckUpKm,
-                                           Date register_date, Date acquisition_date, int maintenance_frequency) {
-       Optional<Vehicle> optionalValue = Optional.empty();
 
-       Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastCheckUpKm, register_date, acquisition_date, maintenance_frequency);
-       if(addVehicle(vehicle)){
-           optionalValue = Optional.of(vehicle);
-       }
-       return optionalValue;
+    public Optional<Vehicle> createVehicle(String plateId, String brand, String model,
+                                           String type, double tare, double weight, int mileage, int lastCheckUpKm,
+                                           Date register_date, Date acquisition_date, int maintenance_frequency) {
+        Optional<Vehicle> optionalValue = Optional.empty();
+
+        Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, lastCheckUpKm, register_date, acquisition_date, maintenance_frequency);
+        if (addVehicle(vehicle)) {
+            optionalValue = Optional.of(vehicle);
+        }
+        return optionalValue;
+    }
+
+    public Optional<Entry> addEntryToAgenda(Entry entry) {
+        if (agenda.addEntry(entry)) {
+            return Optional.of(entry);
+        }
+        return Optional.empty();
+    }
+
+    public Optional<Entry> addEntryToToDoList(Entry entry) {
+        if (toDoList.addEntry(entry)) {
+            return Optional.of(entry);
+        }
+        return Optional.empty();
+    }
+
+    public List<Entry> getEntriesFromToDoList() {
+        return toDoList.getEntries();
     }
 
     /**
@@ -118,6 +137,7 @@ public class Organization {
         return success;
 
     }
+
     private boolean addVehicle(Vehicle vehicle) {
         boolean success = false;
         if (validateVehicle(vehicle)) {
@@ -138,6 +158,7 @@ public class Organization {
     private boolean validate(Task task) {
         return tasksDoNotContain(task);
     }
+
     private boolean validateVehicle(Vehicle vehicle) {
         return vehiclesDoNotContain(vehicle);
     }
@@ -151,6 +172,7 @@ public class Organization {
     private boolean tasksDoNotContain(Task task) {
         return !tasks.contains(task);
     }
+
     private boolean vehiclesDoNotContain(Vehicle vehicle) {
         return !vehicles.contains(vehicle);
     }
@@ -228,14 +250,14 @@ public class Organization {
         Optional<Collaborator> optionalValue = Optional.empty();
 
         Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
-        if(addCollaborator(collaborator)){
+        if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
         }
         return optionalValue;
     }
 
-    public Optional<Entry> createEntry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace) {
-        Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace, , , );
+    public Optional<Entry> createEntry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
+        Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task);
         ToDoList list = Repositories.getInstance().getToDoListRepository().getToDoList();
         if (list.addEntry(entry)) {
             return Optional.of(entry);

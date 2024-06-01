@@ -14,7 +14,6 @@ public class Repositories {
     private final TeamRepository teamRepository;
     private final ToDoListRepository toDoListRepository;
     private final GreenSpaceRepository greenSpaceRepository;
-    private final AgendaRepository agendaRepository;
 
 
 
@@ -30,7 +29,6 @@ public class Repositories {
         this.teamRepository = new TeamRepository();
         this.greenSpaceRepository = new GreenSpaceRepository();
         this.toDoListRepository = new ToDoListRepository();
-        this.agendaRepository = new AgendaRepository();
     }
 
     public static Repositories getInstance() {
@@ -44,9 +42,6 @@ public class Repositories {
 
     public OrganizationRepository getOrganizationRepository() {
         return organizationRepository;
-    }
-    public AgendaRepository getAgendaEntryRepository() {
-        return agendaRepository;
     }
 
     public TaskCategoryRepository getTaskCategoryRepository() {

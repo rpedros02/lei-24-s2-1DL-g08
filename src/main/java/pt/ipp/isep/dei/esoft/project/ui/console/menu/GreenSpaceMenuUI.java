@@ -1,7 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.ui.console.AddEntryToToDoListUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.AddEntryToToDoListUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.AssignTeamToEntryUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.RegisterGreenSpaceUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -19,8 +20,7 @@ public class GreenSpaceMenuUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Register Green Space", new RegisterGreenSpaceUI()));
         options.add(new MenuItem("Add a new entry to the To Do List", new AddEntryToToDoListUI()));
-        options.add(new MenuItem("Add a new entry to the Agenda", new AddEntryToAgendaUI()));
-        options.add(new MenuItem("Assign a team to an entry", new AssignTeamToAgendaEntryUI()));
+        options.add(new MenuItem("Assign a team to an entry", new AssignTeamToEntryUI()));
 
 
         int option = 0;

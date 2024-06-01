@@ -1,17 +1,19 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.repository.DegreeOfUrgencyRepository;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Entry {
     private String title;
     private String description;
-    private DegreeOfUrgencyRepository degreeOfUrgency;
+    private DegreeOfUrgency degreeOfUrgency;
     private Date dateBegin;
     private Date dateEnd;
-    private String status;
+    private EStatus status;
     private GreenSpace greenSpace;
     private Team team;
     private List<Vehicle> vehicles;
@@ -22,110 +24,64 @@ public class Entry {
         this.title = title;
     }
 
-    public Entry(String title, String description, DegreeOfUrgencyRepository degreeOfUrgency, Date dateBegin, Date dateEnd, String status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
-        setTitle(title);
-        setDescription(description);
-        setDegreeOfUrgency(degreeOfUrgency);
-        setDateBegin(dateBegin);
-        setDateEnd(dateEnd);
-        setStatus(status);
-        setGreenSpace(greenSpace);
-        setTeam(team);
-        setVehicles(vehicles);
-        setTask(task);
+    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
+        if (isValid(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task)) {
+            setTitle(title);
+            setDescription(description);
+            setDegreeOfUrgency(degreeOfUrgency);
+            setDateBegin(dateBegin);
+            setDateEnd(dateEnd);
+            setStatus(status);
+            setGreenSpace(greenSpace);
+            setTeam(team);
+            setVehicles(vehicles);
+            setTask(task);
+        }
+    }
+
+    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgencyRepository, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace) {
+        if (isValid(title, description, degreeOfUrgencyRepository, dateBegin, dateEnd, status, greenSpace, null, null, null)) {
+            setTitle(title);
+            setDescription(description);
+            setDegreeOfUrgency(degreeOfUrgencyRepository);
+            setDateBegin(dateBegin);
+            setDateEnd(dateEnd);
+            setStatus(status);
+            setGreenSpace(greenSpace);
+        }
+        this.team = null;
+        this.vehicles = new ArrayList<>();
+        this.task = null;
     }
     //END CONSTRUCTOR(S)
 
     // GETTERS AND SETTERS
-    public GreenSpace getGreenSpace() {
-        return greenSpace;
-    }
-
-    public void setGreenSpace(GreenSpace greenSpace) {
-        this.greenSpace = greenSpace;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public DegreeOfUrgencyRepository getDegreeOfUrgency() {
-        return degreeOfUrgency;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public void setDegreeOfUrgency(DegreeOfUrgencyRepository degreeOfUrgency) {
-        this.degreeOfUrgency = degreeOfUrgency;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    //END GETTERS AND SETTERS
-
-
-    //  VALIDATIONS
-    public boolean validateEntry() {
-        return !title.isEmpty() && !description.isEmpty();
-    }
-    //  END VALIDATIONS
-    @Override
-    public Entry clone() {
-        return new Entry(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace, , , );
+    public String getDescription() {
+        return description;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Entry)) return false;
-        Entry entry = (Entry) o;
-        return  Objects.equals(title, entry.title) &&
-                Objects.equals(description, entry.description) &&
-                Objects.equals(degreeOfUrgency, entry.degreeOfUrgency) &&
-                Objects.equals(status, entry.status) &&
-                Objects.equals(greenSpace, entry.greenSpace);
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, degreeOfUrgency, dateBegin,dateEnd, status, greenSpace);
+    public DegreeOfUrgency getDegreeOfUrgency() {
+        return degreeOfUrgency;
     }
 
-    @Override
-    public String toString() {
-        return "Entry{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", degreeOfUrgency='" + degreeOfUrgency + '\'' +
-                ", dateBegin=" + dateBegin.toString() +
-                ", dateEnd=" + dateEnd.toString() +
-                ", status='" + status + '\'' +
-                ", greenSpace='" + greenSpace + '\'' +
-                '}';
+    public void setDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
+        this.degreeOfUrgency = degreeOfUrgency;
     }
 
     public Date getDateBegin() {
         return dateBegin;
-    }
-
-    public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
     }
 
     public Date getDateEnd() {
@@ -134,6 +90,14 @@ public class Entry {
 
     public void setDateEnd(Date dateEnd) {
         this.dateEnd = dateEnd;
+    }
+
+    public EStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EStatus status) {
+        this.status = status;
     }
 
     public Team getTeam() {
@@ -158,5 +122,120 @@ public class Entry {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public void setDateBegin(Date dateBegin) {
+        this.dateBegin = dateBegin;
+    }
+
+    public GreenSpace getGreenSpace() {
+        return greenSpace;
+    }
+
+    public void setGreenSpace(GreenSpace greenSpace) {
+        this.greenSpace = greenSpace;
+    }
+
+    //END GETTERS AND SETTERS
+
+
+    /**
+     * @param title           title of the entry
+     * @param description     description of the entry
+     * @param degreeOfUrgency degree of urgency of the entry
+     * @param dateBegin       date of the beginning of the entry
+     * @param dateEnd         date of the end of the entry
+     * @param status          status of the entry
+     * @param greenSpace      green space of the entry
+     * @param team            team of the entry
+     * @param vehicles        vehicles of the entry
+     * @param task            task of the entry
+     *                        <p>
+     *                        Validates the entry
+     *                        <p>
+     * @return true if the entry is valid, false otherwise
+     */
+    //  VALIDATIONS
+    private boolean isValid(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
+        return validateTitle(title) && validateDescription(description)
+                && validateDegreeOfUrgency(degreeOfUrgency) && dateBegin != null && dateEnd != null
+                && status != null && greenSpace != null && team != null && !vehicles.isEmpty() && task != null;
+    }
+
+    /**
+     * @param title title of the entry
+     *              <p>
+     *              Validates the title of the entry
+     *              <p>
+     *              The title must contain only letters and spaces and have a maximum length of 25 characters
+     *              <p>
+     * @return true if the title is valid, false otherwise
+     */
+    private boolean validateTitle(String title) {
+        return title.matches("[a-zA-Z ]+") && title.length() < 25;
+    }
+
+    /**
+     * @param description description of the entry
+     *                    <p>
+     *                    Validates the description of the entry
+     *                    <p>
+     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
+     *                    <p>
+     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
+     *                    <p>
+     * @return true if the description is valid, false otherwise
+     */
+    private boolean validateDescription(String description) {
+        return description.matches("[a-zA-Z ]+") && description.length() < 255;
+    }
+
+    /**
+     * @param degreeOfUrgency degree of urgency of the entry
+     *                        <p>
+     *                        Validates the degree of urgency of the entry
+     *                        <p>
+     *                        The degree of urgency must not be null
+     *                        <p>
+     * @return true if the degree of urgency is valid, false otherwise
+     */
+    private boolean validateDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
+        return degreeOfUrgency != null;
+    }
+
+    // END VALIDATIONS
+    @Override
+    public Entry clone() {
+        return new Entry(this.title, this.description, this.degreeOfUrgency, this.dateBegin, this.dateEnd, this.status, this.greenSpace, this.team, this.vehicles, this.task);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Entry)) return false;
+        Entry entry = (Entry) o;
+        return Objects.equals(title, entry.title) &&
+                Objects.equals(description, entry.description) &&
+                Objects.equals(degreeOfUrgency, entry.degreeOfUrgency) &&
+                Objects.equals(status, entry.status) &&
+                Objects.equals(greenSpace, entry.greenSpace);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace);
+    }
+
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", degreeOfUrgency='" + degreeOfUrgency + '\'' +
+                ", dateBegin=" + dateBegin.toString() +
+                ", dateEnd=" + dateEnd.toString() +
+                ", status='" + status + '\'' +
+                ", greenSpace='" + greenSpace + '\'' +
+                '}';
     }
 }

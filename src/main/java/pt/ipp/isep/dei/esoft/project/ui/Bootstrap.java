@@ -2,11 +2,12 @@ package pt.ipp.isep.dei.esoft.project.ui;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
-import java.time.LocalDate;
 import java.util.Random;
 
 public class Bootstrap implements Runnable {
@@ -38,10 +39,10 @@ public class Bootstrap implements Runnable {
                     i * 1000,
                     i * 2000,
                     i * 10000,
-                    LocalDate.now().minusYears(i),
-                    LocalDate.now().minusYears(i + 5),
                     i * 5000,
-                    i * 1000
+                    new Date(12,6,2024),
+                    new Date(12,6,2024),
+                    i * 5000
             );
             vehicleRepository.addVehicle(vehicle);
         }
@@ -58,10 +59,10 @@ public class Bootstrap implements Runnable {
             String vehicleId = generatePlateId(random);
             VehicleCheckup vehicleCheckup = new VehicleCheckup(
                     vehicleId,
-                    LocalDate.now().minusMonths(i),
+                    new Date(12,6,2024),
                     i * 10000
             );
-            VehicleCheckupRepository.addVehicleCheckup(vehicleCheckup);
+            checkupRepository.addVehicleCheckup(vehicleCheckup);
         }
     }
     private char randomChar(Random random) {
@@ -81,11 +82,11 @@ public class Bootstrap implements Runnable {
     private void addAgendaEntries() {
         ToDoListRepository toDoListRepository = Repositories.getInstance().getToDoListRepository();
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        AgendaRepository agendaRepository = Repositories.getInstance().getAgendaEntryRepository();
+        TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
 
-        Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgencyRepository.HIGH, new Date(12,06,2024),new Date(14,06,2024), "In Progress", greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"), , , );
-        Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgencyRepository.MEDIUM,  new Date(22,06,2024),new Date(27,06,2024), "Not Started", greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"), , , );
-        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgencyRepository.LOW,  new Date(31,06,2024),new Date(14,07,2024), "Completed", greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"), , , );
+        Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgency.HIGH, new Date(12,6,2024),new Date(14,6,2024), EStatus.PENDING, greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"));//Team team, List<Vehicle> vehicles, Task task
+        Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgency.MEDIUM,  new Date(22,6,2024),new Date(27,6,2024), EStatus.PENDING, greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"));
+        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgency.LOW,  new Date(31,6,2024),new Date(14,7,2024), EStatus.FINISHED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"));
 
         ToDoList toDoList = new ToDoList();
         toDoList.addEntry(entry1);
@@ -98,19 +99,14 @@ public class Bootstrap implements Runnable {
         toDoListRepository.addEntryToToDoList(entry3);
 
         // Create a few agenda entries
-        Agenda agenda1 = new Agenda(entry1, null, null);
-        Agenda agenda2 = new Agenda(entry2, null, null);
-        Agenda agenda3 = new Agenda(entry3, null, null);
-
+        Agenda agenda1 = new Agenda();
         // Add the agenda entries to the AgendaRepository
-        agendaRepository.addAgendaEntry(agenda1);
-        agendaRepository.addAgendaEntry(agenda2);
-        agendaRepository.addAgendaEntry(agenda3);
+        if(!agenda1.addEntry(entry1) ||!agenda1.addEntry(entry2) || !agenda1.addEntry(entry3)) {
+            System.out.println("Bootstrap: Failed to add entries to the agenda");
+        }
     }
 
     private void addOrganization() {
-        //TODO: add organizations bootstrap here
-        //get organization repository
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("This Company");
         organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
@@ -119,9 +115,6 @@ public class Bootstrap implements Runnable {
     }
 
     private void addTaskCategories() {
-        //TODO: add bootstrap Task Categories here
-
-        //get task category repository
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
         taskCategoryRepository.add(new TaskCategory("Analysis"));
         taskCategoryRepository.add(new TaskCategory("Design"));
@@ -133,7 +126,6 @@ public class Bootstrap implements Runnable {
     }
 
     private void addUsers() {
-        //TODO: add Authentication users here: should be created for each user in the organization
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE,
@@ -204,9 +196,9 @@ public class Bootstrap implements Runnable {
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
-        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC,"123456789",new Address("rua rua",12,"4425-299","City","District"),new Job("Jardineiro"));
+        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC,"123456789",new Address("rua rua",12,"4425-299","City","District"),new Job("Gardener"));
 
     }
-//registei manualmente um colaborador para terem uma ideia para a us3: register a collaborator
+
 
 }

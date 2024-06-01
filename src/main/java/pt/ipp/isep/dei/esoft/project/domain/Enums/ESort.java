@@ -1,6 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.domain.Enums;
 
-public enum Sort {
+public enum ESort {
     ASCENDING_ID (1),
     DESCENDING_ID (2),
     ALPHABETICAL (3),
@@ -8,7 +8,7 @@ public enum Sort {
 
     private final int sort;
 
-    Sort(int sort) {
+    ESort(int sort) {
         this.sort = sort;
     }
 
@@ -16,8 +16,8 @@ public enum Sort {
         return sort;
     }
 
-    public static Sort getSort(int sort) {
-        for (Sort s : Sort.values()) {
+    public static ESort getSort(int sort) {
+        for (ESort s : ESort.values()) {
             if (s.sort == sort) {
                 return s;
             }

@@ -4,18 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList {
-    private List<Entry> entries;
+    private final List<Entry> entries;
 
     public ToDoList() {
         this.entries = new ArrayList<>();
     }
 
     public boolean addEntry(Entry entry) {
-        return entries.add(entry);
+        if(!hasEntry(entry)) {
+            return entries.add(entry);
+        }
+        return false;
     }
 
     public boolean removeEntry(Entry entry) {
+        if(!hasEntry(entry)) {
+            return false;
+        }
         return entries.remove(entry);
+    }
+
+    public boolean hasEntry(Entry entry) {
+        return entries.contains(entry);
     }
 
     public List<Entry> getEntries() {

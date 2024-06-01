@@ -2,10 +2,9 @@ package pt.ipp.isep.dei.esoft.project.ui.console.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,9 +34,7 @@ public class Utils {
             try {
                 String input = readLineFromConsole(prompt);
 
-                int value = Integer.parseInt(input);
-
-                return value;
+                return Integer.parseInt(input);
             } catch (NumberFormatException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -49,9 +46,7 @@ public class Utils {
             try {
                 String input = readLineFromConsole(prompt);
 
-                double value = Double.parseDouble(input);
-
-                return value;
+                return Double.parseDouble(input);
             } catch (NumberFormatException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -73,7 +68,7 @@ public class Utils {
         String input;
         do {
             input = Utils.readLineFromConsole("\n" + message + "\n");
-        } while (!input.equalsIgnoreCase("s") && !input.equalsIgnoreCase("n"));
+        } while (!Objects.requireNonNull(input).equalsIgnoreCase("s") && !input.equalsIgnoreCase("n"));
 
         return input.equalsIgnoreCase("s");
     }
@@ -106,7 +101,7 @@ public class Utils {
         int value;
         do {
             input = Utils.readLineFromConsole("Type your option: ");
-            value = Integer.valueOf(input);
+            value = Integer.parseInt(input);
         } while (value < 0 || value > list.size());
 
         if (value == 0) {
@@ -122,7 +117,7 @@ public class Utils {
         do {
             input = Utils.readLineFromConsole("Type your option: ");
             try {
-                value = Integer.valueOf(input);
+                value = Integer.parseInt(input);
             } catch (NumberFormatException ex) {
                 value = -1;
             }
