@@ -89,11 +89,11 @@ class OrganizationTest {
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
 
         Task expected = new Task("Task Description", "Task Category Description", "informal description",
-                "technical description", 1, 1d, taskCategory, collaborator);
+                "technical description", 1, 1d, taskCategory);
 
         Optional<Task> task =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
-                        "technical description", 1, 1d, taskCategory, collaborator);
+                        "technical description", 1, 1d, taskCategory);
 
         assertNotNull(task);
         assertTrue(task.isPresent());
@@ -109,12 +109,12 @@ class OrganizationTest {
         //Add the first task
         Optional<Task> originalTask =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
-                        "technical description", 1, 1d, taskCategory, collaborator);
+                        "technical description", 1, 1d, taskCategory);
 
         //Act
         Optional<Task> duplicateTask =
                 organization.createTask("Task Description", "Task Category Description", "informal description",
-                        "technical description", 1, 1d, taskCategory, collaborator);
+                        "technical description", 1, 1d, taskCategory);
 
         //Assert
         assertTrue(duplicateTask.isEmpty());
@@ -175,7 +175,7 @@ class OrganizationTest {
         Collaborator collaborator = new Collaborator(new Email("john.doe@this.company.com"));
         organization.addCollaborator(collaborator);
         organization.createTask("Task Description", "Task Category Description", "informal description",
-                "technical description", 1, 1d, new TaskCategory("Task Category Description"), collaborator);
+                "technical description", 1, 1d, new TaskCategory("Task Category Description"));
 
         Organization clone = organization.clone();
         assertEquals(organization, clone);

@@ -13,7 +13,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
     }
 
     @Test
@@ -25,7 +25,7 @@ TaskTest {
         //Act and Assert
         assertThrows(IllegalArgumentException.class,
                 () -> new Task(null, "description", "informal description", "technical description", 1, 1d,
-                        taskCategory, collaborator));
+                        taskCategory));
     }
 
     @Test
@@ -33,7 +33,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertEquals(task, task);
     }
@@ -43,7 +43,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertNotEquals(task, new Object());
     }
@@ -53,7 +53,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertNotEquals(task, null);
     }
@@ -63,9 +63,9 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
         Task task1 = new Task("reference1", "description1", "informal description1", "technical description1", 2, 2d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertNotEquals(task, task1);
     }
@@ -75,9 +75,9 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
         Task task1 = new Task("reference1", "description", "informal description1", "technical description1", 2, 2d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertNotEquals(task, task1);
     }
@@ -87,9 +87,9 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
         Task task1 = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertEquals(task, task1);
     }
@@ -99,7 +99,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertEquals(task.hashCode(), task.hashCode());
     }
@@ -109,9 +109,9 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
         Task task1 = new Task("reference1", "description1", "informal description1", "technical description1", 2, 2d,
-                taskCategory, collaborator);
+                taskCategory);
 
         assertNotEquals(task.hashCode(), task1.hashCode());
     }
@@ -121,7 +121,7 @@ TaskTest {
         Collaborator collaborator = new Collaborator(123456789);
         TaskCategory taskCategory = new TaskCategory("Task Category Description");
         Task task = new Task("reference", "description", "informal description", "technical description", 1, 1d,
-                taskCategory, collaborator);
+                taskCategory);
         Task clone = task.clone();
         assertEquals(task, clone);
     }

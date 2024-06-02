@@ -16,23 +16,6 @@ public class Address {
         this.district = address.district;
     }
 
-    public Address() {
-
-    }
-
-
-    private enum PostalCodeValidationResults {
-        EMPTY,
-        VALID,
-        CONTAIN_LETTERS,
-        INVALID_FORMAT
-    }
-
-    private static final int POSTAL_CODE_TOTAL_DIGITS = 8;
-
-    private static final char POSTAL_CODE_SEPARATOR = '-';
-
-
     /**
      * Constructs an Address object with the given parameters.
      *
@@ -49,6 +32,18 @@ public class Address {
         setCity(city);
         setDistrict(district);
     }
+
+
+    private enum PostalCodeValidationResults {
+        EMPTY,
+        VALID,
+        CONTAIN_LETTERS,
+        INVALID_FORMAT
+    }
+
+    private static final int POSTAL_CODE_TOTAL_DIGITS = 8;
+
+    private static final char POSTAL_CODE_SEPARATOR = '-';
 
     public String getStreet() {
         return street;

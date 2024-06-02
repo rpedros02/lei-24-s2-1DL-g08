@@ -49,13 +49,6 @@ public class GreenSpace {
         return Objects.hash(name, type, area);
     }
 
-    public String toString() {
-        return "GreenSpace{" +
-                "name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", area=" + area +
-                "hectares}";
-    }
 
     public boolean setData(String name, GreenSpaceTypeRepository type, double area) {
         if (name == null || type == null || area < 0) {
@@ -81,6 +74,14 @@ public class GreenSpace {
 
     public boolean isAreaValid(double area) {
         return area >= 0;
+    }
+
+    public String toString() {
+        return "GreenSpace{" +
+                "name='" + name + '\'' +
+                ", type='" + type.toString() + '\'' +
+                ", area=" + area +
+                "hectares}";
     }
 
 }

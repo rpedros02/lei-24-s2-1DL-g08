@@ -20,4 +20,9 @@ public enum DegreeOfUrgency {
     public static List<String> getDegreesOfUrgency() {
         return List.of(HIGH.getType(), MEDIUM.getType(), LOW.getType());
     }
+
+    @Override
+    public String toString() {
+        return this.type;
+    }
 }

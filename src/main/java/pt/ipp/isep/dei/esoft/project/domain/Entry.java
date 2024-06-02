@@ -2,9 +2,12 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Pattern;
+
 
 public class Entry {
     private String title;
@@ -23,7 +26,16 @@ public class Entry {
         this.title = title;
     }
 
-    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
+    public Entry(String title,
+                 String description,
+                 DegreeOfUrgency degreeOfUrgency,
+                 Date dateBegin,
+                 Date dateEnd,
+                 EStatus status,
+                 GreenSpace greenSpace,
+                 Team team,
+                 List<Vehicle> vehicles,
+                 Task task) {
         if (isValid(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task)) {
             setTitle(title);
             setDescription(description);
@@ -38,16 +50,25 @@ public class Entry {
         }
     }
 
-    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgencyRepository, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace) {
-        if (isValid(title, description, degreeOfUrgencyRepository, dateBegin, dateEnd, status, greenSpace, null, null, null)) {
-            setTitle(title);
-            setDescription(description);
-            setDegreeOfUrgency(degreeOfUrgencyRepository);
-            setDateBegin(dateBegin);
-            setDateEnd(dateEnd);
-            setStatus(status);
-            setGreenSpace(greenSpace);
+    public Entry(String title,
+                 String description,
+                 DegreeOfUrgency degreeOfUrgencyRepository,
+                 Date dateBegin,
+                 Date dateEnd,
+                 EStatus status,
+                 GreenSpace greenSpace) {
+        boolean valid = isValid(title, description, degreeOfUrgencyRepository, dateBegin, dateEnd, status, greenSpace, null, null, null);
+        if (!valid) {
+            throw new IllegalArgumentException("Invalid Entry");
         }
+        setTitle(title);
+        setDescription(description);
+        setDegreeOfUrgency(degreeOfUrgencyRepository);
+        setDateBegin(dateBegin);
+        setDateEnd(dateEnd);
+        setStatus(status);
+        setGreenSpace(greenSpace);
+
         this.team = null;
         this.vehicles = new ArrayList<>();
         this.task = null;
@@ -81,6 +102,10 @@ public class Entry {
 
     public Date getDateBegin() {
         return dateBegin;
+    }
+
+    public void setDateBegin(Date dateBegin) {
+        this.dateBegin = dateBegin;
     }
 
     public Date getDateEnd() {
@@ -119,13 +144,8 @@ public class Entry {
         return task;
     }
 
-
     public void setTask(Task task) {
         this.task = task;
-    }
-
-    public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
     }
 
     public GreenSpace getGreenSpace() {
@@ -135,9 +155,9 @@ public class Entry {
     public void setGreenSpace(GreenSpace greenSpace) {
         this.greenSpace = greenSpace;
     }
-
     //END GETTERS AND SETTERS
 
+    //  VALIDATIONS
 
     /**
      * @param title           title of the entry
@@ -155,11 +175,24 @@ public class Entry {
      *                        <p>
      * @return true if the entry is valid, false otherwise
      */
-    //  VALIDATIONS
-    private boolean isValid(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
-        return validateTitle(title) && validateDescription(description)
-                && validateDegreeOfUrgency(degreeOfUrgency) && dateBegin != null && dateEnd != null
-                && status != null && greenSpace != null && team != null && !vehicles.isEmpty() && task != null;
+    private boolean isValid(String title,
+                            String description,
+                            DegreeOfUrgency degreeOfUrgency,
+                            Date dateBegin,
+                            Date dateEnd,
+                            EStatus status,
+                            GreenSpace greenSpace,
+                            Team team,
+                            List<Vehicle> vehicles,
+                            Task task) {
+        boolean validTitle = validateTitle(title);
+        boolean validDescription = validateDescription(description);
+        boolean validDegreeOfUrgency = validateDegreeOfUrgency(degreeOfUrgency);
+        boolean validDateBegin = dateBegin != null;
+        boolean validDateEnd = dateEnd != null;
+        boolean validStatus = status != null;
+        boolean validGreenSpace = greenSpace != null;
+        return validTitle && validDescription && validDegreeOfUrgency && validDateBegin && validDateEnd && validStatus && validGreenSpace;
     }
 
     /**
@@ -172,7 +205,7 @@ public class Entry {
      * @return true if the title is valid, false otherwise
      */
     private boolean validateTitle(String title) {
-        return title.matches("[a-zA-Z ]+") && title.length() < 25;
+        return title.length() < 25;
     }
 
     /**
@@ -187,7 +220,7 @@ public class Entry {
      * @return true if the description is valid, false otherwise
      */
     private boolean validateDescription(String description) {
-        return description.matches("[a-zA-Z ]+") && description.length() < 255;
+        return description.length() < 255;
     }
 
     /**
@@ -202,8 +235,8 @@ public class Entry {
     private boolean validateDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
         return degreeOfUrgency != null;
     }
-
     // END VALIDATIONS
+
     @Override
     public Entry clone() {
         return new Entry(this.title, this.description, this.degreeOfUrgency, this.dateBegin, this.dateEnd, this.status, this.greenSpace, this.team, this.vehicles, this.task);
@@ -231,17 +264,19 @@ public class Entry {
     }
 
 
-
     @Override
     public String toString() {
         return "Entry{" +
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", degreeOfUrgency='" + degreeOfUrgency + '\'' +
+                ", degreeOfUrgency=" + degreeOfUrgency.toString() +
                 ", dateBegin=" + dateBegin.toString() +
                 ", dateEnd=" + dateEnd.toString() +
-                ", status='" + status + '\'' +
-                ", greenSpace='" + greenSpace + '\'' +
+                ", status=" + status.toString() +
+                ", greenSpace=" + greenSpace.toString() +
+                ", team=" + team.toString() +
+                ", vehicles=" + vehicles.toString() +
+                ", task=" + task.toString() +
                 '}';
     }
 }

@@ -20,4 +20,9 @@ public enum GreenSpaceTypeRepository {
     public static List<String> getGreenSpaceTypes() {
         return List.of(GARDEN.getType(), MEDIUM_SIZED.getType(), LARGE_SIZED.getType());
     }
+
+    @Override
+    public String toString() {
+        return this.type;
+    }
 }

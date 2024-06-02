@@ -3,7 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import java.util.Objects;
 
 public class Task {
-    private final String reference;
+
+    private String reference;
     private String description;
     private String informalDescription;
     private String technicalDescription;
@@ -11,25 +12,96 @@ public class Task {
     private double cost;
     private TaskCategory taskCategory;
 
-    public Task(String reference, String description, String informalDescription, String technicalDescription,
-                int duration, double cost, TaskCategory taskCategory) {
-
+    public Task(String reference,
+                String description,
+                String informalDescription,
+                String technicalDescription,
+                int duration,
+                double cost,
+                TaskCategory taskCategory) {
         validateReference(reference);
-        this.reference = reference;
-        this.description = description;
-        this.informalDescription = informalDescription;
-        this.technicalDescription = technicalDescription;
-        this.duration = duration;
-        this.cost = cost;
-        this.taskCategory = taskCategory;
+        setReference(reference);
+        setDescription(description);
+        setInformalDescription(informalDescription);
+        setTechnicalDescription(technicalDescription);
+        setDuration(duration);
+        setCost(cost);
+        setTaskCategory(taskCategory);
     }
 
+    // VALIDATIONS
+
+    /**
+     * @param reference Reference of the task.
+     *                  It cannot be null.
+     *                  It must be unique.
+     *                  It must be alphanumeric.
+     *                  It must be between 4 and 10 characters.
+     */
     private void validateReference(String reference) {
-        //TODO: missing from the diagrams
-        if (reference == null || reference.isEmpty()) {
+        if (reference == null || reference.length() < 4 || reference.length() > 10 || !reference.matches("^[a-zA-Z0-9]*$")) {
             throw new IllegalArgumentException("Reference cannot be null or empty.");
         }
     }
+    // END VALIDATIONS
+
+    // GETTERS & SETTERS
+    public String getReference() {
+        return reference;
+    }
+
+    private void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getInformalDescription() {
+        return informalDescription;
+    }
+
+    public void setInformalDescription(String informalDescription) {
+        this.informalDescription = informalDescription;
+    }
+
+    public String getTechnicalDescription() {
+        return technicalDescription;
+    }
+
+    public void setTechnicalDescription(String technicalDescription) {
+        this.technicalDescription = technicalDescription;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public TaskCategory getTaskCategory() {
+        return taskCategory;
+    }
+
+    public void setTaskCategory(TaskCategory taskCategory) {
+        this.taskCategory = taskCategory;
+    }
+    // END GETTERS & SETTERS
 
     @Override
     public boolean equals(Object o) {
@@ -47,7 +119,6 @@ public class Task {
     public int hashCode() {
         return Objects.hash(reference);
     }
-
 
     /**
      * Clone method.

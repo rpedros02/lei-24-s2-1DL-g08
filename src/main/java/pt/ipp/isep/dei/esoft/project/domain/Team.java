@@ -19,6 +19,9 @@ public class Team {
     }
 
     public String toString() {
+        if(getNumberOfTeamMembers() == 0) {
+            return "No team members";
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Team Members:\n");
         for (Collaborator collaborator : getTeamMembers()) {

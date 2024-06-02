@@ -27,10 +27,16 @@ public class RegisterGreenSpaceGUI {
     private TextField txtStreet;
 
     @FXML
+    private TextField txtStreetNumber;
+
+    @FXML
     private TextField txtZipCode;
 
     @FXML
     private TextField txtCity;
+
+    @FXML
+    private TextField txtDistrict;
 
     private final AuthenticationRepository authenticationRepository;
 
@@ -52,6 +58,7 @@ public class RegisterGreenSpaceGUI {
         String typeName = cbType.getValue();
         String areaString = txtArea.getText();
         String streetName = txtStreet.getText();
+        int streetNumber = Integer.parseInt(txtStreetNumber.getText());
         String zipCodeString = txtZipCode.getText();
         if (!zipCodeString.matches("[0-9]{4}-[0-9]{3}")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -62,8 +69,9 @@ public class RegisterGreenSpaceGUI {
             return;
         }
         String cityString = txtCity.getText();
+        String districtString = txtDistrict.getText();
 
-        Address address = new Address(streetName, zipCodeString, cityString);
+        Address address = new Address(streetName, streetNumber, zipCodeString, cityString, districtString);
 
         if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || zipCodeString.isEmpty() || cityString.isEmpty()){
             Alert alert = new Alert(AlertType.ERROR);
@@ -92,7 +100,7 @@ public class RegisterGreenSpaceGUI {
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
 
-        if (controller.registerGreenSpace(name, type, area, email, address)) { // Pass the GSM to the method
+        if (controller.registerGreenSpace(name, type, area)) { // Pass the GSM to the method
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);

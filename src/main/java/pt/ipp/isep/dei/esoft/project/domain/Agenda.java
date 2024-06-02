@@ -18,19 +18,19 @@ public class Agenda {
         return this.entries;
     }
 
-    public boolean hasEntry(Entry entry) {
-        return this.entries.contains(entry);
+    public boolean checkEntryExists(Entry entry) {
+        return !this.entries.contains(entry);
     }
 
     public boolean addEntry(Entry entry) {
-        if (!hasEntry(entry)) {
+        if (checkEntryExists(entry)) {
             return this.entries.add(entry);
         }
         return false;
     }
 
     public boolean removeEntry(Entry entry) {
-        if (!hasEntry(entry)) {
+        if (checkEntryExists(entry)) {
             return false;
         }
         return this.entries.remove(entry);

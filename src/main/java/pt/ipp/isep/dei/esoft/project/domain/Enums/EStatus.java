@@ -23,4 +23,13 @@ public enum EStatus {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case PENDING -> "Pending";
+            case IN_PROGRESS -> "In Progress";
+            case FINISHED -> "Finished";
+        };
+    }
 }
