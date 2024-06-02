@@ -2,16 +2,15 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import org.junit.Before;
 import org.junit.Test;
-import pt.ipp.isep.dei.esoft.project.domain.Agenda;
-import pt.ipp.isep.dei.esoft.project.domain.Entry;
-import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
-import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import pt.ipp.isep.dei.esoft.project.domain.*;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class PostponeAnEntryControllerTest {
     private Agenda agenda;
@@ -19,48 +18,37 @@ public class PostponeAnEntryControllerTest {
 
     @Before
     public void setUp() {
-        agenda = new Agenda();
+        agenda = new Agenda(new ArrayList<>());
         controller = new PostponeAnEntryController(agenda);
 
-        // Adiciona uma entrada de exemplo na agenda
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date dateBegin = dateFormat.parse("2023-01-01");
-            Date dateEnd = dateFormat.parse("2023-01-10");
-            Entry entry = new Entry("Sample Task", "Description", DegreeOfUrgency.MEDIUM, dateBegin, dateEnd, EStatus.PLANNED, null);
-            agenda.addEntry(entry);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        // Adicionar uma entrada à agenda para testar
+        Entry entry = new Entry(
+                "Test Entry", "Test Description", DegreeOfUrgency.LOW,
+                new Date(1, 6, 2024), new Date(1, 7, 2024), EStatus.PENDING,
+                new GreenSpace("Test Green Space")
+        );
+        agenda.addEntry(entry);
     }
 
     @Test
-    public void testPostponeEntrySuccess() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date newDate = dateFormat.parse("2023-02-01");
-            String result = controller.postponeEntry("Sample Task", newDate);
+    public void testPostponeEntry() {
+        String title = "Test Entry";
+        Date newDateEnd = new Date(1, 8, 2024);
 
-            assertEquals("Entry postponed successfully.", result);
+        String result = controller.postponeEntry(title, newDateEnd);
+        assertEquals("Entry postponed successfully.", result);
 
-            Entry entry = agenda.getEntryByTitle("Sample Task");
-            assertNotNull(entry);
-            assertEquals(newDate, entry.getDateEnd());
-        } catch (ParseException e) {
-            fail("Invalid date format in test.");
-        }
+        Entry postponedEntry = agenda.getEntryByTitle(title);
+        assertNotNull(postponedEntry);
+        assertEquals(newDateEnd, postponedEntry.getDateEnd());
     }
 
     @Test
     public void testPostponeEntryNotFound() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date newDate = dateFormat.parse("2023-02-01");
-            String result = controller.postponeEntry("Nonexistent Task", newDate);
+        String title = "Nonexistent Entry";
+        Date newDateEnd = new Date(1, 8, 2024);
 
-            assertEquals("Entry not found.", result);
-        } catch (ParseException e) {
-            fail("Invalid date format in test.");
-        }
+        String result = controller.postponeEntry(title, newDateEnd);
+        assertEquals("Entry not found.", result);
     }
 }

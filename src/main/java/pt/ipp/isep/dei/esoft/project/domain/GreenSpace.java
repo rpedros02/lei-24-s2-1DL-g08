@@ -13,6 +13,8 @@ public class GreenSpace {
         this.type = type;
         this.area = area;
     }
+    public GreenSpace(String testGreenSpace) {
+    }
     public String getName() {
         return name;
     }
