@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox spacing="10" fillWidth="false" layoutX="20.0" layoutY="20.0"  alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.UI.RegisterGreenSpaceGUI" style="-fx-background-color: #f0f0f0;">
+   <Label text="GSM: Register Green Space" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #098112;"/>
+
+   <Label text="Enter Name:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <TextField fx:id="txtName" style="-fx-font-size: 14;" />
+
+   <Label text="Select Type:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <ComboBox fx:id="cbType" style="-fx-font-size: 14;" />
+
+   <Label text="Enter Area in hectares:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <TextField fx:id="txtArea" style="-fx-font-size: 14;" />
+
+   <Label text="Enter Street:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <TextField fx:id="txtStreet" style="-fx-font-size: 14;" />
+
+   <Label text="Enter Zip Code:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <TextField fx:id="txtZipCode" style="-fx-font-size: 14;" />
+
+   <Label text="Enter City:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+   <TextField fx:id="txtCity" style="-fx-font-size: 14;" />
+
+   <Button text="Register" onAction="#handleRegisterGreenSpace" style="-fx-background-color: #2ae346; -fx-text-fill: white; -fx-font-size: 16;" />
+</VBox>
