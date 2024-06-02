@@ -2,7 +2,6 @@ package pt.ipp.isep.dei.esoft.project.domain;
 
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -120,6 +119,7 @@ public class Entry {
         return task;
     }
 
+
     public void setTask(Task task) {
         this.task = task;
     }
@@ -225,6 +225,12 @@ public class Entry {
     public int hashCode() {
         return Objects.hash(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace);
     }
+
+    public void postponeEntry(Date newDateEnd) {
+        this.dateEnd = newDateEnd;
+    }
+
+
 
     @Override
     public String toString() {

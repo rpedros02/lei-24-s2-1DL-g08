@@ -1,19 +1,19 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Scanner;
-
 
 public class PostPoneAnEntryUI implements Runnable {
     private final PostponeAnEntryController postponeAnEntryController;
+    private final Agenda agenda;
 
     public PostPoneAnEntryUI(Agenda agenda) {
+        this.agenda = agenda;
         this.postponeAnEntryController = new PostponeAnEntryController(agenda);
     }
 
@@ -27,12 +27,8 @@ public class PostPoneAnEntryUI implements Runnable {
         String dateStr = scanner.nextLine();
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date newDate = (Date) dateFormat.parse(dateStr);
-            String result = postponeAnEntryController.postponeEntry(title, newDate);
-            System.out.println(result);
-        } catch (ParseException e) {
-            System.out.println("Invalid date format. Please try again.");
-        }
+        Date newDate = new Date(dateStr);
+        String result = postponeAnEntryController.postponeEntry(title, newDate);
+        System.out.println(result);
     }
 }
