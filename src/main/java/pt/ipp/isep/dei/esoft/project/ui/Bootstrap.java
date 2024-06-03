@@ -110,7 +110,9 @@ public class Bootstrap implements Runnable {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("This Company");
         organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
-        organization.addCollaborator(new Collaborator(new Email("employee@this.app")));
+        organization.addCollaborator(new Collaborator("Employee", new Date(13,12,2005), new Date(12,4,1995),919919919,"employee@this.app",123456780, IdDocType.CC,"123456780",new Address("rua rua",12,"4425-299","City","District"),new Job("Employee")));
+        organization.addCollaborator(new Collaborator("GSM", new Date(13,12,2005), new Date(12,4,1995),919919919,"gsm@this.app",123456781, IdDocType.CC,"123456781",new Address("rua rua",12,"4425-299","City","District"),new Job("GSM")));
+        organization.addCollaborator(new Collaborator("HRM", new Date(13,12,2005), new Date(12,4,1995),919919919,"hrm@this.app",123456782, IdDocType.CC,"123456782",new Address("rua rua",12,"4425-299","City","District"),new Job("HRM")));
         organizationRepository.add(organization);
     }
 
@@ -128,8 +130,9 @@ public class Bootstrap implements Runnable {
     private void addUsers() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
-        authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE,
-                AuthenticationController.ROLE_EMPLOYEE);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
 
         authenticationRepository.addUserWithRole("US12 Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -139,6 +142,9 @@ public class Bootstrap implements Runnable {
 
         authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "pwd",
                 AuthenticationController.ROLE_HRM);
+
+        authenticationRepository.addUserWithRole("GSM", "gsm@this.app", "pwd",
+                AuthenticationController.ROLE_GSM);
 
 
     }
@@ -196,6 +202,7 @@ public class Bootstrap implements Runnable {
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
+        collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC,"123456789",new Address("rua rua",12,"4425-299","City","District"),new Job("Gardener"));
         collaboratorRepository.addCollaborator("Johnny boy", new Date(13,12,2005), new Date(12,4,1995),919919919,"email@this.app",123456789, IdDocType.CC,"123456789",new Address("rua rua",12,"4425-299","City","District"),new Job("Gardener"));
 
     }

@@ -256,9 +256,8 @@ public class Collaborator {
     // https://pt.wikipedia.org/wiki/N%C3%BAmero_de_identifica%C3%A7%C3%A3o_fiscal#Exemplo_de_valida%C3%A7%C3%A3o_em_Java[8]
     public static boolean isValidTaxPayerNumber(String number) {
         final int max=9;
-        //check if is numeric and has 9 numbers
-        if (!number.matches("[0-9]+") || number.length()!=max) return false;
-        int checkSum=0;
+        return number.matches("[0-9]{9}");
+     /*   int checkSum=0;
         //calculate checkSum
         for (int i=0; i<max-1; i++){
             checkSum+=(number.charAt(i)-'0')*(max-i);
@@ -267,7 +266,8 @@ public class Collaborator {
         //if checkDigit is higher than 9 set it to zero
         if (checkDigit>9) checkDigit=0;
         //compare checkDigit with the last number of NIF
-        return checkDigit==number.charAt(max-1)-'0';
+        int a = number.charAt(max-1)-'0';
+        return checkDigit==number.charAt(max-1)-'0';*/
     }
 
     public boolean hasSkill(Skill skill) {
