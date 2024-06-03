@@ -56,6 +56,7 @@ public class RegisterCollaboratorUI implements Runnable {
         address = requestAddress();
         mobileNumber = requestMobileNumber();
         admissionDate = requestAdmissionDate();
+        job = requestJob();
     }
 
     private Job requestJob() {
@@ -121,6 +122,7 @@ public class RegisterCollaboratorUI implements Runnable {
         String street = input.nextLine();
         System.out.println("\nDoor Number: ");
         int doorNumber = input.nextInt();
+        input.nextLine();
         System.out.println("\nPostal Code: ");
         String postalCode = input.nextLine();
         System.out.println("\nCity: ");

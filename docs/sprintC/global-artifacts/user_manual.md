@@ -13,6 +13,7 @@ Leveraging their knowledge from courses like Software Engineering (ESOFT), Progr
 The resulting software solution, composed of Java applications, must adhere to the principles of Test-Driven Development (TDD) to ensure maintainability and high-quality code. 
 The project not only challenges students to apply theoretical concepts in a practical setting but also aims to deliver a proof-of-concept that meets the real-world requirements provided by MS, thereby contributing to the sustainable management of urban green spaces.
 
+
 ## 3. System Overview
 The Integrative Project Assignment aims to develop an IT solution for managing green spaces for collective use, such as gardens and parks, within urban contexts. The project involves students organized in teams, following an iterative and incremental development process based on SCRUM methodology. The solution is to be developed using Java applications following Test-Driven Development (TDD) principles.
 
