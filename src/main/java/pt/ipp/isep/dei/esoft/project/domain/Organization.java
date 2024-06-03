@@ -118,6 +118,10 @@ public class Organization {
         return Optional.empty();
     }
 
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
     public List<Entry> getEntriesFromToDoList() {
         return toDoList.getEntries();
     }

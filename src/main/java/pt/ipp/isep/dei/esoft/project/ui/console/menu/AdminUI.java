@@ -1,6 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 
+import pt.ipp.isep.dei.esoft.project.domain.Agenda;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.CreateTaskUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.AssignSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.CreateJobUI;
@@ -15,14 +17,18 @@ import java.util.List;
  */
 
 public class AdminUI implements Runnable {
+
+    private final Agenda agenda;
+
     public AdminUI() {
+        this.agenda = Repositories.getAgenda();
     }
 
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Vehicle Menu", new VehicleMenuUI()));
         options.add(new MenuItem("Team Menu", new TeamMenuUI()));
-        options.add(new MenuItem("Create Task", new CreateTaskUI()));
+        options.add(new MenuItem("Green Space Menu", new GreenSpaceMenuUI(agenda)));
         options.add(new MenuItem("Register a Skill", new RegisterSkillUI()));
         options.add(new MenuItem("Assign Skill to a Collaborator", new AssignSkillUI()));
         options.add(new MenuItem("Register a Collaborator", new CollaboratorMenuUI()));

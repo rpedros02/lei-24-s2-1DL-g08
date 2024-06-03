@@ -8,11 +8,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrganizationRepository {
-
+    private static OrganizationRepository instance;
     private final List<Organization> organizations;
 
     public OrganizationRepository() {
         organizations = new ArrayList<>();
+    }
+
+    public static OrganizationRepository getInstance() {
+        if (instance == null) {
+            synchronized (OrganizationRepository.class) {
+                instance = new OrganizationRepository();
+            }
+        }
+        return instance;
     }
 
     public Optional<Organization> getOrganizationByCollaborator(Collaborator collaborator) {
@@ -20,7 +29,7 @@ public class OrganizationRepository {
         Optional<Organization> returnOrganization = Optional.empty();
 
         for (Organization organization : organizations) {
-            if (organization.anyCollaboratorHasEmail(collaborator.toString())) {
+            if (organization.anyCollaboratorHasEmail(collaborator.getEmail())) {
                 returnOrganization = Optional.of(organization);
             }
         }
@@ -28,13 +37,13 @@ public class OrganizationRepository {
         return returnOrganization;
     }
 
-    public Optional<Organization> getOrganizationByEmployeeEmail(String email) {
+    public Organization getOrganizationByEmployeeEmail(String email) {
 
-        Optional<Organization> returnOrganization = Optional.empty();
+        Organization returnOrganization = null;
 
         for (Organization organization : organizations) {
             if (organization.anyCollaboratorHasEmail(email)) {
-                returnOrganization = Optional.of(organization);
+                returnOrganization = organization;
             }
         }
 

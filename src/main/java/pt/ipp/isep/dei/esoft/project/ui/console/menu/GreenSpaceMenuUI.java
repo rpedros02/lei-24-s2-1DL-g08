@@ -1,10 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
-import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.AddEntryToToDoListUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.AssignTeamToEntryUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.PostPoneAnEntryUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.RegisterGreenSpaceUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 
@@ -27,6 +24,7 @@ public class GreenSpaceMenuUI implements Runnable {
         options.add(new MenuItem("Add a new entry to the To Do List", new AddEntryToToDoListUI()));
         options.add(new MenuItem("Assign a team to an entry", new AssignTeamToEntryUI()));
         options.add(new MenuItem("Postpone an entry in the Agenda", new PostPoneAnEntryUI(agenda)));
+        options.add(new MenuItem("List Green Spaces", new ListGreenSpacesUI()));
 
 
         int option = 0;

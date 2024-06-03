@@ -10,6 +10,10 @@ public class Agenda {
         this.entries = new ArrayList<>();
     }
 
+    public Agenda(Agenda agenda) {
+        this.entries = new ArrayList<>(agenda.entries);
+    }
+
     public Agenda(List<Entry> entries) {
         this.entries = entries;
     }

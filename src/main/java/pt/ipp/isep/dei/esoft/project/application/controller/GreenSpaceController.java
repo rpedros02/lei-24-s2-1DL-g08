@@ -3,15 +3,13 @@ import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import java.util.ArrayList;
 import java.util.List;
+
 public class GreenSpaceController {
     private GreenSpaceRepository greenSpaceRepository;
     public GreenSpaceController() {
-        if (greenSpaceRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            greenSpaceRepository = repositories.getGreenSpaceRepository();
-        }
+        Repositories repositories = Repositories.getInstance();
+        greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
     public boolean registerGreenSpace(String name, GreenSpaceTypeRepository type, double area) {
         GreenSpace greenSpace = new GreenSpace(name, type, area);
