@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AgendaController {
@@ -33,5 +34,21 @@ public class AgendaController {
                     .addEntryToAgenda(entry);
         }
         return newEntry;
+    }
+
+    public boolean addEntry(Entry entry) {
+        return !createEntry(entry).equals(Optional.empty());
+    }
+
+    public List<Entry> getEntriesBetweenDates(Date dateBegin, Date dateEnd) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        List<Entry> entries = List.of();
+
+        if (organization.isPresent()) {
+            entries = organization.get()
+                    .getEntriesBetweenDates(dateBegin, dateEnd);
+        }
+        return entries;
     }
 }

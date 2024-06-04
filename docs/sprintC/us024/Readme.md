@@ -1,4 +1,4 @@
-# US008 - List the vehicles needing check-up
+# US024 - Postpone an entry in the Agenda to a specific future date.
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 

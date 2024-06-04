@@ -73,4 +73,13 @@ public class OrganizationRepository {
 
         return isValid;
     }
+
+    public Organization getOrganizationByName(String thisCompany) {
+        for (Organization organization : organizations) {
+            if (organization.getVatNumber().equals(thisCompany)) {
+                return organization;
+            }
+        }
+        return null;
+    }
 }

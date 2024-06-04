@@ -3,10 +3,8 @@ package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
-import pt.ipp.isep.dei.esoft.project.ui.console.CreateTaskUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.AssignSkillUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.skillmenu.AssignSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.CreateJobUI;
-import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.RegisterSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -29,9 +27,8 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Vehicle Menu", new VehicleMenuUI()));
         options.add(new MenuItem("Team Menu", new TeamMenuUI()));
         options.add(new MenuItem("Green Space Menu", new GreenSpaceMenuUI(agenda)));
-        options.add(new MenuItem("Register a Skill", new RegisterSkillUI()));
-        options.add(new MenuItem("Assign Skill to a Collaborator", new AssignSkillUI()));
-        options.add(new MenuItem("Register a Collaborator", new CollaboratorMenuUI()));
+        options.add(new MenuItem("Agenda Menu", new AgendaMenuUI()));
+        options.add(new MenuItem("Collaborator Menu", new CollaboratorMenuUI()));
         options.add(new MenuItem("Create a Job", new CreateJobUI()));
 
         int option = 0;

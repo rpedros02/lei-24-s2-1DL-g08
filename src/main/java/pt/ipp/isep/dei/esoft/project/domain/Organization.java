@@ -268,4 +268,26 @@ public class Organization {
         }
         return Optional.empty();
     }
+
+    public List<Entry> getEntriesBetweenDates(Date dateBegin, Date dateEnd) {
+        List<Entry> entries = new ArrayList<>();
+        for(Entry e : agenda.getEntries()){
+            if(e.getDateBegin().isAfter(dateBegin) || e.getDateBegin().isEqual(dateBegin) && !e.getDateEnd().isAfter(dateEnd) || e.getDateEnd().isEqual(dateEnd)){
+                entries.add(e);
+            }
+        }
+        return entries;
+    }
+
+    public String getVatNumber() {
+        return this.vatNumber;
+    }
+
+    public void setAgenda(Agenda agenda1) {
+        agenda.setEntries(agenda1.getEntries());
+    }
+
+    public void setToDoList(ToDoList toDoList) {
+        this.toDoList.setEntries(toDoList.getEntries());
+    }
 }

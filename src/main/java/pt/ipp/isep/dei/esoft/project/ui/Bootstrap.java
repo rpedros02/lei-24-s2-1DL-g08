@@ -93,22 +93,21 @@ public class Bootstrap implements Runnable {
         toDoList.addEntry(entry2);
         toDoList.addEntry(entry3);
 
-        // Add the ToDoList to the ToDoListRepository
-        toDoListRepository.addEntryToToDoList(entry1);
-        toDoListRepository.addEntryToToDoList(entry2);
-        toDoListRepository.addEntryToToDoList(entry3);
-
         // Create a few agenda entries
         Agenda agenda1 = new Agenda();
         // Add the agenda entries to the AgendaRepository
         if(!agenda1.addEntry(entry1) ||!agenda1.addEntry(entry2) || !agenda1.addEntry(entry3)) {
             System.out.println("Bootstrap: Failed to add entries to the agenda");
         }
+        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
+        Organization organization = organizationRepository.getOrganizationByName("505244123");
+        organization.setAgenda(agenda1);
+        organization.setToDoList(toDoList);
     }
 
     private void addOrganization() {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
-        Organization organization = new Organization("This Company");
+        Organization organization = new Organization("505244123");
         organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
         organization.addCollaborator(new Collaborator("Employee", new Date(13,12,2005), new Date(12,4,1995),919919919,"employee@this.app",123456780, IdDocType.CC,"123456780",new Address("rua rua",12,"4425-299","City","District"),new Job("Employee")));
         organization.addCollaborator(new Collaborator("GSM", new Date(13,12,2005), new Date(12,4,1995),919919919,"gsm@this.app",123456781, IdDocType.CC,"123456781",new Address("rua rua",12,"4425-299","City","District"),new Job("GSM")));
