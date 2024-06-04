@@ -6,12 +6,12 @@ skinparam shadowing false
 autonumber
 
 actor "Green Space Manager (GSM)" as GSM
-participant ":PostponeUI" as UI
-participant ":PostponeController" as CTRL
+participant ":PostponeAnEntryUI" as UI
+participant ":PostponeAnEntryController" as CTRL
 participant ":AgendaRepository" as REP
 participant "repositories\n:Repositories" as PLAT
 participant "agendaRepository:\nAgendaRepository" as AGREP
-participant "agendaEntry:\nAgendaEntry" as AgendaEntry
+participant "agendaEntries:\nAgendaEntries" as AgendaEntries
 
 activate GSM
 
@@ -48,12 +48,12 @@ UI -> CTRL : postponeEntry(newDate)
 activate CTRL
 CTRL -> AGREP : postponeEntry(entryID, newDate)
 activate AGREP
-AGREP -> AgendaEntry : postponeEntry(newDate)
-activate AgendaEntry
-AgendaEntry -> AgendaEntry : validateNewDate(newDate)
-AgendaEntry --> AGREP : updatedAgendaEntry
-deactivate AgendaEntry
-AGREP --> CTRL : updatedAgendaEntry
+AGREP -> AgendaEntries : postponeEntry(newDate)
+activate AgendaEntries
+AgendaEntries -> AgendaEntries : validateNewDate(newDate)
+AgendaEntries --> AGREP : updatedAgendaEntries
+deactivate AgendaEntries
+AGREP --> CTRL : updatedAgendaEntries
 deactivate AGREP
 CTRL --> UI : Confirmation message
 deactivate CTRL

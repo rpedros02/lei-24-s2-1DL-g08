@@ -24,7 +24,7 @@ class AgendaRepository {
     + postponeEntry(entryID, newDate)
 }
 
-class AgendaEntry {
+class AgendaEntries {
     entryID
     taskDescription
     assignedTeam
@@ -38,5 +38,5 @@ class AgendaEntry {
 PostponeEntryUI .> PostponeEntryController
 PostponeEntryController .> Repositories : repositories
 Repositories --> "1" AgendaRepository
-AgendaRepository --> "1" AgendaEntry
+AgendaRepository --> "1" AgendaEntries
 @enduml
