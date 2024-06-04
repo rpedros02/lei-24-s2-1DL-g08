@@ -13,38 +13,13 @@ Leveraging their knowledge from courses like Software Engineering (ESOFT), Progr
 The resulting software solution, composed of Java applications, must adhere to the principles of Test-Driven Development (TDD) to ensure maintainability and high-quality code. 
 The project not only challenges students to apply theoretical concepts in a practical setting but also aims to deliver a proof-of-concept that meets the real-world requirements provided by MS, thereby contributing to the sustainable management of urban green spaces.
 
-
-## 3. System Overview
-The Integrative Project Assignment aims to develop an IT solution for managing green spaces for collective use, such as gardens and parks, within urban contexts. The project involves students organized in teams, following an iterative and incremental development process based on SCRUM methodology. The solution is to be developed using Java applications following Test-Driven Development (TDD) principles.
-
-1. Problem Statement:
-
-* Green Spaces for Collective Use: Urban green spaces are essential for public well-being. MusgoSublime (MS) is tasked with planning, constructing, and maintaining such spaces.
-* Collaborators, Tasks, and Teams: MS employs various workers with different skills to carry out tasks in green spaces.
-* Vehicles, Machines, and Equipment: MS utilizes a range of vehicles, machines, and equipment for tasks.
-* Agenda: The Agenda is used for planning and tracking tasks.
-* Green Spaces User Portal: A portal allows users to provide feedback and report faults.
-* System Users: Various users interact with the system, including HR Manager, Fleet Manager, Collaborator, Green Spaces Manager, and User.
-
-2. Minimal Viable Product (PVM):
-
-* Sprint 1: Develops functionalities for Teams and Vehicle Fleet Management.
-* Sprint 2: Enhances functionalities for Teams and Vehicle Fleet Management, adds KPIs and Statistical Analysis, and begins Planning and Building Irrigation Systems.
-* Sprint 3: Focuses on Data Analysis, Emergency Plans, and Task Management.
-
-3. Non-functional Requirements:
-
-* Business rules validation, OO design practices, Java implementation, JavaFX GUI, password authentication, English documentation, coding standards adherence, and unit testing.
-
-The project is divided into three sprints, each focusing on specific functionalities and requirements, with an emphasis on iterative development, adherence to best practices, and user involvement throughout the process.
+## 3. System Requirements
 
 
+## 4. System Overview
 
 
-
-
-
-## 4. Features
+## 5. Features
 
 1. Esoft
 
@@ -125,3 +100,8 @@ The project is divided into three sprints, each focusing on specific functionali
    Run tests on the US13 algorithm with inputs of varying sizes to observe its execution time behavior. Deliverables include a .csv file containing input size and execution time data for 30 examples, along with an image file showing the execution time graph for this data.
 
 
+## 6.Troubleshooting
+
+## 7. Frequently Ask Questions
+
+## 8. References
