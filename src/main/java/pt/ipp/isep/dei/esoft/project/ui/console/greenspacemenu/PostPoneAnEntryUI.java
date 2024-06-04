@@ -23,10 +23,10 @@ public class PostPoneAnEntryUI implements Runnable {
         System.out.print("Enter the title of the entry to postpone: ");
         String title = scanner.nextLine();
 
-        System.out.print("Enter the new date (YYYY-MM-DD): ");
+        System.out.print("Enter the new date (dd-MM-YYYY): ");
         String dateStr = scanner.nextLine();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
         Date newDate = new Date(dateStr);
         String result = postponeAnEntryController.postponeEntry(title, newDate);
         System.out.println(result);
