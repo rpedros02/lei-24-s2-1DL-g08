@@ -1,42 +1,62 @@
 @startuml
-skinparam monochrome false
+'skinparam monochrome true
 skinparam packageStyle rectangle
-skinparam shadowing true
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
 skinparam classAttributeIconSize 0
 
-class PostponeEntryUI {
+'left to right direction
+
+class PostponeAnEntryUI{
 }
 
-class PostponeEntryController {
-    + PostponeEntryController(agendaRepository)
-    + getAgendaEntries()
-    + postponeEntry(entryID, newDate)
-}
+
+class PostponeAnEntryController{
+-AgendaRepository agendaRepository
+    + PostponeAnEntryController(agendaRepository)
+    + getPlannedAndPostponedTask()
+ }
 
 class Repositories {
-    Repositories()
-    + getInstance()
-    + getAgendaRepository()
+    - Repositories(): Repositories
+    + getInstance() : Repositories
+    + getAgendaRepository() : Repositories
 }
+
 
 class AgendaRepository {
-    + getAgendaEntries()
-    + postponeEntry(entryID, newDate)
+    + getPlannedAndPostponedTask()
+
 }
 
-class AgendaEntries {
-    entryID
-    taskDescription
-    assignedTeam
-    vehicles
-    duration
-    status
-    + postponeEntry(newDate)
-    + validateNewDate(newDate)
+class  Entry{
+        -title
+        -description
+        -urgencyLevel
+        -expectedDuration
+        -state
+        -greenSpace
+
 }
 
-PostponeEntryUI .> PostponeEntryController
-PostponeEntryController .> Repositories : repositories
-Repositories --> "1" AgendaRepository
-AgendaRepository --> "1" AgendaEntries
+class EntryDto{
++TaskEntry
++Date
++Time
+}
+
+
+AgendaRepository --> "*" Entry: contains
+PostponeAnEntryUI .>  PostponeAnEntryController
+PostponeAnEntryController ...r> Repositories : repositories
+PostponeAnEntryUI .> EntryDto
+PostponeAnEntryController ..> EntryDto
+Repositories -> Repositories : instance
+Repositories "1" --> "*" Entry
+Repositories ---> "1" AgendaRepository
+
+ PostponeAnEntryController ......>  Entry : Entry
+ PostponeAnEntryController ...> "1" AgendaRepository : AgendaRepository
 @enduml
