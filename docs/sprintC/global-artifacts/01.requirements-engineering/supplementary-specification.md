@@ -9,7 +9,8 @@ _Specifies functionalities that: \
 * Login credentials and sensitive data must be encrypted and stored correctly.
 * Data in the system must be available at all times and must be consistent and correctly stored.
 * A list of roles with permissions is defined in the system.
-
+* The application must also provide a general information dashboard that displays various relevant details about the green space to the user.
+* The Green Space Manager must have complete, unrestricted access to all dashboards and functionalities throughout the entire application.
 ## Usability
 _Evaluates the user interface. It has several subcategories,
 among them: error prevention; interface aesthetics and design; help and
