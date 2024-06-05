@@ -28,7 +28,7 @@ public class AddEntryToToDoListUI implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("--Add Entry to To-Do List:--");
+        System.out.println("-- Add Entry to To-Do List: --");
         GreenSpace greenSpace = getGreenSpace();
         String entryTitle = getEntryName();
         String entryDescription = getEntryDescription();
@@ -41,6 +41,13 @@ public class AddEntryToToDoListUI implements Runnable {
 
         DegreeOfUrgency degreeOfUrgency = DegreeOfUrgency.valueOf(degreeOfUrgencyString.toUpperCase());
         Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, dateBegin,dateEnd, entryStatus, greenSpace);
+
+        boolean flag = Utils.getBooleanAnswer("Do you want to link a Task to this Entry?");
+
+        if (flag) {
+            AddTaskToEntryUI taskUI = new AddTaskToEntryUI(entry);
+            taskUI.run();
+        }
 
         if (toDoListController.addEntry(entry) && agendaController.addEntry(entry)){
             System.out.println("Entry successfully added to the To-Do List and registered in the Agenda.");

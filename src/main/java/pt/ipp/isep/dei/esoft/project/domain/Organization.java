@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class Organization {
     private final String vatNumber;
     private final List<Collaborator> collaborators;
     private final List<Task> tasks;
-    private final List<Vehicle> vehicles;
+    private final VehicleRepository vehicles;
     private final Agenda agenda;
     private final ToDoList toDoList;
     private String name;
@@ -35,7 +36,7 @@ public class Organization {
         this.vatNumber = vatNumber;
         collaborators = new ArrayList<>();
         tasks = new ArrayList<>();
-        vehicles = new ArrayList<>();
+        vehicles = new VehicleRepository();
         agenda = new Agenda();
         toDoList = new ToDoList();
     }
@@ -61,7 +62,7 @@ public class Organization {
     }
 
     public boolean hasVehicle(Vehicle vehicle) {
-        return vehicles.contains(vehicle);
+        return vehicles.getVehicles().contains(vehicle);
     }
 
 
@@ -157,8 +158,7 @@ public class Organization {
     private boolean addVehicle(Vehicle vehicle) {
         boolean success = false;
         if (validateVehicle(vehicle)) {
-            // A clone of the task is added to the list of tasks, to avoid side effects and outside manipulation.
-            success = vehicles.add(vehicle.clone());
+            success = vehicles.addVehicle(vehicle.clone());
         }
         return success;
 
@@ -190,7 +190,7 @@ public class Organization {
     }
 
     private boolean vehiclesDoNotContain(Vehicle vehicle) {
-        return !vehicles.contains(vehicle);
+        return !vehicles.getVehicles().contains(vehicle);
     }
 
     /**
