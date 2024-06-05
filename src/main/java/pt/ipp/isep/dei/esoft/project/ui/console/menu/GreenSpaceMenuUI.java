@@ -24,8 +24,8 @@ public class GreenSpaceMenuUI implements Runnable {
         options.add(new MenuItem("Add a new entry to the To Do List", new AddEntryToToDoListUI()));
         options.add(new MenuItem("Assign a team to an entry", new AssignTeamToEntryUI()));
         options.add(new MenuItem("Postpone an entry in the Agenda", new PostPoneAnEntryUI(agenda)));
+        options.add(new MenuItem("Cancel an entry in the Agenda", new CancelAnEntryUI(agenda)));
         options.add(new MenuItem("List Green Spaces", new ListGreenSpacesUI()));
-
 
         int option = 0;
         do {

@@ -3,7 +3,8 @@ package pt.ipp.isep.dei.esoft.project.domain.Enums;
 public enum EStatus {
     PENDING(1),
     IN_PROGRESS(2),
-    FINISHED(3);
+    FINISHED(3),
+    CANCELED(4);
 
     private final int status;
 
@@ -30,6 +31,7 @@ public enum EStatus {
             case PENDING -> "Pending";
             case IN_PROGRESS -> "In Progress";
             case FINISHED -> "Finished";
+            case CANCELED -> "Canceled";
         };
     }
 }
