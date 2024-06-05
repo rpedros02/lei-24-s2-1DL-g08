@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
+package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.skillmenu;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
@@ -6,7 +6,6 @@ import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import javax.security.auth.callback.TextInputCallback;
 import java.util.List;
 import java.util.Scanner;
 
