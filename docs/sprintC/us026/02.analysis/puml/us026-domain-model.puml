@@ -1,0 +1,43 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+hide circle
+hide methods
+
+class GreenSpaceManager {
+    ID
+    Name
+}
+
+class Agenda {
+    ID
+    Date
+}
+
+class AgendaEntry {
+    ID
+    Date
+    Description
+}
+
+class Vehicle {
+    ID
+    PlateID
+    Brand
+    Model
+    Type
+    Tare
+    GrossWeight
+    CurrentKM
+    RegisterDate
+    AcquisitionDate
+}
+
+GreenSpaceManager "1" - "0..*" AgendaEntry : "interacts with"
+Agenda "1" - "0..*" AgendaEntry : "contains"
+AgendaEntry "0..*" - "0..*" Vehicle : "assigns"
+
+@enduml
