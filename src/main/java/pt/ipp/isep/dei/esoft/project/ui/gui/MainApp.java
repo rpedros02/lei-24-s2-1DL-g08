@@ -12,9 +12,9 @@ import java.util.Objects;
 public class MainApp extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/MainMenuGUI.fxml")));
-        primaryStage.setTitle("");
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainMenuGUI.fxml")));
+        primaryStage.setTitle("Green Spaces Portal");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
     }

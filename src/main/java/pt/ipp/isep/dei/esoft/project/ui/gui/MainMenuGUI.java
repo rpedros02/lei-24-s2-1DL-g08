@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MainMenuGUI {
+public class MainMenuGUI{
 
     @FXML
     private VBox mainBox;

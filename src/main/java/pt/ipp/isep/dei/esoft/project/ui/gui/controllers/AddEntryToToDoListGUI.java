@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+/*package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -13,6 +13,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class AddEntryToToDoListGUI {
 
     private GreenSpaceController greenSpaceController;
     private ToDoListController toDoListController;
+    private ToDoListRepository toDoListRepository;
     private final AuthenticationRepository authenticationRepository;
 
     public AddEntryToToDoListGUI() {
@@ -115,7 +117,7 @@ public class AddEntryToToDoListGUI {
 
         Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, entryStatus, selectedGreenSpace, entryBeginDate, entryEndDate);
 
-        if (toDoListController.addEntryToToDoList(entry)) {
+        if (toDoListRepository.addEntryToToDoList(entry)) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
@@ -132,4 +134,4 @@ public class AddEntryToToDoListGUI {
             alert.showAndWait();
         }
     }
-}
+}*/

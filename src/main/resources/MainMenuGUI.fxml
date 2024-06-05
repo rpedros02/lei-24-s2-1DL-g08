@@ -4,23 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.PasswordField?>
 
-
 <VBox fx:id="mainBox" spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
       fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.MainMenuGUI" style="-fx-background-color: rgb(245,250,246);">
     <ImageView fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="logo.jpg"/>
+        <Image url="@logo.jpg"/>
     </ImageView>
     <Label text="Welcome to the Green Spaces Portal!" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
     <Label text="Please login to access the system." style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-    <VBox fillWidth="false" layoutX="20.0" layoutY="20.0" spacing="10.0" alignment="CENTER">
+    <VBox fillWidth="false" spacing="10.0" alignment="CENTER">
         <Label text="Login ID:" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
         <TextField fx:id="txtLoginId" style="-fx-pref-width: 200;"/>
-        <Label text="Password:" style="-fx-font-size: 16; -fx-text-fill: #000000;"/>
+        <Label text="Password:" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
         <PasswordField fx:id="txtPassword" style="-fx-pref-width: 200;"/>
     </VBox>
     <Button text="Login" onAction="#handleLogin"
