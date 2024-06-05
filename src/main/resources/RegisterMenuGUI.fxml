@@ -1,34 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<?import javafx.scene.control.TextField?>
-
-<VBox fx:id="registerBox" spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.menu.RegisterMenuGUI"
-      style="-fx-background-color: rgb(245,250,246);">
-    <Label text="Register a new user" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-    <VBox fillWidth="false" layoutX="20.0" layoutY="20.0" spacing="10.0" alignment="CENTER">
-        <TextField fx:id="txtName" promptText="Name"/>
-        <TextField fx:id="txtEmail" promptText="Email"/>
-        <PasswordField fx:id="txtPassword" promptText="Password"/>
-        <PasswordField fx:id="txtConfirmPassword" promptText="Confirm Password"/>
+<VBox fx:id="registerBox" alignment="CENTER" prefHeight="297.0" prefWidth="200.0" spacing="10" style="-fx-background-color: #90EE90;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.menu.RegisterMenuGUI">
+    <Label style="-fx-font-size: 20; -fx-text-fill: #050505;" text="Register a new user" />
+    <VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" spacing="10.0">
+        <TextField fx:id="txtName" promptText="Name" />
+        <TextField fx:id="txtEmail" promptText="Email" />
+        <PasswordField fx:id="txtPassword" promptText="Password" />
+        <PasswordField fx:id="txtConfirmPassword" promptText="Confirm Password" />
     </VBox>
     <ComboBox fx:id="cbRole" promptText="Role">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="HRM"/>
-                <String fx:value="VFM"/>
-                <String fx:value="GSM"/>
-                <String fx:value="Collaborator"/>
+                <String fx:value="HRM" />
+                <String fx:value="VFM" />
+                <String fx:value="GSM" />
+                <String fx:value="Collaborator" />
             </FXCollections>
         </items>
     </ComboBox>
-    <Button text="Register" onAction="#handleRegister"/>
+    <Button onAction="#handleRegister" style="-fx-background-color: #006400;" text="Register" textFill="WHITE" />
 </VBox>
