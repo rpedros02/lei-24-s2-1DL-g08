@@ -3,45 +3,94 @@ skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 
-title US008 - List the vehicles needing check-up
-header US008
 autonumber
 
-actor "FM" as fm
-participant ":VehicleListUI" as ui
-participant ":VehicleController" as vc
-participant ":SortingRepository" as sr
-participant ":VehicleRepository" as vr
+actor "Green Space \n Manager" as GSM
+participant ":CancelAnEntryUI" as UI
+participant ":CancelAnEntryController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repository\n:Repository" as PLAT
+participant ":Entries" as MAP
+participant ":AgendaRepository" as URG
+participant "objDto: EntrysDto" as GDTO
 
-activate fm
-    fm -> ui : Request list.
-    activate ui
-        ui --> vc : getSorting()
-        activate vc
-        vc -> sr : getSorting()
-            activate sr
-            sr --> vc : sorting
-            deactivate sr
-        vc --> ui : sorting
-        deactivate vc
-    ui --> fm : shows sorting possibilities and requests one
-    deactivate ui
-    fm -> ui : Selects pretended sorting.
-    activate ui
-        ui --> ui : keepSorting(sorting)
-        ui --> vc : getVehicle(VehicleID)
-        activate vc
-            group loop until all vehicles retrieved
-                vc -> vr : getVehicle(VehicleID)
-                activate vr
-                vr --> vc : vehicle
+
+activate GSM
+
+    GSM -> UI : asks to cancel a task entry
+    activate UI
+        UI -> CTRL : create
+        UI -> CTRL : getEntries()
+        activate CTRL
+
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getAgendaRepository()
+            activate PLAT
+
+                PLAT --> CTRL : AgendaRepository
+            deactivate PLAT
+
+            CTRL -> URG : getEntries()
+            activate URG
+
+                URG --> CTRL : EntriesList
+            deactivate URG
+
+            CTRL -> MAP : ToDTOList(EntriesList)
+            activate MAP
+                MAP -> GDTO: Create()
+                loop for each entry in the entries list
+                MAP -> URG: Entry = get(i)
+                activate URG
+                deactivate URG
+                MAP -> MAP: EntryDTO = toDTO(Entry)
+                activate MAP
+                MAP -> GDTO: add(EntryDto)
+
+                activate GDTO
+                deactivate GDTO
                 end
-                vc --> vc : sortVehicles(sorting)
-                deactivate vr
-            vc --> ui : vehicleList
-        deactivate vc
-        ui --> fm : Displays the list.
-    deactivate ui
+                MAP -> CTRL: EntryDtoList
+            deactivate MAP
 
+            CTRL --> UI : EntryDTO
+        deactivate CTRL
+
+        UI --> GSM : shows a list of entries
+    deactivate UI
+GSM -> UI : selects an entry
+    activate UI
+
+        UI --> GSM : requests confirmation to cancel entry
+    deactivate UI
+
+    GSM -> UI : confirms cancellation
+    activate UI
+        UI -> CTRL : cancelEntry(entryId)
+        activate CTRL
+
+            CTRL -> PLAT : getAgendaRepository()
+            activate PLAT
+
+                PLAT --> CTRL : AgendaRepository
+            deactivate PLAT
+
+            CTRL -> URG : deleteEntry(entryId)
+            activate URG
+
+                URG --> CTRL : entryDeleted
+            deactivate URG
+
+        CTRL --> UI : entryDeleted
+        deactivate CTRL
+
+        UI --> GSM : displays cancellation success
+    deactivate UI
+deactivate GSM
 
 @enduml

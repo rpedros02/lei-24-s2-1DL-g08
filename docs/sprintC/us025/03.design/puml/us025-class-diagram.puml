@@ -9,72 +9,54 @@ skinparam classAttributeIconSize 0
 
 'left to right direction
 
-
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
+class CancelAnEntryUI{
 }
 
-class Sorting {
-    - String description
 
-    + Sorting(description)
-    + getSortingByDescription(description)
-}
-
-class SortingRepository {
-    + getSortingByDescription(description)
-}
-
-class VehicleRepository {
-    + getVehicleByPlateId(id)
-}
+class CancelAnEntryController{
+-AgendaRepository agendaRepository
+    + CancelAnEntryController(agendaRepository)
+    + getPlannedAndPostponedTask()
+ }
 
 class Repositories {
-    - Repositories()
+    - Repositories(): Repositories
     + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
+    + getAgendaRepository() : Repositories
 }
 
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
 
-class VehicleListUI {
+class AgendaRepository {
+    + getPlannedAndPostponedTask()
+
 }
 
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
+class  Entry{
+        -title
+        -description
+        -urgencyLevel
+        -expectedDuration
+        -state
+        -greenSpace
+
 }
 
-VehicleListUI .> CreateVehicleController
+class EntryDto{
++TaskEntry
++Date
++Time
+}
 
-CreateVehicleController .> Repositories : repositories
 
+AgendaRepository --> "*" Entry: contains
+CancelAnEntryUI .>  CancelAnEntryController
+CancelAnEntryController ...r> Repositories : repositories
+CancelAnEntryUI .> EntryDto
+CancelAnEntryController ..> EntryDto
 Repositories -> Repositories : instance
+Repositories "1" --> "*" Entry
+Repositories ---> "1" AgendaRepository
 
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
-
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
-
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
+ CancelAnEntryController ......>  Entry : Entry
+ CancelAnEntryController ...> "1" AgendaRepository : AgendaRepository
 @enduml
