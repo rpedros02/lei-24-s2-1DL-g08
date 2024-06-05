@@ -1,76 +1,54 @@
 @startuml
-'skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
-
 skinparam classAttributeIconSize 0
 
-'left to right direction
-
-
-class Vehicle {
-    - id
-    - brand
-    - model
-    - type
-    - tare
-    - weight
-    - kms
-    - register_date
-    - acquisition_date
-    - maintenance
-
-    + Vehicle(id, brand, model , tyre,\n tare, weight, kms, register_date,\n acquisition_date, maintenance)
-    + getVehicleByPlateId(id)
+class Collaborator {
+    + recordTaskCompletion(taskId: String, completionDate: Date)
 }
 
-class Sorting {
-    - String description
-
-    + Sorting(description)
-    + getSortingByDescription(description)
+class TaskCompletionUI {
+    + getTaskCompletionData()
+    + displayCompletionConfirmation()
 }
 
-class SortingRepository {
-    + getSortingByDescription(description)
-}
-
-class VehicleRepository {
-    + getVehicleByPlateId(id)
+class TaskCompletionController {
+    + recordTaskCompletion(taskId: String, completionDate: Date)
 }
 
 class Repositories {
-    - Repositories()
-    + getInstance() : Repositories
-    + getSortingByDescription(description)
-    + getSorting()
-    + getVehicleByPlateId(id)
+    + getInstance()
 }
 
-
-class VehicleListUI {
+class TaskRepository {
+    + getTaskById(taskId: String): Task
+    + save(task: Task)
 }
 
-class CreateVehicleController {
-    + CreateVehicleController(SortingRepository)
-    + getSorting()
-    - getSortingByDescription(description)
+class Task {
+    - status: String
+    - completionDate: Date
+    + markAsCompleted(completionDate: Date)
 }
 
-VehicleListUI .> CreateVehicleController
+ApplicationSession --> ApplicationSession : getInstance()
+ApplicationSession --> "1" UserSession : manages
 
-CreateVehicleController .> Repositories : repositories
+TaskCompletionController --> Collaborator
+TaskCompletionController --> Repositories
+TaskCompletionController ..> ApplicationSession
 
-Repositories -> Repositories : instance
+Collaborator --> TaskCompletionUI
+TaskCompletionUI --> TaskCompletionController
 
-Repositories --> "1" SortingRepository
-Repositories --> "*" VehicleRepository
+Repositories --> TaskRepository
+TaskRepository --> Task
 
-VehicleRepository "1" --> "*" Vehicle
-SortingRepository "1" --> "*" Sorting
+TaskCompletionController --> TaskRepository : getTaskById(taskId)
+TaskCompletionController --> TaskRepository : save(task)
+TaskRepository --> Task : getTaskById(taskId)
+TaskRepository --> Task : save(task)
+Task --> Task : markAsCompleted(completionDate)
 
-CreateVehicleController .> Sorting
-CreateVehicleController .> Vehicle
 @enduml

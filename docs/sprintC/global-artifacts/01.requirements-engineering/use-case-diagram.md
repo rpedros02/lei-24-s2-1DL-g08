@@ -20,4 +20,8 @@ However, be aware, this is a pedagogical simplification. On further projects and
 | US005 | [Generate team proposal](../../us005/Readme.md)                |                                                          |
 | US006 | [Register a Vehicle](../../us006/Readme.md)                    |
 | US007 | [Register a vehicle's check-up](../../us007/Readme.md)         |
+|       |                                                                |
+|       |                                                                |
 | US008 | [List the vehicles in need of check-up](../../us008/Readme.md) |
+
+
