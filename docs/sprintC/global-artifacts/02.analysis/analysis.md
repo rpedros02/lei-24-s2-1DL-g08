@@ -7,7 +7,10 @@
 
 **Product/Service related to a Transaction or Transaction Line Item**
 
-* Tasks
+* Equipment: Refers to machinery, tools, or devices used in various tasks or operations.
+* Vehicle: Denotes any motorized or non-motorized conveyance designed for transportation or task execution.
+* Machine: Signifies any mechanical device or apparatus employed in different tasks.
+* Automotive Inspection: An evaluation process specifically focused on assessing the condition, safety, and compliance of vehicles.
 
 ---
 
@@ -15,38 +18,45 @@
 
 **Roles of People or Organizations**
 
-* HRM
-* VM
-* Employee
-* Collaborator
-* Team
+* Collaborator: Responsible for tasks related to green space management.
+* Human Resources Manager: The person in charge of managing human resources within the organization.
+* Fleet Manager: An individual overseeing human resources, particularly related to fleet management.
+* Green Spaces Manager: The accountable person for overall green space management.
+* Green Spaces User: Someone who utilizes the green spaces overseen by the organization.
 
 ---
 
 **Places**
 
-* Green Spaces
+* Green Space: Refers to the various green areas managed by the organization, including gardens and parks.
 
 ---
 
 
 **Physical Objects**
 
-* Vehicle
+* Equipment: Includes tools, machinery, and devices used by collaborators to perform various tasks within the domain.
+* Vehicle: Represents motorized or non-motorized conveyances used for transportation or task execution.
+* Machine: Refers to mechanical devices used for specific purposes.
+* Plant Material: Encompasses all items related to plants within the green space.
+* Urban Furniture: Includes functional and aesthetic elements placed in urban or public spaces.
+* Infrastructure: Comprises essential structures, systems, and facilities that support green spaces.
 
 ---
 
 **Descriptions of Things**
 
-* Job
-* Skills
+* Skill: Denotes the unique abilities, expertise, or competencies that individuals possess.
+* Job: Represents specific roles or positions within an organization.
 
 ---
 
 
 **Records of finance, work, contracts, legal matters**
 
-* Check-up
+* Work records:  Documentation that captures information about tasks performed within green spaces.
+
+* Maintenance records:  Detailed documentation specifically focused on maintenance activities.
 
 ---
 
@@ -61,26 +71,31 @@ An association is a relationship between instances of objects that indicates a r
 - **_A_** known/logged/recorded/reported/captured/needed/registers/administers **_B_**
 - **_A_** uses or manages or owns **_B_**
 - **_A_** is related with a transaction (item) of **_B_**
-- **_A_** is related with a transaction (item) of **_B_**
 
 
 
-| Concept (A) 		  |    Association   	     |  Concept (B) |
-|-----------------|:----------------------:|-------------:|
-| Organization  	 |   administers   		 	   | Green Spaces |
-| Tasks 	         | are carried out   		 	 | Green Spaces |
-| Tasks 	         |      needs  		 	       |      Vehicle |
-| Team	           |   carries out  		 	    |        Tasks |
-| Team 	          |    is made of  		 	    |    Employees |
-| Employee	          |    has 		 	    |    Job  |
-| Employee		          |    has   		 	    |    Skills |
-| HRM	          |    registers  		 	    |    Job |
-| HRM		          |   registers   		 	    |    Skills |
-| HRM 	          |    registers and manages 		 	    |    Collaborator |
-| Collaborator	   |       is a  		 	       |     Employee |
-| FM	             | registers and manages   		 	 | Vehicle |
-| Vehicle	         | has  		 	 | Checkup |
-| Tasks 	         | are carried out   		 	 | Green Spaces |
+| Concept (A) 		  |             Association   	             |  Concept (B) |
+|-----------------|:---------------------------------------:|-------------:|
+|  UserType                |               identifies                |  User            |
+| User                         |                  uses                   |    Portal              |
+|  User                        |                  lives                  |    Address              |
+|  User                        |                   has                   |  Job                |
+|   Task                       |                requires                 |    Skill              |
+| Task  	 |             requires   		 	             | Vehicle |
+| GreenSpace 	         |            located at   		 	            | Address |
+| Portal 	         |             made for   		 	             |      GreenSpace |
+| Portal	           |                has  		 	                |        Report |
+| Team 	          |             executes  		 	              |    Task |
+| Team	          |              includes 		 	              |    Job  |
+| Team		          |            associated   		 	            |    User |
+| Team	          |             includes  		 	              |    Skill |
+| Team		          |             follows   		 	              |    Agenda |
+| Team 	          |               follows	 	                |     MaintenanceAgenda |
+| Maintenance         |                requires  		 	                | Vehicles |
+| Vehicle 	         |        assigned to   		 	          | CheckUp |
+|  Vehicle                 |    assigned to       		 	                                      | List             |
+|  Vehicle                 |  transports                                        |     Equipment         |
+|  Vehicle                 |   transports                                       |  Machines            |
 
 ## Domain Model
 
