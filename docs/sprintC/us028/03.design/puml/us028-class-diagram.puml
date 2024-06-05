@@ -1,0 +1,69 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+
+class Collaborator {
+    + getCollaboratorFromSession()
+}
+
+class TaskListUI {
+    + requestTaskRepository()
+    + applyTaskStatusFilter(selectedStatus)
+    + applyDateRangeFilter(startDate, endDate)
+    + applySortByDate()
+}
+
+class TaskListController {
+    + getCollaboratorFromSession()
+    + requestTaskRepository()
+    + applyTaskStatusFilter(selectedStatus)
+    + applyDateRangeFilter(startDate, endDate)
+    + applySortByDate()
+}
+
+class Repositories {
+    + getInstance()
+}
+
+class ApplicationSession {
+    + getInstance()
+}
+
+class UserSession {
+    + getCurrentSession()
+}
+
+class TaskRepository {
+    + getTaskRepository()
+}
+
+class Task {
+    - status: String
+    - date: Date
+}
+
+ApplicationSession -> ApplicationSession : getInstance()
+ApplicationSession --> "1" UserSession : manages
+
+TaskListController --> Collaborator
+TaskListController -> Repositories
+TaskListController ..> ApplicationSession
+
+Collaborator --> TaskListUI
+TaskListUI --> TaskListController
+
+Repositories --> TaskRepository
+TaskRepository --> Task
+
+
+
+@enduml

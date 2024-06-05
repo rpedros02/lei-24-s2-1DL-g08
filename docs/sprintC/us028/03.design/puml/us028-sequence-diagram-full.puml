@@ -1,0 +1,59 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Listing Tasks for Collaborator
+
+autonumber
+actor "Collaborator" as COLLAB
+participant ":TaskListUI" as UI
+participant ":TaskListController" as CTRL
+participant "Repositories" as repositories
+participant ":ApplicationSession" as _APP
+participant "appSession\n:ApplicationSession" as APP
+participant "currentSession\n:UserSession" as SESSAO
+participant ":TaskRepository" as TaskRepoInstance
+
+
+activate COLLAB
+COLLAB -> UI : Open "Task List"
+activate UI
+    UI -> CTRL : getCollaboratorFromSession()
+    activate CTRL
+        CTRL -> _APP: getInstance()
+        activate _APP
+            _APP -> CTRL: appSession
+        deactivate _APP
+
+        CTRL -> APP: getCurrentSession()
+        activate APP
+            APP --> CTRL: currentSession
+        deactivate APP
+
+        CTRL -> SESSAO: email = getUserEmail()
+        activate SESSAO
+            SESSAO --> CTRL: email
+        deactivate SESSAO
+
+        CTRL --> UI : collaboratorDetails
+    deactivate CTRL
+
+    UI -> CTRL : requestTaskRepository()
+    activate CTRL
+        CTRL -> repositories : getInstance()
+        activate repositories
+            repositories -> TaskRepoInstance : getTaskRepository()
+            activate TaskRepoInstance
+                TaskRepoInstance --> repositories : tasks
+            deactivate TaskRepoInstance
+            repositories --> CTRL : tasks
+        deactivate repositories
+        CTRL --> UI : taskList
+    deactivate CTRL
+    UI --> COLLAB : Display list of Tasks
+deactivate UI
+
+
+deactivate COLLAB
+@enduml

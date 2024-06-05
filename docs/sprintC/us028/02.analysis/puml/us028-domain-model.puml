@@ -2,60 +2,48 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
+
+left to right direction
 skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
 
-
 class Organization {
+    id
     name
     vatNumber
     website
     phoneNumber
     email
 }
-class Vehicle {
-    plate id
-    brand
-    model
-    type
-    tare
-    gross weight
-    current km
-    register date
-    acquistion date
-}
-class Collaborator {
-    collaborator id
+
+class SystemUser {
     name
-    birthdate
-    admission date
+    birthDate
+    admissionDate
+    email
+    taxNumber
+    phoneNumber
     address
-    contact info
-    taxpayer
 }
 
-class GSM {
-    gsm id
-    username
-    password
+class Collaborator {
 
+    assignedTasks
 }
 
-class Checkup {
-    plate id
-    date
-
+class "Task" {
+    -name
+    -description
+    -urgency
+    -expectedDuration
+    -status
+    -greenSpace
 }
 
-Organization "1" - "1..*" FM: has >
-Organization "1" - "1..*" Collaborator: has >
-Organization "1" - "1..*" Vehicle: owns >
-Collaborator "1" -- "1..*" Vehicle: uses >
-FM "1" -- "1..*" Vehicle: maintains >
-FM "1" - "1..*" Checkup: schedules >
-Vehicle "1" - "1..*" Checkup: undergoes >
-
-
+SystemUser -- System : uses
+Organization "1" -- "0..*" SystemUser : has
+Collaborator "1" -- "1" SystemUser : is a >
+Collaborator "1" -- "0..*" Task : has
 @enduml

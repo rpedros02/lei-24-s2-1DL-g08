@@ -1,42 +1,39 @@
-`# US008 - List the vehicles in need off check-up. 
-`
-## 3. Design - User Story Realization 
+# US28 - Consult Assigned Tasks
+
+## 3. Design - User Story Realization
 
 ### 3.1. Rationale
 
+_**Note that SSD - Alternative Two is adopted.**_
 
-| Interaction ID                                                          | Question: Which class is responsible for...          | Answer                | Justification (with patterns) |
-|:------------------------------------------------------------------------|:-----------------------------------------------------|:----------------------|:------------------------------|
-| Step 1 : Request list.  		                                              | ...instantiating the class that handles the UI?      | VehicleListUI         | Pure Fabrication              |
-| Step 2 : Shows the possible ways to sort out data and  waits for input. | ..retrieving possible ways to sort data?             | VehicleController     | IE                            |
-|                                                                         | 	...displaying the possible ways to show data?						 | VehicleListUI         | Pure Fabrication              |
-| Step 3 : Selects pretended sorting.                                     |                                                      |                       |                               |
-| Step 4 : Retrieval of vehicles information and sorting.                 | ...retrieval of vehicles information?                | VehicleController     | IE                            |
-|                                                                         | ...sorting the vehicles?                             | VehicleListController | Controller                    |
-| Step 5 : Return the list.                                               | ...showing the list?                                 | VehicleListUI         | Pure Fabrication              |
+| Interaction ID | Question: Which class is responsible for... | Answer              | Justification (with patterns)                                                                                 |
+|:---------------|:--------------------------------------------|:--------------------|:--------------------------------------------------------------------------------------------------------------|
+| Step 1         | ... interacting with the actor?             | :TaskListUI         | Pure Fabrication: there is no reason to assign this responsibility to any existing class in the Domain Model. |
+|                | ... coordinating the US?                    | :TaskListController | Controller                                                                                                    |
+| Step 2         | ... storing the Task?                       | :TaskRepository     | Pure Fabrication, IE: owns all data                                                                           |
 
 ### Systematization ##
 
-According to the taken rationale, the conceptual classes promoted to software classes are: 
+According to the taken rationale, the conceptual classes promoted to software classes are:
 
+* Task
 
+Other software classes (i.e. Pure Fabrication) identified:
 
-Other software classes (i.e. Pure Fabrication) identified: 
-
-
-
+* :TaskListUI
+* :TaskListController
 
 ## 3.2. Sequence Diagram (SD)
 
-
+_**Note that SSD - Alternative Two is adopted.**_
 
 ### Full Diagram
 
 This diagram shows the full sequence of interactions between the classes involved in the realization of this user story.
 
-![Sequence Diagram - Full](svg/us008-sequence-diagram-full.svg)
+![Sequence Diagram - Full](svg/us028-sequence-diagram-full.svg)
 
 
 ## 3.3. Class Diagram (CD)
 
-![Class Diagram](svg/us008-class-diagram.svg)
+![Class Diagram](svg/us028-class-diagram.svg)
