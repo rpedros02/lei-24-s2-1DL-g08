@@ -4,10 +4,9 @@ public class Skill {
     int skillId;
     String name;
 
-
     public Skill(int skillId, String name) {
         this.skillId = skillId;
-        if (name == null ) { //|| !isValidName(name)
+        if (name == null || !isValidName(name)) {
             throw new IllegalArgumentException("Name contains special character and/or numbers:\n");
         }
         this.name = name;
@@ -17,8 +16,19 @@ public class Skill {
         return name;
     }
 
+    public int getId() {
+        return skillId;
+    }
+
     public boolean isValidName(String name) {
         return name.matches("[a-zA-Z ]+");
     }
 
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "skillId=" + skillId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

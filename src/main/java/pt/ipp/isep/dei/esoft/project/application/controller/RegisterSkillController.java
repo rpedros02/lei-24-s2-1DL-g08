@@ -7,7 +7,6 @@ public class RegisterSkillController {
 
     private final SkillsRepository skillsRepository;
 
-
     public RegisterSkillController() {
         this.skillsRepository = Repositories.getInstance().getSkillsRepository();
 
@@ -17,4 +16,11 @@ public class RegisterSkillController {
         return skillsRepository.add(skillId, name);
     }
 
+    public boolean skillIdExists(int skillId) {
+        return skillsRepository.exists(skillId);
+    }
+
+    public int getNextSkillId() {
+        return skillsRepository.getNextId();
+    }
 }
