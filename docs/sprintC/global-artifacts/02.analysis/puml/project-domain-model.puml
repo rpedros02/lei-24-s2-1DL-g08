@@ -123,7 +123,7 @@ class ToDoList {
     -entries
 }
 
-class AgendaEntry {
+class Entry {
     -toDoListEntry
     -team
 }
@@ -150,9 +150,9 @@ Vehicle "1" -- "0..*" Machines : transports >
 Task "1" -- "0..*" ToDoList : exists in >
 ToDoList "1" -- "0..*" ToDoListEntry : contains >
 ToDoListEntry "1" -- "1" Task : contains >
-ToDoListEntry "1" -- "1" AgendaEntry : exists in >
-AgendaEntry "0..*" -- "1" Agenda : belongs to >
+ToDoListEntry "1" -- "1" Entry : exists in >
+Entry "0..*" -- "1" Agenda : belongs to >
 ToDoListEntry "0..*" -- "1" ToDoList : belongs to >
 Team "1..*" - "1" Agenda: follows >
-Team "1" -- "1" AgendaEntry : assigned with >
+Team "1" -- "1" Entry : assigned with >
 @enduml
