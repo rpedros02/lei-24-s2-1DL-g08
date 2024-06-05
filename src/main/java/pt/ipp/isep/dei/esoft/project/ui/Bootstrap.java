@@ -68,17 +68,19 @@ public class Bootstrap implements Runnable {
     private char randomChar(Random random) {
         return (char) ('A' + random.nextInt(26));
     }
+
     private void addGreenSpaces() {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
 
         for (int i = 0; i < 10; i++) {
             String name = "GreenSpace " + (i + 1);
+            Organization organization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
             GreenSpaceTypeRepository type = GreenSpaceTypeRepository.GARDEN;
             Double area = (double) (i*100 + 100);
 
             Address address = new Address("Rua Green", i+1, "4100-100", "Porto", "Porto");
 
-            GreenSpace greenSpace = new GreenSpace(name, type, area, address);
+            GreenSpace greenSpace = new GreenSpace(name, type, area, address,organization.getCollaboratorByEmail("gsm@this.app"));
             greenSpaceRepository.addGreenSpace(greenSpace);
         }
     }
@@ -103,7 +105,7 @@ public class Bootstrap implements Runnable {
             System.out.println("Bootstrap: Failed to add entries to the agenda");
         }
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
-        Organization organization = organizationRepository.getOrganizationByName("505244123");
+        Organization organization = organizationRepository.getOrganizationByVatNumber("505244123");
         organization.setAgenda(agenda1);
         organization.setToDoList(toDoList);
     }

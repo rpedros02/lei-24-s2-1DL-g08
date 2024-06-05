@@ -37,6 +37,18 @@ public class ToDoListController {
         return newEntryToDoList;
     }
 
+    public boolean exists(String entryTitle) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        return organization.get().getEntriesFromToDoList().contains(getEntry(entryTitle));
+    }
+
+    private Entry getEntry(String entryTitle) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        return organization.get().getEntryFromToDoList(entryTitle);
+    }
+
     public boolean addEntry(Entry entry) {
         return !createEntry(entry.getTitle(), entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDateBegin(), entry.getDateEnd(), entry.getStatus(), entry.getGreenSpace(), entry.getTeam(), entry.getVehicles(), entry.getTask()).equals(Optional.empty());
     }

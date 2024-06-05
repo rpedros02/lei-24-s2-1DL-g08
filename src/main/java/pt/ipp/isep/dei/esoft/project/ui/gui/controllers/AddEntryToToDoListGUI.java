@@ -1,4 +1,4 @@
-/*package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -8,12 +8,13 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
-import pt.ipp.isep.dei.esoft.project.repository.ToDoListRepository;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class AddEntryToToDoListGUI {
     private TextField txtEntryTitle;
 
     @FXML
-    private TextField getTxtEntryDescription;
+    private TextField txtEntryDescription;
 
     @FXML
     private ComboBox<String> cbDegreeOfUrgency;
@@ -40,7 +41,6 @@ public class AddEntryToToDoListGUI {
 
     private GreenSpaceController greenSpaceController;
     private ToDoListController toDoListController;
-    private ToDoListRepository toDoListRepository;
     private final AuthenticationRepository authenticationRepository;
 
     public AddEntryToToDoListGUI() {
@@ -85,7 +85,7 @@ public class AddEntryToToDoListGUI {
             return;
         }
 
-        if (toDoListController.entryExists(entryTitle)) {
+        if (toDoListController.exists(entryTitle)) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -94,30 +94,11 @@ public class AddEntryToToDoListGUI {
             return;
         }
 
-        double taskDuration;
-        try {
-            taskDuration = Double.parseDouble(taskDurationString);
-            if (taskDuration <= 0) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Duration must be a number bigger than 0");
-            alert.showAndWait();
-            return;
-        }
-
-
-
-        String entryStatus = "Pending"; // Assuming the entry status is "Pending" when it's created
-
         DegreeOfUrgency degreeOfUrgency = DegreeOfUrgency.valueOf(degreeOfUrgencyString.toUpperCase());
 
-        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, entryStatus, selectedGreenSpace, entryBeginDate, entryEndDate);
+        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, Utils.dateFromString(entryBeginDate), Utils.dateFromString(entryEndDate), EStatus.PENDING, selectedGreenSpace);
 
-        if (toDoListRepository.addEntryToToDoList(entry)) {
+        if (toDoListController.addEntry(entry)) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
@@ -134,4 +115,4 @@ public class AddEntryToToDoListGUI {
             alert.showAndWait();
         }
     }
-}*/
+}

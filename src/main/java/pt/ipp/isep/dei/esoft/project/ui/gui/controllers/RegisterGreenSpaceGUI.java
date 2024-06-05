@@ -7,9 +7,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import javafx.stage.Stage;
+import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 public class RegisterGreenSpaceGUI {
@@ -44,7 +46,7 @@ public class RegisterGreenSpaceGUI {
 
     public RegisterGreenSpaceGUI() {
         this.controller = new GreenSpaceController();
-        this.authenticationRepository= Repositories.getInstance().getAuthenticationRepository();
+        this.authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
     }
 
     @FXML
@@ -73,7 +75,7 @@ public class RegisterGreenSpaceGUI {
 
         Address address = new Address(streetName, streetNumber, PostalCodeString, cityString, districtString);
 
-        if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || PostalCodeString.isEmpty() || cityString.isEmpty() || districtString.isEmpty()){
+        if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || PostalCodeString.isEmpty() || cityString.isEmpty() || districtString.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -99,8 +101,9 @@ public class RegisterGreenSpaceGUI {
 
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
+        Collaborator gsm = OrganizationRepository.getInstance().getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
 
-        if (controller.registerGreenSpace(name, type, area, address)) { // Pass the GSM to the method
+        if (controller.registerGreenSpace(name, type, area, address, gsm)) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);

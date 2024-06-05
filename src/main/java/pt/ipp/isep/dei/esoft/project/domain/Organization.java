@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
@@ -64,7 +65,6 @@ public class Organization {
     }
 
 
-
     /**
      * This method creates a new task.
      *
@@ -124,6 +124,18 @@ public class Organization {
 
     public List<Entry> getEntriesFromToDoList() {
         return toDoList.getEntries();
+    }
+
+    /**
+     * @param entryTitle The title of the entry to be retrieved.
+     *                   This method retrieves an entry from the to do list.
+     *                   The entry is identified by its title.
+     *                   The entry is retrieved from the to do list.
+     *                   The entry is returned.
+     * @return The entry that was retrieved.
+     */
+    public Entry getEntryFromToDoList(String entryTitle) {
+        return toDoList.getEntryByTitle(entryTitle);
     }
 
     /**
@@ -262,8 +274,8 @@ public class Organization {
 
     public Optional<Entry> createEntry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task);
-        ToDoList list = Repositories.getInstance().getToDoListRepository().getToDoList();
-        if (list.addEntry(entry)) {
+
+        if (addEntryToToDoList(entry).isPresent()) {
             return Optional.of(entry);
         }
         return Optional.empty();
@@ -271,8 +283,8 @@ public class Organization {
 
     public List<Entry> getEntriesBetweenDates(Date dateBegin, Date dateEnd) {
         List<Entry> entries = new ArrayList<>();
-        for(Entry e : agenda.getEntries()){
-            if(e.getDateBegin().isAfter(dateBegin) || e.getDateBegin().isEqual(dateBegin) && !e.getDateEnd().isAfter(dateEnd) || e.getDateEnd().isEqual(dateEnd)){
+        for (Entry e : agenda.getEntries()) {
+            if (e.getDateBegin().isAfter(dateBegin) || e.getDateBegin().isEqual(dateBegin) && !e.getDateEnd().isAfter(dateEnd) || e.getDateEnd().isEqual(dateEnd)) {
                 entries.add(e);
             }
         }
@@ -289,5 +301,22 @@ public class Organization {
 
     public void setToDoList(ToDoList toDoList) {
         this.toDoList.setEntries(toDoList.getEntries());
+    }
+
+    public Collaborator getCollaboratorByEmail(String mail) {
+        for (Collaborator c : collaborators) {
+            if (c.getEmail().equals(mail)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public List<String> getCollaborators() {
+        List<String> collaborators = new ArrayList<>();
+        for (Collaborator c : this.collaborators) {
+            collaborators.add(c.getEmail());
+        }
+        return collaborators;
     }
 }
