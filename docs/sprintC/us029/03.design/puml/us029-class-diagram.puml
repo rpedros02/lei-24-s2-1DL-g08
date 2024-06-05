@@ -49,10 +49,6 @@ class Repositories {
     + getVehicleByPlateId(id)
 }
 
-note bottom of SortingRepository
-    - used for displaying
-    the sorting list
-end note
 
 class VehicleListUI {
 }
