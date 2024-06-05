@@ -2,115 +2,157 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
+'skinparam linetype ortho
+'left to right direction
 skinparam classAttributeIconSize 0
-
 hide circle
 hide methods
 
-
-title Domain Model
-
-class Employee {
-    employee id
+class Vehicle {
+    description
+    atributes
+    Brand
+    Model
+    Type
+    Tare
+    GrossWeight
+    Current Km
+    Register Date
+    Acquisition Date
+    Maintenance/Checkup
+    Frequency (in Kms)
 }
+
+class List {
+    plate number
+    model
+    brand
+    current kms
+}
+
+class MaintenanceAgenda {
+    frequency
+    description
+    vehicle
+}
+
+class Team {
+    name
+    members (collaborators)
+}
+
+class Skill {
+    name
+    description
+    }
 
 class Job {
-    job id
-    job title
-}
-
-class Skills {
-    skill id
-    skill description
-}
-
-class HRM {
-    hrm id
-    username
-    password
-}
-
-class Collaborator {
-    collaborator id
     name
-    birthdate
-    admission date
-    address
-    contact info
-    taxpayer
 }
 
-class FM {
-    fm id
-    username
-    password
-
+class User {
+   name
+   birthDate
+   admissionDate
+   address
+   phoneNumber
+   email
+   taxPayerNumber
+   idDocTypeNumber
+   job
+   skills
+   task
+   idType
 }
 
-class Vehicle {
-    plate id
-    brand
-    model
+class UserType {
+    NameOfUserType
+}
+
+class GreenSpace{
+    name
     type
-    tare
-    gross weight
-    current km
-    register date
-    acquistion date
+    description
+    area
+    manager
+    address
 }
 
-class Checkup {
-    plate id
-    date
-
-}
-
-class Organization {
+class Portal{
     name
-    vatNumber
-    website
-    phoneNumber
-    email
+    url address
+    content
 }
 
-class GreenSpaces {
-    plant_material
-    urban_furniture
-    irrigation_systems_and_drinking_fountains
-    lighting_systems_and_the_respective_power_supply
-    rainwater_conduction_and_drainage_systems
+class Report{
+    type
+    date
+    author
+    content
 }
 
-class Team{
-    list of employees
-
-
+class Address{
+    street
+    postalCode
+    city
 }
 
 class Task {
-    description_of_the_task
-    team
+    reference
+    description
+    status
+    urgency
+    expectedDuration
+    greenSpace
 }
 
+class CheckUp {
+    -description
+}
 
+class Agenda {
+    diary
+    entries
+}
 
+class ToDoListEntry {
+    -task
+}
 
-FM "1" - "1..*" Vehicle : registers and manages >
-Vehicle "1" -- "1..*" Checkup : has >
+class ToDoList {
+    -entries
+}
 
-Employee "1" -- "1" Job : has >
-Employee "1" - "1..*" Skills : has >
-HRM "1" -- "1..*" Collaborator : registers and manages >
-HRM "1" -- "1..*" Job : registers >
-HRM "1" - "1..*" Skills : registers >
-Team "1" -- "1..*" Employee : consists of >
-Task "1" -- "1..*" Vehicle : needs >
-Task "1" -- "1..*" GreenSpaces : are carried out >
-Task "1" -- "1..*" Team : carries out <
-Collaborator "1" --- "1..*" Vehicle : uses >
-Collaborator "1" - "1" Employee : is a >
-Organization "1" - "1..*" GreenSpaces: administers >
-HRM "1" - "1..*" Team : forms >
+class AgendaEntry {
+    -toDoListEntry
+    -team
+}
 
-
+UserType "1" --- "1" User: identifies >
+User "1" --- "1" Portal: uses >
+User "1" --- "1" Address: lives in >
+User "1" --- "1" Job: has >
+Task "1" -- "0..*" Skill: requires >
+Task "1" -- "0..*" Vehicle : requires >
+GreenSpace "1" - "1" Address: located at >
+Portal "1" --- "1" GreenSpace: made for >
+Portal "1" -- "0..*" Report: has >
+Team "1" -- "0..*" Task : executes >
+Team "1" -- "0..*" Job : includes >
+Team "1" --- "0..*" User: associated >
+Team "1" -- "0..*" Skill : includes >
+Team "1" --- "0..*" MaintenanceAgenda: follows >
+MaintenanceAgenda "1" -- "0..*" Vehicle : requires >
+Vehicle"0..*" -- "1" CheckUp: assigned to >
+Vehicle "0..*" - "1" List: assigned to >
+Vehicle "1" -- "0..*" Equipment : transports >
+Vehicle "1" -- "0..*" Machines : transports >
+Task "1" -- "0..*" ToDoList : exists in >
+ToDoList "1" -- "0..*" ToDoListEntry : contains >
+ToDoListEntry "1" -- "1" Task : contains >
+ToDoListEntry "1" -- "1" AgendaEntry : exists in >
+AgendaEntry "0..*" -- "1" Agenda : belongs to >
+ToDoListEntry "0..*" -- "1" ToDoList : belongs to >
+Team "1..*" - "1" Agenda: follows >
+Team "1" -- "1" AgendaEntry : assigned with >
 @enduml
