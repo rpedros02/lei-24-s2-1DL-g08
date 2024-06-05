@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" fillWidth="false" layoutX="20.0" layoutY="20.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.UI.AddEntryToAgendaGUI" style="-fx-background-color: #f0f0f0; -fx-padding: 20; -fx-border-color: #333; -fx-border-width: 2;">
+    <Label text="Select a Task:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+    <ComboBox fx:id="cbTasks" style="-fx-font-size: 14;" />
+
+    <Button text="Add Entry" onAction="#handleAddEntry" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16;" />
+</VBox>

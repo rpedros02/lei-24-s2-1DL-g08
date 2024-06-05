@@ -128,6 +128,18 @@ class Entry {
     -team
 }
 
+Team "1" -- "0..*" Task : executes >
+Team "1" -- "0..*" Job : includes >
+Team "1" --- "0..*" User: associated >
+Team "1" -- "0..*" Skill : includes >
+Team "1" --- "0..*" MaintenanceAgenda: follows >
+Portal "1" --- "1" GreenSpace: made for >
+Portal "1" -- "0..*" Report: has >
+MaintenanceAgenda "1" -- "0..*" Vehicle : requires >
+Vehicle"0..*" -- "1" CheckUp: assigned to >
+Vehicle "0..*" - "1" List: assigned to >
+Vehicle "1" -- "0..*" Equipment : transports >
+Vehicle "1" -- "0..*" Machines : transports >
 UserType "1" --- "1" User: identifies >
 User "1" --- "1" Portal: uses >
 User "1" --- "1" Address: lives in >
@@ -135,24 +147,13 @@ User "1" --- "1" Job: has >
 Task "1" -- "0..*" Skill: requires >
 Task "1" -- "0..*" Vehicle : requires >
 GreenSpace "1" - "1" Address: located at >
-Portal "1" --- "1" GreenSpace: made for >
-Portal "1" -- "0..*" Report: has >
-Team "1" -- "0..*" Task : executes >
-Team "1" -- "0..*" Job : includes >
-Team "1" --- "0..*" User: associated >
-Team "1" -- "0..*" Skill : includes >
-Team "1" --- "0..*" MaintenanceAgenda: follows >
-MaintenanceAgenda "1" -- "0..*" Vehicle : requires >
-Vehicle"0..*" -- "1" CheckUp: assigned to >
-Vehicle "0..*" - "1" List: assigned to >
-Vehicle "1" -- "0..*" Equipment : transports >
-Vehicle "1" -- "0..*" Machines : transports >
 Task "1" -- "0..*" ToDoList : exists in >
 ToDoList "1" -- "0..*" ToDoListEntry : contains >
 ToDoListEntry "1" -- "1" Task : contains >
-ToDoListEntry "1" -- "1" Entry : exists in >
-Entry "0..*" -- "1" Agenda : belongs to >
+ToDoListEntry "1" -- "1" AgendaEntry : exists in >
+AgendaEntry "0..*" -- "1" Agenda : belongs to >
 ToDoListEntry "0..*" -- "1" ToDoList : belongs to >
 Team "1..*" - "1" Agenda: follows >
-Team "1" -- "1" Entry : assigned with >
+Team "1" -- "1" AgendaEntry : assigned with >
 @enduml
+
