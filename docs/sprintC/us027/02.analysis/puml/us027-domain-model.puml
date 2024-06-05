@@ -7,55 +7,19 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-class Vehicle {
-    plate id
-    brand
-    model
-    type
-    tare
-    gross weight
-    current km
-    register date
-    acquistion date
-}
-class Collaborator {
-    collaborator id
-    name
-    birthdate
-    admission date
-    address
-    contact info
-    taxpayer
+class GreenSpaceManager {
+    ID
+    Name
 }
 
-class FM {
-    fm id
-    username
-    password
-
+class GreenSpace {
+    ID
+    Name
+    Location
+    Area
+    Description
 }
 
-class Checkup {
-    plate id
-    date
-
-}
-
-Organization "1" - "1..*" FM: has >
-Organization "1" - "1..*" Collaborator: has >
-Organization "1" - "1..*" Vehicle: owns >
-Collaborator "1" -- "1..*" Vehicle: uses >
-FM "1" -- "1..*" Vehicle: maintains >
-FM "1" - "1..*" Checkup: schedules >
-Vehicle "1" - "1..*" Checkup: undergoes >
-
+GreenSpaceManager "1" - "0..*" GreenSpace : "manages"
 
 @enduml

@@ -7,55 +7,37 @@ skinparam classAttributeIconSize 0
 hide circle
 hide methods
 
-
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
+class GreenSpaceManager {
+    ID
+    Name
 }
+
+class Agenda {
+    ID
+    Date
+}
+
+class AgendaEntry {
+    ID
+    Date
+    Description
+}
+
 class Vehicle {
-    plate id
-    brand
-    model
-    type
-    tare
-    gross weight
-    current km
-    register date
-    acquistion date
-}
-class Collaborator {
-    collaborator id
-    name
-    birthdate
-    admission date
-    address
-    contact info
-    taxpayer
+    ID
+    PlateID
+    Brand
+    Model
+    Type
+    Tare
+    GrossWeight
+    CurrentKM
+    RegisterDate
+    AcquisitionDate
 }
 
-class FM {
-    fm id
-    username
-    password
-
-}
-
-class Checkup {
-    plate id
-    date
-
-}
-
-Organization "1" - "1..*" FM: has >
-Organization "1" - "1..*" Collaborator: has >
-Organization "1" - "1..*" Vehicle: owns >
-Collaborator "1" -- "1..*" Vehicle: uses >
-FM "1" -- "1..*" Vehicle: maintains >
-FM "1" - "1..*" Checkup: schedules >
-Vehicle "1" - "1..*" Checkup: undergoes >
-
+GreenSpaceManager "1" - "0..*" AgendaEntry : "interacts with"
+Agenda "1" - "0..*" AgendaEntry : "contains"
+AgendaEntry "0..*" - "0..*" Vehicle : "assigns"
 
 @enduml
