@@ -20,6 +20,7 @@ public class Entry {
     private Team team;
     private List<Vehicle> vehicles;
     private Task task;
+    private Vehicle vehicle;
 
     //CONSTRUCTOR(S)
     public Entry(String title) {
@@ -74,8 +75,14 @@ public class Entry {
         this.task = null;
     }
     //END CONSTRUCTOR(S)
+    public void addVehicle(Vehicle vehicle) {
+        if(!vehicles.contains(vehicle)){
+            vehicles.add(vehicle);
+        }
+    }
 
     // GETTERS AND SETTERS
+
     public String getTitle() {
         return title;
     }
@@ -155,6 +162,7 @@ public class Entry {
     public void setGreenSpace(GreenSpace greenSpace) {
         this.greenSpace = greenSpace;
     }
+
     //END GETTERS AND SETTERS
 
     //  VALIDATIONS
