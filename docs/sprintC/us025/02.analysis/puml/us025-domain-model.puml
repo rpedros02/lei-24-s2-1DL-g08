@@ -2,60 +2,33 @@
 skinparam monochrome true
 skinparam packageStyle rectangle
 skinparam shadowing false
+
+left to right direction
 skinparam classAttributeIconSize 0
 
 hide circle
 hide methods
 
 
-class Organization {
-    name
-    vatNumber
-    website
-    phoneNumber
-    email
-}
-class Vehicle {
-    plate id
-    brand
-    model
-    type
-    tare
-    gross weight
-    current km
-    register date
-    acquistion date
-}
-class Collaborator {
-    collaborator id
-    name
-    birthdate
-    admission date
+class GreenSpace{
+    local
     address
-    contact info
-    taxpayer
+    area
 }
 
-class FM {
-    fm id
-    username
-    password
-
+class "Entry" {
+    -title
+    -description
+    -urgencyLevel
+    -expectedDuration
+    -state
+    -greenSpace
 }
-
-class Checkup {
-    plate id
-    date
-
+class GreenSpaceManager {
+    name
+    email
+    phone
 }
-
-Organization "1" - "1..*" FM: has >
-Organization "1" - "1..*" Collaborator: has >
-Organization "1" - "1..*" Vehicle: owns >
-Collaborator "1" -- "1..*" Vehicle: uses >
-FM "1" -- "1..*" Vehicle: maintains >
-FM "1" - "1..*" Checkup: schedules >
-Vehicle "1" - "1..*" Checkup: undergoes >
-
-
+GreenSpace "1" -- "*" "Entry" : has >
+GreenSpaceManager "1" - "*" GreenSpace : manages >
 @enduml
