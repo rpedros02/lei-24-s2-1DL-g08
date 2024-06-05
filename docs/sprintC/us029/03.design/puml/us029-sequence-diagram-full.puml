@@ -1,0 +1,61 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title System Sequence Diagram (SSD) - Record the completion of a task
+
+autonumber
+
+actor "Collaborator" as Collaborator
+participant "RecordTaskCompletionUI" as UI
+participant "RecordTaskCompletionController" as Controller
+participant "AgendaEntry" as AE
+participant "AgendaEntryRepository" as AgendaEntryRepository
+
+activate Collaborator
+
+Collaborator -> UI : requests to record task completion
+activate UI
+
+UI --> Controller** : create
+UI -> Controller : getTasksOfCollaborator()
+activate Controller
+
+Controller -> AE : getTasksForCollaborator()
+activate AE
+
+AE --> Controller : tasks
+deactivate AE
+
+Controller --> UI : tasks
+deactivate Controller
+
+UI --> Collaborator : selectTask(task)
+deactivate UI
+
+Collaborator -> UI : provides finish time
+activate UI
+
+UI -> Controller : provideFinishTime(finishTime)
+activate Controller
+
+Controller -> AE : markTaskCompleted(task, finishTime)
+activate AE
+
+AE -> AgendaEntryRepository : removeTask(task)
+activate AgendaEntryRepository
+
+AgendaEntryRepository --> AE : success
+deactivate AgendaEntryRepository
+
+AE --> Controller : success
+deactivate AE
+
+Controller --> UI : success
+deactivate Controller
+
+UI --> Collaborator : displays operation success
+deactivate UI
+
+@enduml
