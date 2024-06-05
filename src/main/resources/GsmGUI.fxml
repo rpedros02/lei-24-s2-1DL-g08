@@ -10,6 +10,7 @@
     <Button text="Add Entry To To-Do List" onAction="#handleAddEntryToToDoList" fx:id="btnAddEntryToToDoList" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;"/>
     <Button text="Add Entry To Agenda" onAction="#handleAddEntryToAgenda" fx:id="btnAddEntryToAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;"/>
     <Button text="Assign Team To Agenda Entry" onAction="#handleAssignTeamToAgendaEntry" fx:id="btnAssignTeamToAgendaEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;"/>
+    <Button text="Change the status of an entry in the Agenda" onAction="#handleChangeStatusOfEntry" fx:id="btnChangeStatusOfEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;"/>
     <Button fx:id="btnMainMenu" text="Main Menu" onAction="#handleMainMenu" style="-fx-background-color: #394239; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;"/>
     <Label text="© 2024 Green Spaces Portal" style="-fx-font-size: 12; -fx-text-fill: #222222;"/>
 </VBox>
