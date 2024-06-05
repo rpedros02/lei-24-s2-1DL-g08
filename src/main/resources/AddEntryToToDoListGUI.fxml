@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" fillWidth="false" layoutX="20.0" layoutY="20.0"  alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.UI.AddEntryToToDoListGUI" style="-fx-background-color: #f0f0f0; -fx-padding: 20; -fx-border-color: #333; -fx-border-width: 2;">
-    <Label text="GSM: Add entry to To Do List" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #098112;"/>
+<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="581.0" prefWidth="370.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.UI.AddEntryToToDoListGUI">
+    <Label alignment="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Add entry to To Do List" textAlignment="CENTER" />
 
-    <Label text="Select a Green Space:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
-    <ComboBox fx:id="cbGreenSpaces" style="-fx-font-size: 14;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Green Space:" />
+    <ComboBox fx:id="cbGreenSpaces" prefHeight="29.0" prefWidth="170.0" style="-fx-font-size: 14;" />
 
-    <Label text="Enter the Task Title:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the Entry Title:" />
     <TextField fx:id="txtTaskTitle" style="-fx-font-size: 14;" />
 
-    <Label text="Enter the Task Description:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
-    <TextField fx:id="txtTaskDescription" style="-fx-font-size: 14;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the Entry Description:" />
+   <TextField fx:id="txtTaskTitle1" layoutX="132.0" layoutY="206.0" style="-fx-font-size: 14;" />
 
-    <Label text="Select a Degree of Urgency:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
-    <ComboBox fx:id="cbDegreeOfUrgency" style="-fx-font-size: 14;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Degree of Urgency:" />
+    <ComboBox fx:id="cbDegreeOfUrgency" prefHeight="29.0" prefWidth="168.0" style="-fx-font-size: 14;" />
 
-    <Label text="Enter the Task Duration in days:" style="-fx-font-size: 16; -fx-text-fill: #333;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the Entry begin date:" />
     <TextField fx:id="txtTaskDuration" style="-fx-font-size: 14;" />
+   <Label layoutX="125.0" layoutY="393.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the Entry end date:" />
+   <TextField fx:id="txtTaskTitle11" layoutX="132.0" layoutY="262.0" style="-fx-font-size: 14;" />
 
-    <Button text="Add Entry" onAction="#handleAddTask" style="-fx-background-color: #2ae346; -fx-text-fill: white; -fx-font-size: 16;" />
+    <Button onAction="#handleAddEntry" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Add Entry" />
 </VBox>
