@@ -1,53 +1,41 @@
 @startuml
-'skinparam monochrome true
+skinparam monochrome false
 skinparam packageStyle rectangle
-'skinparam shadowing false
+skinparam shadowing true
 
+title Class Diagram
 
-'title Use Case Diagram
-
-left to right direction
-
-
-    actor "HRM"   as hrm
-    actor "VFM" as vfm
-    actor Collaborator
-    actor GSM
-    actor GSU
+actor "HRM" as hrm
+actor "VFM" as vfm
+actor collaborator as "Collaborator"
+actor GSM
+actor GSU
 
 
 rectangle "Not yet concrete use cases"{
-note right of Collaborator
-    Actor identified but still
-    no concrete use cases
-end note
 
-note right of GSM
-    Actor identified but still
-    no concrete use cases
-end note
-
-
+left to right direction
 note right of GSU
     Actor identified but still
     no concrete use cases
 end note
- }
+}
 
+left to right direction
 
 rectangle "Employees and team management" as emp{
     usecase "UC1 - To register a skill" as UC1
     usecase "UC2 - To register a job" as UC2
-    usecase "UC3 - To register a collaborator" as UC3
-    usecase "UC4 - To assign skills to a collaborator" as UC4
+    usecase "UC3 - To register a Collaborator" as UC3
+    usecase "UC4 - To assign skills to a Collaborator" as UC4
     usecase "UC5 - To generate a team proposal" as UC5
     hrm --> UC1
     hrm --> UC2
     hrm --> UC3
     hrm --> UC4
     hrm --> UC5
-
 }
+
 
 rectangle "Vehicles and machines management"{
     usecase "UC6 - To register a vehicle" as UC6
@@ -56,12 +44,40 @@ rectangle "Vehicles and machines management"{
      vfm --> UC6
      vfm --> UC7
      vfm --> UC8
-
 }
 
 
 
 
+rectangle "Collaborator"{
+    usecase "UC28 - To consult tasks assigned between two dates" as UC28
+    usecase "UC29 - To record the completion of a task" as UC29
+    collaborator --> UC28
+    collaborator --> UC29
+}
 
+
+rectangle "Functionalities for GSM" as gsm_additional{
+    usecase "UC20 - To register a green space and its area" as US20
+    usecase "UC21 - To add a new entry to the To-Do List" as US21
+    usecase "UC22 - To add a new entry in the Agenda" as US22
+    usecase "UC23 - To assign a Team to an entry in the Agenda" as US23
+    usecase "UC24 - To postpone an entry in the Agenda to a specific future date" as US24
+    usecase "UC25 - To cancel an entry in the Agenda" as US25
+    usecase "UC26 - To assign one or more vehicles to an entry in the Agenda" as US26
+    usecase "UC27 - To list all green spaces managed" as US27
+    usecase "UC28 - To consult tasks assigned between two dates" as US28
+    usecase "UC29 - To record the completion of a task" as US29
+    GSM --> US20
+    GSM --> US21
+    GSM --> US22
+    GSM --> US23
+    GSM --> US24
+    GSM --> US25
+    GSM --> US26
+    GSM --> US27
+    GSM --> US28
+    GSM --> US29
+}
 
 @enduml
