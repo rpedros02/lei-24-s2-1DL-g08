@@ -2,17 +2,20 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.Optional;
 
 public class VehicleCheckupController {
+    private final OrganizationRepository organizationRepository;
     private final VehicleCheckupRepository checkUpRepository;
     private final VehicleRepository vehicleRepository;
 
-    public VehicleCheckupController(VehicleCheckupRepository checkUpRepository, VehicleRepository vehicleRepository) {
-        this.checkUpRepository = checkUpRepository;
+    public VehicleCheckupController() {
+        OrganizationRepository organizationRepository = OrganizationRepository.getInstance();
+        this.checkUpRepository = organizationRepository.getOrganizationByCollaborator();
         this.vehicleRepository = vehicleRepository;
     }
 

@@ -1,40 +1,50 @@
 package pt.ipp.isep.dei.esoft.project.domain;
+
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 
 import java.util.Objects;
 
 public class GreenSpace {
+    public Collaborator gsm;
     private String name;
     private GreenSpaceTypeRepository type;
     private double area;
     private Address address;
 
-    public GreenSpace(String name, GreenSpaceTypeRepository type, double area, Address address) {
-        this.name = name;
-        this.type = type;
-        this.area = area;
-        this.address = new Address(address);
+    public GreenSpace(String name, GreenSpaceTypeRepository type, double area, Address address, Collaborator gsm) {
+        if (!setData(name, type, area, address, gsm)) {
+            throw new IllegalArgumentException("Data is not valid.");
+        }
+
     }
+
     public GreenSpace(String testGreenSpace) {
     }
+
     public String getName() {
         return name;
     }
+
     public GreenSpaceTypeRepository getType() {
         return type;
     }
+
     public double getArea() {
         return area;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setType(GreenSpaceTypeRepository type) {
         this.type = type;
     }
+
     public void setArea(double area) {
         this.area = area;
     }
+
     public Address getAddress() {
         return address;
     }
@@ -60,33 +70,45 @@ public class GreenSpace {
     }
 
 
-    public boolean setData(String name, GreenSpaceTypeRepository type, double area, Address address) {
-        if (name == null || type == null || area < 0 || address == null) {
+    public boolean setData(String name, GreenSpaceTypeRepository type, double area, Address address, Collaborator gsm) {
+        if (!isDataValid(name, type, area, address, gsm)) {
             return false;
         }
-        this.name = name;
-        this.type = type;
-        this.area = area;
-        this.address = address;
+        setName(name);
+        setType(type);
+        setArea(area);
+        setAddress(address);
+        setGSM(gsm);
         return true;
     }
 
-    public boolean isDataValid() {
-        return this.name != null && this.type != null && this.area >= 0 && this.address != null;
+    private void setGSM(Collaborator gsm) {
+        this.gsm = gsm;
+    }
+
+    public boolean isDataValid(String name, GreenSpaceTypeRepository type, double area, Address address, Collaborator gsm) {
+        return isNameValid(name) && isTypeValid(type) && isAreaValid(area) && isAddressValid(address) && isGsmValid(gsm);
+    }
+
+    private boolean isGsmValid(Collaborator gsm) {
+        return gsm != null;
     }
 
     public boolean isNameValid(String name) {
         return name != null;
     }
 
-    public boolean isTypeValid(String type) {
+    public boolean isTypeValid(GreenSpaceTypeRepository type) {
         return type != null;
     }
 
     public boolean isAreaValid(double area) {
         return area >= 0;
     }
-    public boolean isAddressValid(Address address) {return address != null;}
+
+    public boolean isAddressValid(Address address) {
+        return address != null;
+    }
 
     public String toString() {
         return "GreenSpace{" +
@@ -94,7 +116,10 @@ public class GreenSpace {
                 ", type='" + type.toString() + '\'' +
                 ", area=" + area +
                 "hectares" + '\'' +
-                ", address=" + address+ "}";
+                ", address=" + address + "}";
     }
 
+    public Object getGsm() {
+        return gsm;
+    }
 }

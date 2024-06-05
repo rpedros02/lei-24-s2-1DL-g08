@@ -5,13 +5,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 
 /**
  * @author Paulo Maio pam@isep.ipp.pt
+ *     <p>
+ *     Utility class.
+ *     <p>
+ *     Updated by Rui Silva 1231501@isep.ipp.pt
  */
 public class Utils {
 
@@ -140,4 +146,29 @@ public class Utils {
         int in = showAndSelectIndex(yes_or_no, header);
         return in == 0;
     }
+
+    public static Date dateFromString(String sDate){
+        String day = sDate.substring(0, 2);
+        String month = sDate.substring(3, 5);
+        String year = sDate.substring(6, 10);
+        return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+    }
+
+    public static Address requestAddress() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("\n--Address--\n");
+        System.out.println("Street: ");
+        String street = input.nextLine();
+        System.out.println("\nDoor Number: ");
+        int doorNumber = input.nextInt();
+        input.nextLine();
+        System.out.println("\nPostal Code: ");
+        String postalCode = input.nextLine();
+        System.out.println("\nCity: ");
+        String city = input.nextLine();
+        System.out.println("\nDistrict: ");
+        String district = input.nextLine();
+        return new Address(street, doorNumber, postalCode, city, district);
+    }
+
 }
