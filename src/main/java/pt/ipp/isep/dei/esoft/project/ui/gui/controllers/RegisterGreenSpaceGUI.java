@@ -30,7 +30,7 @@ public class RegisterGreenSpaceGUI {
     private TextField txtStreetNumber;
 
     @FXML
-    private TextField txtZipCode;
+    private TextField txtPostalCode;
 
     @FXML
     private TextField txtCity;
@@ -59,8 +59,8 @@ public class RegisterGreenSpaceGUI {
         String areaString = txtArea.getText();
         String streetName = txtStreet.getText();
         int streetNumber = Integer.parseInt(txtStreetNumber.getText());
-        String zipCodeString = txtZipCode.getText();
-        if (!zipCodeString.matches("[0-9]{4}-[0-9]{3}")) {
+        String PostalCodeString = txtPostalCode.getText();
+        if (!PostalCodeString.matches("[0-9]{4}-[0-9]{3}")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -71,9 +71,9 @@ public class RegisterGreenSpaceGUI {
         String cityString = txtCity.getText();
         String districtString = txtDistrict.getText();
 
-        Address address = new Address(streetName, streetNumber, zipCodeString, cityString, districtString);
+        Address address = new Address(streetName, streetNumber, PostalCodeString, cityString, districtString);
 
-        if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || zipCodeString.isEmpty() || cityString.isEmpty()){
+        if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || PostalCodeString.isEmpty() || cityString.isEmpty() || districtString.isEmpty()){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);

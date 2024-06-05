@@ -35,7 +35,7 @@ public class AddEntryToToDoListUI implements Runnable {
         List<String> types = DegreeOfUrgency.getDegreesOfUrgency();
         String degreeOfUrgencyString = (String) Utils.showAndSelectOne(types, "Select a degree of urgency:");
         Date dateBegin = Utils.readDateFromConsole("Enter the entry begin date (dd-mm-yyy):");
-        Date dateEnd = Utils.readDateFromConsole("Enter the entry begin date (dd-mm-yyy):");
+        Date dateEnd = Utils.readDateFromConsole("Enter the entry end date (dd-mm-yyy):");
 
         EStatus entryStatus = EStatus.PENDING; // Assuming the entry status is "Pending" when it's created
 
