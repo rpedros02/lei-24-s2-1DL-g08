@@ -100,7 +100,7 @@ public class RegisterGreenSpaceGUI {
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
 
-        if (controller.registerGreenSpace(name, type, area)) { // Pass the GSM to the method
+        if (controller.registerGreenSpace(name, type, area, address)) { // Pass the GSM to the method
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);

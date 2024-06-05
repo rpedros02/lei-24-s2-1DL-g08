@@ -75,7 +75,10 @@ public class Bootstrap implements Runnable {
             String name = "GreenSpace " + (i + 1);
             GreenSpaceTypeRepository type = GreenSpaceTypeRepository.GARDEN;
             Double area = (double) (i*100 + 100);
-            GreenSpace greenSpace = new GreenSpace(name, type, area);
+
+            Address address = new Address("Rua Green", i, "4100-100", "Porto", "Porto");
+
+            GreenSpace greenSpace = new GreenSpace(name, type, area, address);
             greenSpaceRepository.addGreenSpace(greenSpace);
         }
     }
