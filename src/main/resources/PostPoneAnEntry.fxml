@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="741.0" prefWidth="378.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.UI.RegisterGreenSpaceGUI">
+    <Label alignment="TOP_LEFT" prefHeight="113.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Register Green Space" textAlignment="CENTER" />
+
+    <Label prefHeight="99.0" prefWidth="320.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the title of the entry to postpone in the Agenda" textAlignment="JUSTIFY" />
+    <TextField fx:id="txtName" style="-fx-font-size: 14;" />
+   <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the date to postpone the Entry" />
+   <TextField fx:id="txtName1" layoutX="113.0" layoutY="383.0" style="-fx-font-size: 14;" />
+
+    <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Register" />
+   <Label layoutX="107.0" layoutY="311.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the title of the entry " />
+</VBox>
