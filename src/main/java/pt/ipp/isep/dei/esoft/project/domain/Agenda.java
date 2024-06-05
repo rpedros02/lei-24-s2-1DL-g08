@@ -49,4 +49,8 @@ public class Agenda {
         return null;
     }
 
+    public void setEntries(List<Entry> entries) {
+        this.entries.clear();
+        this.entries.addAll(entries);
+    }
 }

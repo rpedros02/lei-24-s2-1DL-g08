@@ -274,9 +274,6 @@ public class Entry {
                 ", dateEnd=" + dateEnd.toString() +
                 ", status=" + status.toString() +
                 ", greenSpace=" + greenSpace.toString() +
-                ", team=" + team.toString() +
-                ", vehicles=" + vehicles.toString() +
-                ", task=" + task.toString() +
                 '}';
     }
 }

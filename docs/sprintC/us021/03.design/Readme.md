@@ -1,4 +1,4 @@
-`# US021 - Adding Entries for GSM.
+# US021 - Add Entry to the To-do List.
 `
 ## 3. Design - User Story Realization 
 

@@ -36,8 +36,8 @@ class Collaborator {
     taxpayer
 }
 
-class FM {
-    fm id
+class GSM {
+    gsm id
     username
     password
 

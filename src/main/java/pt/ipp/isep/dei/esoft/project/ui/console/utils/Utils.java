@@ -45,7 +45,8 @@ public class Utils {
         do {
             try {
                 String input = readLineFromConsole(prompt);
-
+                if(input == null)
+                    return -1;
                 return Double.parseDouble(input);
             } catch (NumberFormatException ex) {
                 Logger.getLogger(Utils.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,11 +57,16 @@ public class Utils {
     static public Date readDateFromConsole(String prompt) {
         do {
             String date = readLineFromConsole(prompt);
-
+            if (date == null)
+                return null;
             String day = date.substring(0, 2);
             String month = date.substring(3, 5);
             String year = date.substring(6, 10);
-            return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+            try{
+                return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
+            }catch (RuntimeException e){
+                System.out.println("Invalid date format. Please try again.");
+            }
         } while (true);
     }
 

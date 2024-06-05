@@ -3,30 +3,29 @@ skinparam monochrome false
 skinparam packageStyle rectangle
 skinparam shadowing true
 
-title US024 - Postpone an entry in the Agenda to a specific future date.
-header US024
+title System Sequence Diagram (SSD) - Main Solution
+
 autonumber
-actor "GSM" as gsm
+
+actor "Green Space\nManager" as GSM
 participant ":System" as System
 
-activate gsm
+activate GSM
 
-    gsm -> System : Request to postpone an agenda entry
+    GSM -> System : asks to postpone a task entry
     activate System
-        System --> System : Retrieve current agenda entry details
-        note right of System : Includes task, team, equipment, duration, status, etc.
-        System -> gsm : Returns current agenda entry details
-    deactivate System
 
-    gsm -> System : Provide new date and reason for postponement
+        System --> GSM : requests data (i.e date, time, task)
+    deactivate System
+    GSM -> System : inputs requested data
     activate System
-        System --> System : Validate new date
 
-        System -> System : Update agenda entry with new date and status
-        note right of System : Change status to "Postponed"
-        System -> gsm : Confirmation of postponement
+        System --> GSM : shows all data and requests confirmation
     deactivate System
+    GSM -> System : confirms data
+    activate System
 
-deactivate gsm
+        System --> GSM : displays operation success
+    deactivate System
 
 @enduml

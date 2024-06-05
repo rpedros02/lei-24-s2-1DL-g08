@@ -8,11 +8,11 @@ public class Date extends java.util.Date {
     int month;
     int year;
 
-    public Date(int day, int month,int year) {
+    public Date(int day, int month, int year) {
         if (!isValid(day, month, year)) {
             throw new IllegalArgumentException("Invalid date.");
         }
-        this.day =  day;
+        this.day = day;
         this.month = month;
         this.year = year;
     }
@@ -28,7 +28,7 @@ public class Date extends java.util.Date {
 
     private boolean isValid(int day, int month, int year) {
         boolean flag = false;
-        if (year < 1900 || year > Year.now().getValue()) {
+        if (year < Year.now().getValue() - 100 || year > Year.now().getValue() + 100) {
             return false;
         }
         switch (month) {
@@ -65,6 +65,19 @@ public class Date extends java.util.Date {
 
     public boolean isEqual(Date other) {
         return this.day == other.day && this.month == other.month && this.year == other.year;
+    }
+
+    public boolean isAfter(Date other) {
+        if (this.year > other.year) {
+            return true;
+        } else if (this.year == other.year) {
+            if (this.month > other.month) {
+                return true;
+            } else if (this.month == other.month) {
+                return this.day > other.day;
+            }
+        }
+        return false;
     }
 
     public Date clone() {

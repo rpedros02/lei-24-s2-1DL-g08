@@ -5,61 +5,113 @@ skinparam shadowing false
 
 autonumber
 
-actor "Green Space Manager (GSM)" as GSM
-participant ":PostponeUI" as UI
-participant ":PostponeController" as CTRL
-participant ":AgendaRepository" as REP
-participant "repositories\n:Repositories" as PLAT
-participant "agendaRepository:\nAgendaRepository" as AGREP
-participant "agendaEntry:\nAgendaEntry" as AgendaEntry
+'hide footbox
+actor "Green Space \n Manager" as ADM
+participant ":PostponeAnEntryUI" as UI
+participant ":PostponeAnEntryController" as CTRL
+participant "Repositories" as RepositorySingleton
+participant "repository\n:Repository" as PLAT
+participant ":Entries" as MAP
+participant ":AgendaRepository" as URG
+participant "EntriesDTOList\n :EntriesDTOList" as DTO
 
-activate GSM
+participant "Entries\n:Entries" as TASK
+participant "objDto: EntriesDto" as GDTO
 
-GSM -> UI : Requests to postpone an entry in the Agenda
-activate UI
-UI -> CTRL** : Create
-UI -> CTRL : getAgendaEntries()
-activate CTRL
-CTRL -> REP : getInstance()
-activate REP
-REP --> CTRL: repositories
-deactivate REP
-CTRL -> PLAT : getAgendaRepository()
-activate PLAT
-PLAT --> CTRL: agendaRepository
-deactivate PLAT
-CTRL -> AGREP : getAgendaEntries()
-activate AGREP
-AGREP --> CTRL : agendaEntries
-deactivate AGREP
-CTRL --> UI : agendaEntries
-deactivate CTRL
-UI --> GSM : Displays list of agenda entries and requests entry selection
-deactivate UI
 
-GSM -> UI : Selects an agenda entry to postpone and requests new date
-activate UI
-UI --> GSM : Input new date for postponement
-deactivate UI
+activate ADM
 
-GSM -> UI : Confirms the postponement request
-activate UI
-UI -> CTRL : postponeEntry(newDate)
-activate CTRL
-CTRL -> AGREP : postponeEntry(entryID, newDate)
-activate AGREP
-AGREP -> AgendaEntry : postponeEntry(newDate)
-activate AgendaEntry
-AgendaEntry -> AgendaEntry : validateNewDate(newDate)
-AgendaEntry --> AGREP : updatedAgendaEntry
-deactivate AgendaEntry
-AGREP --> CTRL : updatedAgendaEntry
-deactivate AGREP
-CTRL --> UI : Confirmation message
-deactivate CTRL
-UI --> GSM : Displays confirmation message
-deactivate UI
+    ADM -> UI : asks to postpone a task entry
+    activate UI
+        UI -> CTRL : create
+        UI -> CTRL : getPlannedAndPostponedAnEntry()
+        activate CTRL
 
-deactivate GSM
+            CTRL -> RepositorySingleton : getInstance()
+            activate RepositorySingleton
+
+                RepositorySingleton --> CTRL : repositories
+            deactivate RepositorySingleton
+
+            CTRL -> PLAT : getAgendaRepository()
+            activate PLAT
+
+                PLAT --> CTRL : AgendaRepository
+            deactivate PLAT
+
+            CTRL -> URG : getPlannedAndPostponedTask()
+            activate URG
+
+                URG --> CTRL : TaskEntryList
+            deactivate URG
+
+            CTRL -> MAP : ToDTOList(TaskEntryList)
+            activate MAP
+                MAP -> DTO: Create()
+                loop for each green space in the green space list
+                MAP -> URG: Entry = get(i)
+                activate URG
+                deactivate URG
+                MAP -> MAP: EntryDTO = toDTO(taskEntry)
+                activate MAP
+                MAP -> GDTO: create(...)
+                deactivate MAP
+                MAP -> DTO: add(EntryDto)
+
+                activate DTO
+                deactivate DTO
+                end
+                MAP -> CTRL: EntryDtoList
+            deactivate MAP
+
+            CTRL --> UI : TaskEntryDTO
+        deactivate CTRL
+
+        UI --> ADM : shows a list of tasks
+    deactivate UI
+ADM -> UI : selects a task
+    activate UI
+
+        UI --> ADM : requests data (new date, new time)
+    deactivate UI
+
+    ADM -> UI : types data
+    activate UI
+
+        UI --> ADM : shows all data and requests confirmation (new date, new time)
+    deactivate UI
+
+    ADM -> UI : confirms data
+    activate UI
+     UI -> CTRL : save updated task
+            activate CTRL
+
+                CTRL -> PLAT : getAgendaRepository()
+                activate PLAT
+
+                    PLAT --> CTRL : AgendaRepository
+                deactivate PLAT
+
+                CTRL -> URG : save updated task
+
+                activate URG
+
+                           URG -> TASK** : updatedTask(new date, new time)
+                           URG --> URG : validatePostponement(postponement)
+                           activate URG
+                           URG --> URG : savePostponement(postponement)
+                           activate URG
+                           URG --> URG
+                           deactivate URG
+                           URG --> URG
+                           deactivate URG
+                           URG --> CTRL : TaskEntry
+                           deactivate URG
+        CTRL --> UI : TaskEntry
+            deactivate CTRL
+
+                UI --> ADM : displays operation success
+            deactivate UI
+        deactivate ADM
 
 @enduml
