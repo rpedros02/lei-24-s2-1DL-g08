@@ -35,11 +35,12 @@ public class GreenSpaceRepository {
         return greenSpaces.remove(greenSpace);
     }
 
-    public boolean updateGreenSpace(GreenSpace greenSpace, String name, GreenSpaceTypeRepository type, double area) {
+    public boolean updateGreenSpace(GreenSpace greenSpace, String name, GreenSpaceTypeRepository type, double area, Address address) {
         if (greenSpaces.contains(greenSpace)) {
             greenSpace.setName(name);
             greenSpace.setType(type);
             greenSpace.setArea(area);
+            greenSpace.setAddress(address);
             return true;
         }
         return false;

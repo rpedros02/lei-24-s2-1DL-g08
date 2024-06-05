@@ -7,11 +7,13 @@ public class GreenSpace {
     private String name;
     private GreenSpaceTypeRepository type;
     private double area;
+    private Address address;
 
-    public GreenSpace(String name, GreenSpaceTypeRepository type, double area) {
+    public GreenSpace(String name, GreenSpaceTypeRepository type, double area, Address address) {
         this.name = name;
         this.type = type;
         this.area = area;
+        this.address = new Address(address);
     }
     public GreenSpace(String testGreenSpace) {
     }
@@ -33,6 +35,14 @@ public class GreenSpace {
     public void setArea(double area) {
         this.area = area;
     }
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 
     public boolean equals(Object o) {
         if (this == o) {
@@ -42,26 +52,27 @@ public class GreenSpace {
             return false;
         }
         GreenSpace greenSpace = (GreenSpace) o;
-        return this.name.equals(greenSpace.name) && this.type.equals(greenSpace.type) && this.area == greenSpace.area;
+        return this.name.equals(greenSpace.name) && this.type.equals(greenSpace.type) && this.area == greenSpace.area && this.address.equals(greenSpace.address);
     }
 
     public int hashCode() {
-        return Objects.hash(name, type, area);
+        return Objects.hash(name, type, area, address);
     }
 
 
-    public boolean setData(String name, GreenSpaceTypeRepository type, double area) {
-        if (name == null || type == null || area < 0) {
+    public boolean setData(String name, GreenSpaceTypeRepository type, double area, Address address) {
+        if (name == null || type == null || area < 0 || address == null) {
             return false;
         }
         this.name = name;
         this.type = type;
         this.area = area;
+        this.address = address;
         return true;
     }
 
     public boolean isDataValid() {
-        return this.name != null && this.type != null && this.area >= 0;
+        return this.name != null && this.type != null && this.area >= 0 && this.address != null;
     }
 
     public boolean isNameValid(String name) {
@@ -75,13 +86,15 @@ public class GreenSpace {
     public boolean isAreaValid(double area) {
         return area >= 0;
     }
+    public boolean isAddressValid(Address address) {return address != null;}
 
     public String toString() {
         return "GreenSpace{" +
                 "name='" + name + '\'' +
                 ", type='" + type.toString() + '\'' +
                 ", area=" + area +
-                "hectares}";
+                "hectares" + '\'' +
+                ", address=" + address+ "}";
     }
 
 }
