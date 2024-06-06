@@ -1,47 +1,82 @@
-# US008 - List the vehicles in need off check-up.
+# US024 - Postpone an Entry 
 
 ## 4. Tests 
 
 **Test 1:** Check that it is not possible to list the vehicles when VehicleRepository is empty. 
 
-    @Test
-    void ensureVehicleRepositoryIsNotEmpty() {
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.add("AA-00-00", "Brand", "Model", "Type", 1.0, 2.0, 1000, new Date(1, 1, 2001), new Date(1, 1, 2001), 12);
-        assertFalse(vehicleRepository.isEmpty());
+     @Test
+    public void testPostponeEntry() {
+        String title = "Test Entry";
+        Date newDateEnd = new Date(1, 8, 2024);
+
+        String result = controller.postponeEntry(title, newDateEnd);
+        assertEquals("Entry postponed successfully.", result);
+
+        Entry postponedEntry = agenda.getEntryByTitle(title);
+        assertNotNull(postponedEntry);
+        assertEquals(newDateEnd, postponedEntry.getDateEnd());
     }
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class PostponeAnEntryController
 
 ```java
-public Vehicle createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                             Date register_date, Date acquisition_date, int maintenance_frequency) {
-    
-    
-	newVehicle = organization.createVehicle(plateId, brand, model, type, tare, weight,
-                                            mileage, register_date, acquisition_date, maintenance_frequency);
-    
-	return newVehicle;
+public class PostponeAnEntryController {
+    private final Agenda agenda;
+
+    public PostponeAnEntryController(Agenda agenda) {
+        this.agenda = agenda;
+    }
+
+    public String postponeEntry(String title, Date newDate) {
+        Entry entry = agenda.getEntryByTitle(title);
+        if (entry == null) {
+            return "Entry not found.";
+        }
+        entry.postponeEntry(newDate);
+        return "Entry postponed successfully.";
+    }
+```
+
+### Class PostPoneAnEntryUI
+
+```java
+public class PostPoneAnEntryUI implements Runnable {
+    private final PostponeAnEntryController postponeAnEntryController;
+    private final Agenda agenda;
+
+    public PostPoneAnEntryUI(Agenda agenda) {
+        this.agenda = agenda;
+        this.postponeAnEntryController = new PostponeAnEntryController(agenda);
+    }
+
+    @Override
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the title of the entry to postpone: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Enter the new date (dd-MM-YYYY): ");
+        String dateStr = scanner.nextLine();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        Date newDate = new Date(dateStr);
+        String result = postponeAnEntryController.postponeEntry(title, newDate);
+        System.out.println(result);
+    }
 }
 ```
 
-### Class Organization
+### Class Entry
 
 ```java
-
-public Optional<Vehicle> createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                                       Date register_date, Date acquisition_date, int maintenance_frequency) {
-
-    Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency);
-
-    addVehicle(vehicle);
-
-    return vehicle;
+public void postponeEntry(Date newDateEnd) {
+    this.dateEnd = newDateEnd;
 }
 ```
+
 
 
 ## 6. Integration and Demo 

@@ -239,7 +239,12 @@ public class Entry {
     public void postponeEntry(Date newDateEnd) {
         this.dateEnd = newDateEnd;
     }
-// Existing code...
+
+    public void addVehicle(Vehicle vehicle) {
+        if(!vehicles.contains(vehicle)){
+            vehicles.add(vehicle);
+        }
+    }
 
     @Override
     public String toString() {
