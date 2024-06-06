@@ -15,14 +15,14 @@ public class VehicleRepository {
         this.vehicles = new ArrayList<>();
     }
 
-    public boolean add(String plateId, String brand, String model, String type, double tare, double weight, int mileage, int lastCheckUpKm, Date register_date, Date acquisition_date, int maintenance_frequency) {
+    public boolean add(String plateId, String brand, String model, String type, double tare, double weight, int mileage, int lastVehicleCheckupKm, Date register_date, Date acquisition_date, int maintenance_frequency) {
         if (vehicles.isEmpty()) {
-            Vehicle newVehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastCheckUpKm, register_date, acquisition_date, maintenance_frequency);
+            Vehicle newVehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastVehicleCheckupKm, register_date, acquisition_date, maintenance_frequency);
             vehicles.add(newVehicle);
             return true;
         }
         if (exists(plateId)) return false; // if the plateId already exists in the list
-        return vehicles.add(new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastCheckUpKm, register_date, acquisition_date, maintenance_frequency));
+        return vehicles.add(new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastVehicleCheckupKm, register_date, acquisition_date, maintenance_frequency));
     }
 
     public List<Vehicle> getVehicles() {
