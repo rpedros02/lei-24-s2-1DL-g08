@@ -110,6 +110,11 @@ public class GreenSpace {
         return address != null;
     }
 
+    public boolean isManagedByGSM() {
+        // Verificar se o colaborador GSM está definido para este espaço verde
+        return this.gsm != null;
+    }
+
     public String toString() {
         return "GreenSpace{" +
                 "name='" + name + '\'' +

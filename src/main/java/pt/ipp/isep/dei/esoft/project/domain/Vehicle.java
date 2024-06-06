@@ -11,13 +11,13 @@ public class Vehicle {
     private double tare;
     private double weight;
     private int mileage;
-    private int lastCheckUpKm;
+    private int lastVehicleCheckupKm;
     private Date registerDate;
     private Date acquisitionDate;
     private int maintenanceFrequency;
-    private List<VehicleCheckup> checkups;
+    private List<VehicleCheckup> vehicleCheckups;
 
-    public Vehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage, int lastCheckUpKm, Date registerDate, Date acquisitionDate, int maintenanceFrequency) {
+    public Vehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage, int lastVehicleCheckupKm, Date registerDate, Date acquisitionDate, int maintenanceFrequency) {
         if (validateArgs()) {
             throw new IllegalArgumentException("Null arguments: \n");
         }
@@ -28,15 +28,15 @@ public class Vehicle {
         this.tare = tare;
         this.weight = weight;
         this.mileage = mileage;
-        this.lastCheckUpKm = lastCheckUpKm;
+        this.lastVehicleCheckupKm = lastVehicleCheckupKm;
         this.registerDate = registerDate;
         this.acquisitionDate = acquisitionDate;
         this.maintenanceFrequency = maintenanceFrequency;
-        this.checkups = new ArrayList<>();
+        this.vehicleCheckups = new ArrayList<>();
     }
 
     public boolean validateArgs() {
-        return plateId != null && brand != null && model != null && type != null && tare != 0 && weight != 0 && mileage != 0 && lastCheckUpKm != 0 && registerDate != null && acquisitionDate != null && maintenanceFrequency != 0;
+        return plateId != null && brand != null && model != null && type != null && tare != 0 && weight != 0 && mileage != 0 && lastVehicleCheckupKm != 0 && registerDate != null && acquisitionDate != null && maintenanceFrequency != 0;
     }
 
     public boolean hasPlate(String plate){
@@ -124,21 +124,21 @@ public class Vehicle {
     }
 
     public Vehicle clone() {
-        return new Vehicle(this.plateId, this.brand, this.model, this.type, this.tare, this.weight, this.mileage, this.lastCheckUpKm, this.registerDate.clone(), this.acquisitionDate.clone(), this.maintenanceFrequency);
+        return new Vehicle(this.plateId, this.brand, this.model, this.type, this.tare, this.weight, this.mileage, this.lastVehicleCheckupKm, this.registerDate.clone(), this.acquisitionDate.clone(), this.maintenanceFrequency);
     }
 
     @Override
 
     public String toString() {
-        return "\n-----\nID: " + plateId + "\nBrand: " + brand + "\nModel: " + model + "\nType: " + type + "\nTare: " + tare + "\nWeight: " + weight + "\nMileage: " + mileage + "\nLast Check-Up at: " + lastCheckUpKm + " kms\nRegister Date: " + registerDate.toString() + "\nAcquisition Date: " + acquisitionDate.toString() + "\nMaintenance Frequency: " + maintenanceFrequency + "\n-----\n";
+        return "\n-----\nID: " + plateId + "\nBrand: " + brand + "\nModel: " + model + "\nType: " + type + "\nTare: " + tare + "\nWeight: " + weight + "\nMileage: " + mileage + "\nLast Check-Up at: " + lastVehicleCheckupKm + " kms\nRegister Date: " + registerDate.toString() + "\nAcquisition Date: " + acquisitionDate.toString() + "\nMaintenance Frequency: " + maintenanceFrequency + "\n-----\n";
     }
 
-    public void updateLastCheckUpKm(int lastCheckUpKm) {
-        this.lastCheckUpKm = lastCheckUpKm;
+    public void updateLastVehicleCheckupKm(int lastVehicleCheckupKm) {
+        this.lastVehicleCheckupKm = lastVehicleCheckupKm;
     }
 
-    public int getLastCheckUpKm() {
-        return lastCheckUpKm;
+    public int getLastVehicleCheckupKm() {
+        return lastVehicleCheckupKm;
     }
 
 }

@@ -4,13 +4,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="356.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.66);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.menu.GsmGUI">
+<VBox alignment="CENTER" prefHeight="356.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.66);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GsmGUI">
     <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #098112;" text="GSM Menu" />
     <Button fx:id="btnRegisterGreenSpace" onAction="#handleRegisterGreenSpace" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Register Green Space" />
     <Button fx:id="btnAddEntryToToDoList" onAction="#handleAddEntryToToDoList" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To To-Do List" />
     <Button fx:id="btnAddEntryToAgenda" onAction="#handleAddEntryToAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To Agenda" />
     <Button fx:id="btnAssignTeamToAgendaEntry" onAction="#handleAssignTeamToAgendaEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign Team To Agenda Entry" />
-    <Button fx:id="btnChangeStatusOfEntry" onAction="#handleChangeStatusOfEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Change the status of an entry in the Agenda" />
+    <Button fx:id="btnPostPoneAnEntryInTheAgenda" onAction="#handlePostPoneAnEntryInTheAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
+   <Button fx:id="btnCancelAnEntryInTheAgenda" layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntryInTheAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
     <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: #394239; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;" text="Main Menu" />
-    <Label style="-fx-font-size: 12; -fx-text-fill: #222222;" text="© 2024 Green Spaces Portal" />
 </VBox>

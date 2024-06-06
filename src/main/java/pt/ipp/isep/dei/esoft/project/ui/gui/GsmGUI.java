@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +20,10 @@ public class GsmGUI {
     private Button btnAddEntryToAgenda;
     @FXML
     private Button btnAssignTeamToAgendaEntry;
+    @FXML
+    private Button btnPostPoneAnEntryInTheAgenda;
+    @FXML
+    private Button btnCancelAnEntryInTheAgenda;
     @FXML
     private Button btnMainMenu;
 
@@ -53,6 +57,17 @@ public class GsmGUI {
     public void handleAssignTeamToAgendaEntry() {
         loadUI("/AssignTeamToAgendaEntryGUI.fxml");
     }
+
+    @FXML
+    public void handlePostPoneAnEntryInTheAgenda() {
+        loadUI("/PostPoneAnEntryInTheAgendaGUI.fxml");
+    }
+
+    @FXML
+    public void handleCancelAnEntryInTheAgenda() {
+        loadUI("/CancelAnEntryInTheAgendaGUI.fxml");
+    }
+
 
     @FXML
     public void handleMainMenu() {

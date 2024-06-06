@@ -16,19 +16,21 @@ class GreenSpace{
     area
 }
 
-class "Entry" {
-    -title
-    -description
-    -urgencyLevel
-    -expectedDuration
-    -state
-    -greenSpace
+class  Entry{
+        -title
+        -description
+        -degreeurgency
+        -datebegin
+        -dateend
+        -state
+        -greenSpace
 }
+
 class GreenSpaceManager {
     name
     email
     phone
 }
 GreenSpace "1" -- "*" "Entry" : has >
-GreenSpaceManager "1" - "*" GreenSpace : manages >
+GreenSpaceManager "1" -- "*" GreenSpace : manages >
 @enduml

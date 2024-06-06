@@ -13,19 +13,17 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 public class RegisterMenuGUI {
 
     @FXML
-    private TextField txtName;
-
-    @FXML
     private TextField txtEmail;
 
     @FXML
     private PasswordField txtPassword;
 
     @FXML
-    private ComboBox<String> cbRole;
+    private PasswordField txtConfirmPassword;
 
     @FXML
-    private PasswordField txtConfirmPassword;
+    private ComboBox<String> cbRole;
+
 
     private AuthenticationRepository authenticationRepository;
 
@@ -35,13 +33,12 @@ public class RegisterMenuGUI {
 
     @FXML
     public void handleRegister() {
-        String name = txtName.getText();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         String confirmPassword = txtConfirmPassword.getText();
         String role = cbRole.getValue();
 
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || role == null) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || role == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Registration Failed");
             alert.setHeaderText(null);
@@ -59,7 +56,7 @@ public class RegisterMenuGUI {
             return;
         }
 
-        boolean userAdded = authenticationRepository.addUserWithRole(name, email, password, role);
+        boolean userAdded = authenticationRepository.addUserWithRole(email, password, confirmPassword, role);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (userAdded) {

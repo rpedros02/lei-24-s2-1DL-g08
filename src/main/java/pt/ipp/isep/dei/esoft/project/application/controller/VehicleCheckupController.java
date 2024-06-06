@@ -1,5 +1,6 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
@@ -10,22 +11,22 @@ import java.util.Optional;
 
 public class VehicleCheckupController {
     private final OrganizationRepository organizationRepository;
-    private final VehicleCheckupRepository checkUpRepository;
+    private final VehicleCheckupRepository vehicleCheckupRepository;
     private final VehicleRepository vehicleRepository;
 
     public VehicleCheckupController() {
-        OrganizationRepository organizationRepository = OrganizationRepository.getInstance();
-        this.checkUpRepository = organizationRepository.getOrganizationByCollaborator();
-        this.vehicleRepository = vehicleRepository;
+        this.organizationRepository = OrganizationRepository.getInstance();
+        this.vehicleCheckupRepository = new VehicleCheckupRepository();
+        this.vehicleRepository = new VehicleRepository();
     }
 
-    public boolean registerCheckUp(String plate, Date date, int lastCheckUpKm) {
+    public boolean registerVehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
         Optional<Vehicle> optVehicle = vehicleRepository.getVehicleByPlate(plate);
         if (optVehicle.isPresent()) {
             Vehicle vehicle = optVehicle.get();
-            vehicle.updateLastCheckUpKm(lastCheckUpKm);
-            boolean checkUpRegistered = checkUpRepository.registerVehicleCheckup(plate, date, lastCheckUpKm).isPresent();
-            if (checkUpRegistered) {
+            vehicle.updateLastVehicleCheckupKm(lastVehicleCheckupKm);
+            boolean vehicleCheckupRegistered = vehicleCheckupRepository.registerVehicleCheckup(plate, date, lastVehicleCheckupKm).isPresent();
+            if (vehicleCheckupRegistered) {
                 vehicleRepository.updateVehicle(vehicle);
                 return true;
             }

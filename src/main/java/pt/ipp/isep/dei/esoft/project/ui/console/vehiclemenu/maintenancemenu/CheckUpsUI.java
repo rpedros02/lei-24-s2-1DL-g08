@@ -1,16 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu.maintenancemenu;
 
+
 import pt.ipp.isep.dei.esoft.project.application.controller.ListGreenSpacesController;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleCheckupController;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 
+
 import java.util.List;
 
 public class CheckUpsUI implements Runnable {
-    private final VehicleCheckupController controller;
+    private final ListGreenSpacesController controller;
 
     public CheckUpsUI() {
-        this.controller = new VehicleCheckupController();
+        this.controller = new ListGreenSpacesController();
     }
 
     @Override

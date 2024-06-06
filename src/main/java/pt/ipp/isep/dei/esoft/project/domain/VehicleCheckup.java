@@ -3,12 +3,12 @@ package pt.ipp.isep.dei.esoft.project.domain;
 public class VehicleCheckup {
     private String plate;
     private Date date;
-    private int lastCheckUpKm;
+    private int lastVehicleCheckupKm;
 
-    public VehicleCheckup(String plate, Date date, int lastCheckUpKm) {
+    public VehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
         this.plate = plate;
         this.date = date;
-        this.lastCheckUpKm = lastCheckUpKm;
+        this.lastVehicleCheckupKm = lastVehicleCheckupKm;
     }
 
     public String getPlate() {
@@ -27,11 +27,11 @@ public class VehicleCheckup {
         this.date = date;
     }
 
-    public double getLastCheckUpKm() {
-        return lastCheckUpKm;
+    public double getLastVehicleCheckupKm() {
+        return lastVehicleCheckupKm;
     }
 
-    public void setLastCheckUpKm(int lastCheckUpKm) {
-        this.lastCheckUpKm = lastCheckUpKm;
+    public void setLastVehicleCheckupKm(int lastCheckUpKm) {
+        this.lastVehicleCheckupKm = lastVehicleCheckupKm;
     }
 }

@@ -66,19 +66,6 @@ public class Organization {
     }
 
 
-    /**
-     * This method creates a new task.
-     *
-     * @param reference            The reference of the task to be created.
-     * @param description          The description of the task to be created.
-     * @param informalDescription  The informal description of the task to be created.
-     * @param technicalDescription The technical description of the task to be created.
-     * @param duration             The duration of the task to be created.
-     * @param cost                 The cost of the task to be created.
-     * @param taskCategory         The task category of the task to be created.
-     * @param collaborator         The collaborator of the task to be created.
-     * @return optionalValue        The task that was created.
-     */
     public Optional<Task> createTask(String reference, String description, String informalDescription,
                                      String technicalDescription, int duration, double cost,
                                      TaskCategory taskCategory) {
@@ -94,11 +81,11 @@ public class Organization {
     }
 
     public Optional<Vehicle> createVehicle(String plateId, String brand, String model,
-                                           String type, double tare, double weight, int mileage, int lastCheckUpKm,
+                                           String type, double tare, double weight, int mileage, int lastVehicleCheckupKm,
                                            Date register_date, Date acquisition_date, int maintenance_frequency) {
         Optional<Vehicle> optionalValue = Optional.empty();
 
-        Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, lastCheckUpKm, register_date, acquisition_date, maintenance_frequency);
+        Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, lastVehicleCheckupKm, register_date, acquisition_date, maintenance_frequency);
         if (addVehicle(vehicle)) {
             optionalValue = Optional.of(vehicle);
         }

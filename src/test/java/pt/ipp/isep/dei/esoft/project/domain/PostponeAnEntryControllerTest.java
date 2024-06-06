@@ -1,34 +1,34 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import org.junit.Before;
-import org.junit.Test;
+
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
-
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.Assertions.*;
+
+
 
 public class PostponeAnEntryControllerTest {
     private Agenda agenda;
     private PostponeAnEntryController controller;
 
-    @Before
     public void setUp() {
         agenda = new Agenda(new ArrayList<>());
-        controller = new PostponeAnEntryController(agenda);
+    controller = new PostponeAnEntryController(agenda);
 
-        // Adicionar uma entrada à agenda para testar
-        Entry entry = new Entry(
-                "Test Entry", "Test Description", DegreeOfUrgency.LOW,
-                new Date(1, 6, 2024), new Date(1, 7, 2024), EStatus.PENDING,
-                new GreenSpace("Test Green Space")
-        );
+    Entry entry = new Entry(
+            "Test Entry", "Test Description", DegreeOfUrgency.LOW,
+            new Date(1, 6, 2024), new Date(1, 7, 2024), EStatus.PENDING,
+            new GreenSpace("Test Green Space")
+    );
         agenda.addEntry(entry);
-    }
+}
 
     @Test
     public void testPostponeEntry() {

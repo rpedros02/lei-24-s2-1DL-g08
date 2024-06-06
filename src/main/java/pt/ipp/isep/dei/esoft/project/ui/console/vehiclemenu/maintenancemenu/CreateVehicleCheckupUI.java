@@ -13,7 +13,7 @@ public class CreateVehicleCheckupUI implements Runnable {
     private final VehicleCheckupController controller;
     private VehicleRepository vehicleRepository;
     public CreateVehicleCheckupUI() {
-        this.controller = new VehicleCheckupController(new VehicleCheckupRepository(), getVehicleRepository());
+        controller = new VehicleCheckupController();
     }
 
     public VehicleRepository getVehicleRepository() {
@@ -46,7 +46,7 @@ public class CreateVehicleCheckupUI implements Runnable {
         int lastCheckUpKm = requestLastCheckUpKm();
 
 
-        boolean success = controller.registerCheckUp(plateId, date, lastCheckUpKm);
+        boolean success = controller.registerVehicleCheckup(plateId, date, lastCheckUpKm);
 
         if (success) {
             System.out.println("Check-Up registered successfully!");

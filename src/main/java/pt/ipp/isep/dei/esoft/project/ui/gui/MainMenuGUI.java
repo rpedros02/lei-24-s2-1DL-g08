@@ -88,6 +88,12 @@ public class MainMenuGUI{
                         stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
+                    case AuthenticationController.ROLE_ADMIN:
+                        loadGsmMenu();
+
+                        stage = (Stage) btnDevTeam.getScene().getWindow();
+                        stage.close();
+                        break;
                     default:
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Error");
