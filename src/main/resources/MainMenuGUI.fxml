@@ -2,30 +2,23 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainBox" spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.MainMenuGUI" style="-fx-background-color: rgb(245,250,246);">
+<VBox fx:id="mainBox" alignment="CENTER" prefHeight="557.0" prefWidth="313.0" spacing="10" style="-fx-background-color: rgb(245,250,246);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.MainMenuGUI">
     <ImageView fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@logo.jpg"/>
+        <Image url="@logo.jpg" />
     </ImageView>
-    <Label text="Welcome to the Green Spaces Portal!" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-    <Label text="Please login to access the system." style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-    <VBox fillWidth="false" spacing="10.0" alignment="CENTER">
-        <Label text="Login ID:" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-        <TextField fx:id="txtLoginId" style="-fx-pref-width: 200;"/>
-        <Label text="Password:" style="-fx-font-size: 16; -fx-text-fill: #050505;"/>
-        <PasswordField fx:id="txtPassword" style="-fx-pref-width: 200;"/>
+    <Label style="-fx-font-size: 16; -fx-text-fill: #050505;" text="Please login:" />
+    <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
+        <Label style="-fx-font-size: 16; -fx-text-fill: #050505;" text="Login ID:" />
+        <TextField fx:id="txtLoginId" style="-fx-pref-width: 200;" />
+        <Label style="-fx-font-size: 16; -fx-text-fill: #050505;" text="Password:" />
+        <PasswordField fx:id="txtPassword" style="-fx-pref-width: 200;" />
     </VBox>
-    <Button text="Login" onAction="#handleLogin"
-            style="-fx-padding: 10; -fx-background-color: #2ae346; -fx-text-fill: rgb(0,0,0); -fx-font-size: 16; -fx-border-color: #0a5111; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30;"/>
-    <Button text="Know the Development Team" onAction="#handleDevTeam" fx:id="btnDevTeam"
-            style="-fx-padding: 10; -fx-background-color: #2ae346; -fx-text-fill: rgb(0,0,0); -fx-font-size: 16; -fx-border-color: #0a5111; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30;"/>
-    <Button text="Register" onAction="#handleRegister"
-            style="-fx-padding: 10; -fx-background-color: rgb(89,89,89); -fx-text-fill: rgb(0,0,0); -fx-font-size: 16; -fx-border-color: #000000; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30;"/>
-    <Label text="© 2024 Green Spaces Portal" style="-fx-font-size: 12; -fx-text-fill: #222222;"/>
+    <Button onAction="#handleLogin" style="-fx-padding: 10; -fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16; -fx-border-color: #0a5111; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30;" text="Login" />
+    <Button fx:id="btnDevTeam" onAction="#handleDevTeam" style="-fx-padding: 10; -fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16; -fx-border-color: #0a5111; -fx-border-width: 2px; -fx-background-radius: 30; -fx-border-radius: 30;" text="Know the Development Team" />
 </VBox>

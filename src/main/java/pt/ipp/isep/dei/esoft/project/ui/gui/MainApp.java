@@ -13,7 +13,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MainMenuGUI.fxml")));
+        Parent root = new FXMLLoader(getClass().getResource("/MainMenuGUI.fxml")).load();
         primaryStage.setTitle("Green Spaces Portal");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.show();
