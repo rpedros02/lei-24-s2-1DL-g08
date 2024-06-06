@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

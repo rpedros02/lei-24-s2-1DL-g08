@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -66,7 +66,7 @@ public class RegisterGreenSpaceGUI {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("Invalid zip code. It should be in the format ´0000-000`.");
+            alert.setContentText("Invalid postal code. It should be in the format ´0000-000`.");
             alert.showAndWait();
             return;
         }

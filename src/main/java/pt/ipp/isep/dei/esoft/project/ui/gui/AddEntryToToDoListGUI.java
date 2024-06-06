@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.gui.controllers;
+package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -68,7 +68,7 @@ public class AddEntryToToDoListGUI {
     }
 
     @FXML
-    public void handleAddEntry() {
+    public void handleAddEntryToToDoList() {
         GreenSpace selectedGreenSpace = cbGreenSpaces.getValue();
         String entryTitle = txtEntryTitle.getText();
         String entryDescription = txtEntryDescription.getText();

@@ -59,13 +59,13 @@ public class GsmGUI {
     }
 
     @FXML
-    public void handlePostPoneAnEntryInTheAgenda() {
-        loadUI("/PostPoneAnEntryInTheAgendaGUI.fxml");
+    public void handlePostPoneAnEntry() {
+        loadUI("/PostPoneAnEntryGUI.fxml");
     }
 
     @FXML
-    public void handleCancelAnEntryInTheAgenda() {
-        loadUI("/CancelAnEntryInTheAgendaGUI.fxml");
+    public void handleCancelAnEntry() {
+        loadUI("/CancelAnEntryGUI.fxml");
     }
 
 
