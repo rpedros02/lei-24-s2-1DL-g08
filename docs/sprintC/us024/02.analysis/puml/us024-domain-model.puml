@@ -19,7 +19,7 @@ class GreenSpace{
 class "Entry" {
     -title
     -description
-    -urgencyLevel
+    -Degreeurgency
     -expectedDuration
     -state
     -greenSpace
@@ -30,5 +30,5 @@ class GreenSpaceManager {
     phone
 }
 GreenSpace "1" -- "*" "Entry" : has >
-GreenSpaceManager "1" - "*" GreenSpace : manages >
+GreenSpaceManager "1" -- "*" GreenSpace : manages >
 @enduml
