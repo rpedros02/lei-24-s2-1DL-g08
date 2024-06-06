@@ -51,4 +51,14 @@ public class AgendaController {
         }
         return entries;
     }
+    public boolean exists(String entryTitle) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+
+        if (organization.isPresent()) {
+            Agenda agenda = organization.get().getAgenda();
+            return agenda.getEntryByTitle(entryTitle) != null;
+        }
+        return false;
+    }
 }
