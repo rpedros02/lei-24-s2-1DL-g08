@@ -1,4 +1,4 @@
-# US008 - List the vehicles in need off check-up.
+# US026- Assign one or more vehicles to an entry in the Agenda.
 
 ## 4. Tests 
 
