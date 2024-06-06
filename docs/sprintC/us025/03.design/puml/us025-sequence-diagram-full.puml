@@ -10,8 +10,8 @@ participant ":CancelAnEntryUI" as UI
 participant ":CancelAnEntryController" as CTRL
 participant "Repositories" as RepositorySingleton
 participant "repository\n:Repository" as PLAT
-participant ":Entries" as MAP
-participant ":AgendaRepository" as URG
+participant ":Entry" as MAP
+participant ":Agenda" as URG
 participant "objDto: EntrysDto" as GDTO
 
 
@@ -29,10 +29,10 @@ activate GSM
                 RepositorySingleton --> CTRL : repositories
             deactivate RepositorySingleton
 
-            CTRL -> PLAT : getAgendaRepository()
+            CTRL -> PLAT : getAgend()
             activate PLAT
 
-                PLAT --> CTRL : AgendaRepository
+                PLAT --> CTRL : Agenda
             deactivate PLAT
 
             CTRL -> URG : getEntries()

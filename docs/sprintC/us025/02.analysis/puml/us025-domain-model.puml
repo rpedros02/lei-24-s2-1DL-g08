@@ -16,14 +16,16 @@ class GreenSpace{
     area
 }
 
-class "Entry" {
-    -title
-    -description
-    -Degreeurgency
-    -expectedDuration
-    -state
-    -greenSpace
+class  Entry{
+        -title
+        -description
+        -degreeurgency
+        -datebegin
+        -dateend
+        -state
+        -greenSpace
 }
+
 class GreenSpaceManager {
     name
     email

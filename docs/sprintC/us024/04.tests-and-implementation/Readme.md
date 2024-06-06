@@ -2,7 +2,7 @@
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to list the vehicles when VehicleRepository is empty. 
+**Test 1:** Verify that an entry is postponed correctly 
 
      @Test
     public void testPostponeEntry() {
@@ -76,14 +76,24 @@ public void postponeEntry(Date newDateEnd) {
     this.dateEnd = newDateEnd;
 }
 ```
+### Class GreenSpaceMenuUI
 
+```java
+ public GreenSpaceMenuUI(Agenda agenda) {
+    this.agenda = agenda;
+}
+
+@Override
+public void run() {
+    //(...)
+    options.add(new MenuItem("Postpone an entry in the Agenda", new PostPoneAnEntryUI(agenda)));
+    //(...)
+    
+}
+```
 
 
 ## 6. Integration and Demo 
 
 * For demo purposes some tasks are bootstrapped while system starts.
 
-
-## 7. Observations
-
-n/a
