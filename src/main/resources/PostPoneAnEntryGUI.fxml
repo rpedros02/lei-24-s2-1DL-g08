@@ -10,21 +10,48 @@
     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="314.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER" />
    <ComboBox prefWidth="150.0" />
    <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the date to postpone the entry" />
-   <Label layoutX="107.0" layoutY="311.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="DAY:" />
-   <TextField fx:id="txtName111" alignment="CENTER" layoutX="183.0" layoutY="540.0" prefHeight="30.0" prefWidth="33.0" style="-fx-font-size: 14;" VBox.vgrow="ALWAYS">
-      <effect>
-         <Reflection />
-      </effect></TextField>
-   <TextField fx:id="txtName1" alignment="BOTTOM_LEFT" layoutX="113.0" layoutY="383.0" prefHeight="30.0" prefWidth="33.0" style="-fx-font-size: 14;">
-      <effect>
-         <Reflection />
-      </effect></TextField>
-   <TextField fx:id="txtName11" layoutX="183.0" layoutY="520.0" prefHeight="20.0" prefWidth="34.0" style="-fx-font-size: 14;">
-      <effect>
-         <Reflection />
-      </effect></TextField>
-   <Label layoutX="71.0" layoutY="662.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="MONTH:" />
-   <Label layoutX="71.0" layoutY="445.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="YEAR:" />
+   <HBox prefHeight="32.0" prefWidth="99.0">
+      <children>
+         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="79.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="DAY:" />
+         <HBox prefHeight="34.0" prefWidth="58.0">
+            <children>
+               <TextField fx:id="txtName111" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="34.0" style="-fx-font-size: 14;">
+                  <effect>
+                     <Reflection />
+                  </effect>
+               </TextField>
+            </children>
+         </HBox>
+      </children>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="36.0" prefWidth="143.0">
+      <children>
+         <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="MONTH:" />
+         <Pane prefHeight="36.0" prefWidth="47.0">
+            <children>
+               <TextField fx:id="txtName1" alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="3.0" prefHeight="30.0" prefWidth="33.0" style="-fx-font-size: 14;">
+                  <effect>
+                     <Reflection />
+                  </effect>
+               </TextField>
+            </children>
+         </Pane>
+      </children>
+   </HBox>
+   <HBox prefHeight="44.0" prefWidth="110.0">
+      <children>
+         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="68.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="YEAR:" />
+         <HBox prefHeight="44.0" prefWidth="38.0">
+            <children>
+               <TextField fx:id="txtName11" prefHeight="30.0" prefWidth="34.0" style="-fx-font-size: 14;">
+                  <effect>
+                     <Reflection />
+                  </effect>
+               </TextField>
+            </children>
+         </HBox>
+      </children>
+   </HBox>
 
     <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="OK" />
 </VBox>
