@@ -8,5 +8,7 @@ module pt.ipp.isep.dei.esoft.project.ui.gui {
 
     opens pt.ipp.isep.dei.esoft.project.ui.gui to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.ui.gui to javafx.graphics;
+    exports pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu to javafx.graphics;
+    opens pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu to javafx.fxml;
 
 }

@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class GsmGUI {
 
     @FXML
-    private Button btnRegisterGreenSpace;
+    private Button btnRegisterAGreenSpace;
     @FXML
     private Button btnAddEntryToToDoList;
     @FXML
@@ -25,9 +26,15 @@ public class GsmGUI {
     @FXML
     private Button btnCancelAnEntryInTheAgenda;
     @FXML
+    private Button btnAssignOneOrMoreVehicles;
+    @FXML
+    private Button btnListAllGreenSpaces;
+
+    @FXML
     private Button btnMainMenu;
 
     private GreenSpaceController controller;
+
 
     public GsmGUI() {
         this.controller = new GreenSpaceController();
@@ -66,6 +73,14 @@ public class GsmGUI {
     @FXML
     public void handleCancelAnEntry() {
         loadUI("/CancelAnEntryGUI.fxml");
+    }
+    @FXML
+    public void handleAssignOneOrMoreVehicles() {
+        loadUI("/AssignOneOrMoreVehiclesGUI.fxml");
+    }
+    @FXML
+    public void handleListAllGreenSpaces() {
+        loadUI("/ListAllGreenSpacesGUI.fxml");
     }
 
 

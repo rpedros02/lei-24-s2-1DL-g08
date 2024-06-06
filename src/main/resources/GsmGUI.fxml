@@ -10,9 +10,9 @@
     <Button fx:id="btnAddEntryToToDoList" onAction="#handleAddEntryToToDoList" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To To-Do List" />
     <Button fx:id="btnAddEntryToAgenda" onAction="#handleAddEntryToAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To Agenda" />
     <Button fx:id="btnAssignTeamToAgendaEntry" onAction="#handleAssignTeamToAgendaEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign a Team To Agenda Entry" />
-    <Button fx:id="btnPostPoneAnEntryInTheAgenda" onAction="#handlePostPoneAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
-   <Button fx:id="btnCancelAnEntryInTheAgenda" layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
-   <Button fx:id="btnCancelAnEntryInTheAgenda1" layoutX="80.0" layoutY="290.0" onAction="#handleCancelAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign one or more Vehicles" />
-   <Button fx:id="btnCancelAnEntryInTheAgenda11" layoutX="80.0" layoutY="366.0" onAction="#handleCancelAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="List All Green Spaces" />
+    <Button fx:id="btnPostPoneAnEntry" onAction="#handlePostPoneAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
+   <Button fx:id="btnCancelAnEntry" layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
+   <Button fx:id="btnAssignOneOrMoreVehicles" layoutX="80.0" layoutY="290.0" onAction="#handleAssignOneOrMoreVehicles" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign one or more Vehicles" />
+   <Button fx:id="btnListAllGreenSpaces" layoutX="80.0" layoutY="366.0" onAction="#handleListAllGreenSpaces" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="List All Green Spaces" />
     <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: #098112; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;" text="Main Menu" />
 </VBox>

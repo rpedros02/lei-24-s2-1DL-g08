@@ -24,7 +24,7 @@ public class PostPoneAnEntryGUI {
     @FXML
     private TextField txtYear;
     @FXML
-    private Button btnOK;
+    private Button btnPostPoneAnEntryInTheAgenda;
 
     private final PostponeAnEntryController postponeAnEntryController;
     private final Agenda agenda;
