@@ -49,6 +49,10 @@ public class ToDoListController {
         return organization.get().getEntryFromToDoList(entryTitle);
     }
 
+    public Entry getToDoListEntry(String entryTitle) {
+        return getEntry(entryTitle);
+    }
+
     public boolean addEntry(Entry entry) {
         return !createEntry(entry.getTitle(), entry.getDescription(), entry.getDegreeOfUrgency(), entry.getDateBegin(), entry.getDateEnd(), entry.getStatus(), entry.getGreenSpace(), entry.getTeam(), entry.getVehicles(), entry.getTask()).equals(Optional.empty());
     }

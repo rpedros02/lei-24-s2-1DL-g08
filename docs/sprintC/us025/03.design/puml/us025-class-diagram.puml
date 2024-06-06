@@ -3,60 +3,60 @@
 skinparam packageStyle rectangle
 skinparam shadowing false
 skinparam linetype polyline
-'skinparam linetype orto
+
 
 skinparam classAttributeIconSize 0
 
-'left to right direction
 
 class CancelAnEntryUI{
 }
 
 
 class CancelAnEntryController{
--AgendaRepository agendaRepository
-    + CancelAnEntryController(agendaRepository)
-    + getPlannedAndPostponedTask()
+-Agenda agendaRepository
+    + CancelAnEntryController(agenda)
  }
 
 class Repositories {
     - Repositories(): Repositories
     + getInstance() : Repositories
-    + getAgendaRepository() : Repositories
+    + getAgenda() : Repositories
+    + getEntries() : Repositories
 }
 
 
-class AgendaRepository {
-    + getPlannedAndPostponedTask()
+class Agenda {
+    + getAgenda().getEntries()
 
 }
 
 class  Entry{
         -title
         -description
-        -urgencyLevel
-        -expectedDuration
+        -degreeurgency
+        -datebegin
+        -dateend
         -state
         -greenSpace
 
 }
 
 class EntryDto{
-+TaskEntry
++Entry
 +Date
 +Time
 }
 
 
-AgendaRepository --> "*" Entry: contains
+Agenda --> "*" Entry: contains
 CancelAnEntryUI .>  CancelAnEntryController
-CancelAnEntryController ...r> Repositories : repositories
+CancelAnEntryController ...l> Repositories
 CancelAnEntryUI .> EntryDto
 CancelAnEntryController ..> EntryDto
 Repositories -> Repositories : instance
 Repositories "1" --> "*" Entry
-Repositories ---> "1" AgendaRepository
+Repositories ---> "1" Agenda
 
- CancelAnEntryController ......>  Entry : Entry
- CancelAnEntryController ...> "1" AgendaRepository : AgendaRepository
+ CancelAnEntryController ....>  Entry
+ CancelAnEntryController ...> "1" Agenda
 @enduml

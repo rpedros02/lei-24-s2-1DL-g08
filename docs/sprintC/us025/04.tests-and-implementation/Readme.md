@@ -5,43 +5,137 @@
 **Test 1:** Check that it is not possible to list the vehicles when VehicleRepository is empty. 
 
     @Test
-    void ensureVehicleRepositoryIsNotEmpty() {
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.add("AA-00-00", "Brand", "Model", "Type", 1.0, 2.0, 1000, new Date(1, 1, 2001), new Date(1, 1, 2001), 12);
-        assertFalse(vehicleRepository.isEmpty());
+    void ensureAgendaIsNotEmpty() {
+        Agenda agenda = new Agenda();
+        agenda.addEntry(new Entry("Title", "Description", DegreeOfUrgency.HIGH, new Date(), new Date(), EStatus.PENDING, new GreenSpace()));
+        assertFalse(agenda.isEmpty());
     }
+**Test 2:** Verify that the entry is canceled correctly.
 
+    @Test
+    void ensureEntryIsCancelled() {
+        Agenda agenda = new Agenda();
+        Entry entry = new Entry("Title", "Description", DegreeOfUrgency.HIGH, new Date(), new Date(), EStatus.PENDING, new GreenSpace());
+        agenda.addEntry(entry);
+
+        CancelAnEntryController controller = new CancelAnEntryController(agenda);
+        controller.cancelEntry("Title");
+
+    assertEquals(EStatus.CANCELED, entry.getStatus());
+}
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class CancelAnEntryController 
 
 ```java
-public Vehicle createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                             Date register_date, Date acquisition_date, int maintenance_frequency) {
-    
-    
-	newVehicle = organization.createVehicle(plateId, brand, model, type, tare, weight,
-                                            mileage, register_date, acquisition_date, maintenance_frequency);
-    
-	return newVehicle;
+public class CancelAnEntryController {
+    private final Agenda agenda;
+
+    public CancelAnEntryController(Agenda agenda) {
+        this.agenda = agenda;
+    }
+
+    public String cancelEntry(String title) {
+        Entry entry = agenda.getEntryByTitle(title);
+        if (entry == null) {
+            return "Entry not found.";
+        }
+        entry.setStatus(EStatus.CANCELED);
+        return "Entry canceled successfully.";
+    }
 }
 ```
 
-### Class Organization
+### Class CancelAnEntryUI
+
+```java
+public class CancelAnEntryUI implements Runnable {
+    private final CancelAnEntryController cancelAnEntryController;
+
+    public CancelAnEntryUI(Agenda agenda) {
+        this.cancelAnEntryController = new CancelAnEntryController(agenda);
+    }
+
+    @Override
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the title of the entry to cancel: ");
+        String title = scanner.nextLine();
+
+        String result = cancelAnEntryController.cancelEntry(title);
+        System.out.println(result);
+    }
+}
+```
+### Class EStatus
 
 ```java
 
-public Optional<Vehicle> createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                                       Date register_date, Date acquisition_date, int maintenance_frequency) {
+public enum EStatus {
+    PENDING(1),
+    IN_PROGRESS(2),
+    FINISHED(3),
+    CANCELED(4);
 
-    Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency);
+    private final int status;
 
-    addVehicle(vehicle);
+    EStatus(int status) {
+        this.status = status;
+    }
 
-    return vehicle;
+    public int status() {
+        return status;
+    }
+
+    public static EStatus getStatus(int status) {
+        for (EStatus s : EStatus.values()) {
+            if (s.status == status) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return switch (this) {
+            case PENDING -> "Pending";
+            case IN_PROGRESS -> "In Progress";
+            case FINISHED -> "Finished";
+            case CANCELED -> "Canceled";
+        };
+    }
 }
 ```
+
+### Class GreenSpaceMenuUI
+
+```java
+ public GreenSpaceMenuUI(Agenda agenda) {
+    this.agenda = agenda;
+}
+
+@Override
+public void run() {
+    //(...)
+    options.add(new MenuItem("Cancel an entry in the Agenda", new CancelAnEntryUI(agenda)));
+    //(...)
+    
+}
+```
+### Class Entry
+
+```java
+    public EStatus getStatus() {
+    return status;
+}
+public void setStatus(EStatus status) {
+    this.status = status;
+}
+
+```
+
 
 
 ## 6. Integration and Demo 
@@ -49,6 +143,3 @@ public Optional<Vehicle> createVehicle(String plateId, String brand, String mode
 * For demo purposes some tasks are bootstrapped while system starts.
 
 
-## 7. Observations
-
-n/a
