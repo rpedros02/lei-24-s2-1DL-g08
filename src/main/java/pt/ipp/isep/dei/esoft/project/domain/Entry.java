@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-
 public class Entry {
     private String title;
     private String description;
@@ -20,23 +19,14 @@ public class Entry {
     private Team team;
     private List<Vehicle> vehicles;
     private Task task;
-    private Vehicle vehicle;
 
-    //CONSTRUCTOR(S)
+    // Constructors
     public Entry(String title) {
         this.title = title;
     }
 
-    public Entry(String title,
-                 String description,
-                 DegreeOfUrgency degreeOfUrgency,
-                 Date dateBegin,
-                 Date dateEnd,
-                 EStatus status,
-                 GreenSpace greenSpace,
-                 Team team,
-                 List<Vehicle> vehicles,
-                 Task task) {
+    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd,
+                 EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         if (isValid(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task)) {
             setTitle(title);
             setDescription(description);
@@ -51,13 +41,8 @@ public class Entry {
         }
     }
 
-    public Entry(String title,
-                 String description,
-                 DegreeOfUrgency degreeOfUrgencyRepository,
-                 Date dateBegin,
-                 Date dateEnd,
-                 EStatus status,
-                 GreenSpace greenSpace) {
+    public Entry(String title, String description, DegreeOfUrgency degreeOfUrgencyRepository, Date dateBegin, Date dateEnd,
+                 EStatus status, GreenSpace greenSpace) {
         boolean valid = isValid(title, description, degreeOfUrgencyRepository, dateBegin, dateEnd, status, greenSpace, null, null, null);
         if (!valid) {
             throw new IllegalArgumentException("Invalid Entry");
@@ -69,20 +54,12 @@ public class Entry {
         setDateEnd(dateEnd);
         setStatus(status);
         setGreenSpace(greenSpace);
-
         this.team = null;
         this.vehicles = new ArrayList<>();
         this.task = null;
     }
-    //END CONSTRUCTOR(S)
-    public void addVehicle(Vehicle vehicle) {
-        if(!vehicles.contains(vehicle)){
-            vehicles.add(vehicle);
-        }
-    }
 
-    // GETTERS AND SETTERS
-
+    // Getters and Setters
     public String getTitle() {
         return title;
     }
@@ -165,8 +142,7 @@ public class Entry {
 
     //END GETTERS AND SETTERS
 
-    //  VALIDATIONS
-
+    // Validations
     /**
      * @param title           title of the entry
      * @param description     description of the entry
@@ -183,16 +159,8 @@ public class Entry {
      *                        <p>
      * @return true if the entry is valid, false otherwise
      */
-    private boolean isValid(String title,
-                            String description,
-                            DegreeOfUrgency degreeOfUrgency,
-                            Date dateBegin,
-                            Date dateEnd,
-                            EStatus status,
-                            GreenSpace greenSpace,
-                            Team team,
-                            List<Vehicle> vehicles,
-                            Task task) {
+    private boolean isValid(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd,
+                            EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         boolean validTitle = validateTitle(title);
         boolean validDescription = validateDescription(description);
         boolean validDegreeOfUrgency = validateDegreeOfUrgency(degreeOfUrgency);
@@ -230,7 +198,6 @@ public class Entry {
     private boolean validateDescription(String description) {
         return description.length() < 255;
     }
-
     /**
      * @param degreeOfUrgency degree of urgency of the entry
      *                        <p>
@@ -240,6 +207,7 @@ public class Entry {
      *                        <p>
      * @return true if the degree of urgency is valid, false otherwise
      */
+
     private boolean validateDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
         return degreeOfUrgency != null;
     }
@@ -247,7 +215,8 @@ public class Entry {
 
     @Override
     public Entry clone() {
-        return new Entry(this.title, this.description, this.degreeOfUrgency, this.dateBegin, this.dateEnd, this.status, this.greenSpace, this.team, this.vehicles, this.task);
+        return new Entry(this.title, this.description, this.degreeOfUrgency, this.dateBegin, this.dateEnd, this.status,
+                this.greenSpace, this.team, this.vehicles, this.task);
     }
 
     @Override
@@ -270,9 +239,8 @@ public class Entry {
     public void postponeEntry(Date newDateEnd) {
         this.dateEnd = newDateEnd;
     }
+// Existing code...
 
-
-    // Existing code...
     @Override
     public String toString() {
         return "Entry{" +
