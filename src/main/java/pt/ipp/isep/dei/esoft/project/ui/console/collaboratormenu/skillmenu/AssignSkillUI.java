@@ -98,15 +98,6 @@ public class AssignSkillUI implements Runnable {
         }
     }
 
-    private Collaborator selectCollaborator(List<Collaborator> collaboratorList) {
-        String idNumber = collaborator.getIdNumber();
-        while (!collaboratorRepository.checkIfTheCollaboratorExists(idNumber)) {
-            if (collaboratorRepository.checkIfTheCollaboratorExists(idNumber)) {
-                return collaborator;
-            }
-        }
-        return null;
-    }
 
     private void selectSkill(Collaborator collaborator, List<Skill> skillList) {
         int answer = -1;

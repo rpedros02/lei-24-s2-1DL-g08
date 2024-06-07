@@ -29,6 +29,13 @@ public class Task {
         setTaskCategory(taskCategory);
     }
 
+    public Task() {
+
+    }
+
+    public Task(String s) {
+    }
+
     // VALIDATIONS
 
     /**

@@ -1,13 +1,12 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
-import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
-import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -249,10 +248,10 @@ public class Organization {
         return clone;
     }
 
-    public Optional<Collaborator> createCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job) {
+    public Optional<Collaborator> createCollaborator(String name, LocalDate birthDate, LocalDate admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
         Optional<Collaborator> optionalValue = Optional.empty();
 
-        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
+        Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job, task);
         if (addCollaborator(collaborator)) {
             optionalValue = Optional.of(collaborator);
         }
