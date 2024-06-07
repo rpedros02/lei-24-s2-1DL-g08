@@ -1,57 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="741.0" prefWidth="378.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.PostPoneAnEntryGUI">
+   <Label alignment="TOP_LEFT" prefHeight="24.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Postpone an Entry" textAlignment="CENTER" />
 
-<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="741.0" prefWidth="378.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.PostPoneAnEntryGUI">
-   <Label alignment="TOP_LEFT" prefHeight="127.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Postpone an entry in the Agenda   " textAlignment="CENTER" />
+   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="314.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER" />
+   <ComboBox fx:id="cmbSelectEntry" prefWidth="150.0" />
 
-   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="314.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER" />
-   <ComboBox prefWidth="150.0" />
    <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the date to postpone the entry" />
-   <HBox prefHeight="32.0" prefWidth="99.0">
-      <children>
-         <Label alignment="TOP_LEFT" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="79.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="DAY:" />
-         <HBox prefHeight="34.0" prefWidth="58.0">
-            <children>
-               <TextField fx:id="txtName111" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="34.0" style="-fx-font-size: 14;">
-                  <effect>
-                     <Reflection />
-                  </effect>
-               </TextField>
-            </children>
-         </HBox>
-      </children>
-   </HBox>
-   <HBox alignment="CENTER" prefHeight="36.0" prefWidth="143.0">
-      <children>
-         <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="MONTH:" />
-         <Pane prefHeight="36.0" prefWidth="47.0">
-            <children>
-               <TextField fx:id="txtName1" alignment="BOTTOM_LEFT" layoutX="9.0" layoutY="3.0" prefHeight="30.0" prefWidth="33.0" style="-fx-font-size: 14;">
-                  <effect>
-                     <Reflection />
-                  </effect>
-               </TextField>
-            </children>
-         </Pane>
-      </children>
-   </HBox>
-   <HBox prefHeight="44.0" prefWidth="110.0">
-      <children>
-         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="68.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="YEAR:" />
-         <HBox prefHeight="44.0" prefWidth="38.0">
-            <children>
-               <TextField fx:id="txtName11" prefHeight="30.0" prefWidth="34.0" style="-fx-font-size: 14;">
-                  <effect>
-                     <Reflection />
-                  </effect>
-               </TextField>
-            </children>
-         </HBox>
-      </children>
-   </HBox>
+
+
+   <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Day:" />
+   <TextField fx:id="txtDay" style="-fx-font-size: 14;" />
+
+   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Month:" />
+   <TextField fx:id="txtMonth" style="-fx-font-size: 14;" />
+
+   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter year:" />
+   <TextField fx:id="txtYear" style="-fx-font-size: 14;" />
 
    <Button onAction="#handlePostPoneAnEntry" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
 </VBox>

@@ -1,27 +1,24 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
+import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
+import pt.ipp.isep.dei.esoft.project.domain.Entry;
+import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
+import java.util.InputMismatchException;
 
 public class PostPoneAnEntryGUI {
-    @FXML
-    private Label lblTitle;
-
-    @FXML
-    private Label lblSelectEntry;
 
     @FXML
     private ComboBox<String> cmbSelectEntry;
 
-    @FXML
-    private Label lblPostponeDate;
 
     @FXML
     private TextField txtDay;
@@ -32,51 +29,65 @@ public class PostPoneAnEntryGUI {
     @FXML
     private TextField txtYear;
 
-    @FXML
-    private Button btnPostponeEntry;
 
     private PostponeAnEntryController controller;
 
     public void initialize() {
-        // Initialize controller with a dummy agenda for demonstration
-        Agenda agenda = new Agenda();
-        controller = new PostponeAnEntryController(agenda);
+        OrganizationRepository orgRepo = Repositories.getInstance().getOrganizationRepository();
+        ApplicationSession appSession = ApplicationSession.getInstance();
+        Agenda agenda = orgRepo.getOrganizationByEmployeeEmail(appSession.getCurrentSession().getUserEmail()).getAgenda();
+        this.controller = new PostponeAnEntryController(agenda);
 
-        // Populate ComboBox with dummy data (entries)
-        cmbSelectEntry.getItems().addAll("Entry 1", "Entry 2", "Entry 3");
+        for (Entry entry : agenda.getEntries()) {
+            cmbSelectEntry.getItems().add(entry.getTitle());
+        }
     }
 
     @FXML
-    void handlePostPoneAnEntry(ActionEvent event) {
-        // Get selected entry from ComboBox
-        String selectedEntry = cmbSelectEntry.getValue();
+    void handlePostPoneAnEntry() {
 
-        // Get day, month, and year from TextFields
+        String selectedEntry = cmbSelectEntry.getValue();
         String day = txtDay.getText();
         String month = txtMonth.getText();
         String year = txtYear.getText();
 
-        // Validate input and postpone entry
-        if (validateInput(day, month, year)) {
-            int intDay = Integer.parseInt(day);
-            int intMonth = Integer.parseInt(month);
-            int intYear = Integer.parseInt(year);
-            Date newDate = new Date(intDay, intMonth, intYear);
-            String result = controller.postponeEntry(selectedEntry, newDate);
-            // Display result (e.g., in a dialog box)
-            System.out.println(result);
+        try {
+            if (!validateInput(day, month, year)) {
+                throw new InputMismatchException();
+            }
+        } catch (InputMismatchException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid input. Please enter a valid date.");
+            alert.showAndWait();
+            return;
+        }
+        int intDay = Integer.parseInt(day);
+        int intMonth = Integer.parseInt(month);
+        int intYear = Integer.parseInt(year);
+        Date newDate = new Date(intDay, intMonth, intYear);
+        boolean result = controller.postponeEntry(selectedEntry, newDate);
+        if(result) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success!");
+            alert.setHeaderText(null);
+            alert.setContentText("Entry postponed successfully! New date: " + result + ".");
+            alert.showAndWait();
         } else {
-            // Display error message (e.g., in a dialog box)
-            System.out.println("Invalid input.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error.");
+            alert.setHeaderText(null);
+            alert.setContentText("There was an error postponing the entry. Please try again.");
+            alert.showAndWait();
         }
     }
-
     private boolean validateInput(String day, String month, String year) {
-        // Validate day, month, and year inputs (e.g., check for numeric values and valid ranges)
         return isNumeric(day) && isNumeric(month) && isNumeric(year);
     }
 
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
+
 }

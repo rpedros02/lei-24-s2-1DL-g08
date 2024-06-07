@@ -1,16 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
-import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
@@ -42,7 +42,7 @@ public class RegisterGreenSpaceGUI {
 
     private final AuthenticationRepository authenticationRepository;
 
-    private GreenSpaceController controller;
+    private final GreenSpaceController controller;
 
     public RegisterGreenSpaceGUI() {
         this.controller = new GreenSpaceController();
@@ -59,8 +59,9 @@ public class RegisterGreenSpaceGUI {
         String name = txtName.getText();
         String typeName = cbType.getValue();
         String areaString = txtArea.getText();
+        String streetNumberString = txtStreetNumber.getText();
         String streetName = txtStreet.getText();
-        int streetNumber = Integer.parseInt(txtStreetNumber.getText());
+        int streetNumber = Integer.parseInt(streetNumberString);
         String PostalCodeString = txtPostalCode.getText();
         if (!PostalCodeString.matches("[0-9]{4}-[0-9]{3}")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -11,12 +11,12 @@ public class PostponeAnEntryController {
         this.agenda = agenda;
     }
 
-    public String postponeEntry(String title, Date newDate) {
+    public boolean postponeEntry(String title, Date newDate) {
         Entry entry = agenda.getEntryByTitle(title);
         if (entry == null) {
-            return "Entry not found.";
+            return false;
         }
         entry.postponeEntry(newDate);
-        return "Entry postponed successfully.";
+        return true;
     }
 }
