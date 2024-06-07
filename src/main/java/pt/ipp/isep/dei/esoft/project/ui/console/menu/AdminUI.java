@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.skillmenu.AssignSkillUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.CreateJobUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu.AssignVehicleAgendaUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Agenda Menu", new AgendaMenuUI()));
         options.add(new MenuItem("Collaborator Menu", new CollaboratorMenuUI()));
         options.add(new MenuItem("Create a Job", new CreateJobUI()));
+        options.add(new MenuItem("Assign vehicle to entry",new AssignVehicleAgendaUI()));
 
         int option = 0;
         do {
