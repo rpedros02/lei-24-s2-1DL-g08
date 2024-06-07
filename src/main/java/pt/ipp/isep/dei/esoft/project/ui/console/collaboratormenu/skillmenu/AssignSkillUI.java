@@ -83,6 +83,25 @@ public class AssignSkillUI implements Runnable {
         return collaborator;
     }
 
+    private void selectCollaborator(List<Collaborator> collaboratorList) {
+        int i = 1;
+        for (Collaborator collaborator : collaboratorList) {
+            System.out.println("  " + i + " - " + collaborator.getName() + " - " + collaborator.getIdNumber());
+            i++;
+        }
+        int answer = -1;
+        int listSize = collaboratorList.size();
+        do {
+            Scanner input = new Scanner(System.in);
+            while (answer < 0 || answer > listSize) {
+                answer = input.nextInt();
+            }
+            if (answer != 0) {
+                collaborator = collaboratorList.get(answer - 1);
+            }
+        } while (answer != 0);
+    }
+
     private void requestSelectedSkills(Collaborator collaborator) {
         skillList = assignSkillController.getSkillList();
         displaySkillList(skillList);

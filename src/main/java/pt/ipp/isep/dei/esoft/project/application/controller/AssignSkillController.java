@@ -29,4 +29,7 @@ public class AssignSkillController {
     }
 
 
+    public void assignSkills(Collaborator collaborator, List<Skill> skills) {
+        collaboratorRepository.assignSkills(collaborator, skills);
+    }
 }

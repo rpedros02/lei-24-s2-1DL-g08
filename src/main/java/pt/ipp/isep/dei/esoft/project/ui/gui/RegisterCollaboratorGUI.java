@@ -12,6 +12,7 @@ import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -88,11 +89,11 @@ public class RegisterCollaboratorGUI {
         }
 
         String name = txtName.getText();
-        LocalDate birthDate;
-        LocalDate admissionDate;
+        Date birthDate;
+        Date admissionDate;
         try {
-            birthDate = LocalDate.parse(txtBirthDate.getText());
-            admissionDate = LocalDate.parse(txtAdmissionDate.getText());
+            birthDate = Utils.dateFromString(txtBirthDate.getText());
+            admissionDate = Utils.dateFromString(txtBirthDate.getText());
         } catch (DateTimeParseException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -102,7 +103,7 @@ public class RegisterCollaboratorGUI {
             return;
         }
 
-        if (admissionDate.isBefore(birthDate.plusYears(16))) {
+        if (!admissionDate.isAfter(birthDate.plusYears(16))){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);

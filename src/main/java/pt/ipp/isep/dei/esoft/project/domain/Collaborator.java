@@ -21,8 +21,8 @@ public class Collaborator {
 
     // Default values for Collaborator attributes
     private final String NAME_BY_OMISSION = "no name";
-    private final LocalDate BIRTH_DATE_BY_OMISSION = LocalDate.of(1975,10,25);
-    private final LocalDate ADMISSION_DATE_BY_OMISSION = LocalDate.of(2002,4,14);
+    private final Date BIRTH_DATE_BY_OMISSION = new Date(12,4,2002);
+    private final Date ADMISSION_DATE_BY_OMISSION = new Date(23,12,2023);
     private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
     private final String EMAIL_BY_OMISSION = "nomail@mail.com";
     private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;
@@ -33,8 +33,8 @@ public class Collaborator {
 
     // Collaborator attributes
     private String name;
-    private LocalDate birthDate;
-    private LocalDate admissionDate;
+    private Date birthDate;
+    private Date admissionDate;
     private int mobileNumber;
     private String email;
     private int taxPayerNumber;
@@ -68,8 +68,8 @@ public class Collaborator {
      * @param job            The job of the collaborator.
      */
     public Collaborator(String name,
-                        LocalDate birthDate,
-                        LocalDate admissionDate,
+                        Date birthDate,
+                        Date admissionDate,
                         int mobileNumber,
                         String email,
                         int taxPayerNumber,
@@ -130,11 +130,11 @@ public class Collaborator {
         return name;
     }
 
-    public LocalDate getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public LocalDate getAdmissionDate() {
+    public Date getAdmissionDate() {
         return admissionDate;
     }
 
@@ -175,14 +175,14 @@ public class Collaborator {
         this.name = name;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(Date birthDate) {
         if (birthDate == null || !isAtLeast18YearsOld(birthDate)) {
             throw new IllegalArgumentException("Birth date is invalid");
         }
         this.birthDate = birthDate;
     }
 
-    public void setAdmissionDate(LocalDate admissionDate) {
+    public void setAdmissionDate(Date admissionDate) {
         this.admissionDate = admissionDate;
     }
 
@@ -235,7 +235,7 @@ public class Collaborator {
      * @param birthDate The birthdate to check.
      * @return True if the birthdate corresponds to an age of at least 18 years old, otherwise false.
      */
-    public static boolean isAtLeast18YearsOld(LocalDate birthDate) {
+    public static boolean isAtLeast18YearsOld(Date birthDate) {
         return Calendar.getInstance().get(Calendar.YEAR) - birthDate.getYear() >= 18;
     }
 
@@ -362,5 +362,9 @@ public class Collaborator {
 
     public boolean hasEmail(String email) {
         return this.email.equals(email);
+    }
+
+    public void assignSkills(List<Skill> skills) {
+        this.assignedSkills = new ArrayList<>(skills);
     }
 }

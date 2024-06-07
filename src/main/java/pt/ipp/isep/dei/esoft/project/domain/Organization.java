@@ -248,7 +248,7 @@ public class Organization {
         return clone;
     }
 
-    public Optional<Collaborator> createCollaborator(String name, LocalDate birthDate, LocalDate admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
+    public Optional<Collaborator> createCollaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
         Optional<Collaborator> optionalValue = Optional.empty();
 
         Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job, task);

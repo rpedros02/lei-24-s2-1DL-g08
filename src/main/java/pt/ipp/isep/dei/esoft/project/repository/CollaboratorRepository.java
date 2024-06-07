@@ -179,7 +179,7 @@ public class CollaboratorRepository {
      * @param job The job to search for.
      * @return A list of all collaborator with the specified job.
      */
-    public Collaborator Collaborator(String name, LocalDate birthDate, LocalDate admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
+    public Collaborator Collaborator(String name, Date birthDate, Date admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
         Collaborator collaborator = new Collaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType,idNumber, address, job, task);
         addCollaborator(collaborator);
         return collaborator;
@@ -191,4 +191,7 @@ public class CollaboratorRepository {
         }
     }
 
-   }
+    public void assignSkills(Collaborator collaborator, List<Skill> skills) {
+        collaborator.assignSkills(skills);
+    }
+}

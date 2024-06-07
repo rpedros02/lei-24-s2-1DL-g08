@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
 import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 
 import java.time.LocalDate;
@@ -13,8 +14,8 @@ public class RegisterCollaboratorUI implements Runnable {
 
     private final CreateCollaboratorController controller;
     private String name;
-    private LocalDate admissionDate;
-    private LocalDate birthdate;
+    private Date admissionDate;
+    private Date birthdate;
     private Address address;
     private int mobileNumber;
     private String email;
@@ -136,16 +137,12 @@ public class RegisterCollaboratorUI implements Runnable {
         return new Address(street, doorNumber, postalCode, city, district);
     }
 
-    private LocalDate requestAdmissionDate() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Admission date (format: dd-mm-yyyy): ");
-        return new LocalDate(input.nextLine());
+    private Date requestAdmissionDate() {
+        return Utils.readDateFromConsole("Admission Date (format: dd-mm-yyyy): ");
     }
 
-    private LocalDate requestBirthdate() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Birthdate (format: dd-mm-yyyy): ");
-        return new LocalDate(input.nextLine());
+    private Date requestBirthdate() {
+        return Utils.readDateFromConsole("Birthdate (format: dd-mm-yyyy): ");
     }
 
     private String requestName() {

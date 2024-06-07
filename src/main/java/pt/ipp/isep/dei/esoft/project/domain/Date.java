@@ -89,4 +89,7 @@ public class Date extends java.util.Date {
         return day + "/" + month + "/" + year;
     }
 
+    public Date plusYears(int i) {
+        return new Date(this.day, this.month, this.year + i);
+    }
 }

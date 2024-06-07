@@ -57,7 +57,7 @@ class OrganizationRepositoryTest {
         organizationRepository.add(organization);
 
         Optional<Organization> result =
-                organizationRepository.getOrganizationByEmployeeEmail("john.doe@this.company.com");
+                Optional.of(organizationRepository.getOrganizationByEmployeeEmail("john.doe@this.company.com"));
 
         assertEquals(organization, result.get());
     }
@@ -72,7 +72,7 @@ class OrganizationRepositoryTest {
         organizationRepository.add(organization);
 
         Optional<Organization> returnOrganization =
-                organizationRepository.getOrganizationByEmployeeEmail("john.doe@this" + ".company.com");
+                Optional.of(organizationRepository.getOrganizationByEmployeeEmail("john.doe@this.company.com"));
 
         //Assert
         //Make sure both represents the same object

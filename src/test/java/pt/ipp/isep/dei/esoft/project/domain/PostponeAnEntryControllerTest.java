@@ -1,17 +1,15 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
 
+import org.junit.jupiter.api.Test;
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
-import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
-import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 public class PostponeAnEntryControllerTest {
