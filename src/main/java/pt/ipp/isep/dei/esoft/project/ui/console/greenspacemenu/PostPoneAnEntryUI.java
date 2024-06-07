@@ -28,7 +28,7 @@ public class PostPoneAnEntryUI implements Runnable {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
         Date newDate = new Date(dateStr);
-        String result = postponeAnEntryController.postponeEntry(title, newDate);
+        boolean result = postponeAnEntryController.postponeEntry(title, newDate);
         System.out.println(result);
     }
 }

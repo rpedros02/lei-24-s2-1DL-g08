@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Task {
@@ -13,7 +11,6 @@ public class Task {
     private int duration;
     private double cost;
     private TaskCategory taskCategory;
-    private List<Skill> skills;
 
     public Task(String reference,
                 String description,
@@ -30,17 +27,13 @@ public class Task {
         setDuration(duration);
         setCost(cost);
         setTaskCategory(taskCategory);
-        setSkills(skills);
     }
 
     public Task() {
-        this.skills = new ArrayList<>();
+
     }
 
     public Task(String s) {
-        this();
-        validateReference(reference);
-        setReference(reference);
     }
 
     // VALIDATIONS
@@ -115,15 +108,6 @@ public class Task {
     public void setTaskCategory(TaskCategory taskCategory) {
         this.taskCategory = taskCategory;
     }
-
-    public List<Skill> getSkills() {
-        return new ArrayList<>(skills);
-    }
-
-    public void setSkills(List<Skill> skills) {
-        this.skills = new ArrayList<>(skills); //
-    }
-
     // END GETTERS & SETTERS
 
     @Override

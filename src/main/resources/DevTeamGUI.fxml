@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="287.0" prefWidth="370.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.DevTeamGUI">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="46.0" layoutY="52.0" prefHeight="173.0" prefWidth="266.0" spacing="10.0">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #1E90FF;" text="Development Team" />
+                <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="201.0" prefWidth="266.0" text="Rui Silva - 1231501@isep.ipp.pt" textAlignment="CENTER">
+               <font>
+                  <Font name="Book Antiqua Bold" size="14.0" />
+               </font></Label>
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="55.0" prefHeight="201.0" prefWidth="266.0" text="Catarina Lima - 1231131@isep.ipp.pt" textAlignment="CENTER">
+               <font>
+                  <Font name="Book Antiqua Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="83.0" prefHeight="201.0" prefWidth="266.0" text="Rita Tavares - 1231261@isep.ipp.pt" textAlignment="CENTER">
+               <font>
+                  <Font name="Book Antiqua Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="83.0" prefHeight="201.0" prefWidth="266.0" text="Marisa Adelino - 1231287@isep.ipp.pt" textAlignment="CENTER">
+               <font>
+                  <Font name="Book Antiqua Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_CENTER" layoutX="10.0" layoutY="55.0" prefHeight="201.0" prefWidth="266.0" text="Diogo Borges - 1211050@isep.ipp.pt" textAlignment="CENTER">
+               <font>
+                  <Font name="Book Antiqua Bold" size="14.0" />
+               </font>
+            </Label>
+                <Label fx:id="lblMessage" style="-fx-font-size: 14; -fx-text-fill: #333;" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
