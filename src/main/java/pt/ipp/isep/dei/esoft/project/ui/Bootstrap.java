@@ -117,6 +117,7 @@ public class Bootstrap implements Runnable {
         organization.addCollaborator(new Collaborator("Employee", new Date(13,12,2005), new Date(12,4,1995),919919919,"employee@this.app",123456780, IdDocType.CC,"123456780",new Address("rua rua",12,"4425-299","City","District"),new Job("Employee")));
         organization.addCollaborator(new Collaborator("GSM", new Date(13,12,2005), new Date(12,4,1995),919919919,"gsm@this.app",123456781, IdDocType.CC,"123456781",new Address("rua rua",12,"4425-299","City","District"),new Job("GSM")));
         organization.addCollaborator(new Collaborator("HRM", new Date(13,12,2005), new Date(12,4,1995),919919919,"hrm@this.app",123456782, IdDocType.CC,"123456782",new Address("rua rua",12,"4425-299","City","District"),new Job("HRM")));
+        organization.addCollaborator(new Collaborator("VFM", new Date(13,12,2005), new Date(12,4,1995),919919919,"vfm@this.app",123456783, IdDocType.CC,"123456783",new Address("rua rua",12,"4425-299","City","District"),new Job("VFM")));
         organizationRepository.add(organization);
     }
 
@@ -147,7 +148,7 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserWithRole("VFM", "vfm@this.app", "vfm",
-                AuthenticationController.ROLE_HRM);
+                AuthenticationController.ROLE_VFM);
 
         authenticationRepository.addUserWithRole("GSM", "gsm@this.app", "gsm",
                 AuthenticationController.ROLE_GSM);
