@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.util.Scanner;
 
@@ -25,17 +26,6 @@ public class CreateVehicleCheckupUI implements Runnable {
         return vehicleRepository;
     }
 
-    public Date getDateFromString(String date) {
-        try {
-            String day = date.substring(0, 2);
-            String month = date.substring(3, 5);
-            String year = date.substring(6, 10);
-            return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
-        } catch (Exception e) {
-            System.out.println("Invalid date format. Please try again.");
-            return requestDate();
-        }
-    }
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -65,7 +55,7 @@ public class CreateVehicleCheckupUI implements Runnable {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter the date (dd/mm/yyyy): ");
         String date = scanner.nextLine();
-        return getDateFromString(date);
+        return Utils.dateFromString(date);
     }
 
     private int requestLastCheckUpKm() {

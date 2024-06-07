@@ -26,13 +26,12 @@ public class ToDoListController {
         Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
         Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task);
         Optional<Entry> newEntryToDoList = Optional.empty();
-        Optional<Entry> newEntryAgenda = Optional.empty();
+
 
         if (organization.isPresent()) {
             newEntryToDoList = organization.get()
                     .addEntryToToDoList(entry);
-            newEntryAgenda = organization.get()
-                    .addEntryToAgenda(entry);
+
         }
         return newEntryToDoList;
     }

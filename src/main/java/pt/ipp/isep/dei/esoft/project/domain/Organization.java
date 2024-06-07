@@ -305,4 +305,8 @@ public class Organization {
         }
         return collaborators;
     }
+
+    public ToDoList getTodoList() {
+        return toDoList;
+    }
 }
