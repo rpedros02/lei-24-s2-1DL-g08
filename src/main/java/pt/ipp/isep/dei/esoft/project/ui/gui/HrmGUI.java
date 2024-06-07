@@ -20,7 +20,7 @@ public class HrmGUI {
     @FXML
     private Button btnRegisterCollaborator;
     @FXML
-    private Button btnAssignSkill;
+    private Button btnAssignSkillsToACollaborator;
     @FXML
     private Button btnGenerateTeamProposal;
 
@@ -55,8 +55,8 @@ public class HrmGUI {
     }
 
     @FXML
-    public void handleAssignSkill() {
-        loadUI("/AssignSkillGUI.fxml");
+    public void handleAssignSkillsToCollaborator() {
+        loadUI("/AssignSkillsToCollaboratorGUI.fxml");
     }
 
     @FXML

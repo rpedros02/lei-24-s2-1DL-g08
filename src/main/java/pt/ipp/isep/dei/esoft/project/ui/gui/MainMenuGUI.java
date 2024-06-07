@@ -78,7 +78,6 @@ public class MainMenuGUI{
                         break;
                     case AuthenticationController.ROLE_GSM:
                         loadGsmMenu();
-
                         stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
@@ -89,7 +88,7 @@ public class MainMenuGUI{
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_ADMIN:
-                        loadGsmMenu();
+                        loadAdminMenu();
 
                         stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
@@ -119,6 +118,10 @@ public class MainMenuGUI{
      */
     private void loadHrmMenu() {
         loadUI("/HrmGUI.fxml");
+    }
+
+    private void loadAdminMenu() {
+        loadUI("/AdminGUI.fxml");
     }
 
     /**
@@ -153,7 +156,7 @@ public class MainMenuGUI{
 
     @FXML
     public void handleCollaboratorMenu() {
-        loadUI("/CollaboratorGUI.fxml");
+        loadUI("/CollaboratorMenuGUI.fxml");
     }
 
     /**
