@@ -19,6 +19,7 @@ public class Entry {
     private Team team;
     private List<Vehicle> vehicles;
     private Task task;
+    private Team assignedTeam;
 
     // Constructors
     public Entry(String title) {
@@ -57,6 +58,10 @@ public class Entry {
         this.team = null;
         this.vehicles = new ArrayList<>();
         this.task = null;
+    }
+
+    public Team getAssignedTeam() {
+        return assignedTeam;
     }
 
     // Getters and Setters
@@ -138,6 +143,18 @@ public class Entry {
 
     public void setGreenSpace(GreenSpace greenSpace) {
         this.greenSpace = greenSpace;
+    }
+
+    public void setAssignedTeam(Team assignedTeam) {
+        this.assignedTeam = assignedTeam;
+    }
+
+    public List<Skill> getSkills() {
+        if (this.task != null) {
+            return this.task.getSkills();
+        } else {
+            throw new IllegalStateException("Entry does not have a task associated with it.");
+        }
     }
 
     //END GETTERS AND SETTERS

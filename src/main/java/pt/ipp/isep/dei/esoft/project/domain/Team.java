@@ -1,9 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
+
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 public class Team {
     private int minMembers;
@@ -19,12 +20,12 @@ public class Team {
     }
 
     public String toString() {
-        if(getNumberOfTeamMembers() == 0) {
+        if (getNumberOfTeamMembers() == 0) {
             return "No team members";
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Team Members:\n");
-        for (Collaborator collaborator : getTeamMembers()) {
+        for (Collaborator collaborator : teamMembers) {
             sb.append("Name: ").append(collaborator.getName()).append("\n");
             sb.delete(sb.length() - 2, sb.length()); // Remove the last comma and space
             sb.append("\n\n");
@@ -43,6 +44,13 @@ public class Team {
 
     public List<Collaborator> getTeamMembers() {
         return new ArrayList<>(this.teamMembers);
+    }
+    public List<String> getMembers() {
+        List<String> memberNames = new ArrayList<>();
+        for (Collaborator collaborator : teamMembers) {
+            memberNames.add(collaborator.getName());
+        }
+        return memberNames;
     }
 
     public int getNumberOfTeamMembers() {

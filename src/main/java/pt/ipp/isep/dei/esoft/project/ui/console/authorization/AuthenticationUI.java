@@ -5,15 +5,10 @@ import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-/**
- * @author Paulo Maio pam@isep.ipp.pt
- */
 
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
@@ -47,7 +42,7 @@ public class AuthenticationUI implements Runnable {
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI())); // Adicionando GsmUI
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }
