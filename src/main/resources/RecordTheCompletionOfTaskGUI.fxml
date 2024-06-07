@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="467.0" prefWidth="703.0" spacing="10" style="-fx-background-color: #DDA0DD;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RecordTheCompletionOfTaskGUI">
+    <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #7B68EE;" text="Record the Completion of a Task" textAlignment="CENTER" />
+
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Task:" />
+   <ComboBox fx:id="cbEntries" prefHeight="29.0" prefWidth="171.0" style="-fx-font-size: 14;" />
+
+    <Button onAction="#handleRecordTheCompletionOfTask" style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="Complete Task" />
+    <ListView fx:id="agendaListView" prefHeight="185.0" prefWidth="544.0" style="-fx-background-color: #DDA0DD;" />
+</VBox>

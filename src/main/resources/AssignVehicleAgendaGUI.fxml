@@ -5,8 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" fillWidth="false" prefHeight="600.0" prefWidth="400.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignVehicleAgendaController">
-    <Label fx:id="nameLabel" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="Assign one or more vehicles to an entry in the Agenda." textAlignment="CENTER" />
+<VBox alignment="CENTER" fillWidth="false" prefHeight="363.0" prefWidth="738.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignVehicleAgendaController">
+    <Label fx:id="nameLabel" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Assign one or more vehicles to an entry in the Agenda" textAlignment="CENTER" />
 
     <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" />
     <ComboBox fx:id="cbEntries" prefHeight="29.0" prefWidth="200.0" style="-fx-font-size: 14;" />
