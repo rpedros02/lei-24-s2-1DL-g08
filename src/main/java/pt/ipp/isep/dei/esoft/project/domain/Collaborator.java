@@ -21,8 +21,8 @@ public class Collaborator {
 
     // Default values for Collaborator attributes
     private final String NAME_BY_OMISSION = "no name";
-    private final LocalDate BIRTH_DATE_BY_OMISSION = new LocalDate(12, 3, 1975);
-    private final LocalDate ADMISSION_DATE_BY_OMISSION = new LocalDate(10,10,2002);
+    private final LocalDate BIRTH_DATE_BY_OMISSION = LocalDate.of(1975,10,25);
+    private final LocalDate ADMISSION_DATE_BY_OMISSION = LocalDate.of(2002,4,14);
     private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
     private final String EMAIL_BY_OMISSION = "nomail@mail.com";
     private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;

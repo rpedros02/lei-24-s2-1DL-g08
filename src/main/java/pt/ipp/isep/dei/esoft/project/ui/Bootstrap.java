@@ -121,46 +121,10 @@ public class Bootstrap implements Runnable {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("505244123");
         organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
-        organization.addCollaborator(new Collaborator("Employee",
-                LocalDate.of(2005, 12, 13),
-                LocalDate.of(1995, 4, 12),
-                919919919,
-                "employee@this.app",
-                123456780,
-                IdDocType.CC,
-                "123456780",
-                new Address("rua rua", 12, "4425-299", "City", "District"),
-                new Job("Employee")));
-        organization.addCollaborator(new Collaborator("GSM",
-                LocalDate.of(2005, 12, 13),
-                LocalDate.of(1995, 4, 12),
-                919919919,
-                "gsm@this.app",
-                123456781,
-                IdDocType.CC,
-                "123456781",
-                new Address("rua rua", 12, "4425-299", "City", "District"),
-                new Job("GSM")));
-        organization.addCollaborator(new Collaborator("HRM",
-                LocalDate.of(2005, 12, 13),
-                LocalDate.of(1995, 4, 12),
-                919919919,
-                "hrm@this.app",
-                123456782,
-                IdDocType.CC,
-                "123456782",
-                new Address("rua rua", 12, "4425-299", "City", "District"),
-                new Job("HRM")));
-        organization.addCollaborator(new Collaborator("VFM",
-                LocalDate.of(2005, 12, 13),
-                LocalDate.of(1995, 4, 12),
-                919919919,
-                "vfm@this.app",
-                123456783,
-                IdDocType.CC,
-                "123456783",
-                new Address("rua rua", 12, "4425-299", "City", "District"),
-                new Job("VFM")));
+        organization.addCollaborator(new Collaborator("Employee", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "employee@this.app", 123456780, IdDocType.CC, "123456780", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Employee"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("GSM", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "gsm@this.app", 123456781, IdDocType.CC, "123456781", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("GSM"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("HRM", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "hrm@this.app", 123456782, IdDocType.CC, "123456782", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("HRM"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("VFM", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "vfm@this.app", 123456783, IdDocType.CC, "123456783", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("VFM"), new Task("Task")));
         organizationRepository.add(organization);
     }
 
@@ -257,9 +221,8 @@ public class Bootstrap implements Runnable {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
-        collaboratorRepository.addCollaborator("Johnny boy", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"));
-
-        collaboratorRepository.addCollaborator("Johnny boy", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"));
+        collaboratorRepository.addCollaborator("Johnny boy", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task"));
+        collaboratorRepository.addCollaborator("Johnny boy", LocalDate.of(2005, 12, 13), LocalDate.of(1995, 4, 12), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task"));
     }
 }
 
