@@ -1,13 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu;
 
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Date;
+import pt.ipp.isep.dei.esoft.project.domain.*;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
 
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -15,8 +13,8 @@ public class RegisterCollaboratorUI implements Runnable {
 
     private final CreateCollaboratorController controller;
     private String name;
-    private Date admissionDate;
-    private Date birthdate;
+    private LocalDate admissionDate;
+    private LocalDate birthdate;
     private Address address;
     private int mobileNumber;
     private String email;
@@ -24,6 +22,7 @@ public class RegisterCollaboratorUI implements Runnable {
     private String idNumber;
     private IdDocType idType;
     private Job job;
+    private Task task;
     public RegisterCollaboratorUI() {
         controller = new CreateCollaboratorController();
     }
@@ -42,7 +41,7 @@ public class RegisterCollaboratorUI implements Runnable {
     }
 
     private void submitData() {
-        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, birthdate, admissionDate, mobileNumber, email, taxpayerNumber, idType, idNumber, address, job);
+        Optional<Collaborator> collaborator = getRegisterCollaboratorController().createCollaborator(name, birthdate, admissionDate, mobileNumber, email, taxpayerNumber, idType, idNumber, address, job, task);
     }
 
 
@@ -57,6 +56,7 @@ public class RegisterCollaboratorUI implements Runnable {
         mobileNumber = requestMobileNumber();
         admissionDate = requestAdmissionDate();
         job = requestJob();
+        task = requestTask();
     }
 
     private Job requestJob() {
@@ -64,7 +64,11 @@ public class RegisterCollaboratorUI implements Runnable {
         System.out.println("Job: ");
         return new Job(input.nextLine());
     }
-
+    private Task requestTask() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Task: ");
+        return new Task(input.nextLine());
+    }
     private String requestIdNumber() {
         Scanner input = new Scanner(System.in);
         System.out.println("ID Doc Number: ");
@@ -132,16 +136,16 @@ public class RegisterCollaboratorUI implements Runnable {
         return new Address(street, doorNumber, postalCode, city, district);
     }
 
-    private Date requestAdmissionDate() {
+    private LocalDate requestAdmissionDate() {
         Scanner input = new Scanner(System.in);
         System.out.println("Admission date (format: dd-mm-yyyy): ");
-        return new Date(input.nextLine());
+        return new LocalDate(input.nextLine());
     }
 
-    private Date requestBirthdate() {
+    private LocalDate requestBirthdate() {
         Scanner input = new Scanner(System.in);
         System.out.println("Birthdate (format: dd-mm-yyyy): ");
-        return new Date(input.nextLine());
+        return new LocalDate(input.nextLine());
     }
 
     private String requestName() {

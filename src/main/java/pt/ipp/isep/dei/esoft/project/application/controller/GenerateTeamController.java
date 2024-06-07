@@ -67,7 +67,7 @@ public class GenerateTeamController {
     public Team generateTeam(int minMembers, int maxMembers, List<Skill> teamSkills) {
 
         Team team = new Team(minMembers, maxMembers, teamSkills);
-        collaborators = new ArrayList<>(getCollaboratorRepository().getCollaboratorList());
+        collaborators = new ArrayList<>(getCollaboratorRepository().getAll());
 
         int skillIndex = 0;
         while(collaborators.size() >= minMembers) {

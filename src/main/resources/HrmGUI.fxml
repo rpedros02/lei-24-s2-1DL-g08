@@ -4,12 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="312.0" prefWidth="268.0" spacing="10" style="-fx-background-color: #B0C4DE;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui..HrmGUI">
+<VBox alignment="CENTER" prefHeight="321.0" prefWidth="268.0" spacing="10" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.HrmGUI">
     <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #1E90FF;" text="HRM Menu" />
-    <Button onAction="#handleRegisterSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Skill" />
-    <Button onAction="#handleRegisterJob" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Job" />
-    <Button onAction="#handleRegisterCollaborator" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Collaborator" />
-    <Button onAction="#handleAssignSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Assigning Skills to a Collaborator" />
-    <Button onAction="#handleGenerateTeamProposal" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Generate a Team Proposal" />
+    <Button fx:id="btnRegisterSkill" onAction="#handleRegisterSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Skill" />
+    <Button fx:id="btnRegisterJob" onAction="#handleRegisterJob" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Job" />
+    <Button fx:id="btnRegisterCollaborator" onAction="#handleRegisterCollaborator" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Collaborator" />
+    <Button fx:id="btnAssignSkill" onAction="#handleAssignSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Assigning Skills to a Collaborator" />
+    <Button fx:id="btnGenerateTeamProposal" onAction="#handleGenerateTeamProposal" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Generate a Team Proposal" />
     <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: #1E90FF; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;" text="Main Menu" />
 </VBox>

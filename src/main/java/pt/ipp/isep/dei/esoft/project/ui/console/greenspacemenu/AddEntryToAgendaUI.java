@@ -7,7 +7,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
 import java.util.Scanner;
 
-public class AddEntryToAgendaUI {
+public class AddEntryToAgendaUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
     private final Scanner scanner;

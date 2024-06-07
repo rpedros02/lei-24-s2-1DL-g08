@@ -1,18 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
+
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.GreenSpace;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
 import java.util.List;
 
 public class GreenSpaceController {
     private GreenSpaceRepository greenSpaceRepository;
+
     public GreenSpaceController() {
         Repositories repositories = Repositories.getInstance();
         greenSpaceRepository = repositories.getGreenSpaceRepository();
     }
+
     public boolean registerGreenSpace(String name, GreenSpaceTypeRepository type, double area, Address address, Collaborator gsm) {
         GreenSpace greenSpace = new GreenSpace(name, type, area, address, gsm);
         return greenSpaceRepository.addGreenSpace(greenSpace);
@@ -37,6 +41,7 @@ public class GreenSpaceController {
     public void setGreenSpaceRepository(GreenSpaceRepository greenSpaceRepository) {
         this.greenSpaceRepository = greenSpaceRepository;
     }
+
     public GreenSpaceRepository getGreenSpaceRepository() {
         return greenSpaceRepository;
     }

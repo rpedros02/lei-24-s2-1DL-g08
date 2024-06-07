@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="282.0" prefWidth="345.0" spacing="10" style="-fx-background-color: #F5DEB3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui..HrmGUI">
+<VBox alignment="CENTER" prefHeight="282.0" prefWidth="345.0" spacing="10" style="-fx-background-color: #F5DEB3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.VfmGUI">
     <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #D2691E;" text="VFM Menu" />
-    <Button onAction="#handleRegisterSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle" />
-    <Button onAction="#handleRegisterJob" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle Check Up" />
-    <Button onAction="#handleRegisterCollaborator" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="List the Vehicles in need of Check Up" />
+    <Button fx:id="btnRegisterVehicle" onAction="#handleRegisterVehicle" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle" />
+    <Button fx:id="btnRegisterVehicleCheckup" onAction="#handleRegisterVehicleCheckup" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle Check Up" />
+    <Button fx:id="btnListTheVehiclesInNeedOfCheckup" onAction="#handleListTheVehiclesInNeedOfCheckup" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="List the Vehicles in need of Check Up" />
+    <Button fx:id="btnAssignSkill" onAction="#handleAssignSkill" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Assigning Skills to a Collaborator" />
     <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: #D2691E; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;" text="Main Menu" />
 </VBox>
+

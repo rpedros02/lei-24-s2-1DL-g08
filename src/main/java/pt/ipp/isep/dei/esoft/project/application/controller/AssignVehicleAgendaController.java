@@ -19,7 +19,6 @@ public class AssignVehicleAgendaController {
     }
 
 
-
     public Agenda getAgenda(){
         if(agenda == null){
             Repositories repositories = Repositories.getInstance();

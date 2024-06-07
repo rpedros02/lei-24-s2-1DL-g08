@@ -4,6 +4,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,8 +21,8 @@ public class Collaborator {
 
     // Default values for Collaborator attributes
     private final String NAME_BY_OMISSION = "no name";
-    private final Date BIRTH_DATE_BY_OMISSION = new Date(12, 3, 1975);
-    private final Date ADMISSION_DATE_BY_OMISSION = new Date(10,10,2002);
+    private final LocalDate BIRTH_DATE_BY_OMISSION = LocalDate.of(1975,10,25);
+    private final LocalDate ADMISSION_DATE_BY_OMISSION = LocalDate.of(2002,4,14);
     private final int MOBILE_NUMBER_BY_OMISSION = 999999999;
     private final String EMAIL_BY_OMISSION = "nomail@mail.com";
     private final IdDocType ID_DOC_TYPE_BY_OMISSION = IdDocType.OTHER;
@@ -32,8 +33,8 @@ public class Collaborator {
 
     // Collaborator attributes
     private String name;
-    private Date birthDate;
-    private Date admissionDate;
+    private LocalDate birthDate;
+    private LocalDate admissionDate;
     private int mobileNumber;
     private String email;
     private int taxPayerNumber;
@@ -42,6 +43,15 @@ public class Collaborator {
     private Address address;
     private Job job;
     private List<Skill> assignedSkills;
+    private Task task;
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
 
     /**
      * Constructs a Collaborator object with specified attributes.
@@ -58,15 +68,16 @@ public class Collaborator {
      * @param job            The job of the collaborator.
      */
     public Collaborator(String name,
-                        Date birthDate,
-                        Date admissionDate,
+                        LocalDate birthDate,
+                        LocalDate admissionDate,
                         int mobileNumber,
                         String email,
                         int taxPayerNumber,
                         IdDocType idDocType,
                         String idNumber,
                         Address address,
-                        Job job) {
+                        Job job,
+                        Task task) {
         setName(name);
         setBirthDate(birthDate);
         setAdmissionDate(admissionDate);
@@ -97,6 +108,7 @@ public class Collaborator {
         this.address = new Address(ADDRESS_BY_OMISSION);
         this.job = new Job(JOB_BY_OMISSION);
         this.assignedSkills = new ArrayList<>();
+        this.task = new Task();
     }
 
     public Collaborator(Email email) {
@@ -118,11 +130,11 @@ public class Collaborator {
         return name;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public Date getAdmissionDate() {
+    public LocalDate getAdmissionDate() {
         return admissionDate;
     }
 
@@ -163,14 +175,14 @@ public class Collaborator {
         this.name = name;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         if (birthDate == null || !isAtLeast18YearsOld(birthDate)) {
             throw new IllegalArgumentException("Birth date is invalid");
         }
         this.birthDate = birthDate;
     }
 
-    public void setAdmissionDate(Date admissionDate) {
+    public void setAdmissionDate(LocalDate admissionDate) {
         this.admissionDate = admissionDate;
     }
 
@@ -223,7 +235,7 @@ public class Collaborator {
      * @param birthDate The birthdate to check.
      * @return True if the birthdate corresponds to an age of at least 18 years old, otherwise false.
      */
-    public static boolean isAtLeast18YearsOld(Date birthDate) {
+    public static boolean isAtLeast18YearsOld(LocalDate birthDate) {
         return Calendar.getInstance().get(Calendar.YEAR) - birthDate.getYear() >= 18;
     }
 
@@ -235,6 +247,10 @@ public class Collaborator {
      */
     public static boolean isValidMobileNumber(int mobileNumber) {
         return mobileNumber < 1000000000 && mobileNumber > 99999999;
+    }
+
+    public List<Skill> getAssignedSkills() {
+        return assignedSkills;
     }
 
     /**
@@ -318,8 +334,7 @@ public class Collaborator {
     @Override
     public Collaborator clone() {
         return new Collaborator(this.name, this.birthDate, this.admissionDate, this.mobileNumber, this.email,
-                this.taxPayerNumber, this.idDocType, this.idNumber, this.address, this.job);
-
+                this.taxPayerNumber, this.idDocType, this.idNumber, this.address, this.job, this.task);
     }
 
     @Override
@@ -336,6 +351,12 @@ public class Collaborator {
                 ", address=" + getAddress() +
                 ", job=" + getJob() +
                 '}';
+    }
+    public void assignTask(Task task) {
+        if (this.task != null) {
+            throw new IllegalStateException("This collaborator already has a task assigned.");
+        }
+        this.task = task;
     }
 
 
