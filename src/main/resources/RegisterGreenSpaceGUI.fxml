@@ -21,15 +21,15 @@
    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street:" />
    <TextField fx:id="txtStreet" style="-fx-font-size: 14;" />
    <Label layoutX="156.0" layoutY="291.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street Number:" />
-   <TextField fx:id="txtStreet1" layoutX="112.0" layoutY="345.0" style="-fx-font-size: 14;" />
+   <TextField fx:id="txtStreetNumber" layoutX="112.0" layoutY="345.0" style="-fx-font-size: 14;" />
 
    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Postal Code:" />
-   <TextField fx:id="txtZipCode" style="-fx-font-size: 14;" />
+   <TextField fx:id="txtPostalCode" style="-fx-font-size: 14;" />
 
    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter City:" />
    <TextField fx:id="txtCity" style="-fx-font-size: 14;" />
    <Label layoutX="163.0" layoutY="499.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter District:" />
-   <TextField fx:id="txtCity1" layoutX="112.0" layoutY="534.0" style="-fx-font-size: 14;" />
+   <TextField fx:id="txtDistrict" layoutX="112.0" layoutY="534.0" style="-fx-font-size: 14;" />
 
    <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Register" />
 </VBox>

@@ -136,11 +136,10 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin}</version>
                 <configuration>
-                    <source>14</source>
-                    <target>14</target>
+                    <source>21</source>
+                    <target>21</target>
                     <showWarnings>true</showWarnings>   <!-- Needs this -->
-                    <compilerArgs>
-                        <arg>-Xlint:all</arg>   <!-- recommended -->
+                    <compilerArgs>--enable-preview
                     </compilerArgs>
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
