@@ -4,6 +4,7 @@ import pt.ipp.isep.dei.esoft.project.ui.console.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu.CreateVehicleUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu.maintenancemenu.CheckUpsUI;
+import pt.ipp.isep.dei.esoft.project.ui.console.vehiclemenu.maintenancemenu.CreateVehicleCheckupUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class VfmUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Create Vehicle", new CreateVehicleUI()));
+        options.add(new MenuItem("Register a Vehicle Check up", new CreateVehicleCheckupUI()));
         options.add(new MenuItem("Register Check Up or See Vehicles needing Check Up", new CheckUpsUI()));
 
         int option = 0;

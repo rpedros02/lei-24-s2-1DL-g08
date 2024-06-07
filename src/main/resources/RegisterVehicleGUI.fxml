@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="841.0" prefWidth="354.0" style="-fx-background-color: #F5DEB3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RegisterVehicleGUI">
+    <children>
+        <VBox alignment="TOP_CENTER" layoutX="41.0" layoutY="38.0" spacing="10.0">
+            <children>
+                <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #D2691E;" text="VFM: Register a Vehicle" />
+                <Label text="Enter the plate Id:" />
+                <TextField fx:id="txtPlateId" />
+                <Label text="Enter the brand:" />
+                <TextField fx:id="txtBrand" />
+                <Label text="Enter the model:" />
+                <TextField fx:id="txtModel" />
+                <Label text="Enter the type:" />
+                <TextField fx:id="txtTupe" />
+            <Label layoutX="70.0" layoutY="489.0" text="Enter the tare:" />
+                <TextField fx:id="txtTare" />
+                <Label text="Enter the weight:" />
+                <TextField fx:id="txtWeight" />
+                <Label text="Enter mileage:" />
+                <TextField fx:id="txtMileage" />
+                <Label layoutX="134.0" layoutY="551.0" text="Enter the last vehicle check up km:" />
+                <TextField fx:id="txtLastVehicleCheckup" layoutX="10.0" layoutY="702.0" />
+                <Label text="Enter register date:" />
+            <DatePicker fx:id="dpRegisterDate" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="272.0" style="-fx-font-size: 14;" />
+                <Label text="Enter acquisition date:" />
+            <DatePicker fx:id="dpRegisterDate1" layoutX="10.0" layoutY="640.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="272.0" style="-fx-font-size: 14;" />
+                <Label text="Enter the maintenance frequency:" />
+                <TextField fx:id="txtMaintenanceFrequency" />
+                <Button onAction="#handleRegisterVehicle" style="-fx-background-color: #D2691E; -fx-text-fill: #000000; -fx-font-size: 16;" text="Register a Vehicle" />
+                <Label fx:id="lblMessage" style="-fx-font-size: 14; -fx-text-fill: #333;" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

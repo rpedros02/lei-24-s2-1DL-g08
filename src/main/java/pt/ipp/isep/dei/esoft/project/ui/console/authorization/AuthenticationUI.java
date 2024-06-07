@@ -5,6 +5,7 @@ import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -33,7 +33,7 @@ public class CreateCollaboratorController {
 
 
     public Optional<Collaborator> createCollaborator(String name, LocalDate birthDate, LocalDate admissionDate, int mobileNumber, String email, int taxPayerNumber, IdDocType idDocType, String idNumber, Address address, Job job, Task task) {
-        return Organization.getInstance("000000000").createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job);
+        return Organization.getInstance("000000000").createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job, task);
     }
 
 
