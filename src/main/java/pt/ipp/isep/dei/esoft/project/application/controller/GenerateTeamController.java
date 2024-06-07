@@ -74,7 +74,7 @@ public class GenerateTeamController {
             if (team.getNumberOfTeamMembers() < maxMembers) {
                 Optional<Collaborator> OptCollaborator = getCollaborator(teamSkills.get(skillIndex).getName());
                 if (OptCollaborator.isPresent()) {
-                    collaborators.remove(OptCollaborator);
+                    collaborators.remove(OptCollaborator.get());
                     team.addTeamMember(OptCollaborator.get());
                 } else {
                     Collaborator collaborator = getRandomCollaborator();
@@ -85,5 +85,13 @@ public class GenerateTeamController {
         }
 
         return team;
+    }
+
+    public void registerTeam(Team team) {
+        if (teamRepository.add(team)) {
+            System.out.println("Team successfully registered!");
+        } else {
+            System.out.println("Team not registered!");
+        }
     }
 }

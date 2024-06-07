@@ -40,20 +40,30 @@ public class GenerateTeamUI implements Runnable {
 
     private void submitData(int minMembers, int maxMembers, List<Skill> teamSkills) {
         Team team = getController().generateTeam(minMembers, maxMembers, teamSkills);
-        if (team != null) {
-            System.out.println(team);
-            System.out.println("\nTeam successfully generated!");
-        } else {
-            System.out.println("\nTeam not generated!");
+
+        if(requestConfirmation(team)){
+            if (team != null) {
+                System.out.println("\nTeam successfully generated!");
+            } else {
+                System.out.println("\nTeam not generated!");
+            }
         }
+    }
+
+    private boolean requestConfirmation(Team team){
+        boolean confirmation = Utils.getBooleanAnswer("Do you want to confirm the team generation?");
+        if(confirmation){
+            getController().registerTeam(team);
+            return true;
+        }
+        return false;
     }
 
     private int requestTeamSize() {
         int number = 0;
         while (number <= 0) {
-            number = Utils.readIntegerFromConsole("Team Size: ");
+            number = Utils.readIntegerFromConsole("Size: ");
         }
-
         return number;
     }
 
