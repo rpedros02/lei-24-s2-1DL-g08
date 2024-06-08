@@ -18,7 +18,8 @@ public class GreenSpace {
 
     }
 
-    public GreenSpace() {
+    public GreenSpace(String name) {
+        this.name = name;
     }
 
     public String getName() {
