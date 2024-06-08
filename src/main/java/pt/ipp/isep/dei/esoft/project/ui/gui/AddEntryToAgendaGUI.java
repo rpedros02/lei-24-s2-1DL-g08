@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
@@ -21,6 +22,12 @@ public class AddEntryToAgendaGUI {
     private ComboBox<String> cbEntries;
     @FXML
     private Button btnAddEntry;
+
+    @FXML
+    private TextField entryTitleTextField;
+    @FXML
+    private TextField numMembersTextField;
+
 
     private final OrganizationRepository organizationRepository;
     private final ToDoListController toDoListController;
