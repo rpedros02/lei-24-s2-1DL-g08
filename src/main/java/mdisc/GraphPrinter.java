@@ -70,4 +70,6 @@ public class GraphPrinter {
         outputStream.write(text.getBytes());
         outputStream.close();
     }
+
 }
+

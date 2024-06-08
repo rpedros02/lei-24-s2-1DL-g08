@@ -23,3 +23,5 @@ public class Aresta {
         return weight;
     }
 }
+
+
