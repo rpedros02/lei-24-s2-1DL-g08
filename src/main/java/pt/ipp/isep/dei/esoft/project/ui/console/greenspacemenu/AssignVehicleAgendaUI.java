@@ -15,8 +15,8 @@ public class AssignVehicleAgendaUI implements Runnable {
     private Scanner input = new Scanner(System.in);
     private Entry selectedEntry;
 
-    public AssignVehicleAgendaUI() {
-        controller = new AssignVehicleAgendaController();
+    public AssignVehicleAgendaUI(AssignVehicleAgendaController controller) {
+        this.controller = controller;
     }
 
     @Override

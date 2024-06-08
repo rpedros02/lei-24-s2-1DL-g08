@@ -24,14 +24,16 @@ public class ToDoListController {
     public Optional<Entry> createEntry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd, EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         Collaborator collaborator = getEmployeeFromSession();
         Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        if (team == null) {
+            System.out.println("Team is null.");
+            return Optional.empty();
+        }
+
         Entry entry = new Entry(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task);
         Optional<Entry> newEntryToDoList = Optional.empty();
 
-
         if (organization.isPresent()) {
-            newEntryToDoList = organization.get()
-                    .addEntryToToDoList(entry);
-
+            newEntryToDoList = organization.get().addEntryToToDoList(entry);
         }
         return newEntryToDoList;
     }
@@ -61,4 +63,20 @@ public class ToDoListController {
         return new Collaborator(email);
     }
 
+    public Optional<Team> getTeam(String teamName) {
+        Optional<Team> teamOpt = organizationRepository.getTeamByName(teamName);
+        return teamOpt;
+    }
+
+
+    public Optional<List<String>> getMembers(String teamName) {
+        Optional<Team> teamOpt = getTeam(teamName);
+        if (teamOpt.isPresent()) {
+            Team team = teamOpt.get();
+            List<String> members = team.getMembers();
+            return Optional.of(members);
+        } else {
+            return Optional.empty();
+        }
+    }
 }

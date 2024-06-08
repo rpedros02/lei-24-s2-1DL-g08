@@ -1,7 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
-
 import java.util.Objects;
 
 public class Task {
@@ -13,7 +11,6 @@ public class Task {
     private int duration;
     private double cost;
     private TaskCategory taskCategory;
-    private EStatus taskStatus;
 
     public Task(String reference,
                 String description,
@@ -30,7 +27,6 @@ public class Task {
         setDuration(duration);
         setCost(cost);
         setTaskCategory(taskCategory);
-        taskStatus = EStatus.PENDING;
     }
 
     public Task() {
@@ -111,10 +107,6 @@ public class Task {
 
     public void setTaskCategory(TaskCategory taskCategory) {
         this.taskCategory = taskCategory;
-    }
-
-    public void setTaskStatus (EStatus eStatus){
-        this.taskStatus = eStatus;
     }
     // END GETTERS & SETTERS
 

@@ -1,20 +1,24 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
-
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.Scanner;
 
 public class AddEntryToAgendaUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
+    private final GenerateTeamController generateTeamController;
     private final Scanner scanner;
 
-    public AddEntryToAgendaUI(ToDoListController toDoListController, AgendaController agendaController) {
+    public AddEntryToAgendaUI(ToDoListController toDoListController, AgendaController agendaController, AssignVehicleAgendaController generateTeamController) {
         this.toDoListController = toDoListController;
         this.agendaController = agendaController;
+        this.generateTeamController = generateTeamController;
         this.scanner = new Scanner(System.in);
     }
 
@@ -36,23 +40,34 @@ public class AddEntryToAgendaUI implements Runnable {
         }
 
         // Verificar se a entrada está associada a um espaço verde gerenciado pela GSM
-        if (entry.getGreenSpace().isManagedByGSM()) {
-            System.out.println("Entry is associated with a green space managed by the GSM.");
-        } else {
+        if (!entry.getGreenSpace().isManagedByGSM()) {
             System.out.println("Entry is not associated with a green space managed by the GSM.");
             return;
         }
-
 
         // Adicionar a entrada à agenda
         boolean success = agendaController.addEntry(entry);
         if (success) {
             System.out.println("Entry added to the Agenda successfully.");
+
+            // Gerar uma equipe
+            int minMembers = 1; // Defina o número mínimo de membros da equipe conforme necessário
+            int maxMembers = 5; // Defina o número máximo de membros da equipe conforme necessário
+            Team team = generateTeamController.generateTeam(minMembers, maxMembers, entry.getSkills());
+
+            // Atribuir a equipe à entrada
+            boolean teamAssigned = agendaController.assignTeamToEntry(entryTitle, team);
+            if (teamAssigned) {
+                System.out.println("Team assigned to the entry successfully.");
+            } else {
+                System.out.println("Failed to assign team to the entry.");
+            }
         } else {
             System.out.println("Failed to add entry to the Agenda.");
         }
     }
 }
+
 
 
 
