@@ -19,4 +19,5 @@ public class PostponeAnEntryController {
         entry.postponeEntry(newDate);
         return true;
     }
+
 }

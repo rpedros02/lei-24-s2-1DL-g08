@@ -41,16 +41,29 @@ public class Agenda {
     }
 
     public Entry getEntryByTitle(String title) {
+        if (title == null) {
+            return null;
+        }
         for (Entry entry : entries) {
-            if (entry.getTitle().equals(title)) {
+            if (title.equals(entry.getTitle())) {
                 return entry;
             }
         }
         return null;
     }
 
+
     public void setEntries(List<Entry> entries) {
         this.entries.clear();
         this.entries.addAll(entries);
     }
+
+    public boolean cancelEntry(String title) {
+        Entry entryToRemove = getEntryByTitle(title);
+        if (entryToRemove != null) {
+            return removeEntry(entryToRemove);
+        }
+        return false;
+    }
+
 }

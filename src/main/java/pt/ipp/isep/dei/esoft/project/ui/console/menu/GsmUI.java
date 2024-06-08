@@ -25,7 +25,7 @@ public class GsmUI implements Runnable {
     public void run() {
         List<MenuItem> options = new ArrayList<>();
         options.add(new MenuItem("Register a Green Space", new RegisterGreenSpaceUI()));
-        options.add(new MenuItem("Add a new entry to the To Do List", new AddEntryToToDoListUI(toDoListController)));
+        options.add(new MenuItem("Add a new entry to the To Do List", new AddEntryToToDoListUI(toDoListController, agendaController)));
         options.add(new MenuItem("Add a new entry to the Agenda", new AddEntryToAgendaUI(toDoListController, agendaController, assignVehicleAgendaController)));
         options.add(new MenuItem("Assign a team to an entry", new AssignTeamToEntryUI(toDoListController, agendaController, generateTeamController)));
         options.add(new MenuItem("PostPone an entry in the agenda", new PostPoneAnEntryUI(agendaController)));

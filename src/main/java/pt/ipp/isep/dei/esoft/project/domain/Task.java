@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.Skill;
+import pt.ipp.isep.dei.esoft.project.domain.TaskCategory;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Task {
@@ -11,6 +15,7 @@ public class Task {
     private int duration;
     private double cost;
     private TaskCategory taskCategory;
+    private List<Skill> skills;
 
     public Task(String reference,
                 String description,
@@ -29,22 +34,12 @@ public class Task {
         setTaskCategory(taskCategory);
     }
 
-    public Task() {
+    public Task() {}
 
-    }
-
-    public Task(String s) {
-    }
+    public Task(String s) {}
 
     // VALIDATIONS
 
-    /**
-     * @param reference Reference of the task.
-     *                  It cannot be null.
-     *                  It must be unique.
-     *                  It must be alphanumeric.
-     *                  It must be between 4 and 10 characters.
-     */
     private void validateReference(String reference) {
         if (reference == null || reference.length() < 4 || reference.length() > 10 || !reference.matches("^[a-zA-Z0-9]*$")) {
             throw new IllegalArgumentException("Reference cannot be null or empty.");
@@ -108,6 +103,15 @@ public class Task {
     public void setTaskCategory(TaskCategory taskCategory) {
         this.taskCategory = taskCategory;
     }
+
+    // Métodos para habilidades
+    public List<Skill> getSkills() {
+        return this.skills;
+    }
+
+    public void setSkills(List<Skill> skills) {
+        this.skills = skills;
+    }
     // END GETTERS & SETTERS
 
     @Override
@@ -127,11 +131,6 @@ public class Task {
         return Objects.hash(reference);
     }
 
-    /**
-     * Clone method.
-     *
-     * @return A clone of the current instance.
-     */
     public Task clone() {
         return new Task(this.reference, this.description, this.informalDescription, this.technicalDescription,
                 this.duration, this.cost, this.taskCategory);

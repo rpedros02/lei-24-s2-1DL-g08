@@ -18,7 +18,7 @@ import java.util.Objects;
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
 
-    public AuthenticationUI() {
+    public AuthenticationUI(AgendaController agendaController, ToDoListController toDoListController, AssignVehicleAgendaController assignVehicleAgendaController, GenerateTeamController generateTeamController) {
         ctrl = new AuthenticationController();
     }
 

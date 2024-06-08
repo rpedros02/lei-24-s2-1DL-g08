@@ -17,7 +17,7 @@ public class Date extends java.util.Date {
         this.year = year;
     }
 
-    public Date(String date) {
+    public Date(long date) {
         if (!isValid(Integer.parseInt(date.substring(0, 2)), Integer.parseInt(date.substring(3, 5)), Integer.parseInt(date.substring(6, 10))) || date.length() != 10) {
             throw new IllegalArgumentException("Invalid date.");
         }

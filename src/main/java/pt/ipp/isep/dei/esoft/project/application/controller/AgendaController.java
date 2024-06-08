@@ -35,8 +35,6 @@ public class AgendaController {
         return Optional.empty();
     }
 
-
-
     public boolean addEntry(Entry entry) {
         return createEntry(entry).isPresent();
     }
@@ -57,7 +55,6 @@ public class AgendaController {
             return Optional.ofNullable(agenda.getEntryByTitle(entryTitle));
         });
     }
-
 
     public boolean exists(String entryTitle) {
         Collaborator collaborator = getEmployeeFromSession();
@@ -81,6 +78,32 @@ public class AgendaController {
                 return true;
             }
             return false;
+        }).orElse(false);
+    }
+
+    public boolean postponeEntry(String entryTitle, Date newDate) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+
+        return organization.map(org -> {
+            Agenda agenda = org.getAgenda();
+            Entry entry = agenda.getEntryByTitle(entryTitle);
+            if (entry != null) {
+                entry.setBeginDate(newDate);
+                entry.setEndDate(newDate);
+                return true;
+            }
+            return false;
+        }).orElse(false);
+    }
+
+    public boolean cancelEntry(String entryTitle) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+
+        return organization.map(org -> {
+            Agenda agenda = org.getAgenda();
+                return agenda.removeEntryByTitle(entryTitle);
         }).orElse(false);
     }
 }
