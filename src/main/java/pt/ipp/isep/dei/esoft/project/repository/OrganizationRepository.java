@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Organization;
+import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,17 @@ public class OrganizationRepository {
 
         return newOrganization;
 
+    }
+
+    public Optional<Team> getTeamByName(String teamName) {
+        for (Organization organization : organizations) {
+            for (Team team : organization.getTeams()) {
+                if (team.getName().equals(teamName)) {
+                    return Optional.of(team);
+                }
+            }
+        }
+        return Optional.empty();
     }
 
     private boolean validateOrganization(Organization organization) {

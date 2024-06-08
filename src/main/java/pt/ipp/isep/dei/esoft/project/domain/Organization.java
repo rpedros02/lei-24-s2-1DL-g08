@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
-
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
@@ -24,6 +23,7 @@ public class Organization {
     private String website;
     private String phone;
     private String email;
+    private final List<Team> teams;
 
     /**
      * This method is the constructor of the organization.
@@ -38,6 +38,7 @@ public class Organization {
         vehicles = new VehicleRepository();
         agenda = new Agenda();
         toDoList = new ToDoList();
+        teams = new ArrayList<>();
     }
 
     public static Organization getInstance(String vatNumber) {
@@ -107,6 +108,10 @@ public class Organization {
 
     public Agenda getAgenda() {
         return agenda;
+    }
+
+    public List<Team> getTeams() {
+        return new ArrayList<>(this.teams);
     }
 
     public List<Entry> getEntriesFromToDoList() {

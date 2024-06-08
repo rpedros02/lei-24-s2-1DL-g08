@@ -3,18 +3,61 @@
  [Click here to view the Glossary](01.requirements-engineering/glossary.md)
  
 ## 2. Introduction
-Green spaces, such as parks and gardens, are crucial for enhancing the quality of life in urban and semi-urban areas. 
-As urbanization continues to rise globally, with predictions indicating that 68% of the world population will reside in urban areas by 2050, the effective management of these green spaces becomes increasingly important. 
-This integrative project aims to address the planning, construction, and maintenance of urban green spaces by developing a comprehensive software solution for MusgoSublime (MS), an organization dedicated to managing such spaces.
-
-Students are tasked with creating a computer system to streamline various operations of MS, focusing on aspects such as team management, allocation of resources, optimization of irrigation and lighting systems, and performance measurement through statistical indicators. 
-Leveraging their knowledge from courses like Software Engineering (ESOFT), Programming Paradigms (PPROG), Computational Mathematics (MATCP), Discrete Mathematics (MDISC), and Laboratory-Project II (LAPR2), students will employ an agile methodology, specifically SCRUM, to manage the iterative and incremental development process of the project.
-
-The resulting software solution, composed of Java applications, must adhere to the principles of Test-Driven Development (TDD) to ensure maintainability and high-quality code. 
-The project not only challenges students to apply theoretical concepts in a practical setting but also aims to deliver a proof-of-concept that meets the real-world requirements provided by MS, thereby contributing to the sustainable management of urban green spaces.
+This user manual aims to provide instructions to help users understand how to use the Green Spaces Management Application.
+Firstly, it is important to know the main goal of our app: to create a good environment in green spaces by adopting the best management practices and providing a friendly and healthy environment.
+To achieve our goal, this user manual offers an understanding of the functionalities, usage guidelines, and features of the application.
+As expected, this manual will be divided into various chapters, such as "System Overview," "Features," "Glossary," and others. The way this manual is structured will help users solve any problems they might encounter, learn how to perform each task, provide step-by-step explanations of the features and their user stories, and include a FAQ section to showcase feedback received.
+The structure of this manual is designed to assist users in resolving any issues they may face, learning how to perform each task, explaining the features and their user stories step by step, and providing FAQs to allow users to see the feedback received.
 
 ## 3. System Requirements
 
+1.	Operating System
+      •	Windows:
+- Windows 10, Windows 8.1, Windows 8, Windows 7, Windows Vista
+  •	macOS:
+- macOS High Sierra, macOS Sierra, macOS El Capitan
+  •	Linux:
+- Ubuntu 20.04 LTS, Ubuntu 18.04 LTS, Ubuntu 16.04 LTS
+
+2.	Browsers:
+      •	Google Chrome:
+- Version 80 or higher
+  •	Mozilla Firefox:
+- Version 78 or higher
+  •	Microsoft Edge:
+- Version 80 or higher
+
+2. Java Platform
+   •	Minimum Java Version: Java SE 19 or higher
+
+3. Graphics Support
+- Prism Hardware Pipeline:
+  •	NVIDIA:
+- Mobile GPUs: GeForce 8M and 100M series or higher
+- Desktop GPUs: GeForce 8 and 100 series or higher
+- Workstation GPUs: Quadro FX 300 series or higher
+  •	ATI:
+- Mobile GPUs: Mobility Radeon HD 3000, 4000, and 5000 series
+- Desktop GPUs: Radeon HD 2400, 3000, 4000, 5000, and 6000 series
+  •	Intel:
+- Mobile GPUs: GMA 4500MHD and GMA HD
+- Desktop GPUs: GMA 4500 and GMA HD
+
+4. JavaFX Installation
+   •	JavaFX SDK and Runtime:
+- Included in the JDK starting with Java SE 7 Update 2
+  •	Standalone JavaFX SDK:
+- For JDK older than 7u2
+  •	Standalone JavaFX Runtime:
+- For JDK older than 7u2 and no plan to install the JavaFX SDK
+
+5. NetBeans IDE
+   •	Required Version: NetBeans IDE 7.1 (at least a prerelease version)
+
+6. Additional Requirements
+   •	Internet Connection: Required for accessing online features and updates
+   •	Java 19 or Higher: Required for JavaFX 20
+   •	org.apache.commons.math3.stat Package: Required for JavaFX 20
 
 ## 4. System Overview
 
@@ -70,41 +113,215 @@ Our software is a comprehensive solution designed to enhance green space managem
    1.1. Register a skill | HRM
 
    As a Human Resources Manager (HRM), I want to register skills that a collaborator may have.
+   Here is how our system will handle this process, step by step:
+
+•	The HRM requests to register a skill;
+•	The system displays a list of available skills;
+•	While the HRM wants to select more skills:
+      o	The HRM selects a skill from the list;
+      o	The system prompts for confirmation of the selected skill;
+      o	The HRM confirms the selection;
+      o	The system saves the skill to the list; 
+      o	This loop continues until all relevant skills for the collaborator are selected;
+•	The system displays a message indicating the operation was successful.
 
 
    1.2. Register a job | HRM
 
    As an HRM, I want to register a job that a collaborator need to have.
+   Here is how our system will handle this process, step by step:
+
+•	The HRM requests to register a job;
+•	The system displays a list of available jobs;
+•	The HRM selects a job from the list;
+•	The system prompts for confirmation of the selected job;
+•	The HRM confirms the selection;
+•	The system assigns the job to the collaborator;
+•	The system displays a message indicating the operation was successful.
 
 
    1.3. Register a collaborator | HRM
 
    As an HRM, I want to register a collaborator with a job and fundamental characteristics.
+   Here is how our system will handle this process, step by step:
+
+
+•	The HRM requests to register a collaborator;
+•	The system displays a list of available jobs;
+•	The HRM selects a job from the list;
+•	The system prompts for the collaborator's data;
+•	The HRM inputs the required data;
+•	The system displays a message indicating the operation was successful.
  
 
    1.4. Assign skills to a collaborator | HRM
  
    As an HRM, I want to assign one or more skills to a collaborator.
+   Here is how our system will handle this process, step by step:
+   •	The HRM accesses the collaborator's profile;
+   •	The system displays the profile;
+   •	The HRM selects the option to manage skills;
+   •	The system shows the list of predefined skills and the option to add more;
+   •	The HRM either selects from the predefined skills or chooses to add new skills:
+       o	If the HRM chooses to add skills, the system prompts to enter the skill;
+       o	The system asks for confirmation;
+       o	The HRM confirms the addition;
+   •	The system displays a message indicating the operation was successful.
  
 
    1.5. Generate team proposal | HRM
 
    As an HRM, I want to generate a team proposal automatically.
+   Here is how our system will handle this process, step by step:
+   •	The HRM requests to generate a team proposal automatically;
+   •	The system prompts for the team data;
+   •	The HRM inputs the requested data;
+   •	In a loop:
+       o	The system displays a list of employees with their respective skills and jobs;
+       o	The HRM selects an employee from the list;
+       o	The system adds the selected employee to the team;
+       o	If the team size is still smaller than the requested size, the loop repeats;
+   •	When the team is full, the system displays a message indicating the operation was successful.
 
 
    1.6. Register a vehicle | FM
 
-   As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross      Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms).
+   As an FM, I wish to register a vehicle including Brand, Model, Type, Tare, Gross Weight, Current Km, Register Date, Acquisition Date, Maintenance/Check-up Frequency (in Kms).
+   ere is how our system will handle this process, step by step:
+   •	The FM requests to register a vehicle;
+   •	The system prompts for the required data;
+   •	The FM inputs the data;
+   •	The system verifies if all necessary information is provided and asks the FM to confirm it;
+   •	The FM confirms the information;
+   •	Once the registration is complete, the system displays a message indicating the operation was successful.
 
 
    1.7. Register a vehicle’s check-up | FM
 
    As an FM, I want to register a vehicle’s check-up.
+   Here is how our system will handle this process, step by step:
+   •	The FM requests to register a vehicle's check-up;
+   •	The system prompts for the necessary data;
+   •	The FM inputs the requested data;
+   •	The system displays a message indicating the operation was successful.
 
 
    1.8. List the vehicles in need off check-up | FM
 
    As an FM, I want to list the vehicles needing the check-up.
+   Here is how our system will handle this process, step by step:
+   •	The FM requests the list of vehicles needing a check-up;
+   •	The system displays the list;
+   •	The FM requests to filter the list by location;
+   •	The system displays the filtered list.
+
+
+   1.20. Register a Green Space | GSM
+
+   As a Green Space Manager (GSM), I want to register a green space (garden, medium-sized park, or large-sized park) and its respective area.
+   Here is how our system will handle this process, step by step:
+   •	The GSM requests to register a green space;
+   •	The system prompts for the required data;
+   •	The GSM inputs the data;
+   •	The system displays a message indicating the operation was successful.
+
+
+   1.21. Add a new entry to the To-Do list | GSM
+
+   As a Green Space Manager (GSM), I want to add a new entry to the To-Do List.
+   Here is how our system will handle this process, step by step:
+   •	The GSM requests to register an entry on the To-Do list;
+   •	The system prompts for the required data;
+   •	The GSM inputs the data;
+   •	The system displays a message indicating the operation was successful.
+
+
+   1.22. Add a new entry in the agenda | GSM
+
+   As a Green Space Manager (GSM), I want to add a new entry in the Agenda.
+   Here is how our system will handle this process, step by step:
+   •	The GSM requests to register an entry on the Agenda;
+   •	The system displays the list of entries from the To-Do list;
+   •	The GSM selects an entry;
+   •	The system prompts for the starting date;
+   •	The GSM inputs the starting date;
+   •	The system displays a message indicating the operation was successful.
+
+
+   1.23. Assign a team to an entry in the Agenda | GSM
+
+   As a Green Space Manager (GSM), I want to assign a Team to an entry in the Agenda.
+   Here is how our system will handle this process, step by step:
+   •	The GSM asks to assign a Team to an entry in the Agenda;
+   •	The system shows the list of entries from the Agenda;
+   •	The GSM selects an entry;
+   •	The system shows the list of Teams;
+   •	The GSM selects a team;
+   •	The system shows a message of operation success;
+
+
+   1.24. Postpone an entry in the agenda | GSM
+
+   As a Green Space Manager (GSM), I want to Postpone an entry in the Agenda to a specific future date.
+   Here is how our system will handle this process, step by step:
+   •	The Green Space Manager (GSM) requests to postpone an entry on the Agenda.
+   •	The system displays the list of entries available in the Agenda.
+   •	The GSM selects the entry they wish to postpone.
+   •	The system prompts the GSM to input the new starting date for the selected entry.
+   •	The GSM inputs the desired starting date for postponement.
+   •	The system confirms the successful postponement of the entry with a notification message.
+
+
+   1.25. Cancel an entry in the agenda | GSM
+
+   As a Green Space Manager (GSM), I want to Cancel an entry in the Agenda.
+   Here is how our system will handle this process, step by step:
+   •	The Green Space Manager (GSM) requests to cancel an entry on the Agenda.
+   •	The system displays the list of entries available in the Agenda.
+   •	The GSM selects the entry they wish to cancel.
+   •	The system confirms the successful cancellation of the entry with a notification message.
+
+
+   1.26. Assign one or more vehicles to an entry in the agenda | GSM
+
+   As a Green Space Manager (GSM), I want to assign one or more vehicles to an entry in the Agenda.
+   Here is how our system will handle this process, step by step:
+   •	The Green Space Manager (GSM) requests to assign a vehicle to an entry in the Agenda.
+   •	The system displays the list of entries available in the Agenda.
+   •	The GSM selects the desired entry from the provided list.
+   •	The system presents the GSM with the list of available vehicles.
+   •	The GSM selects one or more vehicles to assign to the selected entry.
+   •	The system confirms the successful assignment with a notification message.
+
+
+   1.27. List all green spaces managed  by me | GSM
+
+   As a Green Space Manager (GSM), I need to list all green spaces managed by me.
+   Here is how our system will handle this process, step by step:
+   •	The Green Space Manager (GSM) requests to see the list of green spaces managed by them.
+   •	The system retrieves and displays the list of green spaces managed by the GSM.
+
+
+   1.28. List all green spaces managed by me |  Collaborator
+
+   As a Collaborator, I wish to consult the tasks assigned to me between two dates.
+   Here is how our system will handle this process, step by step:
+   •	The Collaborator requests to consult the tasks assigned to them between two dates.
+   •	The system prompts the collaborator to input the first date.
+   •	The collaborator inputs the first date as requested.
+   •	The system then prompts the collaborator to input the last date.
+   •	The collaborator inputs the last date.
+   •	The system retrieves and displays all tasks assigned to the collaborator between the two input dates.
+
+
+   1.29. Record the completion of the task | Collaborator
+
+   As a Collaborator (CLB), I want to record the completion of a task.
+   Here is how our system will handle this process, step by step:
+   •	The Collaborator  requests to record the completion of a task on the Agenda.
+   •	The system displays the list of entries available in the Agenda.
+   •	The collaborator selects the entry/task for which they want to record completion.
+   •	The system confirms the successful recording of task completion with a notification message.
 
 
 2. MATCP
