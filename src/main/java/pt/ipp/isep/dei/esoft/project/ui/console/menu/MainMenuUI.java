@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.DevTeamUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.authorization.AuthenticationUI;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -10,27 +9,19 @@ import java.util.List;
 
 public class MainMenuUI implements Runnable {
 
-    private final AgendaController agendaController;
-    private final ToDoListController toDoListController;
-    private final AssignVehicleAgendaController assignVehicleAgendaController;
-    private final GenerateTeamController generateTeamController;
 
-    public MainMenuUI(AgendaController agendaController, ToDoListController toDoListController,
-                      AssignVehicleAgendaController assignVehicleAgendaController, GenerateTeamController generateTeamController) {
-        this.agendaController = agendaController;
-        this.toDoListController = toDoListController;
-        this.assignVehicleAgendaController = assignVehicleAgendaController;
-        this.generateTeamController = generateTeamController;
+
+    public MainMenuUI() {
+
     }
 
     public void run() {
         List<MenuItem> options = new ArrayList<>();
-        options.add(new MenuItem("Do Login", new AuthenticationUI(agendaController, toDoListController,
-                assignVehicleAgendaController, generateTeamController)));
+        options.add(new MenuItem("Do Login", new AuthenticationUI()));
         options.add(new MenuItem("Know the Development Team", new DevTeamUI()));
         options.add(new MenuItem("Load Data", new LoadDataUI()));
 
-        int option = 0;
+        int option;
         do {
             option = Utils.showAndSelectIndex(options, "\n\n--- MAIN MENU --------------------------");
 

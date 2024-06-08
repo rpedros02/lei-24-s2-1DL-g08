@@ -1,22 +1,23 @@
 package pt.ipp.isep.dei.esoft.project.ui;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.*;
+import javafx.scene.control.Alert;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.MainMenuUI;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main() {
         try {
-            AgendaController agendaController = new AgendaController();
-            ToDoListController toDoListController = new ToDoListController();
-            AssignVehicleAgendaController assignVehicleAgendaController = new AssignVehicleAgendaController();
-            GenerateTeamController generateTeamController = new GenerateTeamController();
-
-            MainMenuUI menu = new MainMenuUI(agendaController, toDoListController,
-                    assignVehicleAgendaController, generateTeamController);
+            MainMenuUI menu = new MainMenuUI();
             menu.run();
         } catch (Exception e) {
-            e.printStackTrace();
+            showAlert(e.getMessage());
         }
+    }
+    private static void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
