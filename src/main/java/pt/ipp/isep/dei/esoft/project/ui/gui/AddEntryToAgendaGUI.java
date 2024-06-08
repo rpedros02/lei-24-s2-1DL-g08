@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
@@ -38,6 +39,7 @@ public class AddEntryToAgendaGUI {
 
     @FXML
     private void handleAddEntryToAgenda() {
+        Stage stage = (Stage) cbEntries.getScene().getWindow();
         String entryTitle = cbEntries.getValue();
         if (entryTitle == null || entryTitle.isEmpty()) {
             showAlert(AlertType.ERROR, "Error", "Please select an entry.");
@@ -65,6 +67,7 @@ public class AddEntryToAgendaGUI {
         } else {
             showAlert(AlertType.WARNING, "Warning", "Entry is not associated with a green space managed by the GSM.");
         }
+        stage.close();
     }
 
     private void showAlert(AlertType alertType, String title, String message) {
