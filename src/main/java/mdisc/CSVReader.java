@@ -48,7 +48,7 @@ public class CSVReader {
     public static void writeCSV(ArrayList<Aresta> tree, String fileName, double minimumCost) {
         try (FileWriter writer = new FileWriter(fileName)) {
 
-            // Write each edge of the tree in CSV format
+
             for (Aresta aresta : tree) {
                 writer.append(aresta.getStart() + ";" + aresta.getEnd() + ";" + aresta.getWeight() + "\n");
             }
@@ -77,10 +77,11 @@ public class CSVReader {
 
         return assemblyPoints;
     }
+
+
     public static void writePathsCSV(List<List<Vertice>> paths, String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
 
-            // Write each path in CSV format
             for (List<Vertice> path : paths) {
                 for (int i = 0; i < path.size(); i++) {
                     writer.append(path.get(i).getName());

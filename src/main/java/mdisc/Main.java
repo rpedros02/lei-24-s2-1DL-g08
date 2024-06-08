@@ -25,7 +25,7 @@ public class Main {
             calculateExecutionTimeMultipleFiles(scanner);
         } else if (option == 3) {
             calculateShortestPathForEvacuation(scanner);
-        }else{
+        } else {
 
             System.out.println("Invalid option. The program will terminate.");
         }
@@ -104,7 +104,7 @@ public class Main {
         List<File> files = new ArrayList<>();
         int counter = 1;
         while (true) {
-            String fileName =  baseFileName + "_" + counter + ".csv";
+            String fileName = baseFileName + "_" + counter + ".csv";
             File file = new File(fileName);
             if (file.exists()) {
                 files.add(file);
@@ -189,46 +189,50 @@ public class Main {
         gp.print();
     }
 
-
     private static void calculateShortestPathForEvacuation(Scanner scanner) {
-    System.out.print("Enter the name of the .csv file: ");
-    String fileName = scanner.nextLine();
+        System.out.print("Enter the name of the matrix .csv file: ");
+        String matrixFileName = scanner.nextLine();
 
-        List<File> files = searchFilesByBaseName(fileName);
+        System.out.print("Enter the name of the assembly points .csv file: ");
+        String assemblyPointsFileName = scanner.nextLine();
+
+        List<File> files = searchFilesByBaseName(matrixFileName);
         if (files.isEmpty()) {
             System.out.println("No files found with the provided base name.");
             return;
         }
 
         CSVReader csvReader = new CSVReader();
-        ArrayList<Object[]> csvData = csvReader.readCsv(fileName);
+        for (File file : files) {
+            ArrayList<Object[]> csvData = csvReader.readCsv(file.getPath());
 
+            Grafo graph = new Grafo();
+            for (Object[] row : csvData) {
+                String startVerticeName = (String) row[0];
+                String endVerticeName = (String) row[1];
+                double arestaWeight = (double) row[2];
 
-    Grafo graph = new Grafo();
-    for (Object[] row : csvData) {
-        String startVerticeName = (String) row[0];
-        String endVerticeName = (String) row[1];
-        double arestaWeight = (double) row[2];
+                graph.addVertice(startVerticeName);
+                graph.addVertice(endVerticeName);
+                graph.addAresta(startVerticeName, endVerticeName, arestaWeight);
+            }
 
-        graph.addVertice(startVerticeName);
-        graph.addVertice(endVerticeName);
-        graph.addAresta(startVerticeName, endVerticeName, arestaWeight);
+            List<Pair<Vertice, Vertice>> assemblyPoints = csvReader.readAssemblyPointsCsv(assemblyPointsFileName);
+
+            List<List<Vertice>> shortestPaths = new ArrayList<>();
+            for (Pair<Vertice, Vertice> assemblyPoint : assemblyPoints) {
+                List<Vertice> assemblyPointsList = new ArrayList<>();
+                assemblyPointsList.add(assemblyPoint.getRight());
+                List<Vertice> shortestPath = graph.shortestPathToNearestAssemblyPoint(assemblyPoint.getLeft(), assemblyPointsList);
+                shortestPaths.add(shortestPath);
+            }
+
+            String shortestPathsFileName = "shortest_paths.csv";
+            csvReader.writePathsCSV(shortestPaths, shortestPathsFileName);
+
+            for (List<Vertice> shortestPath : shortestPaths) {
+                GraphPrinter.printShortestPath(shortestPath, "shortest_path_" + file.getName());
+            }
+        }
     }
-
-    HashMap<Vertice, Vertice> previousVertices = graph.dijkstra(graph.getVertices().get(0));
-
-    List<Vertice> path = graph.reconstructPath(previousVertices, graph.getVertices().get(graph.getVertices().size() - 1));
-
-        ArrayList<Aresta> arestas = new ArrayList<>();
-     for (int i = 0; i < path.size() - 1; i++) {
-        Vertice v1 = path.get(i);
-        Vertice v2 = path.get(i + 1);
-        double weight = graph.getEdgeWeight(v1, v2);
-        arestas.add(new Aresta(v1, v2, weight));
-     }
-
-    String shortestPathFileName = "shortest_path.csv";
-    CSVReader.writeCSV(arestas, shortestPathFileName, graph.calculateDistance(path));
-    }
-
 }
