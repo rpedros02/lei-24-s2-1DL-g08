@@ -83,15 +83,6 @@ public class AssignTeamToEntryUI implements Runnable {
     }
 
     /**
-     * Gets the ToDoListController.
-     *
-     * @return The ToDoListController.
-     */
-    public ToDoListController getToDoListController() {
-        return toDoListController;
-    }
-
-    /**
      * Gets the AgendaController.
      *
      * @return The AgendaController.
