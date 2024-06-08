@@ -15,10 +15,10 @@ public class AssignTeamToEntryUI implements Runnable {
     private final GenerateTeamController generateTeamController;
     private final Scanner scanner;
 
-    public AssignTeamToEntryUI(ToDoListController toDoListController, AgendaController agendaController, GenerateTeamController generateTeamController) {
-        this.toDoListController = toDoListController;
-        this.agendaController = agendaController;
-        this.generateTeamController = generateTeamController;
+    public AssignTeamToEntryUI() {
+        this.toDoListController = new ToDoListController();
+        this.agendaController = new AgendaController();
+        this.generateTeamController = new GenerateTeamController();
         this.scanner = new Scanner(System.in);
     }
 
@@ -26,16 +26,14 @@ public class AssignTeamToEntryUI implements Runnable {
         System.out.println("Enter the title of the entry to assign a team:");
         String entryTitle = scanner.nextLine();
 
-        // Verificar se a entrada existe na agenda
         Optional<Entry> entryOpt = agendaController.getEntryByTitle(entryTitle);
         if (entryOpt.isEmpty()) {
             System.out.println("Entry not found in the Agenda.");
             return;
         }
 
-        Entry entry = entryOpt.get(); // Alteração aqui, usando get() em vez de orElseThrow
+        Entry entry = entryOpt.get();
 
-        // Obter a equipe a ser atribuída
         System.out.println("Enter the name of the team to assign:");
         String teamName = scanner.nextLine();
         Optional<Team> teamOpt = toDoListController.getTeam(teamName);
@@ -44,18 +42,18 @@ public class AssignTeamToEntryUI implements Runnable {
             return;
         }
 
-        Team team = teamOpt.get(); // Alteração aqui, usando get() em vez de orElseThrow
+        Team team = teamOpt.get();
 
-        // Atribuir a equipe à entrada na agenda
+
         entry.setAssignedTeam(team);
         System.out.println("Team assigned to the entry successfully.");
 
-        // Enviar mensagem para os membros da equipe
+
         sendNotificationToTeamMembers(team);
     }
 
     private void sendNotificationToTeamMembers(Team team) {
-        // Implementação básica: apenas exibir a mensagem
+
         System.out.println("Sending notification to team members:");
         for (String member : team.getMembers()) {
             System.out.println("Notification sent to: " + member);

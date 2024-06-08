@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class PostPoneAnEntryUI implements Runnable {
     private final AgendaController agendaController;
 
-    public PostPoneAnEntryUI(AgendaController agendaController) {
-        this.agendaController = agendaController;
+    public PostPoneAnEntryUI() {
+        this.agendaController = new AgendaController();
     }
 
     @Override

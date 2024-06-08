@@ -1,8 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.domain.Enums;
 
 public enum EStatus {
-    PENDING(1),
-    IN_PROGRESS(2),
+    PLANNED(1),
+    POSTPONED(2),
     FINISHED(3),
     CANCELED(4);
 
@@ -28,8 +28,8 @@ public enum EStatus {
     @Override
     public String toString() {
         return switch (this) {
-            case PENDING -> "Pending";
-            case IN_PROGRESS -> "In Progress";
+            case PLANNED -> "Planned";
+            case POSTPONED -> "Postponed";
             case FINISHED -> "Finished";
             case CANCELED -> "Canceled";
         };

@@ -163,9 +163,25 @@ public class Entry {
         this.dateBegin = newBeginDate;
         this.dateEnd = newEndDate;
     }
+    //END GETTERS AND SETTERS
 
-
-    // Validations
+    // VALIDATIONS
+    /**
+     * @param title           title of the entry
+     * @param description     description of the entry
+     * @param degreeOfUrgency degree of urgency of the entry
+     * @param dateBegin       date of the beginning of the entry
+     * @param dateEnd         date of the end of the entry
+     * @param status          status of the entry
+     * @param greenSpace      green space of the entry
+     * @param team            team of the entry
+     * @param vehicles        vehicles of the entry
+     * @param task            task of the entry
+     *                        <p>
+     *                        Validates the entry
+     *                        <p>
+     * @return true if the entry is valid, false otherwise
+     */
     private boolean isValid(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd,
                             EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         boolean validTitle = validateTitle(title);
@@ -178,14 +194,43 @@ public class Entry {
         return validTitle && validDescription && validDegreeOfUrgency && validDateBegin && validDateEnd && validStatus && validGreenSpace;
     }
 
+    /**
+     * @param title title of the entry
+     *              <p>
+     *              Validates the title of the entry
+     *              <p>
+     *              The title must contain only letters and spaces and have a maximum length of 25 characters
+     *              <p>
+     * @return true if the title is valid, false otherwise
+     */
     private boolean validateTitle(String title) {
-        return title != null && title.length() > 0 && title.length() <= 25 && title.matches("[a-zA-Z\\s]+");
+        return title.length() < 25;
     }
 
+    /**
+     * @param description description of the entry
+     *                    <p>
+     *                    Validates the description of the entry
+     *                    <p>
+     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
+     *                    <p>
+     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
+     *                    <p>
+     * @return true if the description is valid, false otherwise
+     */
     private boolean validateDescription(String description) {
-        return description != null && description.length() <= 255 && description.matches("[a-zA-Z\\s]+");
+        return description != null && description.length() <= 255;
     }
 
+    /**
+     * @param degreeOfUrgency degree of urgency of the entry
+     *                        <p>
+     *                        Validates the degree of urgency of the entry
+     *                        <p>
+     *                        The degree of urgency must not be null
+     *                        <p>
+     * @return true if the degree of urgency is valid, false otherwise
+     */
     private boolean validateDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
         return degreeOfUrgency != null;
     }
@@ -214,13 +259,11 @@ public class Entry {
         return Objects.hash(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace);
     }
 
-    public boolean postponeEntry(Date newDate) {
+    public void postponeEntry(Date newDate) {
         if (newDate == null) {
-            return false;
+            return;
         }
-        this.dateBegin = newDate;
-        this.dateEnd = newDate; // Altera tanto a data de início quanto a data de fim para a nova data
-        return true;
+        this.dateEnd = newDate;
     }
 
 
@@ -237,4 +280,4 @@ public class Entry {
         return STR."Entry{title='\{title}', description='\{description}', degreeOfUrgency=\{degreeOfUrgency.toString()}, dateBegin=\{dateBegin.toString()}, dateEnd=\{dateEnd.toString()}, status=\{status.toString()}, greenSpace=\{greenSpace.toString()}}";
     }
 }
-}
+

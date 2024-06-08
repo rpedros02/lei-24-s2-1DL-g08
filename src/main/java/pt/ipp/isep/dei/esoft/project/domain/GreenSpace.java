@@ -111,17 +111,11 @@ public class GreenSpace {
     }
 
     public boolean isManagedByGSM() {
-        // Verificar se o colaborador GSM está definido para este espaço verde
         return this.gsm != null;
     }
 
     public String toString() {
-        return "GreenSpace{" +
-                "name='" + name + '\'' +
-                ", type='" + type.toString() + '\'' +
-                ", area=" + area +
-                "hectares" + '\'' +
-                ", address=" + address + "}";
+        return STR."GreenSpace{name='\{name}\{'\''}, type='\{type.toString()}\{'\''}, area=\{area}hectares\{'\''}, address=\{address}}";
     }
 
     public Object getGsm() {

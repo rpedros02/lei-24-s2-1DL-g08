@@ -11,5 +11,6 @@ public class DevTeamGUI {
     @FXML
     public void initialize() {
         lblMessage.setText("Bem-vindo à equipa de desenvolvimento!");
+
     }
 }

@@ -96,7 +96,7 @@ public class AddEntryToToDoListGUI {
 
         DegreeOfUrgency degreeOfUrgency = DegreeOfUrgency.valueOf(degreeOfUrgencyString.toUpperCase());
 
-        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, Utils.dateFromString(entryBeginDate), Utils.dateFromString(entryEndDate), EStatus.PENDING, selectedGreenSpace);
+        Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, Utils.dateFromString(entryBeginDate), Utils.dateFromString(entryEndDate), EStatus.PLANNED, selectedGreenSpace);
 
         if (toDoListController.addEntry(entry)) {
             Alert alert = new Alert(AlertType.INFORMATION);

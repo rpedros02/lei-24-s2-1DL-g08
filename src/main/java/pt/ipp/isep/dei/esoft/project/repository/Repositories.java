@@ -1,14 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
-import pt.isep.lei.esoft.auth.domain.model.Email;
 
 public class Repositories {
 
     private static Repositories instance;
-    private OrganizationRepository organizationRepository;
+    private final OrganizationRepository organizationRepository;
     private final TaskCategoryRepository taskCategoryRepository;
     private final AuthenticationRepository authenticationRepository;
     private final SkillsRepository skillsRepository;
@@ -48,7 +45,6 @@ public class Repositories {
     public static Agenda getAgenda() {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         if(organizationRepository == null) {
-            organizationRepository = new OrganizationRepository();
             return new Agenda();
         }
         Agenda agenda = organizationRepository.getOrganizationByEmployeeEmail(getInstance().getEmployeeEmailFromSession()).getAgenda();

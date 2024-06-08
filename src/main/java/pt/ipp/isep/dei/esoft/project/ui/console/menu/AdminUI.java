@@ -31,11 +31,11 @@ public class AdminUI implements Runnable {
         List<MenuItem> options = new ArrayList<MenuItem>();
         options.add(new MenuItem("Vehicle Menu", new VehicleMenuUI()));
         options.add(new MenuItem("Team Menu", new TeamMenuUI()));
-        options.add(new MenuItem("Green Space Menu", new GreenSpaceMenuUI(agenda, toDoListController, agendaController)));
+        options.add(new MenuItem("Green Space Menu", new GreenSpaceMenuUI()));
         options.add(new MenuItem("Agenda Menu", new AgendaMenuUI()));
         options.add(new MenuItem("Collaborator Menu", new CollaboratorMenuUI()));
         options.add(new MenuItem("Create a Job", new CreateJobUI()));
-        options.add(new MenuItem("Assign vehicle to entry",new AssignVehicleAgendaUI(assignVehicleAgendaController)));
+        options.add(new MenuItem("Assign vehicle to entry",new AssignVehicleAgendaUI()));
 
         int option = 0;
         do {

@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaController;
-import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
@@ -15,10 +14,10 @@ public class AddEntryToAgendaUI implements Runnable {
     private final GenerateTeamController generateTeamController;
     private final Scanner scanner;
 
-    public AddEntryToAgendaUI(ToDoListController toDoListController, AgendaController agendaController, AssignVehicleAgendaController generateTeamController) {
-        this.toDoListController = toDoListController;
-        this.agendaController = agendaController;
-        this.generateTeamController = generateTeamController;
+    public AddEntryToAgendaUI() {
+        this.toDoListController = new ToDoListController();
+        this.agendaController = new AgendaController();
+        this.generateTeamController = new GenerateTeamController();
         this.scanner = new Scanner(System.in);
     }
 
@@ -26,36 +25,32 @@ public class AddEntryToAgendaUI implements Runnable {
         System.out.println("Enter the title of the entry to add to the agenda:");
         String entryTitle = scanner.nextLine();
 
-        // Verificar se a entrada existe na lista de afazeres
         Entry entry = toDoListController.getToDoListEntry(entryTitle);
         if (entry == null) {
             System.out.println("Entry not found in the To-Do List.");
             return;
         }
 
-        // Verificar se a entrada já está na agenda
         if (agendaController.exists(entryTitle)) {
             System.out.println("Entry already exists in the Agenda.");
             return;
         }
 
-        // Verificar se a entrada está associada a um espaço verde gerenciado pela GSM
         if (!entry.getGreenSpace().isManagedByGSM()) {
             System.out.println("Entry is not associated with a green space managed by the GSM.");
             return;
         }
 
-        // Adicionar a entrada à agenda
         boolean success = agendaController.addEntry(entry);
         if (success) {
             System.out.println("Entry added to the Agenda successfully.");
 
-            // Gerar uma equipe
-            int minMembers = 1; // Defina o número mínimo de membros da equipe conforme necessário
-            int maxMembers = 5; // Defina o número máximo de membros da equipe conforme necessário
+
+            int minMembers = 1;
+            int maxMembers = 5;
             Team team = generateTeamController.generateTeam(minMembers, maxMembers, entry.getSkills());
 
-            // Atribuir a equipe à entrada
+
             boolean teamAssigned = agendaController.assignTeamToEntry(entryTitle, team);
             if (teamAssigned) {
                 System.out.println("Team assigned to the entry successfully.");

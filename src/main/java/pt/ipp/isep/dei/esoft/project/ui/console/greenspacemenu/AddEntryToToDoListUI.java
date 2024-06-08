@@ -17,10 +17,10 @@ public class AddEntryToToDoListUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
 
-    public AddEntryToToDoListUI(ToDoListController toDoListController, AgendaController agendaController) {
+    public AddEntryToToDoListUI() {
         this.greenSpaceController = new GreenSpaceController();
-        this.toDoListController = toDoListController;
-        this.agendaController = agendaController;
+        this.toDoListController = new ToDoListController();
+        this.agendaController = new AgendaController();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AddEntryToToDoListUI implements Runnable {
         Date dateBegin = Utils.readDateFromConsole("Enter the entry begin date (dd-MM-yyyy):");
         Date dateEnd = Utils.readDateFromConsole("Enter the entry end date (dd-MM-yyyy):");
 
-        EStatus entryStatus = EStatus.PENDING;
+        EStatus entryStatus = EStatus.PLANNED;
 
         DegreeOfUrgency degreeOfUrgency = DegreeOfUrgency.valueOf(degreeOfUrgencyString.toUpperCase());
         Entry entry = new Entry(entryTitle, entryDescription, degreeOfUrgency, dateBegin, dateEnd, entryStatus, greenSpace);

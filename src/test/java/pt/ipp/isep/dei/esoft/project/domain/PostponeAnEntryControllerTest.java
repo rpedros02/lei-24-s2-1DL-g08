@@ -8,8 +8,7 @@ import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PostponeAnEntryControllerTest {
@@ -22,7 +21,7 @@ public class PostponeAnEntryControllerTest {
 
     Entry entry = new Entry(
             "Test Entry", "Test Description", DegreeOfUrgency.LOW,
-            new Date(1, 6, 2024), new Date(1, 7, 2024), EStatus.PENDING,
+            new Date(1, 6, 2024), new Date(1, 7, 2024), EStatus.PLANNED,
             new GreenSpace("Test Green Space")
     );
         agenda.addEntry(entry);
@@ -33,8 +32,8 @@ public class PostponeAnEntryControllerTest {
         String title = "Test Entry";
         Date newDateEnd = new Date(1, 8, 2024);
 
-        String result = controller.postponeEntry(title, newDateEnd);
-        assertEquals("Entry postponed successfully.", result);
+        boolean result = controller.postponeEntry(title, newDateEnd);
+        assertTrue(result);
 
         Entry postponedEntry = agenda.getEntryByTitle(title);
         assertNotNull(postponedEntry);
@@ -46,7 +45,7 @@ public class PostponeAnEntryControllerTest {
         String title = "Nonexistent Entry";
         Date newDateEnd = new Date(1, 8, 2024);
 
-        String result = controller.postponeEntry(title, newDateEnd);
-        assertEquals("Entry not found.", result);
+        boolean result = controller.postponeEntry(title, newDateEnd);
+        assertFalse(result);
     }
 }

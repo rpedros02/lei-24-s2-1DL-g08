@@ -12,7 +12,7 @@ public class OrganizationRepository {
     private static OrganizationRepository instance;
     private final List<Organization> organizations;
 
-    private OrganizationRepository() {
+    public OrganizationRepository() {
         organizations = new ArrayList<>();
     }
 
@@ -52,6 +52,19 @@ public class OrganizationRepository {
         }
         return Optional.empty();
     }
+    public Organization getOrganizationByEmployeeEmail(String email) {
+
+        Organization returnOrganization = null;
+
+        for (Organization organization : organizations) {
+            if (organization.anyCollaboratorHasEmail(email)) {
+                returnOrganization = organization;
+            }
+        }
+
+        return returnOrganization;
+    }
+
 
     private boolean validateOrganization(Organization organization) {
         return !organizations.contains(organization);

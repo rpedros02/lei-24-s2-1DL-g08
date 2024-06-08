@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class CancelAnEntryUI implements Runnable {
     private final AgendaController agendaController;
 
-    public CancelAnEntryUI(AgendaController agendaController) {
-        this.agendaController = agendaController;
+    public CancelAnEntryUI() {
+        this.agendaController = new AgendaController();
     }
 
     @Override
