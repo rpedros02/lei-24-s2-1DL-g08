@@ -13,7 +13,7 @@ public class Main {
             showAlert(e.getMessage());
         }
     }
-    private static void showAlert(String message) {
+    public static void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
