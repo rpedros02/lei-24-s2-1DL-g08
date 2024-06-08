@@ -18,8 +18,6 @@ public class AssignTeamToEntryGUI {
     private TextField entryTitleTextField;
     @FXML
     private TextField teamNameTextField;
-    @FXML
-    private Button btnAssignTeam;
 
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
