@@ -4,15 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="mainBox" alignment="CENTER" prefHeight="557.0" prefWidth="313.0" spacing="10" style="-fx-background-color: rgb(245,250,246);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.MainMenuGUI">
-    <ImageView fitHeight="250.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@logo.jpg" />
-    </ImageView>
-    <Label style="-fx-font-size: 16; -fx-text-fill: #050505;" text="Please login:" />
+<VBox fx:id="mainBox" alignment="CENTER" prefHeight="400.0" prefWidth="313.0" spacing="10" style="-fx-background-color: #F5F5DC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.MainMenuGUI">
     <VBox alignment="CENTER" fillWidth="false" spacing="10.0">
         <Label style="-fx-font-size: 16; -fx-text-fill: #050505;" text="Login ID:" />
         <TextField fx:id="txtLoginId" style="-fx-pref-width: 200;" />

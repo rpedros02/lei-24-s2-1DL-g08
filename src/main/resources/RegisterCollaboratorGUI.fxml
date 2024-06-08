@@ -3,46 +3,45 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="905.0" prefWidth="427.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RegisterCollaboratorGUI">
-    <children>
-        <VBox alignment="TOP_CENTER" layoutX="48.0" layoutY="50.0" spacing="10.0">
-            <children>
-                <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #1E90FF;" text="HRM: Register a Collaborator" />
-                <Label text="Enter the name:" />
-                <TextField fx:id="txtIdNumber" />
-                <Label text="Enter the birth date (dd-mm-yyyy):" />
-                <TextField fx:id="txtName" />
-                <Label text="Enter the admission date (dd-mm-yyyy):" />
-                <TextField fx:id="txtBirthDate" />
-                <Label text="Enter the mobile number:" />
-                <TextField fx:id="txtCity" />
-                <Label text="Enter the email:" />
-                <TextField fx:id="txtPhoneNumber" />
-                <Label text="Enter the tax payer number:" />
-                <TextField fx:id="txtAdmissionDate" />
-                <Label text="Please select the ID type:" />
-                <ComboBox fx:id="cbIdType" prefHeight="25.0" prefWidth="148.0" />
-                <Label text="Please enter the ID number:" />
-                <TextField fx:id="txtEmail" />
-                <Label text="Enter the street:" />
-                <TextField fx:id="txtStreet" />
-            <Label layoutX="134.0" layoutY="551.0" text="Enter the street number:" />
-            <TextField fx:id="txtTaxPayerNumber1" layoutX="10.0" layoutY="702.0" />
-                <Label text="Enter the postal code:" />
-                <TextField fx:id="txtZipCode" />
-                <Label text="Enter the city:" />
-                <TextField fx:id="txtTaxPayerNumber" />
-            <Label layoutX="140.0" layoutY="737.0" text="Enter the district:" />
-            <TextField fx:id="txtTaxPayerNumber2" layoutX="10.0" layoutY="764.0" />
-                <Label text="Choose a job:" />
-                <ComboBox fx:id="cbJob" prefHeight="25.0" prefWidth="148.0" />
-                <Button onAction="#handleRegisterCollaborator" style="-fx-background-color: #1E90FF; -fx-text-fill: #000000; -fx-font-size: 16;" text="Register a Collaborator" />
-                <Label fx:id="lblMessage" style="-fx-font-size: 14; -fx-text-fill: #333;" />
-            </children>
-        </VBox>
-    </children>
+<AnchorPane prefHeight="983.0" prefWidth="386.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RegisterCollaboratorGUI">
+   <ScrollPane layoutY="-2.0" prefHeight="625.0" prefWidth="386.0" style="-fx-background-color: #B0C4DE;">
+       <VBox alignment="TOP_CENTER" layoutX="48.0" layoutY="50.0" prefHeight="943.0" prefWidth="385.0" spacing="10.0" style="-fx-background-color: #B0C4DE;">
+           <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #1E90FF;" text="HRM: Register a Collaborator" />
+           <Label text="Enter the name:" />
+           <TextField fx:id="txtIdNumber" />
+           <Label text="Enter the birth date (dd-mm-yyyy):" />
+           <TextField fx:id="txtName" />
+           <Label text="Enter the admission date (dd-mm-yyyy):" />
+           <TextField fx:id="txtBirthDate" />
+           <Label text="Enter the mobile number:" />
+           <TextField fx:id="txtCity" />
+           <Label text="Enter the email:" />
+           <TextField fx:id="txtPhoneNumber" />
+           <Label text="Enter the tax payer number:" />
+           <TextField fx:id="txtAdmissionDate" />
+           <Label text="Please select the ID type:" />
+           <ComboBox fx:id="cbIdType" prefHeight="25.0" prefWidth="148.0" />
+           <Label text="Please enter the ID number:" />
+           <TextField fx:id="txtEmail" />
+           <Label text="Enter the street:" />
+           <TextField fx:id="txtStreet" />
+           <Label layoutX="134.0" layoutY="551.0" text="Enter the street number:" />
+           <TextField fx:id="txtTaxPayerNumber1" layoutX="10.0" layoutY="702.0" />
+           <Label text="Enter the postal code:" />
+           <TextField fx:id="txtZipCode" />
+           <Label text="Enter the city:" />
+           <TextField fx:id="txtTaxPayerNumber" />
+           <Label layoutX="140.0" layoutY="737.0" text="Enter the district:" />
+           <TextField fx:id="txtTaxPayerNumber2" layoutX="10.0" layoutY="764.0" />
+           <Label text="Choose a job:" />
+           <ComboBox fx:id="cbJob" prefHeight="25.0" prefWidth="148.0" />
+           <Button onAction="#handleRegisterCollaborator" style="-fx-background-color: #1E90FF; -fx-text-fill: #000000; -fx-font-size: 16;" text="Register a Collaborator" />
+           <Label fx:id="lblMessage" style="-fx-font-size: 14; -fx-text-fill: #333;" />
+       </VBox>
+   </ScrollPane>
 </AnchorPane>

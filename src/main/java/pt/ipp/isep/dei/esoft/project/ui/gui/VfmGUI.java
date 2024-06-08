@@ -52,8 +52,7 @@ public class VfmGUI {
     @FXML
     public void handleMainMenu() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
+        loadUI(UtilsGUI.getCurrentRoleXml());
         currentStage.close();
-        loadUI("/MainMenuGUI.fxml");
     }
-
 }

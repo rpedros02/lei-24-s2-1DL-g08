@@ -44,7 +44,7 @@ public class HrmGUI {
     @FXML
     public void handleRegisterCollaborator() {
         Stage stage = (Stage) btnRegisterCollaborator.getScene().getWindow();
-        loadUI("/RegisterCollaborator.fxml");
+        loadUI("/RegisterCollaboratorGUI.fxml");
         stage.close();
     }
 

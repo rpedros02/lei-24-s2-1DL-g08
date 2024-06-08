@@ -37,10 +37,10 @@ public class GenerateTeamProposalGUI {
     @FXML
     private void initialize() {
         // Initialize ComboBox with skills
-        List<String> skills = skillsRepository.getAllSkills().stream()
-                .map(Skill::getName)
-                .collect(Collectors.toList());
-        cbType.getItems().addAll(skills);
+        List<Skill> skills = skillsRepository.getAllSkills();
+        for (Skill skill : skills) {
+            cbType.getItems().add(skill.getName());
+        }
     }
 
     @FXML

@@ -152,6 +152,8 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_EMPLOYEE, AuthenticationController.ROLE_EMPLOYEE);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_HRM, AuthenticationController.ROLE_HRM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_GSM, AuthenticationController.ROLE_GSM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
+        authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
 
         authenticationRepository.addUserWithRole("US12 Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
@@ -228,5 +230,7 @@ public class Bootstrap implements Runnable {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
         collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
         collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
     }
 }
