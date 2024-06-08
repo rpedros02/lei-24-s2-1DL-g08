@@ -22,12 +22,6 @@ public class AddEntryToAgendaGUI {
     @FXML
     private Button btnAddEntry;
 
-    @FXML
-    private TextField entryTitleTextField;
-    @FXML
-    private TextField numMembersTextField;
-
-
     private final OrganizationRepository organizationRepository;
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;

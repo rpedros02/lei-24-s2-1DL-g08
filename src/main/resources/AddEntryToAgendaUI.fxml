@@ -11,14 +11,8 @@
             <children>
                 <Label text="Enter the title of the entry to add to the agenda:"/>
                 <TextField fx:id="entryTitleTextField"/>
-                <Label text="Enter the number of members for the team:"/>
-                <TextField fx:id="numMembersTextField"/>
                 <Button text="Add Entry" onAction="#handleAddEntryToAgenda"/>
             </children>
         </VBox>
     </children>
 </AnchorPane>
-
-
-
-
