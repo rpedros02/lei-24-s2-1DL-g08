@@ -18,8 +18,6 @@ public class AddEntryToAgendaGUI {
 
     @FXML
     private ComboBox<String> cbEntries;
-    @FXML
-    private Button btnAddEntry;
 
     private final OrganizationRepository organizationRepository;
     private final ToDoListController toDoListController;
