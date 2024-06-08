@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="266.0" prefWidth="345.0" spacing="10" style="-fx-background-color: #F5DEB3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.VfmGUI">
+<VBox alignment="CENTER" prefHeight="437.0" prefWidth="345.0" spacing="10" style="-fx-background-color: #F5DEB3;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.VfmGUI">
     <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #D2691E;" text="VFM Menu" />
     <Button fx:id="btnRegisterVehicle" onAction="#handleRegisterVehicle" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle" />
     <Button fx:id="btnRegisterVehicleCheckup" onAction="#handleRegisterVehicleCheckup" style="-fx-background-color: #808080; -fx-text-fill: white; -fx-font-size: 16;" text="Register a Vehicle Check Up" />

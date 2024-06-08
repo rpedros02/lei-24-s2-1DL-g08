@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="450.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgba(255,255,255,0.66);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GsmGUI">
-    <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #098112;" text="GSM Menu" />
-    <Button fx:id="btnRegisterGreenSpace" onAction="#handleRegisterGreenSpace" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Register a Green Space" />
-    <Button fx:id="btnAddEntryToToDoList" onAction="#handleAddEntryToToDoList" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To To-Do List" />
-    <Button fx:id="btnAddEntryToAgenda" onAction="#handleAddEntryToAgenda" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Add Entry To Agenda" />
-    <Button fx:id="btnAssignTeamToAgendaEntry" onAction="#handleAssignTeamToAgendaEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign a Team To Agenda Entry" />
-    <Button fx:id="btnPostPoneAnEntry" onAction="#handlePostPoneAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
-   <Button fx:id="btnCancelAnEntry" layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntry" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
-   <Button fx:id="btnAssignOneOrMoreVehicles" layoutX="80.0" layoutY="290.0" onAction="#handleAssignOneOrMoreVehicles" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="Assign one or more Vehicles" />
-   <Button fx:id="btnListAllGreenSpaces" layoutX="80.0" layoutY="366.0" onAction="#handleListAllGreenSpaces" style="-fx-background-color: #2ae346; -fx-text-fill: rgb(255,255,255); -fx-font-size: 16;" text="List All Green Spaces" />
-    <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: #098112; -fx-text-fill: rgb(255,255,255); -fx-font-size: 12;" text="Main Menu" />
+<VBox alignment="CENTER" prefHeight="529.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgb(153,204,102);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GsmGUI">
+    <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: rgb(153,102,51);" text="GSM Menu" />
+    <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Register a Green Space" />
+    <Button onAction="#handleAddEntryToToDoList" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Add Entry To To-Do List" />
+    <Button onAction="#handleAddEntryToAgenda" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Add Entry To Agenda" />
+    <Button onAction="#handleAssignTeamToAgendaEntry" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Assign a Team To Agenda Entry" />
+    <Button onAction="#handlePostPoneAnEntry" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
+   <Button layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntry" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
+   <Button layoutX="80.0" layoutY="290.0" onAction="#handleAssignOneOrMoreVehicles" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Assign one or more Vehicles" />
+   <Button layoutX="80.0" layoutY="366.0" onAction="#handleListAllGreenSpaces" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="List All Green Spaces" />
+    <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
 </VBox>

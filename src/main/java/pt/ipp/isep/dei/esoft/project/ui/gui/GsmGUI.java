@@ -1,12 +1,11 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,35 +13,15 @@ import java.io.IOException;
 public class GsmGUI {
 
     @FXML
-    private Button btnRegisterAGreenSpace;
-    @FXML
-    private Button btnAddEntryToToDoList;
-    @FXML
-    private Button btnAddEntryToAgenda;
-    @FXML
-    private Button btnAssignTeamToAgendaEntry;
-    @FXML
-    private Button btnPostPoneAnEntryInTheAgenda;
-    @FXML
-    private Button btnCancelAnEntryInTheAgenda;
-    @FXML
-    private Button btnAssignOneOrMoreVehicles;
-    @FXML
-    private Button btnListAllGreenSpaces;
-
-    @FXML
     private Button btnMainMenu;
 
-    private GreenSpaceController controller;
-
-
     public GsmGUI() {
-        this.controller = new GreenSpaceController();
+
     }
 
     @FXML
     public void initialize() {
-        // Initialize UI components if needed
+
     }
 
     @FXML
@@ -87,8 +66,8 @@ public class GsmGUI {
     @FXML
     public void handleMainMenu() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
-        currentStage.close();
         loadUI("/MainMenuGUI.fxml");
+        currentStage.close();
     }
 
     private void loadUI(String fxmlPath) {
@@ -100,7 +79,15 @@ public class GsmGUI {
             stage.setScene(new Scene(root, 600, 600));
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            showAlert(e.getMessage());
         }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
