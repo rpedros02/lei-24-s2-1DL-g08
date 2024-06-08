@@ -1,14 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
-import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaController;
-import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
-
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,7 +13,7 @@ import java.util.Objects;
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
 
-    public AuthenticationUI(AgendaController agendaController, ToDoListController toDoListController, AssignVehicleAgendaController assignVehicleAgendaController, GenerateTeamController generateTeamController) {
+    public AuthenticationUI() {
         ctrl = new AuthenticationController();
     }
 
@@ -57,7 +52,7 @@ public class AuthenticationUI implements Runnable {
         System.out.println("\n\n--- LOGIN UI ---------------------------");
 
         int maxAttempts = 3;
-        boolean success = false;
+        boolean success;
         do {
             maxAttempts--;
             String id = Utils.readLineFromConsole("Enter UserId/Email: ");
@@ -93,7 +88,7 @@ public class AuthenticationUI implements Runnable {
 
     private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
         if (roles.size() == 1) {
-            return roles.get(0);
+            return roles.getFirst();
         } else {
             return (UserRoleDTO) Utils.showAndSelectOne(roles, "Select the role you want to adopt in this session:");
         }

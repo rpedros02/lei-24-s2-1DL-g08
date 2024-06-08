@@ -1,24 +1,21 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.greenspacemenu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
-import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 
+import java.util.Optional;
 import java.util.Scanner;
-import java.util.Optional; // Adicionando a importação do Optional
 
 public class AssignTeamToEntryUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
-    private final GenerateTeamController generateTeamController;
     private final Scanner scanner;
 
     public AssignTeamToEntryUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
-        this.generateTeamController = new GenerateTeamController();
         this.scanner = new Scanner(System.in);
     }
 
