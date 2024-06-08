@@ -30,8 +30,10 @@ public class AddEntryToAgendaUI implements Runnable {
     public void run() {
         System.out.println("Enter the title of the entry to add to the agenda:");
         String entryTitle = scanner.nextLine();
-
         Entry entry = toDoListController.getToDoListEntry(entryTitle);
+        if (entryTitle == null) {
+            return;
+        }
         if (entry == null) {
             System.out.println("Entry not found in the To-Do List.");
             return;
@@ -64,6 +66,22 @@ public class AddEntryToAgendaUI implements Runnable {
         } else {
             System.out.println("Failed to add entry to the Agenda.");
         }
+    }
+
+    public ToDoListController getToDoListController() {
+        return toDoListController;
+    }
+
+    public AgendaController getAgendaController() {
+        return agendaController;
+    }
+
+    public GenerateTeamController getGenerateTeamController() {
+        return generateTeamController;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
     }
 
     /**

@@ -14,12 +14,25 @@ public class AssignTeamToEntryUI implements Runnable {
     private final AgendaController agendaController;
     private final Scanner scanner;
 
+
     /**
      * Constructs a new AssignTeamToEntryUI instance.
      */
     public AssignTeamToEntryUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
+        this.scanner = new Scanner(System.in);
+    }
+
+    /**
+     * Constructs a new AssignTeamToEntryUI instance with provided controllers.
+     *
+     * @param toDoListController The ToDoListController instance.
+     * @param agendaController The AgendaController instance.
+     */
+    public AssignTeamToEntryUI(ToDoListController toDoListController, AgendaController agendaController) {
+        this.toDoListController = toDoListController;
+        this.agendaController = agendaController;
         this.scanner = new Scanner(System.in);
     }
 
@@ -67,5 +80,23 @@ public class AssignTeamToEntryUI implements Runnable {
         for (String member : team.getMembers()) {
             System.out.println("Notification sent to: " + member);
         }
+    }
+
+    /**
+     * Gets the ToDoListController.
+     *
+     * @return The ToDoListController.
+     */
+    public ToDoListController getToDoListController() {
+        return toDoListController;
+    }
+
+    /**
+     * Gets the AgendaController.
+     *
+     * @return The AgendaController.
+     */
+    public AgendaController getAgendaController() {
+        return agendaController;
     }
 }
