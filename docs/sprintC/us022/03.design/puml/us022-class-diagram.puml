@@ -1,0 +1,54 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+interface Runnable {
+    +run()
+}
+
+class ToDoListController{
++getToDoListEntries(email)
++getEntry(entryTitle)
+}
+
+class ToDoListRepository{
++getToDoListEntries(email)
+}
+
+
+class AgendaController{
++exists(entryTitle)
++saveEntry(entry)
++addEntry(entry)
++createEntry(entry)
+}
+
+class AgendaRepository{
++addEntry(entry)
+}
+
+class Agenda{
++saveEntry(entry)
+}
+
+class AddEntryToAgendaGUI{
+run();
+}
+
+Runnable -|> AddEntryToAgendaGUI
+
+AddEntryToAgendaGUI ..> AgendaController
+AddEntryToAgendaGUI ..> ToDoListController
+ToDoListController ..> ToDoListRepository
+AgendaController ..> Agenda
+AgendaController ..> AgendaRepository
+
+
+@enduml

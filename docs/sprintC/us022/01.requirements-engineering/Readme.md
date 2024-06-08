@@ -44,6 +44,6 @@ As a GSM, I want to add a new entry in the Agenda.
 
 ### 1.6. System Sequence Diagram (SSD)
 
-![us008](svg/us008-sequence_diagram.svg)
+![us022-sequence_diagram.svg](svg%2Fus022-sequence_diagram.svg)
 
 
