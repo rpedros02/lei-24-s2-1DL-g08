@@ -2,7 +2,9 @@ package mdisc;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class CSVReader {
     public ArrayList<Object[]> readCsv(String fileName) {
@@ -59,4 +61,42 @@ public class CSVReader {
             e.printStackTrace();
         }
     }
+
+    public List<Pair<Vertice, Vertice>> readAssemblyPointsCsv(String fileName) {
+        List<Pair<Vertice, Vertice>> assemblyPoints = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] fields = line.split(";");
+                assemblyPoints.add(new Pair<>(new Vertice(fields[0]), new Vertice(fields[1])));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return assemblyPoints;
+    }
+    public static void writePathsCSV(List<List<Vertice>> paths, String fileName) {
+        try (FileWriter writer = new FileWriter(fileName)) {
+
+            // Write each path in CSV format
+            for (List<Vertice> path : paths) {
+                for (int i = 0; i < path.size(); i++) {
+                    writer.append(path.get(i).getName());
+                    if (i < path.size() - 1) {
+                        writer.append(";");
+                    }
+                }
+                writer.append("\n");
+            }
+
+            System.out.println("CSV file generated successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+

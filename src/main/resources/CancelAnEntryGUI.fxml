@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="741.0" prefWidth="378.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.CancelAnEntryGUI">
-    <Label alignment="TOP_LEFT" prefHeight="43.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Cancel an entry in the Agenda   " textAlignment="CENTER" />
+    <Label alignment="TOP_LEFT" prefHeight="76.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="    GSM: Cancel an entry   &#10;in the Agenda   " textAlignment="CENTER" />
 
     <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="85.0" prefWidth="314.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER" />
     <ComboBox prefWidth="150.0" />
