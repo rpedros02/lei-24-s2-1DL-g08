@@ -1,0 +1,73 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US022 ´'Add Entry to Agenda´'
+header US022
+autonumber
+
+actor "User" as us
+participant ":AddEntryToAgendaGUI" as ui
+participant ":AgendaController" as ac
+participant ":ToDoListController" as tc
+participant ":AgendaRepository" as ar
+participant ":ToDoListRepository" as tr
+participant ":Agenda" as a
+
+activate us
+    us -> ui : Request to add a entry to the Agenda
+    activate ui
+        ui -> tc : getToDoListEntries(email) -- AC01 only retrieves entries associated to the user
+        activate tc
+        tc -> tr : getToDoListEntries(email)
+        activate tr
+        deactivate tc
+        tr --> tc :returns list of To Do Entries
+        deactivate tr
+        activate tc
+        tc --> ui : returns list of To Do Entries
+        deactivate tc
+        ui --> us : asks user to select a entry to add to the agenda
+        deactivate ui
+        us -> ui : selects a entry
+        activate ui
+        loop if entry exists in To Do List (AC02)
+        ui -> tc : exists(entry)
+        activate tc
+        tc -> tr : exists(entry)
+        deactivate tc
+        activate tr
+        tr --> tc : returns true or false
+        deactivate tr
+        activate tc
+        tc --> ui : returns true or false
+        deactivate tc
+        end
+        ui -> ac : saveEntryInAgenda(entry)
+        activate ac
+        ac -> a : saveEntryInAgenda(entry)
+        deactivate ac
+        activate a
+        a --> ac: in(sucess) of operation
+        deactivate a
+        activate ac
+        ac --> ui : in(sucess) of operation
+        deactivate ac
+        ui -> ac : addEntry(entry)
+        activate ac
+        ac -> ar : addEntry(entry)
+        deactivate ac
+        activate ar
+        ar --> ac : returns in(success) of operation
+        deactivate ar
+        activate ac
+        ac --> ui : returns in(success) of operation
+        deactivate ac
+        ui --> us : entry added to the agenda
+        deactivate ui
+
+
+deactivate us
+
+@enduml

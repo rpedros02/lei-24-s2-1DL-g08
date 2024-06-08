@@ -1,0 +1,28 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US022 - List the vehicles needing check-up
+header US022
+autonumber
+
+actor "user" as user
+participant ":System" as System
+
+activate user
+
+      user -> System : Request to add a Entry to the Agenda.
+    activate System
+        System --> user :displays list of all Entries associated with the user
+        deactivate System
+        user -> System : User selects a entry to add to the agenda
+        activate System
+        System --> user :checks the selected entry for exceptions,and returns (in)success of operation
+
+        deactivate System
+
+
+    deactivate user
+
+@enduml
