@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert;
@@ -13,6 +14,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+
 public class ConsultTheTasksAssignInTheBetweenDatesGUI {
 
     @FXML
@@ -23,6 +26,12 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
 
     @FXML
     private ListView<String> agendaListView;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleCollaboratorMenu() {
+        loadUI("/CollaboratorMenuGUI.fxml");
+    }
 
     private final AgendaController agendaController = new AgendaController();
 

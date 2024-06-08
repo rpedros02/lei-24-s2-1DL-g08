@@ -14,4 +14,5 @@
 
     <Button onAction="#handleRecordTheCompletionOfTask" style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="Complete Task" />
     <ListView fx:id="agendaListView" prefHeight="185.0" prefWidth="544.0" style="-fx-background-color: #DDA0DD;" />
+    <Button fx:id="btnMainMenu" onAction="#handleCollaboratorMenu" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
 </VBox>

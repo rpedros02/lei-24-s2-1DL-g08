@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="529.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgb(153,204,102);" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GsmGUI">
+<VBox alignment="CENTER" prefHeight="529.0" prefWidth="373.0" spacing="10" style="-fx-background-color: rgb(153,204,102);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GsmGUI">
     <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: rgb(153,102,51);" text="GSM Menu" />
     <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Register a Green Space" />
     <Button onAction="#handleAddEntryToToDoList" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Add Entry To To-Do List" />
@@ -13,5 +13,5 @@
    <Button layoutX="70.0" layoutY="254.0" onAction="#handleCancelAnEntry" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Cancel an Entry in the Agenda" />
    <Button layoutX="80.0" layoutY="290.0" onAction="#handleAssignOneOrMoreVehicles" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="Assign one or more Vehicles" />
    <Button layoutX="80.0" layoutY="366.0" onAction="#handleListAllGreenSpaces" style="-fx-background-color: rgb(255,255,153); -fx-font-size: 16;" text="List All Green Spaces" />
-    <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
+    <Button fx:id="btnMainMenu" onAction="#handleMainMenu" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Main Menu" textFill="WHITE" />
 </VBox>

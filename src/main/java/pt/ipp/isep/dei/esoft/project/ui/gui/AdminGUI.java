@@ -42,7 +42,7 @@ public class AdminGUI {
     @FXML
     public void handleMainMenu() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI(UtilsGUI.getCurrentRoleXml());
+        loadUI("/MainMenuGUI.fxml");
         currentStage.close();
     }
 

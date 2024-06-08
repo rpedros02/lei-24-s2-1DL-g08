@@ -1,15 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.time.LocalDate;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class RegisterVehicleGUI {
 
@@ -48,6 +47,12 @@ public class RegisterVehicleGUI {
 
     @FXML
     private Label lblMessage;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleVfm() {
+        loadUI("/VfmGUI.fxml");
+    }
 
     private final VehicleController controller = new VehicleController();
 

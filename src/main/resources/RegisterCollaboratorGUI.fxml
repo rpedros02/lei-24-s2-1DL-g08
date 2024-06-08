@@ -42,6 +42,7 @@
            <ComboBox fx:id="cbJob" prefHeight="25.0" prefWidth="148.0" />
            <Button onAction="#handleRegisterCollaborator" style="-fx-background-color: #1E90FF; -fx-text-fill: #000000; -fx-font-size: 16;" text="Register a Collaborator" />
            <Label fx:id="lblMessage" style="-fx-font-size: 14; -fx-text-fill: #333;" />
+           <Button fx:id="btnMainMenu" onAction="#handleHrm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
        </VBox>
    </ScrollPane>
 </AnchorPane>
