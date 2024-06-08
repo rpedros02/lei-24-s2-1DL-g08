@@ -12,7 +12,7 @@ public class OrganizationRepository {
     private static OrganizationRepository instance;
     private final List<Organization> organizations;
 
-    public OrganizationRepository() {
+    private OrganizationRepository() {
         organizations = new ArrayList<>();
     }
 
@@ -26,47 +26,20 @@ public class OrganizationRepository {
     }
 
     public Optional<Organization> getOrganizationByCollaborator(Collaborator collaborator) {
-
-        Optional<Organization> returnOrganization = Optional.empty();
-
         for (Organization organization : organizations) {
             if (organization.anyCollaboratorHasEmail(collaborator.getEmail())) {
-                returnOrganization = Optional.of(organization);
+                return Optional.of(organization);
             }
         }
-
-        return returnOrganization;
-    }
-
-    public Organization getOrganizationByEmployeeEmail(String email) {
-
-        Organization returnOrganization = null;
-
-        for (Organization organization : organizations) {
-            if (organization.anyCollaboratorHasEmail(email)) {
-                returnOrganization = organization;
-            }
-        }
-
-        return returnOrganization;
+        return Optional.empty();
     }
 
     public Optional<Organization> add(Organization organization) {
-
-        Optional<Organization> newOrganization = Optional.empty();
-        boolean operationSuccess = false;
-
         if (validateOrganization(organization)) {
-            newOrganization = Optional.of(organization.clone());
-            operationSuccess = organizations.add(newOrganization.get());
+            organizations.add(organization);
+            return Optional.of(organization);
         }
-
-        if (!operationSuccess) {
-            newOrganization = Optional.empty();
-        }
-
-        return newOrganization;
-
+        return Optional.empty();
     }
 
     public Optional<Team> getTeamByName(String teamName) {
@@ -81,18 +54,15 @@ public class OrganizationRepository {
     }
 
     private boolean validateOrganization(Organization organization) {
-        boolean isValid = !organizations.contains(organization);
-
-        return isValid;
+        return !organizations.contains(organization);
     }
 
-    public Organization getOrganizationByVatNumber(String thisCompany) {
+    public Optional<Organization> getOrganizationByVatNumber(String vatNumber) {
         for (Organization organization : organizations) {
-            if (organization.getVatNumber().equals(thisCompany)) {
-                return organization;
+            if (organization.getVatNumber().equals(vatNumber)) {
+                return Optional.of(organization);
             }
         }
-        return null;
+        return Optional.empty();
     }
-
 }

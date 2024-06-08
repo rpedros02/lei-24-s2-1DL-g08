@@ -1,5 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.authorization;
 
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.ipp.isep.dei.esoft.project.ui.console.menu.*;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
@@ -10,10 +14,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-/**
- * @author Paulo Maio pam@isep.ipp.pt
- */
 
 public class AuthenticationUI implements Runnable {
     private final AuthenticationController ctrl;
@@ -43,12 +43,17 @@ public class AuthenticationUI implements Runnable {
     }
 
     private List<MenuItem> getMenuItemForRoles() {
+        AgendaController agendaController = new AgendaController();
+        ToDoListController toDoListController = new ToDoListController();
+        AssignVehicleAgendaController assignVehicleAgendaController = new AssignVehicleAgendaController();
+        GenerateTeamController generateTeamController = new GenerateTeamController();
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_COLLABORATOR, new CollaboratorUI()));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(
+                agendaController, toDoListController, assignVehicleAgendaController, generateTeamController)));
+
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;
     }

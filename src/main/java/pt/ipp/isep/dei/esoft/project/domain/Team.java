@@ -11,12 +11,14 @@ public class Team {
     private int maxMembers;
     private List<Skill> teamSkills;
     private List<Collaborator> teamMembers;
+    private String name;
 
     public Team(int minMembers, int maxMembers, List<Skill> teamSkills) {
         this.minMembers = minMembers;
         this.maxMembers = maxMembers;
         this.teamSkills = teamSkills;
         this.teamMembers = new ArrayList<>();
+        this.name = name;
     }
 
     public String toString() {
@@ -63,5 +65,8 @@ public class Team {
 
     public void addTeamMember(Collaborator collaborator) {
         teamMembers.add(collaborator);
+    }
+    public String getName() {
+        return name;
     }
 }

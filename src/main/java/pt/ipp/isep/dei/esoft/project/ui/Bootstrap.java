@@ -9,11 +9,12 @@ import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Random;
 
 public class Bootstrap implements Runnable {
 
-    //Add some task categories to the repository as bootstrap
+
     public void run() {
         addTaskCategories();
         addOrganization();
@@ -79,14 +80,17 @@ public class Bootstrap implements Runnable {
 
         for (int i = 0; i < 10; i++) {
             String name = "GreenSpace " + (i + 1);
-            Organization organization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
-            GreenSpaceTypeRepository type = GreenSpaceTypeRepository.GARDEN;
-            Double area = (double) (i * 100 + 100);
+            Optional<Organization> optionalOrganization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
+            if (optionalOrganization.isPresent()) {
+                Organization organization = optionalOrganization.get();
+                GreenSpaceTypeRepository type = GreenSpaceTypeRepository.GARDEN;
+                Double area = (double) (i * 100 + 100);
 
-            Address address = new Address("Rua Green", i + 1, "4100-100", "Porto", "Porto");
+                Address address = new Address("Rua Green", i + 1, "4100-100", "Porto", "Porto");
 
-            GreenSpace greenSpace = new GreenSpace(name, type, area, address, organization.getCollaboratorByEmail("gsm@this.app"));
-            greenSpaceRepository.addGreenSpace(greenSpace);
+                GreenSpace greenSpace = new GreenSpace(name, type, area, address, organization.getCollaboratorByEmail("gsm@this.app"));
+                greenSpaceRepository.addGreenSpace(greenSpace);
+            }
         }
     }
 
@@ -110,12 +114,16 @@ public class Bootstrap implements Runnable {
         if (!agenda1.addEntry(entry1) || !agenda1.addEntry(entry2) || !agenda1.addEntry(entry3)) {
             System.out.println("Bootstrap: Failed to add entries to the agenda");
         }
-        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
-        Organization organization = organizationRepository.getOrganizationByVatNumber("505244123");
-        organization.setAgenda(agenda1);
-        organization.setToDoList(toDoList);
-    }
 
+        Optional<Organization> optionalOrganization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
+        if (optionalOrganization.isPresent()) {
+            Organization organization = optionalOrganization.get();
+            organization.setAgenda(agenda1);
+            organization.setToDoList(toDoList);
+        } else {
+            System.out.println("Bootstrap: Organization not found by VAT number");
+        }
+    }
 
     private void addOrganization() {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
@@ -127,7 +135,6 @@ public class Bootstrap implements Runnable {
         organization.addCollaborator(new Collaborator("VFM", new Date(12,4,2002), new Date(23,12,2023), 919919919, "vfm@this.app", 123456783, IdDocType.CC, "123456783", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("VFM"), new Task("Task")));
         organizationRepository.add(organization);
     }
-
 
     private void addTaskCategories() {
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
@@ -162,8 +169,6 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_GSM);
         authenticationRepository.addUserWithRole("COLLABORATOR", "collaborator@this.app", "collaborator",
                 AuthenticationController.ROLE_COLLABORATOR);
-
-
     }
 
     private void addSkills() {
@@ -226,4 +231,3 @@ public class Bootstrap implements Runnable {
         collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
     }
 }
-
