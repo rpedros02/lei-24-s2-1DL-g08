@@ -29,7 +29,12 @@ public class AddEntryToAgendaUITest {
         System.setIn(inputStream);
         try {
             ui.run();
-            String expectedOutput = "Enter the title of the entry to add to the agenda:\n" + "Entry added to the Agenda successfully.\n" + "Enter the number of members for the team:\n" + "Team assigned to the entry successfully.\n";assertEquals(expectedOutput, outputStream.toString());
+            String expectedOutput = """
+                    Enter the title of the entry to add to the agenda:
+                    Entry added to the Agenda successfully.
+                    Enter the number of members for the team:
+                    Team assigned to the entry successfully.
+                    """;assertEquals(expectedOutput, outputStream.toString());
         } finally {System.setIn(System.in);}
     }
 
