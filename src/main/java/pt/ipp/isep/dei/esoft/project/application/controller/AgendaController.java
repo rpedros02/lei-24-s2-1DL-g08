@@ -89,13 +89,14 @@ public class AgendaController {
             Agenda agenda = org.getAgenda();
             Entry entry = agenda.getEntryByTitle(entryTitle);
             if (entry != null) {
-                entry.setBeginDate(newDate);
-                entry.setEndDate(newDate);
+                entry.setDateBegin(newDate);
+                entry.setDateEnd(newDate);
                 return true;
             }
             return false;
         }).orElse(false);
     }
+
 
     public boolean cancelEntry(String entryTitle) {
         Collaborator collaborator = getEmployeeFromSession();
@@ -103,7 +104,9 @@ public class AgendaController {
 
         return organization.map(org -> {
             Agenda agenda = org.getAgenda();
-                return agenda.removeEntryByTitle(entryTitle);
+            return agenda.cancelEntry(entryTitle);
         }).orElse(false);
     }
+
+
 }

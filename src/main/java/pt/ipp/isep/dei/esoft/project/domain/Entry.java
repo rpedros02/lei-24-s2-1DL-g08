@@ -93,7 +93,7 @@ public class Entry {
     }
 
     public void setDateBegin(Date dateBegin) {
-        this.dateBegin = dateBegin;
+        this.dateBegin = dateBegin != null ? dateBegin.clone() : null;
     }
 
     public Date getDateEnd() {
@@ -101,7 +101,7 @@ public class Entry {
     }
 
     public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
+        this.dateEnd = dateEnd != null ? dateEnd.clone() : null;
     }
 
     public EStatus getStatus() {
@@ -234,6 +234,7 @@ public class Entry {
 
     @Override
     public String toString() {
-        return STR."Entry{title='\{title}\{'\''}, description='\{description}\{'\''}, degreeOfUrgency=\{degreeOfUrgency.toString()}, dateBegin=\{dateBegin.toString()}, dateEnd=\{dateEnd.toString()}, status=\{status.toString()}, greenSpace=\{greenSpace.toString()}\{'}'}";
+        return STR."Entry{title='\{title}', description='\{description}', degreeOfUrgency=\{degreeOfUrgency.toString()}, dateBegin=\{dateBegin.toString()}, dateEnd=\{dateEnd.toString()}, status=\{status.toString()}, greenSpace=\{greenSpace.toString()}}";
     }
+}
 }

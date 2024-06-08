@@ -18,45 +18,44 @@ public class Date extends java.util.Date {
     }
 
     public Date(long date) {
-        if (!isValid(Integer.parseInt(date.substring(0, 2)), Integer.parseInt(date.substring(3, 5)), Integer.parseInt(date.substring(6, 10))) || date.length() != 10) {
+        String dateStr = String.valueOf(date);
+        int day = Integer.parseInt(dateStr.substring(0, 2));
+        int month = Integer.parseInt(dateStr.substring(3, 5));
+        int year = Integer.parseInt(dateStr.substring(6, 10));
+
+        if (!isValid(day, month, year) || dateStr.length() != 10) {
             throw new IllegalArgumentException("Invalid date.");
         }
-        this.day = Integer.parseInt(date.substring(0, 2));
-        this.month = Integer.parseInt(date.substring(3, 5));
-        this.year = Integer.parseInt(date.substring(6, 10));
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     private boolean isValid(int day, int month, int year) {
-        boolean flag = false;
-        if (year < Year.now().getValue() - 100 || year > Year.now().getValue() + 100) {
+        if (year < 1900 || year > 2100) {
             return false;
         }
-        switch (month) {
-            case 1, 3, 5, 7, 8, 10, 12 -> {
-                if (day > 0 && day <= 31) {
-                    flag = true;
-                }
-            }
-            case 4, 6, 9, 11 -> {
-                if (day > 0 && day <= 30) {
-                    flag = true;
-                }
-            }
-            case 2 -> {
-                if (isLeap(year)) {
-                    if (day > 0 && day <= 29) {
-                        flag = true;
-                    }
-                } else {
-                    if (day > 0 && day <= 28) {
-                        flag = true;
-                    }
-                }
-            }
-            default -> {
-            }
+
+        if (month < 1 || month > 12) {
+            return false;
         }
-        return flag;
+
+        switch (month) {
+            case 1, 3, 5, 7, 8, 10, 12:
+                return day >= 1 && day <= 31;
+            case 4, 6, 9, 11:
+                return day >= 1 && day <= 30;
+            case 2:
+
+                boolean isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+                if (isLeapYear) {
+                    return day >= 1 && day <= 29;
+                } else {
+                    return day >= 1 && day <= 28;
+                }
+            default:
+                return false;
+        }
     }
 
     private boolean isLeap(int year) {
