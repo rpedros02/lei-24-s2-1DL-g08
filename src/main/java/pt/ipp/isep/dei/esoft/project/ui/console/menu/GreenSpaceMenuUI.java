@@ -11,16 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GreenSpaceMenuUI implements Runnable {
-    private final AgendaController agendaController;
-    private final ToDoListController toDoListController;
-    private final AssignVehicleAgendaController assignVehicleAgendaController;
-    private final GenerateTeamController generateTeamController;
 
     public GreenSpaceMenuUI() {
-        this.agendaController = new AgendaController();
-        this.toDoListController = new ToDoListController();
-        this.assignVehicleAgendaController = new AssignVehicleAgendaController();
-        this.generateTeamController = new GenerateTeamController();
     }
 
     @Override

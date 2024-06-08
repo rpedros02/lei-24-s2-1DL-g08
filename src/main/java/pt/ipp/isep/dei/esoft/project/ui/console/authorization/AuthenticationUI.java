@@ -43,16 +43,11 @@ public class AuthenticationUI implements Runnable {
     }
 
     private List<MenuItem> getMenuItemForRoles() {
-        AgendaController agendaController = new AgendaController();
-        ToDoListController toDoListController = new ToDoListController();
-        AssignVehicleAgendaController assignVehicleAgendaController = new AssignVehicleAgendaController();
-        GenerateTeamController generateTeamController = new GenerateTeamController();
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_HRM, new HrmUI()));
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_VFM, new VfmUI()));
-        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI(
-                agendaController, toDoListController, assignVehicleAgendaController, generateTeamController)));
+        rolesUI.add(new MenuItem(AuthenticationController.ROLE_GSM, new GsmUI()));
 
         //TODO: Complete with other user roles and related RoleUI
         return rolesUI;

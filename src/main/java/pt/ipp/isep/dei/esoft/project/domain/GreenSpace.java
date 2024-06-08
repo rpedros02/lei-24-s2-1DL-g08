@@ -18,7 +18,7 @@ public class GreenSpace {
 
     }
 
-    public GreenSpace(String testGreenSpace) {
+    public GreenSpace() {
     }
 
     public String getName() {

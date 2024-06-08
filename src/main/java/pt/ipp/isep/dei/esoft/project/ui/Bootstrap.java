@@ -8,7 +8,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.repository.*;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
 
