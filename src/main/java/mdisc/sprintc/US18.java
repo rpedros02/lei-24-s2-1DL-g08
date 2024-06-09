@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class US18 {
 
@@ -52,7 +53,9 @@ public class US18 {
                 shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint));
             }
         }
+
         writeShortestPaths(outputFile, shortestPaths);
+
     }
 
 
@@ -102,8 +105,10 @@ public class US18 {
     private static void writeShortestPaths(String filename, Map<String, Path> shortestPaths) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
             for (Map.Entry<String, Path> entry : shortestPaths.entrySet()) {
-                String path = String.join(",", entry.getValue().getPoints());
-                writer.write(String.format(OUTPUT_FORMAT, path, entry.getValue().getDistance()));
+                String path = entry.getValue().getPoints().stream()
+                        .map(point -> "Vertex: " + point)
+                        .collect(Collectors.joining(", "));
+                writer.write(String.format("(%s); Cost: %d%n", path, entry.getValue().getDistance()));
             }
         }
     }
@@ -150,10 +155,16 @@ public class US18 {
         return scanner.nextLine();
     }
 
+
+
     private void writeShortestPath(String filename, String point, Path shortestPath) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
-            String path = String.join(",", shortestPath.getPoints());
-            writer.write(String.format(OUTPUT_FORMAT, path, shortestPath.getDistance()));
+            String path = shortestPath.getPoints().stream()
+                    .map(p -> "Vertex: " + p)
+                    .collect(Collectors.joining(", "));
+            writer.write(String.format("(%s); Cost: %d%n", path, shortestPath.getDistance()));
         }
     }
+
+
 }
