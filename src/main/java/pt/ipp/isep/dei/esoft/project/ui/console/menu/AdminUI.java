@@ -65,6 +65,7 @@ public class AdminUI implements Runnable {
         options.add(new MenuItem("Collaborator Menu", new CollaboratorMenuUI()));
         options.add(new MenuItem("Create a Job", new CreateJobUI()));
         options.add(new MenuItem("Assign vehicle to entry",new AssignVehicleAgendaUI()));
+        options.add(new MenuItem("Collaborator UI",new CollaboratorUI()));
 
         int option = 0;
         do {
