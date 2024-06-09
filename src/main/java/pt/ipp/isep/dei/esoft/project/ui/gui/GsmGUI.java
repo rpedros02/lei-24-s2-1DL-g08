@@ -110,7 +110,7 @@ public class GsmGUI {
     @FXML
     public void handleAssignOneOrMoreVehicles() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/AssignOneOrMoreVehiclesGUI.fxml");
+        loadUI("/AssignVehicleAgendaGUI.fxml");
         currentStage.close();
     }
 
