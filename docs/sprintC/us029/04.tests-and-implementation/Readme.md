@@ -50,34 +50,29 @@
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### CompleteTaskUI
 
 ```java
-public Vehicle createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                             Date register_date, Date acquisition_date, int maintenance_frequency) {
-    
-    
-	newVehicle = organization.createVehicle(plateId, brand, model, type, tare, weight,
-                                            mileage, register_date, acquisition_date, maintenance_frequency);
-    
-	return newVehicle;
+public class CompleteTasksUI implements Runnable {
+    private final ToDoListController toDoListController;
+    public CompleteTasksUI() {
+        this.toDoListController = new ToDoListController();
+    }
+
+    public void run() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the title of the entry to cancel: ");
+        String title = scanner.nextLine();
+
+        boolean result = toDoListController.updateStatus(toDoListController.getToDoListEntry(title), EStatus.CANCELED);
+        System.out.println(result ? "Entry cancelled successfully." : "Failed to cancel entry.");
+
+
+    }
 }
 ```
 
-### Class Organization
 
-```java
-
-public Optional<Vehicle> createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                                       Date register_date, Date acquisition_date, int maintenance_frequency) {
-
-    Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency);
-
-    addVehicle(vehicle);
-
-    return vehicle;
-}
-```
 
 
 ## 6. Integration and Demo 
