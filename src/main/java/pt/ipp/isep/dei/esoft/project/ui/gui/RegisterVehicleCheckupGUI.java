@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleCheckupController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 
+import java.time.LocalDate;
+
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class RegisterVehicleCheckupGUI {
@@ -40,7 +42,8 @@ public class RegisterVehicleCheckupGUI {
     @FXML
     private void handleRegisterVehicleCheckup(ActionEvent event) {
         String plateId = txtPlateId.getText();
-        Date date = new Date(dpRegisterDate1.getValue().getDayOfMonth(), dpRegisterDate1.getValue().getMonthValue(), dpRegisterDate1.getValue().getYear());
+        LocalDate localDate = dpRegisterDate1.getValue();
+        Date date = new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
         int lastVehicleCheckUpKm = Integer.parseInt(txtLastVehicleCheckUpKm.getText());
 
         boolean success = controller.registerVehicleCheckup(plateId, date, lastVehicleCheckUpKm);
