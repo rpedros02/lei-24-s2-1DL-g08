@@ -6,8 +6,6 @@ import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
-import java.util.Optional;
-
 /**
  * This class represents a VehicleCheckupController in the system.
  * It manages the operations related to vehicle check-ups.
@@ -47,15 +45,14 @@ public class VehicleCheckupController {
      * If the vehicle check-up is registered successfully, it returns true.
      * Otherwise, it returns false.
      *
-     * @param plate the plate of the vehicle
-     * @param date the date of the vehicle check-up
+     * @param plate                the plate of the vehicle
+     * @param date                 the date of the vehicle check-up
      * @param lastVehicleCheckupKm the last vehicle check-up km
      * @return true if the vehicle check-up is registered successfully, false otherwise
      */
     public boolean registerVehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
-        Optional<Vehicle> optVehicle = vehicleRepository.getVehicleByPlate(plate);
-        if (optVehicle.isPresent()) {
-            Vehicle vehicle = optVehicle.get();
+        Vehicle vehicle = vehicleRepository.getVehicleByPlate(plate);
+        if (vehicle != null) {
             vehicle.updateLastVehicleCheckupKm(lastVehicleCheckupKm);
             boolean vehicleCheckupRegistered = vehicleCheckupRepository.registerVehicleCheckup(plate, date, lastVehicleCheckupKm).isPresent();
             if (vehicleCheckupRegistered) {

@@ -8,7 +8,6 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class VehicleRepository {
 
@@ -295,13 +294,13 @@ public class VehicleRepository {
      * @param plate the plate id of the vehicle
      * @return an Optional containing the vehicle if it exists, an empty Optional otherwise
      */
-    public Optional<Vehicle> getVehicleByPlate(String plate) {
+    public Vehicle getVehicleByPlate(String plate) {
         for (Vehicle vehicle : vehicles) {
             if (vehicle.getPlateId().equals(plate)) {
-                return Optional.of(vehicle);
+                return vehicle;
             }
         }
-        return Optional.empty();
+        return null;
     }
 
     /**
