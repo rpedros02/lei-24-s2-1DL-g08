@@ -14,6 +14,9 @@ import java.util.Optional;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * The GUI for assigning a team to an entry.
+ */
 public class AssignTeamToEntryGUI {
 
     @FXML
@@ -29,10 +32,15 @@ public class AssignTeamToEntryGUI {
 
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
+    private final EmailService emailService;
 
+    /**
+     * Constructs a new AssignTeamToEntryGUI instance.
+     */
     public AssignTeamToEntryGUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
+        this.emailService = EmailServiceController.createEmailServiceFromConfig();
     }
 
     @FXML
@@ -73,6 +81,7 @@ public class AssignTeamToEntryGUI {
     private void sendNotificationToTeamMembers(Team team) {
         StringBuilder notificationMessage = new StringBuilder("Sending notification to team members:\n");
         for (String member : team.getMembers()) {
+            emailService.sendEmail(member, "Team Assignment Notification", "You have been assigned to a team.");
             notificationMessage.append("Notification sent to: ").append(member).append("\n");
         }
         showAlert(AlertType.INFORMATION, "Notifications", notificationMessage.toString());
@@ -86,4 +95,3 @@ public class AssignTeamToEntryGUI {
         alert.showAndWait();
     }
 }
-

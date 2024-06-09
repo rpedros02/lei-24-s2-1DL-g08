@@ -1,4 +1,4 @@
-# US008 - List the vehicles needing check-up
+# US023 - Assign a Team to an entry in the Agenda
 
 [Requirements Engineering](01.requirements-engineering/Readme.md)
 
