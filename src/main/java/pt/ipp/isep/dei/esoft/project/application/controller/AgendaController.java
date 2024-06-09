@@ -6,6 +6,7 @@ import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.isep.lei.esoft.auth.domain.model.Email;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,10 +84,17 @@ public class AgendaController {
      * @return A list of Entry objects representing the entries between the specified dates.
      */
     public List<Entry> getEntriesBetweenDates(Date dateBegin, Date dateEnd) {
-        Collaborator collaborator = getEmployeeFromSession();
-        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        Organization organization = organizationRepository.getOrganizationByEmployeeEmail(getEmployeeFromSession().getEmail());
+        ToDoList toDoList = organization.getTodoList();
+        List<Entry> entries = toDoList.getEntries();
+        List<Entry> entriesBetweenDates = new ArrayList<>();
 
-        return organization.map(org -> org.getEntriesBetweenDates(dateBegin, dateEnd)).orElse(List.of());
+        for (Entry entry : entries) {
+            if (entry.getDateBegin().isAfter(dateBegin) && !entry.getDateEnd().isAfter(dateEnd)) {
+                entriesBetweenDates.add(entry);
+            }
+        }
+        return entriesBetweenDates;
     }
 
     /**
