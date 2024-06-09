@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="239.0" prefWidth="477.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignTeamToEntryGUI">
+<AnchorPane prefHeight="239.0" prefWidth="477.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignTeamToAgendaEntryGUI">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="8.0" layoutY="7.0" prefHeight="245.0" prefWidth="469.0" spacing="10.0">
             <children>
@@ -14,7 +14,7 @@
                 <TextField fx:id="entryTitleTextField"/>
                 <Label text="Enter the name of the team to assign:"/>
                 <TextField fx:id="teamNameTextField"/>
-                <Button text="Assign Team" onAction="#handleAssignTeam"/>
+                <Button text="Assign Team" onAction="#handleAssignTeamToAgendaEntry"/>
                 <Button fx:id="btnMainMenu" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
             </children>
         </VBox>

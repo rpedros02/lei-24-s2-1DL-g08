@@ -134,7 +134,7 @@ public class GsmGUI {
     @FXML
     public void handleMainMenu() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/MainMenuGUI.fxml");
+        loadUI("/AdminGUI.fxml");
         currentStage.close();
     }
 }
