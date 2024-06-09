@@ -161,11 +161,7 @@ public class GenerateTeamController {
      *
      * @param team The Team object to be registered.
      */
-    public void registerTeam(Team team) {
-        if (teamRepository.add(team)) {
-            System.out.println("Team successfully registered!");
-        } else {
-            System.out.println("Team not registered!");
-        }
+    public boolean registerTeam(Team team) {
+        return teamRepository.add(team);
     }
 }

@@ -20,23 +20,35 @@ import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 /**
  * The GUI for adding an entry to the agenda.
  */
+/**
+ * This class provides a user interface for adding an entry to the agenda.
+ */
 public class AddEntryToAgendaGUI {
 
     @FXML
+    // ComboBox for selecting entries
     private ComboBox<String> cbEntries;
     @FXML
+    // Button for going back
     private Button btnBack;
     @FXML
+    /**
+     * Handles the action of clicking the GSM button.
+     * It loads the GSM user interface.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
+    // Repository for organizations
     private final OrganizationRepository organizationRepository;
+    // Controller for the to-do list
     private final ToDoListController toDoListController;
+    // Controller for the agenda
     private final AgendaController agendaController;
 
     /**
-     * Constructs a new AddEntryToAgendaGUI instance.
+     * Constructs a new instance of AddEntryToAgendaGUI.
      */
     public AddEntryToAgendaGUI() {
         this.toDoListController = new ToDoListController();
@@ -44,14 +56,22 @@ public class AddEntryToAgendaGUI {
         this.organizationRepository = Repositories.getInstance().getOrganizationRepository();
     }
 
+    /**
+     * Initializes the user interface.
+     * It populates the ComboBox with the titles of the entries from the to-do list.
+     */
     @FXML
     private void initialize() {
-        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(ApplicationSession.getInstance().getCurrentSession().getUserEmail()).getEntriesFromToDoList();
+        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getEntriesFromToDoList();
         for (Entry entry : toDoListEntries) {
             cbEntries.getItems().add(entry.getTitle());
         }
     }
 
+    /**
+     * Handles the action of adding an entry to the agenda.
+     * It validates the selected entry and adds it to the agenda if it is valid.
+     */
     @FXML
     private void handleAddEntryToAgenda() {
         Stage stage = (Stage) cbEntries.getScene().getWindow();
@@ -85,6 +105,12 @@ public class AddEntryToAgendaGUI {
         stage.close();
     }
 
+    /**
+     * Displays an alert with the specified type, title, and message.
+     * @param alertType the type of the alert
+     * @param title the title of the alert
+     * @param message the message of the alert
+     */
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

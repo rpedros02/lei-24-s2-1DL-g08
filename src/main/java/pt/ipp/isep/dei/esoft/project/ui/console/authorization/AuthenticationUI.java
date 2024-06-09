@@ -10,13 +10,31 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class provides the user interface for the authentication process.
+ * It implements the Runnable interface, allowing it to be used in a separate thread.
+ */
 public class AuthenticationUI implements Runnable {
+    /**
+     * The controller that handles the authentication process.
+     */
     private final AuthenticationController ctrl;
 
+    /**
+     * Constructs a new AuthenticationUI.
+     * It initializes the controller.
+     */
     public AuthenticationUI() {
         ctrl = new AuthenticationController();
     }
 
+    /**
+     * Starts the authentication process.
+     * It first attempts to log in the user.
+     * If the login is successful, it retrieves the user's roles and allows the user to select a role.
+     * It then redirects the user to the appropriate user interface based on the selected role.
+     * If the login is not successful or no role is selected, it logs out the user.
+     */
     public void run() {
         boolean success = doLogin();
 
@@ -37,6 +55,12 @@ public class AuthenticationUI implements Runnable {
         this.logout();
     }
 
+    /**
+     * Returns a list of menu items for the user roles.
+     * Each menu item represents a user role and its corresponding user interface.
+     *
+     * @return a list of menu items for the user roles
+     */
     private List<MenuItem> getMenuItemForRoles() {
         List<MenuItem> rolesUI = new ArrayList<>();
         rolesUI.add(new MenuItem(AuthenticationController.ROLE_ADMIN, new AdminUI()));
@@ -48,6 +72,14 @@ public class AuthenticationUI implements Runnable {
         return rolesUI;
     }
 
+    /**
+     * Attempts to log in the user.
+     * It prompts the user to enter their user id and password.
+     * It then attempts to log in the user with the entered user id and password.
+     * If the login is not successful, it allows the user to try again up to a maximum number of attempts.
+     *
+     * @return true if the login is successful, false otherwise
+     */
     private boolean doLogin() {
         System.out.println("\n\n--- LOGIN UI ---------------------------");
 
@@ -67,10 +99,20 @@ public class AuthenticationUI implements Runnable {
         return success;
     }
 
+    /**
+     * Logs out the user.
+     */
     private void logout() {
         ctrl.doLogout();
     }
 
+    /**
+     * Redirects the user to the appropriate user interface based on the selected role.
+     * If there is no user interface for the selected role, it prints a message indicating this.
+     *
+     * @param rolesUI the list of menu items for the user roles
+     * @param role the selected role
+     */
     private void redirectToRoleUI(List<MenuItem> rolesUI, UserRoleDTO role) {
         boolean found = false;
         Iterator<MenuItem> it = rolesUI.iterator();
@@ -86,6 +128,14 @@ public class AuthenticationUI implements Runnable {
         }
     }
 
+    /**
+     * Allows the user to select a role from a list of roles.
+     * If there is only one role in the list, it automatically selects that role.
+     * If there are multiple roles in the list, it prompts the user to select a role.
+     *
+     * @param roles the list of roles
+     * @return the selected role
+     */
     private UserRoleDTO selectsRole(List<UserRoleDTO> roles) {
         if (roles.size() == 1) {
             return roles.getFirst();

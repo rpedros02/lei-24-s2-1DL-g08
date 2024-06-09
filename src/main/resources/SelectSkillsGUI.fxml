@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #B0C4DE;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.GenerateTeamProposalGUI">
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="600.0" spacing="10.0">
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="172.0" prefWidth="347.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #1E90FF;" text="Select Necessary Skills" textAlignment="CENTER" />
+        <Label layoutX="194.0" layoutY="117.0" text="Add necessary skills">
+        </Label>
+        <ScrollPane prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="582.0">
+                <CheckBox fx:id="chbSkills" mnemonicParsing="false" text="CheckBox"/>
+            </AnchorPane>
+        </ScrollPane>
+        <Button onAction="#handleGenerateTeamProposal" style="-fx-background-color: #1E90FF; -fx-text-fill: #000000; -fx-font-size: 16;" text="Select Skills" />
+        <Button fx:id="btnBack" onAction="#handleReturn" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
+    </VBox>
+</AnchorPane>

@@ -10,34 +10,58 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for assigning one or more vehicles to an agenda entry.
+ */
 public class AssignOneOrMoreVehiclesGUI {
 
     @FXML
+    // ComboBox for selecting vehicles
     private ComboBox<Vehicle> cbVehicles;
 
     @FXML
+    // ComboBox for selecting an agenda entry
     private ComboBox<Entry> cbAgendaEntry;
+
     @FXML
+    // Button for going back
     private Button btnBack;
+
     @FXML
+    /**
+     * Handles the action of navigating to the GSM user interface.
+     * It is triggered when the GSM button is clicked.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
+    // Controller for assigning vehicles to agenda entries
     private AssignVehicleAgendaController controller;
 
+    /**
+     * Constructs a new instance of AssignOneOrMoreVehiclesGUI.
+     * It initializes the controller.
+     */
     public AssignOneOrMoreVehiclesGUI() {
         controller = new AssignVehicleAgendaController();
     }
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * It populates the ComboBoxes with the vehicles and agenda entries.
+     */
     public void initialize() {
-        // Inicializa os ComboBoxes com dados
         cbVehicles.setItems(FXCollections.observableArrayList(controller.getVehicles()));
         cbAgendaEntry.setItems(FXCollections.observableArrayList(controller.getAgenda().getEntries()));
     }
 
     @FXML
+    /**
+     * Handles the action of assigning one or more vehicles to an agenda entry.
+     * It validates the selected vehicle and agenda entry and assigns the vehicle to the entry if they are valid.
+     */
     private void handleAssignOneOrMoreVehicles() {
         Vehicle selectedVehicle = cbVehicles.getSelectionModel().getSelectedItem();
         Entry selectedEntry = cbAgendaEntry.getSelectionModel().getSelectedItem();

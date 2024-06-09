@@ -9,16 +9,30 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 import java.util.Scanner;
 
 /**
- * User interface for adding an entry to the agenda.
+ * This class provides the user interface for generating a team.
+ * It implements the Runnable interface, allowing it to be used in a separate thread.
  */
 public class AddEntryToAgendaUI implements Runnable {
+    /**
+     * The controller that handles the To-Do List.
+     */
     private final ToDoListController toDoListController;
+    /**
+     * The controller that handles the agenda.
+     */
     private final AgendaController agendaController;
+    /**
+     * The controller that handles the generation of teams.
+     */
     private final GenerateTeamController generateTeamController;
+    /**
+     * The scanner to read user input.
+     */
     private final Scanner scanner;
 
     /**
      * Constructs a new instance of AddEntryToAgendaUI.
+     * It initializes the controllers and the scanner.
      */
     public AddEntryToAgendaUI() {
         this.toDoListController = new ToDoListController();
@@ -29,6 +43,10 @@ public class AddEntryToAgendaUI implements Runnable {
 
     /**
      * Runs the user interface for adding an entry to the agenda.
+     * It prompts the user to enter the title of the entry.
+     * It then checks if the entry exists in the To-Do List and the agenda, and if it is associated with a green space managed by the GSM.
+     * If the entry passes all checks, it adds the entry to the agenda and assigns a team to the entry.
+     * It then sends a notification to the team members regarding the assignment of the entry.
      */
     public void run() {
         System.out.println("Enter the title of the entry to add to the agenda:");

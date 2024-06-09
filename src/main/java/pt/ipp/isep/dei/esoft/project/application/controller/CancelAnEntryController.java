@@ -3,7 +3,9 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Agenda;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
-import pt.ipp.isep.dei.esoft.project.domain.Date;
+import pt.ipp.isep.dei.esoft.project.domain.ToDoList;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+import pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI;
 
 /**
  * The CancelAnEntryController class is responsible for handling operations related to canceling an entry in the agenda.
@@ -15,16 +17,11 @@ public class CancelAnEntryController {
      * This instance is used to interact with the agenda,
      * allowing the controller to perform operations related to the agenda.
      */
-    private final Agenda agenda;
+    private final ToDoList toDoList = Repositories.getInstance().getOrganizationRepository().getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getTodoList();
 
-    /**
-     * The constructor for the CancelAnEntryController.
-     * It initializes the Agenda instance.
-     *
-     * @param agenda The Agenda object.
-     */
-    public CancelAnEntryController(Agenda agenda) {
-        this.agenda = agenda;
+
+    public CancelAnEntryController() {
+
     }
 
     /**
@@ -36,12 +33,12 @@ public class CancelAnEntryController {
      * @param title The title of the entry.
      * @return A string indicating the result of the operation.
      */
-    public String cancelEntry(String title) {
-        Entry entry = agenda.getEntryByTitle(title);
+    public boolean cancelEntry(String title) {
+        Entry entry = toDoList.getEntryByTitle(title);
         if (entry == null) {
-            return "Entry not found.";
+            return false;
         }
         entry.setStatus(EStatus.CANCELED);
-        return "Entry canceled successfully.";
+        return true;
     }
 }

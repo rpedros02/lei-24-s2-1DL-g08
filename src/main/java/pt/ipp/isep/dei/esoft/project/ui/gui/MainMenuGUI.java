@@ -16,22 +16,30 @@ import java.util.List;
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
 
+/**
+ * This class provides the main user interface for the application.
+ */
 public class MainMenuGUI {
 
     @FXML
+    // The main VBox layout for the user interface
     private VBox mainBox;
 
     @FXML
+    // The TextField for the user to enter their login ID
     private TextField txtLoginId;
 
     @FXML
+    // The PasswordField for the user to enter their password
     private PasswordField txtPassword;
 
     @FXML
+    // The Button for the user to switch to the DevTeam user interface
     private Button btnDevTeam;
 
     /**
-     * Initializes the controller class.
+     * Initializes the user interface.
+     * This method is called after all @FXML annotated members have been injected.
      */
     @FXML
     public void initialize() {
@@ -39,7 +47,10 @@ public class MainMenuGUI {
     }
 
     /**
-     * Handles the login button action.
+     * Handles the action of the user clicking the login button.
+     * This method attempts to log the user in with the entered login ID and password.
+     * If the login is successful, it switches to the user interface corresponding to the user's role.
+     * If the login is not successful, it displays an error message.
      */
     @FXML
     public void handleLogin() {
@@ -105,11 +116,16 @@ public class MainMenuGUI {
 
     /**
      * Loads the HRM menu.
+     * This method is called when the user's role is HRM.
      */
     private void loadHrmMenu() {
         UtilsGUI.handleHRM(btnDevTeam);
     }
 
+    /**
+     * Loads the Admin menu.
+     * This method is called when the user's role is Admin.
+     */
     private void loadAdminMenu() {
         Stage stage = (Stage) btnDevTeam.getScene().getWindow();
         loadUI("/AdminGUI.fxml");
@@ -118,6 +134,7 @@ public class MainMenuGUI {
 
     /**
      * Loads the VFM menu.
+     * This method is called when the user's role is VFM.
      */
     private void loadVfmMenu() {
         Stage stage = (Stage) btnDevTeam.getScene().getWindow();
@@ -126,7 +143,8 @@ public class MainMenuGUI {
     }
 
     /**
-     * Handles the DevTeam button action.
+     * Handles the action of the user clicking the DevTeam button.
+     * This method switches to the DevTeam user interface.
      */
     @FXML
     public void handleDevTeam() {
@@ -137,6 +155,7 @@ public class MainMenuGUI {
 
     /**
      * Loads the GSM menu.
+     * This method is called when the user's role is GSM.
      */
     private void loadGsmMenu() {
         Stage stage = (Stage) btnDevTeam.getScene().getWindow();
@@ -144,6 +163,10 @@ public class MainMenuGUI {
         stage.close();
     }
 
+    /**
+     * Handles the action of the user clicking the Collaborator button.
+     * This method switches to the Collaborator user interface.
+     */
     @FXML
     public void handleCollaboratorMenu() {
         Stage stage = (Stage) btnDevTeam.getScene().getWindow();

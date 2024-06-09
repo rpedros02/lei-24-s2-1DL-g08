@@ -1,5 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
+/**
+ * This interface defines the contract for sending emails.
+ */
 public interface EmailService {
     /**
      * Sends an email to the specified recipient.

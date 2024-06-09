@@ -10,53 +10,82 @@ import java.time.LocalDate;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for registering a vehicle.
+ */
 public class RegisterVehicleGUI {
 
     @FXML
+    // TextField for entering the vehicle's plate ID
     private TextField txtPlateId;
 
     @FXML
+    // TextField for entering the vehicle's brand
     private TextField txtBrand;
 
     @FXML
+    // TextField for entering the vehicle's model
     private TextField txtModel;
 
     @FXML
+    // TextField for entering the vehicle's type
     private TextField txtType;
 
     @FXML
+    // TextField for entering the vehicle's tare
     private TextField txtTare;
 
     @FXML
+    // TextField for entering the vehicle's weight
     private TextField txtWeight;
 
     @FXML
+    // TextField for entering the vehicle's mileage
     private TextField txtMileage;
 
     @FXML
+    // TextField for entering the vehicle's last checkup
     private TextField txtLastVehicleCheckup;
 
     @FXML
+    // DatePicker for selecting the vehicle's register date
     private DatePicker dpRegisterDate;
 
     @FXML
+    // DatePicker for selecting the vehicle's acquisition date
     private DatePicker dpAcquisitionDate;
 
     @FXML
+    // TextField for entering the vehicle's maintenance frequency
     private TextField txtMaintenanceFrequency;
 
     @FXML
+    // Label for displaying messages
     private Label lblMessage;
+
     @FXML
+    // Button for going back to the previous user interface
     private Button btnBack;
+
     @FXML
+    /**
+     * Handles the action of returning to the Vfm user interface.
+     * It is triggered when the Back button is clicked.
+     * It closes the current stage and loads the VfmGUI.
+     */
     public void handleVfm() {
         loadUI("/VfmGUI.fxml");
     }
 
+    // Controller for managing vehicles
     private final VehicleController controller = new VehicleController();
 
     @FXML
+    /**
+     * Handles the action of registering a vehicle.
+     * It is triggered when the corresponding button is clicked.
+     * It validates the input, creates a vehicle if the input is valid, and displays a message indicating the result.
+     */
     private void handleRegisterVehicle() {
         String plateId = txtPlateId.getText();
         String brand = txtBrand.getText();
@@ -95,6 +124,10 @@ public class RegisterVehicleGUI {
         }
     }
 
+    /**
+     * Displays an error alert with the specified message.
+     * @param message the message to display
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");

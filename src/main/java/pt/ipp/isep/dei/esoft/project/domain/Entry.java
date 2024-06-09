@@ -342,4 +342,12 @@ public class Entry {
     public String toString() {
         return STR."Entry{title='\{title}', description='\{description}', degreeOfUrgency=\{degreeOfUrgency.toString()}, dateBegin=\{dateBegin.toString()}, dateEnd=\{dateEnd.toString()}, status=\{status.toString()}, greenSpace=\{greenSpace.toString()}}";
     }
+
+    public boolean updateStatus(EStatus eStatus) {
+        if (eStatus == null) {
+            return false;
+        }
+        this.status = eStatus;
+        return true;
+    }
 }

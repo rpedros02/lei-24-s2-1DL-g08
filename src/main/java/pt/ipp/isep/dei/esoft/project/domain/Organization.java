@@ -512,4 +512,8 @@ public class Organization {
     public ToDoList getTodoList() {
         return toDoList;
     }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
 }

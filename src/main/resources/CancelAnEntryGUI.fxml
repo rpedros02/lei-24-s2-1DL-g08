@@ -14,9 +14,9 @@
 
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="290.0"
                style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER"/>
-        <ComboBox prefWidth="150.0"/>
+        <ComboBox fx:id="comboBoxEntry" prefWidth="150.0"/>
 
-        <Button onAction="#handleCancelAnEntry"
+        <Button fx:id="btnCancelAnEntryInTheAgenda" onAction="#handleCancelAnEntry"
                 style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;"
                 text="Cancel an Entry in the Agenda"/>
         <Button fx:id="btnBack" onAction="#handleGsm"
