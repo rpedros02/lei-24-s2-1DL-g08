@@ -228,7 +228,6 @@ public class ToDoList {
         this.entries.addAll(entries);
     }
 }
-}
 ```
 
 ### ToDoListRepository

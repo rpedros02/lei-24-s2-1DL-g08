@@ -13,7 +13,7 @@ class GreenSpace {
 }
 
 class GreenSpaceRepository {
-    + registerGreenSpace(name, location, area)
+    + registerGreenSpace(name, location, area, address)
     + validateGreenSpace(greenSpace)
     + saveGreenSpace(greenSpace)
     + getGreenSpaceTypeList()
@@ -30,7 +30,7 @@ class Repositories {
 
 class RegisterGreenSpaceController {
     + getGreenSpaceTypeList()
-    + registerGreenSpace(name, location, area)
+    + registerGreenSpace(name, location, area, address)
 
 }
 

@@ -21,7 +21,7 @@ activate Employee
     Employee -> System : selects a Green Space type
     activate System
 
-        System --> Employee : requests data (a name, a location, an area)
+        System --> Employee : requests data (a name, a location, an area, an address)
     deactivate System
 
     Employee -> System : types data

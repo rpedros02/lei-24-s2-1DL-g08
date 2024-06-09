@@ -32,6 +32,7 @@ multiple hectares (e.g., in Porto, there are the Parque da Cidade - City Park - 
   * Name of the green space
   * Location (address or coordinates)
   * Size or area of the green space
+  * Address
 
   
 * **AC2:** The registration form should include validation checks to ensure that all required fields are filled out appropriately.
@@ -45,6 +46,7 @@ multiple hectares (e.g., in Porto, there are the Parque da Cidade - City Park - 
   * Name of the green space
   * Location (address or coordinates)
   * Size or area of the green space
+  * Address
 
 
 * Selected data:

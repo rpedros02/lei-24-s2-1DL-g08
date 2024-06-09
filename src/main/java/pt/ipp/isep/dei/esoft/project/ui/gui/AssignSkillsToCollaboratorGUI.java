@@ -37,7 +37,7 @@ public class AssignSkillsToCollaboratorGUI {
         List<Collaborator> collaborators = controller.getCollabortorList();
         for ( Collaborator collaborator : collaborators
              ) {
-            cbCollaborator.getItems().add(STR."\{collaborator.getName()} - \{collaborator.getEmail()}")
+            cbCollaborator.getItems().add(STR."\{collaborator.getName()} - \{collaborator.getEmail()}");
         }
 
         List<Skill> skills = controller.getSkillList();

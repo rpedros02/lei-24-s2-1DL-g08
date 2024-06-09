@@ -12,7 +12,7 @@ hide methods
 
 title Domain model US21
 
-class "Task" {
+class "Entry" {
     -name
     -description
     -urgency
@@ -30,7 +30,7 @@ class "ToDoList" {
 }
 
 
-Task "1" -- "0..*" ToDoList : exists in >
+Entry "1" -- "0..*" ToDoList : exists in >
 ToDoList "1" -- "0..*" ToDoListEntry : contains >
-ToDoListEntry "1" -- "1" Task : contains >
+ToDoListEntry "1" -- "1" Entry : contains >
 @enduml
