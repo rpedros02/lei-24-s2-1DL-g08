@@ -2,44 +2,81 @@
 
 ## 4. Tests 
 
-**Test 1:** Check that it is not possible to list the vehicles when VehicleRepository is empty. 
+**Test 1:** Check that it is not possible to list green spaces when the GreenSpaceRepository is empty. 
 
     @Test
-    void ensureVehicleRepositoryIsNotEmpty() {
-        VehicleRepository vehicleRepository = new VehicleRepository();
-        vehicleRepository.add("AA-00-00", "Brand", "Model", "Type", 1.0, 2.0, 1000, new Date(1, 1, 2001), new Date(1, 1, 2001), 12);
-        assertFalse(vehicleRepository.isEmpty());
+    void ensureGreenSpaceRepositoryIsEmpty() {
+        GreenSpaceRepository greenSpaceRepository = new GreenSpaceRepository();
+        assertTrue(greenSpaceRepository.getGreenSpaces().isEmpty(), "Green space repository should be empty initially");
     }
+
+**Test 2:** Verify that green spaces are sorted by size in descending order.
+
+     @Test
+    void ensureGreenSpacesAreSortedBySizeDescending() {
+        GreenSpaceRepository greenSpaceRepository = new GreenSpaceRepository();
+        greenSpaceRepository.addGreenSpace(new GreenSpace("Small Park", 1.0));
+        greenSpaceRepository.addGreenSpace(new GreenSpace("Medium Park", 5.0));
+        greenSpaceRepository.addGreenSpace(new GreenSpace("Large Park", 10.0));
+
+        SortStrategy sortStrategy = new SortBySizeDescending();
+        ListGreenSpacesController controller = new ListGreenSpacesController(sortStrategy);
+
+        List<GreenSpace> greenSpaces = controller.getAllGreenSpaces();
+        assertEquals(3, greenSpaces.size());
+        assertEquals("Large Park", greenSpaces.get(0).getName());
+        assertEquals("Medium Park", greenSpaces.get(1).getName());
+        assertEquals("Small Park", greenSpaces.get(2).getName());
+    }
+
 
 
 ## 5. Construction (Implementation)
 
-### Class CreateTaskController 
+### Class ListGreenSpacesController 
 
 ```java
-public Vehicle createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                             Date register_date, Date acquisition_date, int maintenance_frequency) {
-    
-    
-	newVehicle = organization.createVehicle(plateId, brand, model, type, tare, weight,
-                                            mileage, register_date, acquisition_date, maintenance_frequency);
-    
-	return newVehicle;
+public class ListGreenSpacesController {
+    private GreenSpaceRepository greenSpaceRepository;
+
+    public ListGreenSpacesController() {
+        this.greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
+    }
+    public List<GreenSpace> getAllGreenSpaces(){
+        return this.greenSpaceRepository.getGreenSpaces();
+    }
+
 }
 ```
 
-### Class Organization
+### ListGreenSpacesUI
 
 ```java
 
-public Optional<Vehicle> createVehicle(String plateId, String brand, String model, String type, double tare, double weight, int mileage,
-                                       Date register_date, Date acquisition_date, int maintenance_frequency) {
+public class ListGreenSpacesUI implements Runnable {
+    private final ListGreenSpacesController controller;
 
-    Vehicle vehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage, register_date, acquisition_date, maintenance_frequency);
+    public ListGreenSpacesUI() {
+        this.controller = new ListGreenSpacesController();
+    }
 
-    addVehicle(vehicle);
+    @Override
+    public void run() {
+        System.out.println("Green Spaces:");
+        List<GreenSpace> greenSpaces = controller.getAllGreenSpaces();
+        displayGreenSpaces(greenSpaces);
+        System.out.println("--------------------");
+    }
 
-    return vehicle;
+    private void displayGreenSpaces(List<GreenSpace> greenSpaces) {
+        if (greenSpaces.isEmpty()) {
+            System.out.println("No green spaces found for this GSM.");
+        } else {
+            for (GreenSpace greenSpace : greenSpaces) {
+                System.out.println(greenSpace);
+            }
+        }
+    }
 }
 ```
 
