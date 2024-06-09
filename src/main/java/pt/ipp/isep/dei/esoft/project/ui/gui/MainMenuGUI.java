@@ -14,6 +14,7 @@ import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
 
 public class MainMenuGUI {
 
@@ -53,11 +54,7 @@ public class MainMenuGUI {
             Alert alert;
             List<UserRoleDTO> roles = ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("No role assigned to user.");
-                alert.showAndWait();
+                showAlert("No roles found.");
             } else {
                 UserRoleDTO role = roles.getFirst(); // Get the single role directly
                 Stage stage = (Stage) btnDevTeam.getScene().getWindow();
@@ -100,11 +97,7 @@ public class MainMenuGUI {
                 }
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Login failed. Wrong credentials.");
-            alert.showAndWait();
+            showAlert("Login failed. Double-check your credentials.");
         }
         txtLoginId.clear();
         txtPassword.clear();
@@ -114,9 +107,7 @@ public class MainMenuGUI {
      * Loads the HRM menu.
      */
     private void loadHrmMenu() {
-        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
-        loadUI("/HrmGUI.fxml");
-        stage.close();
+        UtilsGUI.handleHRM(btnDevTeam);
     }
 
     private void loadAdminMenu() {
