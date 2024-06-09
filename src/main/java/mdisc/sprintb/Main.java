@@ -1,9 +1,8 @@
-package mdisc;
-
+package mdisc.sprintb;
 import java.io.*;
-import java.util.*;
+ import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -13,33 +12,20 @@ public class Main {
         System.out.println("Choose an option: ");
         System.out.println("1. Calculate the minimum cost tree");
         System.out.println("2. Calculate execution time for multiple files");
-        System.out.println("3. Route to the Assembly Poin.");
-        System.out.println("4. Route to the closest Assembly Point");
-
-
         int option = Integer.parseInt(scanner.nextLine());
 
         if (option == 1) {
-
+            // Calculate the minimum cost tree for a single file
             calculateMinimumCostTree(scanner);
         } else if (option == 2) {
             calculateExecutionTimeMultipleFiles(scanner);
-
-        } else if (option == 3 || option == 4) {
-            String path;
-
-            if (option == 3) {
-                path = "./src/main/java/mdisc/us17";
-            } else {
-                path = "./src/main/java/mdisc/us18";
-            }
         } else {
-
             System.out.println("Invalid option. The program will terminate.");
         }
 
+        // Generate execution time graph
         String dataFilePath = "execution_time.csv";
-        String outputFilePath = "execution_time.png";
+        String outputFilePath = "execution_time.png"; // Output file name
         GNUPlothGraph.generateGNUPlotGraph(dataFilePath, outputFilePath);
         scanner.close();
     }
@@ -112,7 +98,7 @@ public class Main {
         List<File> files = new ArrayList<>();
         int counter = 1;
         while (true) {
-            String fileName = baseFileName + "_" + counter + ".csv";
+            String fileName =  baseFileName + "_" + counter + ".csv";
             File file = new File(fileName);
             if (file.exists()) {
                 files.add(file);
@@ -130,16 +116,16 @@ public class Main {
     public static long readFileTime(String fileName, List<Integer> inputSizeList) {
         Grafo graph = new Grafo();
 
-
+        // JVM warm-up
         Grafo.KruskalResult minimumTree = graph.kruskalMinSpanningTree();
 
-
+        // Read the file and calculate execution time
         long startTime = System.nanoTime();
-        minimumTree = graph.kruskalMinSpanningTree();
+        minimumTree = graph.kruskalMinSpanningTree(); // Call again after warm-up
         long endTime = System.nanoTime();
         long executionTime = endTime - startTime;
 
-
+        // Calculate the input size of the file
         int inputSize = calculateInputSize(fileName);
         inputSizeList.add(inputSize);
         return executionTime;
@@ -172,15 +158,15 @@ public class Main {
     }
 
     public static void printGraph(ArrayList<Object[]> csvData) {
-        String graphOutputFileName = "gráfico";
+        String graphOutputFileName = "graph"; // PNG file name for the graph
         GraphPrinter gp = new GraphPrinter(graphOutputFileName);
 
-
+        // Build the graph content in DOT format
         for (Object[] aresta : csvData) {
             gp.addln(aresta[0] + " -- " + aresta[1] + "[label=" + aresta[2] + "]");
         }
 
-
+        // Print the graph
         gp.print();
     }
 
@@ -188,80 +174,14 @@ public class Main {
         String subGraphOutputFileName = "minimum_cost_tree_subgraph"; // PNG file name for the subgraph
         GraphPrinter gp = new GraphPrinter(subGraphOutputFileName);
 
-
+        // Build the subgraph content in DOT format
         gp.addln("label=\"Cost of a minimum spanning tree = " + minimumCost + "\";");
         for (Aresta aresta : arestas) {
-            gp.addln(aresta.getStartVertice() + " -- " + aresta.getEndVertice() + "[label=" + aresta.getCost() + "]");
+            gp.addln(aresta.getStart() + " -- " + aresta.getEnd() + "[label=" + aresta.getWeight() + "]");
         }
 
+        // Print the graph
         gp.print();
     }
 
-
-    private static void calculateShortestPathForEvacuation(Scanner scanner) {
-        System.out.print("Enter the name of the matrix .csv file: ");
-        String matrixFileName = scanner.nextLine();
-
-        System.out.print("Enter the name of the assembly points .csv file: ");
-        String assemblyPointsFileName = scanner.nextLine();
-
-        List<File> files = searchFilesByBaseName(matrixFileName);
-
-        System.out.printf(matrixFileName);
-        if (files.isEmpty()) {
-            System.out.println("No files found with the provided base name.");
-            return;
-        }
-
-        CSVReader csvReader = new CSVReader();
-        for (File file : files) {
-            ArrayList<Object[]> csvData = csvReader.readCsv(file.getPath());
-
-            Grafo grafico = new Grafo();
-            for (Object[] row : csvData) {
-                String startVerticeName = (String) row[0];
-                String endVerticeName = (String) row[1];
-                double cost= (double) row[2];
-
-                grafico.addVertice(startVerticeName);
-                grafico.addVertice(endVerticeName);
-                grafico.addAresta(startVerticeName, endVerticeName, cost);
-            }
-
-        }
-    }
-
-    public static List<File> listFilesInDirectory(String directoryPath) {
-        List<File> fileList = new ArrayList<>();
-
-        File directory = new File(directoryPath);
-        if (directory.exists() && directory.isDirectory()) {
-            File[] files = directory.listFiles();
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isFile()) {
-                        fileList.add(file);
-                    }
-                }
-                fileList.sort(Comparator.comparingLong(File::length));
-            }
-        } else {
-            System.err.println("Directory does not exist or is not a directory.");
-        }
-
-        return fileList;
-    }
-
-    public static List<String> getNames(String filename, String path) {
-        CSVReader importer = new CSVReader();
-        List<String> names = new ArrayList<>();
-        try {
-            names = importer.importNames(path + filename);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return names;
-
-    }
 }
-

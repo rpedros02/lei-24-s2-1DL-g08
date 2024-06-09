@@ -1,10 +1,9 @@
-package mdisc;
+ package mdisc.sprintb;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 public class GraphPrinter {
     private StringBuilder graphBuilder = new StringBuilder();
@@ -71,16 +70,4 @@ public class GraphPrinter {
         outputStream.write(text.getBytes());
         outputStream.close();
     }
-
-    public static void printShortestPath(List<Vertice> path, String fileName) {
-        GraphPrinter gp = new GraphPrinter(fileName);
-
-        for (int i = 0; i < path.size() - 1; i++) {
-            gp.addln(path.get(i).getVertice() + " -- " + path.get(i + 1).getVertice());
-        }
-
-        gp.print();
-    }
-
 }
-
