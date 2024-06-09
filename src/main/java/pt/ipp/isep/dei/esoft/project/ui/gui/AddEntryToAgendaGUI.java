@@ -17,6 +17,9 @@ import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * The GUI for adding an entry to the agenda.
+ */
 public class AddEntryToAgendaGUI {
 
     @FXML
@@ -32,15 +35,18 @@ public class AddEntryToAgendaGUI {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
 
+    /**
+     * Constructs a new AddEntryToAgendaGUI instance.
+     */
     public AddEntryToAgendaGUI() {
-        this.toDoListController = new ToDoListController(); // Assumindo que há um construtor padrão
+        this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
         this.organizationRepository = Repositories.getInstance().getOrganizationRepository();
     }
 
     @FXML
     private void initialize() {
-        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(ApplicationSession.getInstance().getCurrentSession().getUserEmail()).getEntriesFromToDoList(); // Método atualizado
+        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(ApplicationSession.getInstance().getCurrentSession().getUserEmail()).getEntriesFromToDoList();
         for (Entry entry : toDoListEntries) {
             cbEntries.getItems().add(entry.getTitle());
         }

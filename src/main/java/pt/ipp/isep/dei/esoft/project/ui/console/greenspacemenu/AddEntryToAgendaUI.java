@@ -8,6 +8,9 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 
 import java.util.Scanner;
 
+/**
+ * User interface for adding an entry to the agenda.
+ */
 public class AddEntryToAgendaUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
@@ -15,7 +18,7 @@ public class AddEntryToAgendaUI implements Runnable {
     private final Scanner scanner;
 
     /**
-     * Constructs a new AddEntryToAgendaUI instance.
+     * Constructs a new instance of AddEntryToAgendaUI.
      */
     public AddEntryToAgendaUI() {
         this.toDoListController = new ToDoListController();
@@ -68,18 +71,38 @@ public class AddEntryToAgendaUI implements Runnable {
         }
     }
 
+    /**
+     * Gets the ToDoListController.
+     *
+     * @return The ToDoListController instance.
+     */
     public ToDoListController getToDoListController() {
         return toDoListController;
     }
 
+    /**
+     * Gets the AgendaController.
+     *
+     * @return The AgendaController instance.
+     */
     public AgendaController getAgendaController() {
         return agendaController;
     }
 
+    /**
+     * Gets the GenerateTeamController.
+     *
+     * @return The GenerateTeamController instance.
+     */
     public GenerateTeamController getGenerateTeamController() {
         return generateTeamController;
     }
 
+    /**
+     * Gets the scanner.
+     *
+     * @return The Scanner instance.
+     */
     public Scanner getScanner() {
         return scanner;
     }
@@ -97,4 +120,3 @@ public class AddEntryToAgendaUI implements Runnable {
         }
     }
 }
-

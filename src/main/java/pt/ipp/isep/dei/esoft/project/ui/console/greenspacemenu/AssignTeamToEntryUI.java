@@ -4,6 +4,8 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.ui.gui.EmailService;
+import pt.ipp.isep.dei.esoft.project.ui.gui.EmailServiceController;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -13,7 +15,7 @@ public class AssignTeamToEntryUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
     private final Scanner scanner;
-
+    private final EmailService emailService;
 
     /**
      * Constructs a new AssignTeamToEntryUI instance.
@@ -22,17 +24,21 @@ public class AssignTeamToEntryUI implements Runnable {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
         this.scanner = new Scanner(System.in);
+        this.emailService = EmailServiceController.createEmailServiceFromConfig();
     }
 
+
     /**
-     * Constructs a new AssignTeamToEntryUI instance with provided controllers.
+     * Constructs a new AssignTeamToEntryUI instance with provided controllers and email service.
      *
      * @param toDoListController The ToDoListController instance.
-     * @param agendaController The AgendaController instance.
+     * @param agendaController   The AgendaController instance.
+     * @param emailService       The EmailService instance.
      */
-    public AssignTeamToEntryUI(ToDoListController toDoListController, AgendaController agendaController) {
+    public AssignTeamToEntryUI(ToDoListController toDoListController, AgendaController agendaController, EmailService emailService) {
         this.toDoListController = toDoListController;
         this.agendaController = agendaController;
+        this.emailService = emailService;
         this.scanner = new Scanner(System.in);
     }
 
@@ -61,10 +67,8 @@ public class AssignTeamToEntryUI implements Runnable {
 
         Team team = teamOpt.get();
 
-
         entry.setAssignedTeam(team);
         System.out.println("Team assigned to the entry successfully.");
-
 
         sendNotificationToTeamMembers(team);
     }
@@ -75,9 +79,9 @@ public class AssignTeamToEntryUI implements Runnable {
      * @param team The team to which the notification is sent.
      */
     private void sendNotificationToTeamMembers(Team team) {
-
         System.out.println("Sending notification to team members:");
         for (String member : team.getMembers()) {
+            emailService.sendEmail(member, "Team Assignment Notification", "You have been assigned to a team.");
             System.out.println("Notification sent to: " + member);
         }
     }
@@ -91,3 +95,4 @@ public class AssignTeamToEntryUI implements Runnable {
         return agendaController;
     }
 }
+
