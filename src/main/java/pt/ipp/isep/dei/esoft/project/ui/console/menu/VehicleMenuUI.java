@@ -35,7 +35,7 @@ public class VehicleMenuUI implements Runnable{
         // Add option to edit a vehicle
         options.add(new MenuItem("Edit a Vehicle", new ShowTextUI("You have chosen Option 3.")));
         // Add option to display the maintenance list
-        options.add(new MenuItem("Maintenance List", new ShowTextUI("You have chosen Option 4.")));
+        //options.add(new MenuItem("Maintenance List", new MaintenanceListUI(checkupRepository)));
         // Add option to delete a vehicle
         options.add(new MenuItem("Delete a Vehicle", new ShowTextUI("You have chosen Option 5.")));
 

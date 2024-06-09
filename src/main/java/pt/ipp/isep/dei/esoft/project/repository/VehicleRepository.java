@@ -55,32 +55,6 @@ public class VehicleRepository {
         return this.vehicles;
     }
 
-    /**
-     * Updates the plate id of a vehicle.
-     *
-     * @param oldPlateId the old plate id
-     * @param newPlateId the new plate id
-     * @return true if the plate id was updated successfully, false otherwise
-     */
-    public boolean updatePlateId(String oldPlateId, String newPlateId) {
-        for (Vehicle vehicle : vehicles) {
-            if (exists(oldPlateId)) {
-                vehicle.setPlateId(newPlateId);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean updateBrand(String plateId, String newBrand) {
-        for (Vehicle vehicle : vehicles) {
-            if (exists(plateId)) {
-                vehicle.setBrand(newBrand);
-                return true;
-            }
-        }
-        return false;
-    }
 
     /**
      * Updates a vehicle with new information.
@@ -336,4 +310,15 @@ public class VehicleRepository {
         }
         return true;
     }
+
+    public List<Vehicle> getVehiclesInNeedOfCheckUp() {
+        List<Vehicle> vehiclesInNeedOfCheckUp = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.isInNeedOfCheckUp()) {
+                vehiclesInNeedOfCheckUp.add(vehicle);
+            }
+        }
+        return vehiclesInNeedOfCheckUp;
+    }
+
 }

@@ -343,4 +343,8 @@ public class Vehicle {
     public int getLastVehicleCheckupKm() {
         return lastVehicleCheckupKm;
     }
+
+    public boolean isInNeedOfCheckUp() {
+        return (mileage - lastVehicleCheckupKm) >= maintenanceFrequency;
+    }
 }

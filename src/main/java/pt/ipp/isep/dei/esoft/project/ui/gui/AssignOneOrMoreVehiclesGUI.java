@@ -33,7 +33,7 @@ public class AssignOneOrMoreVehiclesGUI {
      */
     @FXML
     public void handleGsm() {
-       handleGSM(btnBack);
+        handleGSM(btnBack);
     }
 
     // Controller for assigning vehicles to agenda entries
