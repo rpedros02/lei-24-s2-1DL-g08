@@ -1,4 +1,4 @@
-package pt.ipp.isep.dei.esoft.project.ui.console.menu;
+/*package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
@@ -29,3 +29,4 @@ public class MaintenanceListUI implements Runnable {
         }
     }
 }
+*/
