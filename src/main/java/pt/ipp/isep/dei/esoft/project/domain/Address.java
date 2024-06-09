@@ -1,13 +1,41 @@
 package pt.ipp.isep.dei.esoft.project.domain;
-
+/**
+ * The Address class represents a physical address.
+ * It includes properties for the street, street number, postal code, city, and district.
+ * It also includes methods for setting these properties with validation.
+ */
 public class Address {
 
+    /**
+     * The street of the address.
+     */
     private String street;
+
+    /**
+     * The street number of the address.
+     */
     private int streetNumber;
+
+    /**
+     * The postal code of the address.
+     */
     private String postalCode;
+
+    /**
+     * The city of the address.
+     */
     private String city;
+
+    /**
+     * The district of the address.
+     */
     private String district;
 
+    /**
+     * Constructs an Address object by copying the properties of another Address object.
+     *
+     * @param address The Address object to copy.
+     */
     public Address(Address address) {
         this.street = address.street;
         this.streetNumber = address.streetNumber;
@@ -33,7 +61,9 @@ public class Address {
         setDistrict(district);
     }
 
-
+    /**
+     * The PostalCodeValidationResults enum represents the possible results of postal code validation.
+     */
     private enum PostalCodeValidationResults {
         EMPTY,
         VALID,
@@ -41,10 +71,21 @@ public class Address {
         INVALID_FORMAT
     }
 
+    /**
+     * The total number of digits in a valid postal code.
+     */
     private static final int POSTAL_CODE_TOTAL_DIGITS = 8;
 
+    /**
+     * The separator character in a valid postal code.
+     */
     private static final char POSTAL_CODE_SEPARATOR = '-';
 
+    /**
+     * Retrieves the street of the address.
+     *
+     * @return The street of the address.
+     */
     public String getStreet() {
         return street;
     }
@@ -256,6 +297,4 @@ public class Address {
     private static boolean validateDistrict(String district) {
         return district != null && !district.trim().isEmpty();
     }
-
-
 }
