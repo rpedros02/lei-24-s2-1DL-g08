@@ -1,0 +1,56 @@
+@startuml
+'skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam linetype polyline
+'skinparam linetype orto
+
+skinparam classAttributeIconSize 0
+
+'left to right direction
+
+interface Runnable {
+    +run()
+}
+
+class TeamController{
++getAllTeams(teams)
++getTeamMembersEmails(team)
+
+}
+
+class TeamRepository{
++getAllTeams(teams)
++getTeamMembersEmails(team)
+
+}
+
+class AgendaController{
++updateEntry(entry,team)
++getAllAgendaEntries()
++sendEmailToTeamMembers(emails,entry)
+}
+
+class AgendaRepository{
++getAllAgendaEntries()
++saveEntry(entry,team)
+}
+
+class Agenda{
++updateEntry(entry,team)
+}
+
+class AddTeamToAgendaEntryGUI{
+run();
+}
+
+Runnable -|> AddTeamToAgendaEntryGUI
+
+AddTeamToAgendaEntryGUI ..> AgendaController
+AddTeamToAgendaEntryGUI ..> TeamController
+TeamController ..> TeamRepository
+AgendaController ..> Agenda
+AgendaController ..> AgendaRepository
+
+
+@enduml

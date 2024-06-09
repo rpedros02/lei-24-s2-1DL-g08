@@ -1,0 +1,96 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US022 ´'Add Entry to Agenda´'
+header US022
+autonumber
+
+actor "User" as us
+participant ":AddTeamToAgendaEntryGUI" as ui
+participant ":AgendaController" as ac
+participant ":TeamController" as tc
+participant ":AgendaRepository" as ar
+participant ":TeamRepository" as tr
+participant ":Agenda" as a
+
+activate us
+    us -> ui : Request to add a team to a agenda entry
+    activate ui
+        ui -> tc : getAllTeams(teams)
+        activate tc
+        tc -> tr : getAllTeams(teams)
+        activate tr
+        deactivate tc
+        tr --> tc :returns list of all teams
+        deactivate tr
+        activate tc
+        tc --> ui : returns list of all teams
+        deactivate tc
+        ui --> us : asks user to select a team
+        deactivate ui
+        us -> ui : selects a team
+
+        activate ui
+        ui -> ac : getAllAgendaEntries()
+        activate ac
+        ac -> ar : getAllAgendaEntries()
+        activate ar
+        deactivate ac
+        ar --> ac :returns all agendas entries
+        deactivate ar
+        activate ac
+        ac --> ui : returns all agendas entries
+        deactivate ac
+        ui --> us : asks user to select a agenda entry to the the desired team
+        deactivate ui
+        us -> ui : selects a team
+        activate ui
+        ui -> ac : updateEntry(entry,team)
+        deactivate ui
+        activate ac
+        ac -> a : updateEntry(entry,team)
+        deactivate ac
+        activate a
+        a --> ac : returns updated entry
+        deactivate a
+        activate ac
+        ac -> ar : updateEntry(entry,team)
+        deactivate ac
+        activate ar
+        ar --> ac : returns (in)success of operation
+        alt if success
+        deactivate ar
+        activate ac
+        ac -> ui : returns success of operation
+        deactivate ac
+        activate ui
+        ui -> tc : getTeamMembersEmails(team)
+        deactivate ui
+        activate tc
+        tc -> tr : getTeamMembersEmails(team)
+        deactivate tc
+        activate tr
+        tr --> tc : returns list of team members emails
+        deactivate tr
+        activate tc
+        tc --> ui : returns list of team members emails
+        deactivate tc
+        activate ui
+        ui -> ac : sendEmailToTeamMembers(emails,entry)
+        deactivate ui
+        activate ac
+        ac -> ui : returns success of operation
+        deactivate ac
+        activate ui
+        ui --> us : informs user that the team was added to the entry
+        end
+
+
+
+
+
+deactivate us
+
+@enduml

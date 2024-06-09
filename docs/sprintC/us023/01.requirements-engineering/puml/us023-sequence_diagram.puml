@@ -1,0 +1,33 @@
+@startuml
+skinparam monochrome true
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+title US023 - List the vehicles needing check-up
+header US023
+autonumber
+
+actor "user" as user
+participant ":System" as System
+
+activate user
+
+      user -> System : Request to add a Team to an entry.
+    activate System
+        System --> user :displays list of all Teams and asks to select one
+        deactivate System
+        user -> System : User selects a team to add to an entry
+        activate System
+        System --> user :displays list of all Entries in the agenda and asks to select one
+        deactivate System
+        user -> System : User selects an entry to add the team to
+        activate System
+        System --> user :displays message of (In)success.
+
+
+        deactivate System
+
+
+    deactivate user
+
+@enduml

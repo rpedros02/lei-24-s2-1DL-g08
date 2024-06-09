@@ -1,4 +1,4 @@
-# US022 - List the vehicles in need off check-up.
+# US022 - Add a new entry in the Agenda
 
 ## 2. Analysis
 
