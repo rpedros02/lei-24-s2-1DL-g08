@@ -3,25 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<AnchorPane maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.ConsultTheTasksAssignInTheBetweenDatesGUI">
+    <VBox alignment="CENTER" fillWidth="false" prefHeight="600.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #DDA0DD;">
+        <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #7B68EE;" text="Consult the Tasks Assign In The Between 2 Dates" textAlignment="CENTER" />
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.ConsultTheTasksAssignInTheBetweenDatesGUI">
-    <VBox alignment="CENTER" fillWidth="false" prefHeight="467.0" prefWidth="703.0" spacing="10"
-          style="-fx-background-color: #DDA0DD;">
-        <Label alignment="CENTER" contentDisplay="CENTER"
-               style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #7B68EE;"
-               text="Consult the Tasks Assign In The Between 2 Dates" textAlignment="CENTER"/>
+        <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the begin date (dd-mm-yyy):" />
+        <DatePicker fx:id="initialDatePicker" style="-fx-font-size: 14;" />
 
-        <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the begin date (dd-mm-yyy):"/>
-        <DatePicker fx:id="initialDatePicker" style="-fx-font-size: 14;"/>
+        <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the end date (dd-mm-yyy):" />
+        <DatePicker fx:id="endDatePicker" style="-fx-font-size: 14;" />
 
-        <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter the end date (dd-mm-yyy):"/>
-        <DatePicker fx:id="endDatePicker" style="-fx-font-size: 14;"/>
-
-        <Button onAction="#handleConsultTheTasksAssignInTheBetweenDates"
-                style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="View Tasks"/>
-        <ListView fx:id="agendaListView" prefHeight="185.0" prefWidth="544.0" style="-fx-background-color: #DDA0DD;"/>
-        <Button fx:id="btnBack" onAction="#handleCollaboratorMenu" prefHeight="25.0" prefWidth="41.0"
-                style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE"/>
+        <Button onAction="#handleConsultTheTasksAssignInTheBetweenDates" style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="View Tasks" />
+        <ListView fx:id="agendaListView" prefHeight="185.0" prefWidth="544.0" style="-fx-background-color: #DDA0DD;" />
+        <Button fx:id="btnBack" onAction="#handleCollaboratorMenu" prefHeight="25.0" prefWidth="41.0" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
     </VBox>
 </AnchorPane>

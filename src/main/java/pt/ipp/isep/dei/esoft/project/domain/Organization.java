@@ -1,11 +1,10 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
-import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -313,5 +312,9 @@ public class Organization {
 
     public ToDoList getTodoList() {
         return toDoList;
+    }
+
+    public boolean updateStatus(Entry selectedEntry, EStatus eStatus) {
+        return toDoList.updateStatus(selectedEntry, eStatus);
     }
 }
