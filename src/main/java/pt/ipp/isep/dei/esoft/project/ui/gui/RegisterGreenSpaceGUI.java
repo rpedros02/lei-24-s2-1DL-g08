@@ -44,8 +44,6 @@ public class RegisterGreenSpaceGUI {
     private TextField txtDistrict;
 
     @FXML
-    private Button btnBack;
-    @FXML
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
@@ -113,7 +111,8 @@ public class RegisterGreenSpaceGUI {
 
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
-        Collaborator gsm = OrganizationRepository.getInstance().getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
+        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
+        Collaborator gsm = organizationRepository.getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
 
         if (controller.registerGreenSpace(name, type, area, address, gsm)) {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -132,6 +131,7 @@ public class RegisterGreenSpaceGUI {
             alert.setContentText("Failed to add green space. Green space already exists.");
             alert.showAndWait();
         }
+        UtilsGUI.loadUI("/GsmGUI.fxml");
     }
 
 }
