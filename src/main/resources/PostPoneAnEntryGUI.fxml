@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
-<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="741.0" prefWidth="378.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.PostPoneAnEntryGUI">
-   <Label alignment="TOP_LEFT" prefHeight="24.0" prefWidth="306.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Postpone an Entry" textAlignment="CENTER" />
+<?import javafx.scene.layout.*?>
 
-   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="314.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER" />
-   <ComboBox fx:id="cmbSelectEntry" prefWidth="150.0" />
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.PostPoneAnEntryGUI">
+   <VBox alignment="CENTER" fillWidth="false" prefHeight="600.0" prefWidth="600.0" spacing="10"
+         style="-fx-background-color: #93DB70;">
+      <Label alignment="TOP_LEFT" prefHeight="24.0" prefWidth="306.0"
+             style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Postpone an Entry"
+             textAlignment="CENTER"/>
 
-   <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Type the date to postpone the entry" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="314.0"
+             style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Entry:" textAlignment="CENTER"/>
+      <ComboBox fx:id="cmbSelectEntry" prefWidth="150.0"/>
 
+      <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;"
+             text="Type the date to postpone the entry"/>
+      <DatePicker fx:id="dpDate"/>
 
-   <Label layoutX="156.0" layoutY="348.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Day:" />
-   <TextField fx:id="txtDay" style="-fx-font-size: 14;" />
-
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Month:" />
-   <TextField fx:id="txtMonth" style="-fx-font-size: 14;" />
-
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter year:" />
-   <TextField fx:id="txtYear" style="-fx-font-size: 14;" />
-
-   <Button onAction="#handlePostPoneAnEntry" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
-   <Button fx:id="btnMainMenu" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
-</VBox>
+      <Button onAction="#handlePostPoneAnEntry"
+              style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;"
+              text="PostPone an Entry in the Agenda"/>
+      <Button fx:id="btnBack" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;"
+              text="Back" textFill="WHITE"/>
+   </VBox>
+</AnchorPane>

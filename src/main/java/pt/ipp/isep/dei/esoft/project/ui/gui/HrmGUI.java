@@ -36,10 +36,10 @@ public class HrmGUI {
     // Button for generating a team proposal
     private Button btnGenerateTeamProposal;
 
-    @FXML
     /**
      * Initializes the user interface.
      */
+    @FXML
     public void initialize() {
 
     }

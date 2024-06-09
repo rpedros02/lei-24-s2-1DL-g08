@@ -108,7 +108,7 @@ public class MainMenuGUI {
                 }
             }
         } else {
-            showAlert("Login failed. Double-check your credentials.");
+            showAlert("Login failed. Double-check your credentials.").showAndWait();
         }
         txtLoginId.clear();
         txtPassword.clear();
@@ -137,9 +137,7 @@ public class MainMenuGUI {
      * This method is called when the user's role is VFM.
      */
     private void loadVfmMenu() {
-        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
-        loadUI("/VfmGUI.fxml");
-        stage.close();
+        UtilsGUI.handleVFM(btnDevTeam);
     }
 
     /**
@@ -158,9 +156,7 @@ public class MainMenuGUI {
      * This method is called when the user's role is GSM.
      */
     private void loadGsmMenu() {
-        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
-        loadUI("/GsmGUI.fxml");
-        stage.close();
+        UtilsGUI.handleGSM(btnDevTeam);
     }
 
     /**
@@ -169,9 +165,7 @@ public class MainMenuGUI {
      */
     @FXML
     public void handleCollaboratorMenu() {
-        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
-        loadUI("/CollaboratorMenuGUI.fxml");
-        stage.close();
+        UtilsGUI.handleCollaborator(btnDevTeam);
     }
 
 }

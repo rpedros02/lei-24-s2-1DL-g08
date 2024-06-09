@@ -52,28 +52,16 @@ public class GenerateTeamController {
     }
 
     /**
-     * Retrieves the list of teams.
-     *
-     * @return A list of Team objects.
-     */
-    public List<Team> getTeamList() {
-        return teamRepository.getTeams();
-    }
-
-    /**
      * Retrieves the team repository.
      * If the team repository is null, it retrieves the team repository from the repositories.
-     *
-     * @return The TeamRepository object.
      */
-    private TeamRepository getTeamRepository() {
+    private void getTeamRepository() {
         if (teamRepository == null) {
             Repositories repositories = Repositories.getInstance();
 
             //Get the Job Repository
             teamRepository = repositories.getTeamRepository();
         }
-        return teamRepository;
     }
 
     /**
@@ -161,7 +149,7 @@ public class GenerateTeamController {
      *
      * @param team The Team object to be registered.
      */
-    public boolean registerTeam(Team team) {
-        return teamRepository.add(team);
+    public void registerTeam(Team team) {
+        teamRepository.add(team);
     }
 }
