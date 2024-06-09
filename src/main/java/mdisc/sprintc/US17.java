@@ -28,6 +28,9 @@ public class US17 {
 
     public void main(String[] args) throws IOException {
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the point name: ");
+        String startpoint = scanner.nextLine();
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us17_points_names.csv";
         String matrixFile = "src/main/java/mdisc/sprintc/datasets/us17_matrix.csv";
@@ -43,8 +46,6 @@ public class US17 {
                 shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint, endPoint));
             }
         }
-
-
         writeShortestPaths(outputFile, shortestPaths);
     }
 
