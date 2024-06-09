@@ -1,13 +1,14 @@
 package pt.ipp.isep.dei.esoft.project.ui.console.menu;
 
-import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
+import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 
 import java.util.Scanner;
 
 public class CompleteTasksUI implements Runnable {
-    private final AgendaController agendaController;
+    private final ToDoListController toDoListController;
     public CompleteTasksUI() {
-        this.agendaController = new AgendaController();
+        this.toDoListController = new ToDoListController();
     }
 
     public void run() {
@@ -15,7 +16,7 @@ public class CompleteTasksUI implements Runnable {
         System.out.print("Enter the title of the entry to cancel: ");
         String title = scanner.nextLine();
 
-        boolean result = agendaController.cancelEntry(title);
+        boolean result = toDoListController.updateStatus(toDoListController.getToDoListEntry(title), EStatus.CANCELED);
         System.out.println(result ? "Entry cancelled successfully." : "Failed to cancel entry.");
 
 
