@@ -119,7 +119,7 @@ public class GreenSpace {
         return STR."GreenSpace{name='\{name}\{'\''}, type='\{type.toString()}\{'\''}, area=\{area}hectares\{'\''}, address=\{address}}";
     }
 
-    public Object getGsm() {
+    public Collaborator getGsm() {
         return gsm;
     }
 }

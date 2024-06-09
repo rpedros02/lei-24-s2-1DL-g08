@@ -1,16 +1,18 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class CollaboratorMenuGUI {
+
+    @FXML
+    private Button btnConsultTheTasksAssignInTheBetweenDates;
+
+    @FXML
+    private Button btnRecordTheCompletionOfTask;
 
     @FXML
     private Button btnMainMenu;
@@ -20,7 +22,9 @@ public class CollaboratorMenuGUI {
      */
     @FXML
     public void handleConsultTheTasksAssignInTheBetweenDates() {
+        Stage stage = (Stage) btnConsultTheTasksAssignInTheBetweenDates.getScene().getWindow();
         loadUI("/ConsultTheTasksAssignInTheBetweenDatesGUI.fxml");
+        stage.close();
     }
 
     /**
@@ -28,33 +32,20 @@ public class CollaboratorMenuGUI {
      */
     @FXML
     public void handleRecordTheCompletionOfTask() {
+        Stage stage = (Stage) btnRecordTheCompletionOfTask.getScene().getWindow();
         loadUI("/RecordTheCompletionOfTaskGUI.fxml");
+        stage.close();
     }
 
-    /**
-     * Handles the MainMenu button action.
-     */
-    private void loadUI(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Handles the MainMenu button action.
      */
     @FXML
     public void handleMainMenu( ) {
-        loadUI("/MainMenuGUI.fxml");
-
         Stage stage = (Stage) btnMainMenu.getScene().getWindow();
+        loadUI(UtilsGUI.getCurrentRoleXml());
         stage.close();
     }
 }

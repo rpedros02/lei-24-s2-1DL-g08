@@ -2,10 +2,13 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class AssignOneOrMoreVehiclesGUI {
 
@@ -14,6 +17,12 @@ public class AssignOneOrMoreVehiclesGUI {
 
     @FXML
     private ComboBox<Entry> cbAgendaEntry;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleGsm() {
+        loadUI("/GsmGUI.fxml");
+    }
 
     private AssignVehicleAgendaController controller;
 

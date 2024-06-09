@@ -1,9 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
@@ -13,15 +12,21 @@ import java.util.List;
 public class AssignSkillsToCollaboratorGUI {
 
     @FXML
-    private ComboBox<Collaborator> cbCollaborator;
+    private ComboBox<String> cbCollaborator;
 
     @FXML
-    private ComboBox<Skill> cbSkill;
+    private ComboBox<String> cbSkill;
 
     @FXML
-    private Label lblMessage;
+    private Button btnBack;
 
     private final AssignSkillController controller;
+
+    @FXML
+    public void handleReturn() {
+        UtilsGUI.handleHRM(btnBack);
+    }
+
 
     public AssignSkillsToCollaboratorGUI() {
         this.controller = new AssignSkillController();
@@ -30,22 +35,28 @@ public class AssignSkillsToCollaboratorGUI {
     @FXML
     public void initialize() {
         List<Collaborator> collaborators = controller.getCollabortorList();
-        cbCollaborator.getItems().addAll(collaborators);
+        for ( Collaborator collaborator : collaborators
+             ) {
+            cbCollaborator.getItems().add(STR."\{collaborator.getName()} - \{collaborator.getEmail()}");
+        }
 
         List<Skill> skills = controller.getSkillList();
-        cbSkill.getItems().addAll(skills);
+        for (Skill skill : skills) {
+            cbSkill.getItems().add(skill.getName());
+        }
     }
 
     @FXML
-    private void handleAssignSkillsToCollaborator(ActionEvent event) {
-        Collaborator selectedCollaborator = cbCollaborator.getValue();
-        Skill selectedSkill = cbSkill.getValue();
+    private void handleAssignSkillsToCollaborator() {
+
+        Collaborator selectedCollaborator = controller.getCollaboratorByEmail(cbCollaborator.getValue().split(" - ")[1].trim());
+        Skill selectedSkill = controller.getSkillByName(cbSkill.getValue());
 
         if (selectedCollaborator != null && selectedSkill != null) {
             controller.assignSkills(selectedCollaborator, List.of(selectedSkill));
-            lblMessage.setText("Skill assigned successfully!");
+            UtilsGUI.showSuccess("Skill assigned successfully!").showAndWait();
         } else {
-            lblMessage.setText("Please select a collaborator and a skill.");
+            UtilsGUI.showAlert("Please select a collaborator and a skill.");
         }
     }
 }

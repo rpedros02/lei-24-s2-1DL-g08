@@ -11,6 +11,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
 import java.util.List;
 
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+
 public class CancelAnEntryGUI {
 
     @FXML
@@ -21,6 +23,12 @@ public class CancelAnEntryGUI {
 
     @FXML
     private Label lblResult;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleGsm() {
+        loadUI("/GsmGUI.fxml");
+    }
 
     private final Agenda agenda;
     private final CancelAnEntryController cancelAnEntryController;

@@ -2,12 +2,10 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+
 
 public class HrmGUI {
 
@@ -26,73 +24,51 @@ public class HrmGUI {
 
     @FXML
     public void initialize() {
-        // Initialize UI components if needed
 
     }
 
     @FXML
     public void handleRegisterSkill() {
+        Stage stage = (Stage) btnRegisterSkill.getScene().getWindow();
         loadUI("/RegisterSkillGUI.fxml");
+        stage.close();
     }
 
     @FXML
     public void handleRegisterJob() {
+        Stage stage = (Stage) btnRegisterJob.getScene().getWindow();
         loadUI("/RegisterJobGUI.fxml");
+        stage.close();
     }
 
     @FXML
     public void handleRegisterCollaborator() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/RegisterCollaboratorGUI.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 900));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) btnRegisterCollaborator.getScene().getWindow();
+        loadUI("/RegisterCollaboratorGUI.fxml");
+        stage.close();
     }
 
     @FXML
     public void handleAssignSkillsToCollaborator() {
+        Stage stage = (Stage) btnAssignSkillsToACollaborator.getScene().getWindow();
         loadUI("/AssignSkillsToCollaboratorGUI.fxml");
+        stage.close();
     }
 
     @FXML
     public void handleGenerateTeamProposal() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GenerateTeamProposalGUI.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Stage stage = (Stage) btnGenerateTeamProposal.getScene().getWindow();
+        loadUI("/GenerateTeamProposalGUI.fxml");
+        stage.close();
     }
 
 
     @FXML
     public void handleMainMenu() {
         Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
+        loadUI(UtilsGUI.getCurrentRoleXml());
         currentStage.close();
-        loadUI("/MainMenuGUI.fxml");
     }
 
-
-    private void loadUI(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

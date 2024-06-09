@@ -50,7 +50,7 @@ activate ADM
     ADM -> UI : selects a Green Space type
     activate UI
 
-        UI --> ADM : requests data (a name, a location, an area)
+        UI --> ADM : requests data (a name, a location, an area, an address)
 
     ADM -> UI : types data
 
@@ -61,7 +61,7 @@ activate ADM
     ADM -> UI : confirms data
     activate UI
 
-            UI -> CTRL : registerGreenSpace(name, location, area)
+            UI -> CTRL : registerGreenSpace(name, location, area, address)
             activate CTRL
 
                 CTRL -> PLAT : getGreenSpaceRepository()
@@ -70,10 +70,10 @@ activate ADM
                     PLAT --> CTRL : greenSpaceRepository
                 deactivate PLAT
 
-                CTRL -> GSR : registerGreenSpace(name, location, area)
+                CTRL -> GSR : registerGreenSpace(name, location, area, address)
                 activate GSR
 
-                    GSR -> GS** : registerGreenSpace(name, location, area)
+                    GSR -> GS** : registerGreenSpace(name, location, area, address)
                     GSR --> GSR : validateGreenSpace(greenSpace)
                     GSR --> GSR : saveGreenSpace(greenSpace)
                     GSR --> CTRL : boolean

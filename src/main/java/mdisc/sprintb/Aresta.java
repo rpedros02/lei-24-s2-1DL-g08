@@ -1,4 +1,6 @@
-package mdisc;
+package mdisc.sprintb;
+
+import mdisc.sprintb.Vertice;
 
 public class Aresta {
     private final Vertice start;

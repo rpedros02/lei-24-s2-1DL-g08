@@ -1,4 +1,4 @@
-package mdisc;
+ package mdisc.sprintb;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;

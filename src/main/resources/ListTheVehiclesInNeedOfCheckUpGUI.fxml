@@ -16,5 +16,6 @@
             </children>
         </VBox>
       <ListView fx:id="agendaListView" layoutX="92.0" layoutY="137.0" prefHeight="123.0" prefWidth="394.0" style="-fx-background-color: #F5DEB3;" />
+        <Button fx:id="btnMainMenu" onAction="#handleVfm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
     </children>
 </AnchorPane>

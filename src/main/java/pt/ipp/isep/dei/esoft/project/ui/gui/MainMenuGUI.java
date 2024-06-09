@@ -1,25 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-
 import pt.ipp.isep.dei.esoft.project.application.controller.authorization.AuthenticationController;
 import pt.isep.lei.esoft.auth.mappers.dto.UserRoleDTO;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
-public class MainMenuGUI{
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
+
+public class MainMenuGUI {
 
     @FXML
     private VBox mainBox;
@@ -53,61 +50,40 @@ public class MainMenuGUI{
 
         boolean loginSuccessful = ctrl.doLogin(id, password);
         if (loginSuccessful) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             List<UserRoleDTO> roles = ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("No role assigned to user.");
-                alert.showAndWait();
+                showAlert("No roles found.");
             } else {
-                UserRoleDTO role = roles.get(0); // Get the single role directly
+                UserRoleDTO role = roles.getFirst(); // Get the single role directly
+                Stage stage = (Stage) btnDevTeam.getScene().getWindow();
                 switch (role.getDescription()) {
                     case AuthenticationController.ROLE_HRM:
                         loadHrmMenu();
-
-                        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_VFM:
                         loadVfmMenu();
-
-                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_GSM:
                         loadGsmMenu();
-                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_COLLABORATOR:
                         handleCollaboratorMenu();
-
-                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_ADMIN:
                         loadAdminMenu();
-
-                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     default:
-                        alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Error");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Role not recognized.");
-                        alert.showAndWait();
+                        showAlert("Role not recognized.").showAndWait();
                         break;
                 }
             }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Login failed. Wrong credentials.");
-            alert.showAndWait();
+            showAlert("Login failed. Double-check your credentials.").showAndWait();
         }
         txtLoginId.clear();
         txtPassword.clear();
@@ -117,18 +93,20 @@ public class MainMenuGUI{
      * Loads the HRM menu.
      */
     private void loadHrmMenu() {
-        loadUI("/HrmGUI.fxml");
+        UtilsGUI.handleHRM(btnDevTeam);
     }
 
     private void loadAdminMenu() {
+        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
         loadUI("/AdminGUI.fxml");
+        stage.close();
     }
 
     /**
      * Loads the VFM menu.
      */
     private void loadVfmMenu() {
-        loadUI("/VfmGUI.fxml");
+        UtilsGUI.handleVFM(btnDevTeam);
     }
 
     /**
@@ -136,44 +114,21 @@ public class MainMenuGUI{
      */
     @FXML
     public void handleDevTeam() {
+        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
         loadUI("/DevTeamGUI.fxml");
+        stage.close();
     }
 
     /**
      * Loads the GSM menu.
      */
     private void loadGsmMenu() {
-        loadUI("/GsmGUI.fxml");
-    }
-
-    /**
-     * Handles the Register button action.
-     */
-    @FXML
-    public void handleRegister() {
-        loadUI("/RegisterMenuGUI.fxml");
+        UtilsGUI.handleGSM(btnDevTeam);
     }
 
     @FXML
     public void handleCollaboratorMenu() {
-        loadUI("/CollaboratorMenuGUI.fxml");
+        UtilsGUI.handleCollaborator(btnDevTeam);
     }
 
-    /**
-     * Loads the UI from a FXML file.
-     *
-     * @param fxmlPath the FXML file path
-     */
-    private void loadUI(String fxmlPath) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 600));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

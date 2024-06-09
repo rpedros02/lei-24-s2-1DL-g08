@@ -1,11 +1,9 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GreenSpaceController;
 import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
@@ -13,6 +11,8 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 public class RegisterGreenSpaceGUI {
 
@@ -40,6 +40,15 @@ public class RegisterGreenSpaceGUI {
     @FXML
     private TextField txtDistrict;
 
+    @FXML
+    private Button btnBack;
+
+    @FXML
+    public void handleGsm() {
+        handleGSM(btnBack);
+    }
+
+
     private final AuthenticationRepository authenticationRepository;
 
     private final GreenSpaceController controller;
@@ -64,27 +73,16 @@ public class RegisterGreenSpaceGUI {
         int streetNumber = Integer.parseInt(streetNumberString);
         String PostalCodeString = txtPostalCode.getText();
         if (!PostalCodeString.matches("[0-9]{4}-[0-9]{3}")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid postal code. It should be in the format ´0000-000`.");
-            alert.showAndWait();
+            showAlert("Invalid postal code. It should be in the format ´0000-000`.").showAndWait();
             return;
         }
         String cityString = txtCity.getText();
         String districtString = txtDistrict.getText();
-
         Address address = new Address(streetName, streetNumber, PostalCodeString, cityString, districtString);
-
         if (name.isEmpty() || typeName == null || areaString.isEmpty() || streetName.isEmpty() || PostalCodeString.isEmpty() || cityString.isEmpty() || districtString.isEmpty()) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Please fill in all fields.");
-            alert.showAndWait();
+            showAlert("Please fill in all fields.").showAndWait();
             return;
         }
-
         double area;
         try {
             area = Double.parseDouble(areaString);
@@ -92,34 +90,20 @@ public class RegisterGreenSpaceGUI {
                 throw new NumberFormatException();
             }
         } catch (NumberFormatException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Area must be a number bigger than 0");
-            alert.showAndWait();
+            showAlert("Invalid area. Please enter a positive number.").showAndWait();
             return;
         }
 
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
-        Collaborator gsm = OrganizationRepository.getInstance().getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
-
+        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
+        Collaborator gsm = organizationRepository.getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
         if (controller.registerGreenSpace(name, type, area, address, gsm)) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setHeaderText(null);
-            alert.setContentText("Green space successfully added.");
-            alert.showAndWait();
-
-            // Get the current stage and close it
-            Stage stage = (Stage) txtName.getScene().getWindow();
-            stage.close();
+            showSuccess("Green space added successfully.").showAndWait();
         } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to add green space. Green space already exists.");
-            alert.showAndWait();
+            showAlert("An error occurred. Please try again.").showAndWait();
         }
+        handleGsm();
     }
+
 }

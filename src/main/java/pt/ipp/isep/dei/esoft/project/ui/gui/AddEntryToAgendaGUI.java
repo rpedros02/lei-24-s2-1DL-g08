@@ -5,22 +5,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.ToDoListController;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
-import pt.ipp.isep.dei.esoft.project.domain.Organization;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class AddEntryToAgendaGUI {
 
     @FXML
     private ComboBox<String> cbEntries;
     @FXML
-    private Button btnAddEntry;
+    private Button btnBack;
+    @FXML
+    public void handleGsm() {
+        loadUI("/GsmGUI.fxml");
+    }
 
     private final OrganizationRepository organizationRepository;
     private final ToDoListController toDoListController;
@@ -42,6 +48,7 @@ public class AddEntryToAgendaGUI {
 
     @FXML
     private void handleAddEntryToAgenda() {
+        Stage stage = (Stage) cbEntries.getScene().getWindow();
         String entryTitle = cbEntries.getValue();
         if (entryTitle == null || entryTitle.isEmpty()) {
             showAlert(AlertType.ERROR, "Error", "Please select an entry.");
@@ -69,6 +76,7 @@ public class AddEntryToAgendaGUI {
         } else {
             showAlert(AlertType.WARNING, "Warning", "Entry is not associated with a green space managed by the GSM.");
         }
+        stage.close();
     }
 
     private void showAlert(AlertType alertType, String title, String message) {

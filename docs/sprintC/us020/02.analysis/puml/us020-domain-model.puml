@@ -13,16 +13,17 @@ hide methods
 title Domain model US20
 
 class "Address" {
-    -streetName
-    -zipCode
+    -street
+    - streetNumber
     -city
+    -postalCode
+    -district
 }
 
 class "GreenSpace" {
     -name
     -type
     -area
-    -manager
     -address
 }
 

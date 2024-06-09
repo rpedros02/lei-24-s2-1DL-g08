@@ -21,4 +21,5 @@
    <TextField fx:id="txtYear" style="-fx-font-size: 14;" />
 
    <Button onAction="#handlePostPoneAnEntry" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="PostPone an Entry in the Agenda" />
+   <Button fx:id="btnMainMenu" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
 </VBox>

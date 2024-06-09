@@ -79,4 +79,13 @@ public class ToDoListController {
             return Optional.empty();
         }
     }
+
+    public boolean updateStatus(Entry selectedEntry, EStatus eStatus) {
+        Collaborator collaborator = getEmployeeFromSession();
+        Optional<Organization> organization = organizationRepository.getOrganizationByCollaborator(collaborator);
+        if (organization.isPresent()) {
+            return organization.get().updateStatus(selectedEntry, eStatus);
+        }
+        return false;
+    }
 }

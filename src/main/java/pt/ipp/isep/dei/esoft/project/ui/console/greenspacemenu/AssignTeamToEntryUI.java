@@ -8,17 +8,37 @@ import pt.ipp.isep.dei.esoft.project.domain.Team;
 import java.util.Optional;
 import java.util.Scanner;
 
+
 public class AssignTeamToEntryUI implements Runnable {
     private final ToDoListController toDoListController;
     private final AgendaController agendaController;
     private final Scanner scanner;
 
+
+    /**
+     * Constructs a new AssignTeamToEntryUI instance.
+     */
     public AssignTeamToEntryUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Constructs a new AssignTeamToEntryUI instance with provided controllers.
+     *
+     * @param toDoListController The ToDoListController instance.
+     * @param agendaController The AgendaController instance.
+     */
+    public AssignTeamToEntryUI(ToDoListController toDoListController, AgendaController agendaController) {
+        this.toDoListController = toDoListController;
+        this.agendaController = agendaController;
+        this.scanner = new Scanner(System.in);
+    }
+
+    /**
+     * Runs the user interface.
+     */
     public void run() {
         System.out.println("Enter the title of the entry to assign a team:");
         String entryTitle = scanner.nextLine();
@@ -49,11 +69,25 @@ public class AssignTeamToEntryUI implements Runnable {
         sendNotificationToTeamMembers(team);
     }
 
+    /**
+     * Sends a notification to all team members.
+     *
+     * @param team The team to which the notification is sent.
+     */
     private void sendNotificationToTeamMembers(Team team) {
 
         System.out.println("Sending notification to team members:");
         for (String member : team.getMembers()) {
             System.out.println("Notification sent to: " + member);
         }
+    }
+
+    /**
+     * Gets the AgendaController.
+     *
+     * @return The AgendaController.
+     */
+    public AgendaController getAgendaController() {
+        return agendaController;
     }
 }

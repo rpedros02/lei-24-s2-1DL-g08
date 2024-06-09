@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="736.0" prefWidth="447.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RegisterGreenSpaceGUI">
-   <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Register Green Space" textAlignment="CENTER" />
+<AnchorPane prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RegisterGreenSpaceGUI">
+   <ScrollPane fitToWidth="true" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #93DB70;">
+      <VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="600.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #93DB70;">
+          <Label style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Register Green Space" textAlignment="CENTER">
+            <padding>
+               <Insets top="20.0" />
+            </padding></Label>
+          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Name:" />
+          <TextField fx:id="txtName" style="-fx-font-size: 14;" />
+         <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Type:" />
+         <ComboBox fx:id="cbType" prefHeight="29.0" prefWidth="173.0" style="-fx-font-size: 14;" />
 
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Name:" />
-   <TextField fx:id="txtName" style="-fx-font-size: 14;" />
+          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Area:" />
+          <TextField fx:id="txtArea" style="-fx-font-size: 14;" />
 
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select Type:" />
-   <ComboBox fx:id="cbType" prefHeight="29.0" prefWidth="173.0" style="-fx-font-size: 14;" />
+          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street:" />
+          <TextField fx:id="txtStreet" style="-fx-font-size: 14;" />
+          <Label layoutX="156.0" layoutY="291.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street Number:" />
+          <TextField fx:id="txtStreetNumber" layoutX="112.0" layoutY="345.0" style="-fx-font-size: 14;" />
 
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Area:" />
-   <TextField fx:id="txtArea" style="-fx-font-size: 14;" />
+          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Postal Code:" />
+          <TextField fx:id="txtPostalCode" style="-fx-font-size: 14;" />
 
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street:" />
-   <TextField fx:id="txtStreet" style="-fx-font-size: 14;" />
-   <Label layoutX="156.0" layoutY="291.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Street Number:" />
-   <TextField fx:id="txtStreetNumber" layoutX="112.0" layoutY="345.0" style="-fx-font-size: 14;" />
+          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter City:" />
+          <TextField fx:id="txtCity" style="-fx-font-size: 14;" />
+          <Label layoutX="163.0" layoutY="499.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter District:" />
+          <TextField fx:id="txtDistrict" layoutX="112.0" layoutY="534.0" style="-fx-font-size: 14;" />
 
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter Postal Code:" />
-   <TextField fx:id="txtPostalCode" style="-fx-font-size: 14;" />
-
-   <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter City:" />
-   <TextField fx:id="txtCity" style="-fx-font-size: 14;" />
-   <Label layoutX="163.0" layoutY="499.0" style="-fx-font-size: 16; -fx-text-fill: #333;" text="Enter District:" />
-   <TextField fx:id="txtDistrict" layoutX="112.0" layoutY="534.0" style="-fx-font-size: 14;" />
-
-   <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Register" />
-</VBox>
+          <Button onAction="#handleRegisterGreenSpace" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Register">
+            <VBox.margin>
+               <Insets bottom="20.0" />
+            </VBox.margin></Button>
+      </VBox>
+   </ScrollPane>
+    <Button fx:id="btnBack" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="10.0" layoutY="25.0" onAction="#handleGsm" prefHeight="26.0" prefWidth="42.0" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
+</AnchorPane>

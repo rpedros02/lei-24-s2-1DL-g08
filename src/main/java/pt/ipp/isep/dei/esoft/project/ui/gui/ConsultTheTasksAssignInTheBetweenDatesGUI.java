@@ -1,16 +1,20 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
-import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
+
 public class ConsultTheTasksAssignInTheBetweenDatesGUI {
+
     @FXML
     private DatePicker initialDatePicker;
 
@@ -18,27 +22,41 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
     private DatePicker endDatePicker;
 
     @FXML
-    private ListView<Entry> agendaListView;
-
-    private final AgendaController agendaController;
-
-    public ConsultTheTasksAssignInTheBetweenDatesGUI() {
-        this.agendaController = new AgendaController();
+    private ListView<String> agendaListView;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleCollaboratorMenu() {
+        handleCollaborator(btnBack);
     }
+
+    private final AgendaController agendaController = new AgendaController();
 
     @FXML
     private void handleConsultTheTasksAssignInTheBetweenDates() {
-        Date beginDate = getDateFromDatePicker(initialDatePicker);
-        Date endDate = getDateFromDatePicker(endDatePicker);
+        LocalDate initialDate = initialDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
-        List<Entry> entries = agendaController.getEntriesBetweenDates(beginDate, endDate);
-        agendaListView.getItems().setAll(entries);
+        if (initialDate == null || endDate == null) {
+            showAlert("Please select both dates.");
+            return;
+        }
+
+        Date beginDate = convertToDate(initialDate);
+        Date endDateDomain = convertToDate(endDate);
+
+        List<Entry> entries = agendaController.getEntriesBetweenDates(beginDate, endDateDomain);
+
+        agendaListView.getItems().clear();
+
+        if (entries.isEmpty()) {
+            showAlert("No tasks found between the given dates.");
+        } else {
+            for (Entry entry : entries) {
+                agendaListView.getItems().add(entry.toString());
+            }
+        }
     }
 
-    private Date getDateFromDatePicker(DatePicker datePicker) {
-        int day = datePicker.getValue().getDayOfMonth();
-        int month = datePicker.getValue().getMonthValue();
-        int year = datePicker.getValue().getYear();
-        return new Date(day, month, year);
-    }
+
 }

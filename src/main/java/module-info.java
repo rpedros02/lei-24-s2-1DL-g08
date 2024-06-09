@@ -5,6 +5,8 @@ module pt.ipp.isep.dei.esoft.project.ui.gui {
     requires javafx.controls;
     requires javafx.graphics;
     requires org.apache.commons.lang3;
+    requires jdk.jshell;
+    requires org.jfree.jfreechart;
 
     opens pt.ipp.isep.dei.esoft.project.ui.gui to javafx.fxml;
     exports pt.ipp.isep.dei.esoft.project.ui.gui to javafx.graphics;

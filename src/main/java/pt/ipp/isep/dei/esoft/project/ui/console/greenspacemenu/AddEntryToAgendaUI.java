@@ -14,6 +14,9 @@ public class AddEntryToAgendaUI implements Runnable {
     private final GenerateTeamController generateTeamController;
     private final Scanner scanner;
 
+    /**
+     * Constructs a new AddEntryToAgendaUI instance.
+     */
     public AddEntryToAgendaUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
@@ -21,11 +24,16 @@ public class AddEntryToAgendaUI implements Runnable {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Runs the user interface for adding an entry to the agenda.
+     */
     public void run() {
         System.out.println("Enter the title of the entry to add to the agenda:");
         String entryTitle = scanner.nextLine();
-
         Entry entry = toDoListController.getToDoListEntry(entryTitle);
+        if (entryTitle == null) {
+            return;
+        }
         if (entry == null) {
             System.out.println("Entry not found in the To-Do List.");
             return;
@@ -44,16 +52,14 @@ public class AddEntryToAgendaUI implements Runnable {
         boolean success = agendaController.addEntry(entry);
         if (success) {
             System.out.println("Entry added to the Agenda successfully.");
-
-
-            int minMembers = 1;
-            int maxMembers = 5;
-            Team team = generateTeamController.generateTeam(minMembers, maxMembers, entry.getSkills());
-
-
+            System.out.println("Enter the number of members for the team:");
+            int numMembers = Integer.parseInt(scanner.nextLine());
+            Team team = generateTeamController.generateTeam(numMembers, numMembers, entry.getSkills());
             boolean teamAssigned = agendaController.assignTeamToEntry(entryTitle, team);
             if (teamAssigned) {
                 System.out.println("Team assigned to the entry successfully.");
+
+                sendNotificationToTeamMembers(team, entryTitle);
             } else {
                 System.out.println("Failed to assign team to the entry.");
             }
@@ -61,8 +67,34 @@ public class AddEntryToAgendaUI implements Runnable {
             System.out.println("Failed to add entry to the Agenda.");
         }
     }
+
+    public ToDoListController getToDoListController() {
+        return toDoListController;
+    }
+
+    public AgendaController getAgendaController() {
+        return agendaController;
+    }
+
+    public GenerateTeamController getGenerateTeamController() {
+        return generateTeamController;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    /**
+     * Sends a notification to the team members regarding the assignment of the entry.
+     *
+     * @param team       The team to notify.
+     * @param entryTitle The title of the assigned entry.
+     */
+    private void sendNotificationToTeamMembers(Team team, String entryTitle) {
+        System.out.println("Sending notification to team members:");
+        for (String member : team.getMembers()) {
+            System.out.println("Notification sent to: " + member + " regarding the assignment of entry " + entryTitle);
+        }
+    }
 }
-
-
-
 

@@ -1,5 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +46,13 @@ public class ToDoList {
     public void setEntries(List<Entry> entries) {
         this.entries.clear();
         this.entries.addAll(entries);
+    }
+
+    public boolean updateStatus(Entry selectedEntry, EStatus eStatus) {
+        if (selectedEntry == null) {
+            return false;
+        }
+        selectedEntry.setStatus(eStatus);
+        return true;
     }
 }

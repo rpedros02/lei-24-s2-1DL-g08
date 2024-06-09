@@ -1,4 +1,4 @@
-package mdisc;
+package mdisc.sprintb;
 import java.util.ArrayList;
 
 public class Grafo {
