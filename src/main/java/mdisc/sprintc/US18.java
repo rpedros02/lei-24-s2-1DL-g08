@@ -33,19 +33,28 @@ public class US18 {
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us18_points_names.csv";
         String matrixFile = "src/main/java/mdisc/sprintc/datasets/us18_matrix.csv";
-        String outputFile = "src/main/java/mdisc/sprintc/output/us18_output.csv";
+        String outputFile = "src/main/java/mdisc/sprintc/output/us18_allpoints.csv";
 
         List<String> points = readPoints(pointsFile);
         int[][] matrix = readMatrix(matrixFile, points.size());
 
-        String startPoint = getUserInput();
-        if (points.contains(startPoint)) {
-            Path shortestPath = calculateShortestPath(points, matrix, startPoint);
-            writeShortestPath(outputFile, startPoint, shortestPath);
+        String userPoint = getUserInput();
+        if (points.contains(userPoint)) {
+            Path shortestPath = calculateShortestPath(points, matrix, userPoint);
+            writeShortestPath("src/main/java/mdisc/sprintc/output/us18_output.csv", userPoint, shortestPath);
         } else {
-            System.out.println("The point " + startPoint + " does not exist.");
+            System.out.println("The point you entered does not exist.");
         }
+
+        Map<String, Path> shortestPaths = new HashMap<>();
+        for (String startPoint : points) {
+            if (!startPoint.startsWith("AP")) {
+                shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint));
+            }
+        }
+        writeShortestPaths(outputFile, shortestPaths);
     }
+
 
     private Path calculateShortestPath(List<String> points, int[][] matrix, String start) {
         int size = points.size();

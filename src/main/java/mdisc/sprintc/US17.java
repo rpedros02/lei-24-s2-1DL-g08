@@ -33,7 +33,7 @@ public class US17 {
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us17_points_names.csv";
         String matrixFile = "src/main/java/mdisc/sprintc/datasets/us17_matrix.csv";
-        String outputFile = "src/main/java/mdisc/sprintc/output/output.csv";
+        String outputFile = "src/main/java/mdisc/sprintc/output/us17_allpoints.csv";
         String endPoint = "AP";
 
         List<String> points = readPoints(pointsFile);

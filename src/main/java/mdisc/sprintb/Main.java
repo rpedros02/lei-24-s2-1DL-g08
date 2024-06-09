@@ -1,8 +1,9 @@
 package mdisc.sprintb;
+
 import java.io.*;
- import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -98,7 +99,7 @@ public class Main {
         List<File> files = new ArrayList<>();
         int counter = 1;
         while (true) {
-            String fileName =  baseFileName + "_" + counter + ".csv";
+            String fileName = baseFileName + "_" + counter + ".csv";
             File file = new File(fileName);
             if (file.exists()) {
                 files.add(file);
@@ -185,4 +186,3 @@ public class Main {
     }
 
 }
-

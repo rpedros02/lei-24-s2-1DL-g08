@@ -1,4 +1,4 @@
-package mdisc;
+package mdisc.sprintb;
 
 public class DisjointSet {
     private final int[] parent;
