@@ -15,35 +15,59 @@ import java.util.stream.Collectors;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for generating a team proposal.
+ */
 public class GenerateTeamProposalGUI {
 
     @FXML
+    // TextField for entering the minimum team size
     private TextField txtMinTeamSize;
 
     @FXML
+    // TextField for entering the maximum team size
     private TextField txtMaxTeamSize;
 
     @FXML
+    // ComboBox for selecting the type of skill
     private ComboBox<String> cbType;
 
     @FXML
+    // Label for displaying messages
     private Label lblMessage;
+
     @FXML
+    // Button for going back
     private Button btnBack;
+
     @FXML
+    /**
+     * Handles the action of navigating to the HRM user interface.
+     * It is triggered when the Back button is clicked.
+     */
     public void handleHrm() {
         loadUI("/HrmGUI.fxml");
     }
 
+    // Controller for generating a team
     private final GenerateTeamController controller;
+
+    // Repository for accessing skills
     private final SkillsRepository skillsRepository;
 
+    /**
+     * Constructs a GenerateTeamProposalGUI with a GenerateTeamController and a SkillsRepository.
+     */
     public GenerateTeamProposalGUI() {
         this.controller = new GenerateTeamController();
         this.skillsRepository = new SkillsRepository();
     }
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * It populates the ComboBox with the names of all skills.
+     */
     private void initialize() {
         // Initialize ComboBox with skills
         List<Skill> skills = skillsRepository.getAllSkills();
@@ -53,6 +77,12 @@ public class GenerateTeamProposalGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of generating a team proposal.
+     * It is triggered when the Generate button is clicked.
+     * It validates the entered team sizes and selected skill, generates a team with the specified sizes and skill, and registers the team.
+     * It displays a success message if the team is successfully generated and registered, or an error message if an error occurs.
+     */
     private void handleGenerateTeamProposal() {
         try {
             int minTeamSize = Integer.parseInt(txtMinTeamSize.getText());

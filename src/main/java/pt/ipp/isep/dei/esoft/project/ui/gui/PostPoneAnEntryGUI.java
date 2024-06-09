@@ -17,30 +17,49 @@ import java.util.InputMismatchException;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for postponing an entry.
+ */
 public class PostPoneAnEntryGUI {
 
     @FXML
+    // ComboBox for selecting an entry
     private ComboBox<String> cmbSelectEntry;
 
-
     @FXML
+    // TextField for entering the day
     private TextField txtDay;
 
     @FXML
+    // TextField for entering the month
     private TextField txtMonth;
 
     @FXML
+    // TextField for entering the year
     private TextField txtYear;
+
     @FXML
+    // Button for going back
     private Button btnBack;
+
     @FXML
+    /**
+     * Handles the action of going back to the GSM user interface.
+     * It is triggered when the Back button is clicked.
+     * It closes the current stage and loads the GsmGUI.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
-
+    // Controller for postponing an entry
     private PostponeAnEntryController controller;
 
+    /**
+     * Initializes the user interface.
+     * This method is called after all @FXML annotated members have been injected.
+     * It sets up the ComboBox with the titles of all entries.
+     */
     public void initialize() {
         OrganizationRepository orgRepo = Repositories.getInstance().getOrganizationRepository();
         ApplicationSession appSession = ApplicationSession.getInstance();
@@ -53,6 +72,11 @@ public class PostPoneAnEntryGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of postponing an entry.
+     * It is triggered when the corresponding button is clicked.
+     * It validates the input, postpones the entry if the input is valid, and displays a message indicating the result.
+     */
     void handlePostPoneAnEntry() {
 
         String selectedEntry = cmbSelectEntry.getValue();
@@ -91,10 +115,23 @@ public class PostPoneAnEntryGUI {
             alert.showAndWait();
         }
     }
+
+    /**
+     * Validates the input for the day, month, and year.
+     * @param day the day input
+     * @param month the month input
+     * @param year the year input
+     * @return true if the input is valid, false otherwise
+     */
     private boolean validateInput(String day, String month, String year) {
         return isNumeric(day) && isNumeric(month) && isNumeric(year);
     }
 
+    /**
+     * Checks if a string is numeric.
+     * @param str the string to check
+     * @return true if the string is numeric, false otherwise
+     */
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }

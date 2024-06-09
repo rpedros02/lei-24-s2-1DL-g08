@@ -3,12 +3,33 @@ package pt.ipp.isep.dei.esoft.project.ui.console.collaboratormenu.skillmenu;
 import pt.ipp.isep.dei.esoft.project.application.controller.RegisterSkillController;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
+/**
+ * This class provides the user interface for registering a skill.
+ * It implements the Runnable interface, allowing it to be used in a separate thread.
+ */
 public class RegisterSkillUI implements Runnable {
 
+    /**
+     * The controller that handles the skill registration process.
+     */
     private final RegisterSkillController ctrl = new RegisterSkillController();
+
+    /**
+     * The ID of the skill to be registered.
+     */
     private int skillId;
+
+    /**
+     * The name of the skill to be registered.
+     */
     private String name;
 
+    /**
+     * Starts the skill registration process.
+     * It prompts the user to enter the ID and name of the skill.
+     * If the entered ID already exists, it allows the user to see the next available ID.
+     * It then asks the user for confirmation before registering the skill.
+     */
     public void run() {
         boolean flag = true;
 
@@ -32,6 +53,14 @@ public class RegisterSkillUI implements Runnable {
         }
     }
 
+    /**
+     * Asks the user for confirmation before registering the skill.
+     * If the user confirms, it attempts to register the skill.
+     * If the skill registration is successful, it prints a success message.
+     * If the skill registration is not successful, it prints an error message.
+     *
+     * @param flag a flag indicating whether to ask for confirmation
+     */
     private void getConfirmation(boolean flag) {
         if (flag) {
             System.out.println("----------------- SKILL DATA -----------------\n\n");

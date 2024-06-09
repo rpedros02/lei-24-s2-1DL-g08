@@ -22,36 +22,60 @@ import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for adding an entry to the To-Do List.
+ */
 public class AddEntryToToDoListGUI {
 
     @FXML
+    // ComboBox for selecting green spaces
     private ComboBox<GreenSpace> cbGreenSpaces;
 
     @FXML
+    // TextField for inputting the entry title
     private TextField txtEntryTitle;
 
     @FXML
+    // TextField for inputting the entry description
     private TextField txtEntryDescription;
 
     @FXML
+    // ComboBox for selecting the degree of urgency
     private ComboBox<String> cbDegreeOfUrgency;
 
     @FXML
+    // TextField for inputting the entry begin date
     private TextField txtEntryBeginDate;
 
     @FXML
+    // TextField for inputting the entry end date
     private TextField txtEntryEndDate;
+
     @FXML
+    // Button for going back
     private Button btnBack;
+
     @FXML
+    /**
+     * Handles the action of clicking the GSM button.
+     * It loads the GSM user interface.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
+    // Controller for green spaces
     private GreenSpaceController greenSpaceController;
+
+    // Controller for the to-do list
     private ToDoListController toDoListController;
+
+    // Repository for authentication
     private final AuthenticationRepository authenticationRepository;
 
+    /**
+     * Constructs a new instance of AddEntryToToDoListGUI.
+     */
     public AddEntryToToDoListGUI() {
         this.greenSpaceController = new GreenSpaceController();
         this.toDoListController = new ToDoListController();
@@ -59,6 +83,10 @@ public class AddEntryToToDoListGUI {
     }
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * It populates the ComboBox with the green spaces and degrees of urgency.
+     */
     public void initialize() {
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
         List<GreenSpace> allGreenSpaces = greenSpaceController.getAllGreenSpaces();
@@ -77,6 +105,10 @@ public class AddEntryToToDoListGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of adding an entry to the to-do list.
+     * It validates the input data and adds the entry to the to-do list if it is valid.
+     */
     public void handleAddEntryToToDoList() {
         GreenSpace selectedGreenSpace = cbGreenSpaces.getValue();
         String entryTitle = txtEntryTitle.getText();

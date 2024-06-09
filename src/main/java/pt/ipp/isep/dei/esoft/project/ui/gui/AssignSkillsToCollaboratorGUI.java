@@ -9,34 +9,52 @@ import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.List;
 
+/**
+ * This class provides a user interface for assigning skills to a collaborator.
+ */
 public class AssignSkillsToCollaboratorGUI {
 
     @FXML
+    // ComboBox for selecting a collaborator
     private ComboBox<String> cbCollaborator;
 
     @FXML
+    // ComboBox for selecting a skill
     private ComboBox<String> cbSkill;
 
     @FXML
+    // Button for going back
     private Button btnBack;
 
+    // Controller for assigning skills
     private final AssignSkillController controller;
 
     @FXML
+    /**
+     * Handles the action of returning to the previous user interface.
+     * It is triggered when the Back button is clicked.
+     */
     public void handleReturn() {
         UtilsGUI.handleHRM(btnBack);
     }
 
-
+    /**
+     * Constructs a new instance of AssignSkillsToCollaboratorGUI.
+     * It initializes the controller.
+     */
     public AssignSkillsToCollaboratorGUI() {
         this.controller = new AssignSkillController();
     }
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * It populates the ComboBoxes with the collaborators and skills.
+     */
     public void initialize() {
         List<Collaborator> collaborators = controller.getCollabortorList();
         for ( Collaborator collaborator : collaborators
-             ) {
+        ) {
             cbCollaborator.getItems().add(STR."\{collaborator.getName()} - \{collaborator.getEmail()}");
         }
 
@@ -47,6 +65,10 @@ public class AssignSkillsToCollaboratorGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of assigning skills to a collaborator.
+     * It validates the selected collaborator and skill and assigns the skill to the collaborator if they are valid.
+     */
     private void handleAssignSkillsToCollaborator() {
 
         Collaborator selectedCollaborator = controller.getCollaboratorByEmail(cbCollaborator.getValue().split(" - ")[1].trim());

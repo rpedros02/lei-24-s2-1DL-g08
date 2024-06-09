@@ -11,14 +11,34 @@ import java.util.Optional;
 import java.util.Scanner;
 
 
+/**
+ * This class provides the user interface for assigning a team to an entry.
+ * It implements the Runnable interface, allowing it to be used in a separate thread.
+ */
 public class AssignTeamToEntryUI implements Runnable {
+    /**
+     * The controller that handles the To-Do List.
+     */
     private final ToDoListController toDoListController;
+
+    /**
+     * The controller that handles the agenda.
+     */
     private final AgendaController agendaController;
+
+    /**
+     * The scanner to read user input.
+     */
     private final Scanner scanner;
+
+    /**
+     * The service to send emails.
+     */
     private final EmailService emailService;
 
     /**
      * Constructs a new AssignTeamToEntryUI instance.
+     * It initializes the controllers, the scanner, and the email service.
      */
     public AssignTeamToEntryUI() {
         this.toDoListController = new ToDoListController();
@@ -26,7 +46,6 @@ public class AssignTeamToEntryUI implements Runnable {
         this.scanner = new Scanner(System.in);
         this.emailService = EmailServiceController.createEmailServiceFromConfig();
     }
-
 
     /**
      * Constructs a new AssignTeamToEntryUI instance with provided controllers and email service.
@@ -43,7 +62,11 @@ public class AssignTeamToEntryUI implements Runnable {
     }
 
     /**
-     * Runs the user interface.
+     * Starts the user interface for assigning a team to an entry.
+     * It prompts the user to enter the title of the entry and the name of the team.
+     * It then checks if the entry and the team exist.
+     * If the entry and the team exist, it assigns the team to the entry and sends a notification to the team members.
+     * If the entry or the team does not exist, it prints an error message.
      */
     public void run() {
         System.out.println("Enter the title of the entry to assign a team:");
@@ -75,6 +98,7 @@ public class AssignTeamToEntryUI implements Runnable {
 
     /**
      * Sends a notification to all team members.
+     * The notification informs the team members that they have been assigned to a team.
      *
      * @param team The team to which the notification is sent.
      */
@@ -87,7 +111,7 @@ public class AssignTeamToEntryUI implements Runnable {
     }
 
     /**
-     * Gets the AgendaController.
+     * Returns the controller that handles the agenda.
      *
      * @return The AgendaController.
      */

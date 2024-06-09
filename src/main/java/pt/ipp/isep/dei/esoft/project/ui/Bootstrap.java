@@ -11,9 +11,15 @@ import pt.isep.lei.esoft.auth.domain.model.Email;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ * This class is responsible for initializing the application with some default data.
+ */
 public class Bootstrap implements Runnable {
 
-
+    /**
+     * This method is called when the application starts.
+     * It initializes the application with some default data.
+     */
     public void run() {
         addTaskCategories();
         addOrganization();
@@ -28,6 +34,9 @@ public class Bootstrap implements Runnable {
         addAgendaEntries();
     }
 
+    /**
+     * This method adds some default vehicles to the application.
+     */
     private void addVehicle() {
         VehicleRepository vehicleRepository = Repositories.getInstance().getVehicleRepository();
         Random random = new Random();
@@ -50,12 +59,20 @@ public class Bootstrap implements Runnable {
         }
     }
 
+    /**
+     * This method generates a random plate ID.
+     * @param random a Random instance
+     * @return a random plate ID
+     */
     private String generatePlateId(Random random) {
         return String.format("%c%c-%02d-%02d",
                 randomChar(random), randomChar(random),
                 random.nextInt(100), random.nextInt(100));
     }
 
+    /**
+     * This method adds some default vehicle checkups to the application.
+     */
     private void addVehicleMaintenance() {
         VehicleCheckupRepository checkupRepository = Repositories.getInstance().getVehicleCheckupRepository();
         Random random = new Random();
@@ -70,10 +87,18 @@ public class Bootstrap implements Runnable {
         }
     }
 
+    /**
+     * This method generates a random character.
+     * @param random a Random instance
+     * @return a random character
+     */
     private char randomChar(Random random) {
         return (char) ('A' + random.nextInt(26));
     }
 
+    /**
+     * This method adds some default green spaces to the application.
+     */
     private void addGreenSpaces() {
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
 
@@ -93,6 +118,9 @@ public class Bootstrap implements Runnable {
         }
     }
 
+    /**
+     * This method adds some default agenda entries to the application.
+     */
     private void addAgendaEntries() {
         ToDoListRepository toDoListRepository = Repositories.getInstance().getToDoListRepository();
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
@@ -125,6 +153,9 @@ public class Bootstrap implements Runnable {
         }
     }
 
+    /**
+     * This method adds a default organization to the application.
+     */
     private void addOrganization() {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("505244123");
@@ -136,6 +167,9 @@ public class Bootstrap implements Runnable {
         organizationRepository.add(organization);
     }
 
+    /**
+     * This method adds some default task categories to the application.
+     */
     private void addTaskCategories() {
         TaskCategoryRepository taskCategoryRepository = Repositories.getInstance().getTaskCategoryRepository();
         taskCategoryRepository.add(new TaskCategory("Analysis"));
@@ -147,6 +181,9 @@ public class Bootstrap implements Runnable {
         taskCategoryRepository.add(new TaskCategory("Maintenance"));
     }
 
+    /**
+     * This method adds some default users to the application.
+     */
     private void addUsers() {
         AuthenticationRepository authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
         authenticationRepository.addUserRole(AuthenticationController.ROLE_ADMIN, AuthenticationController.ROLE_ADMIN);
@@ -170,6 +207,9 @@ public class Bootstrap implements Runnable {
                 AuthenticationController.ROLE_COLLABORATOR);
     }
 
+    /**
+     * This method adds some default skills to the application.
+     */
     private void addSkills() {
         SkillsRepository skillRepository = Repositories.getInstance().getSkillsRepository();
 
@@ -196,6 +236,9 @@ public class Bootstrap implements Runnable {
 
     }
 
+    /**
+     * This method adds some default jobs to the application.
+     */
     private void addJobs() {
         JobRepository jobRepository = Repositories.getInstance().getJobRepository();
 
@@ -223,6 +266,9 @@ public class Bootstrap implements Runnable {
 
     }
 
+    /**
+     * This method adds some default collaborators to the application.
+     */
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
         collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12, 04, 2002), new Date(23, 12, 2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"), new Task("Task")));

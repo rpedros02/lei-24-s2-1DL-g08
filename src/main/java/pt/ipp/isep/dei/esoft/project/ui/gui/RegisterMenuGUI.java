@@ -10,28 +10,43 @@ import pt.ipp.isep.dei.esoft.project.application.controller.authorization.Authen
 import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
+/**
+ * This class provides a user interface for registering a user with a specific role.
+ */
 public class RegisterMenuGUI {
 
     @FXML
+    // TextField for entering the user's email
     private TextField txtEmail;
 
     @FXML
+    // PasswordField for entering the user's password
     private PasswordField txtPassword;
 
     @FXML
+    // PasswordField for confirming the user's password
     private PasswordField txtConfirmPassword;
 
     @FXML
+    // ComboBox for selecting the user's role
     private ComboBox<String> cbRole;
 
-
+    // Repository for accessing authentication data
     private AuthenticationRepository authenticationRepository;
 
+    /**
+     * Constructs a RegisterMenuGUI with an AuthenticationRepository.
+     */
     public RegisterMenuGUI() {
         this.authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
     }
 
     @FXML
+    /**
+     * Handles the action of registering a user.
+     * It is triggered when the Register button is clicked.
+     * It validates the input, creates a user if the input is valid, and displays a message indicating the result.
+     */
     public void handleRegister() {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
