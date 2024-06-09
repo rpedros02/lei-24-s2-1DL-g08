@@ -8,12 +8,14 @@ import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
 
 public class GenerateTeamProposalGUI {
 
@@ -40,12 +42,11 @@ public class GenerateTeamProposalGUI {
 
     public GenerateTeamProposalGUI() {
         this.controller = new GenerateTeamController();
-        this.skillsRepository = new SkillsRepository();
+        this.skillsRepository = Repositories.getInstance().getSkillsRepository();
     }
 
     @FXML
     private void initialize() {
-        // Initialize ComboBox with skills
         List<Skill> skills = skillsRepository.getAllSkills();
         for (Skill skill : skills) {
             cbType.getItems().add(skill.getName());
@@ -60,12 +61,12 @@ public class GenerateTeamProposalGUI {
             String selectedSkill = cbType.getValue();
 
             if (selectedSkill == null || selectedSkill.isEmpty()) {
-                lblMessage.setText("Please select a skill.");
+                showAlert("Please select a skill.");
                 return;
             }
 
             Skill skill = skillsRepository.getSkillByName(selectedSkill);
-            List<Skill> teamSkills = List.of(skill); // Assuming a single skill for simplicity
+            List<Skill> teamSkills = List.of(skill);
 
             Team team = controller.generateTeam(minTeamSize, maxTeamSize, teamSkills);
 

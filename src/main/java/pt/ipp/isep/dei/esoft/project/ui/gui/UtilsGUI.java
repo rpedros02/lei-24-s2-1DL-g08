@@ -65,19 +65,19 @@ public class UtilsGUI {
 
     public static void handleGSM(Button btnBack) {
         Stage stage = (Stage) btnBack.getScene().getWindow();
-        loadUI("GsmGUI/.fxml");
+        loadUI("/GsmGUI.fxml");
         stage.close();
     }
 
     public static void handleVFM(Button btnBack) {
         Stage stage = (Stage) btnBack.getScene().getWindow();
-        loadUI("VfmGUI/.fxml");
+        loadUI("/VfmGUI.fxml");
         stage.close();
     }
 
     public static void handleCollaborator(Button btnBack) {
         Stage stage = (Stage) btnBack.getScene().getWindow();
-        loadUI("CollaboratorMenuGUI/.fxml");
+        loadUI("/CollaboratorMenuGUI.fxml");
         stage.close();
     }
 }
