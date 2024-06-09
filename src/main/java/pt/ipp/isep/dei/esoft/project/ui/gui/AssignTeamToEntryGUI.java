@@ -54,12 +54,12 @@ public class AssignTeamToEntryGUI {
         this.emailService = EmailServiceController.createEmailServiceFromConfig();
     }
 
-    @FXML
     /**
      * Handles the action of assigning a team to an entry.
      * It validates the input data and assigns the team to the entry if it is valid.
      * It also sends a notification to the team members.
      */
+    @FXML
     private void handleAssignTeam() {
         String entryTitle = entryTitleTextField.getText();
         if (entryTitle == null || entryTitle.isEmpty()) {

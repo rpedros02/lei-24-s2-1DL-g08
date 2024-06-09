@@ -11,8 +11,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.List;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.handleGSM;
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 /**
  * This class provides a user interface for cancelling an entry in the agenda.
@@ -56,7 +55,9 @@ public class CancelAnEntryGUI {
             showAlert("There are no entries in the agenda.").showAndWait();
         } else {
             for (Entry entry : entries) {
-                comboBoxEntry.getItems().add(entry.getTitle());
+                if(!entry.getStatus().toString().equals("Canceled")) {
+                    comboBoxEntry.getItems().add(entry.getTitle());
+                }
             }
         }
     }
@@ -73,9 +74,9 @@ public class CancelAnEntryGUI {
     void handleCancelAnEntry() {
         String title = comboBoxEntry.getValue();
         if (cancelAnEntryController.cancelEntry(title)) {
-            showAlert("Entry cancelled successfully.").show();
+            showSuccess("Entry cancelled successfully.").showAndWait();
         } else {
-            showAlert("An error occurred. Please try again.").show();
+            showAlert("An error occurred. Please try again.").showAndWait();
         }
         handleGSM(btnBack);
     }

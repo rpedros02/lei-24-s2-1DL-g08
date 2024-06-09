@@ -246,7 +246,7 @@ public class GreenSpace {
      *
      * @return the Green Space Manager of this GreenSpace
      */
-    public Object getGsm() {
+    public Collaborator getGsm() {
         return gsm;
     }
 }

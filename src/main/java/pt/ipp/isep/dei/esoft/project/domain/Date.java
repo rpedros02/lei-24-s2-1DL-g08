@@ -151,4 +151,8 @@ public class Date extends java.util.Date {
     public Date plusYears(int i) {
         return new Date(this.day, this.month, this.year + i);
     }
+
+    public boolean isValid() {
+        return isValid(this.day, this.month, this.year);
+    }
 }
