@@ -6,9 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class US17 {
+public class US18 {
 
-    public static class Path {
+    public class Path {
         private final List<String> points;
         private final int distance;
 
@@ -31,36 +31,25 @@ public class US17 {
 
     public void main(String[] args) throws IOException {
 
-        String pointsFile = "src/main/java/mdisc/sprintc/datasets/us17_points_names.csv";
-        String matrixFile = "src/main/java/mdisc/sprintc/datasets/us17_matrix.csv";
-        String outputFile = "src/main/java/mdisc/sprintc/output/output.csv";
-        String endPoint = "AP";
+        String pointsFile = "src/main/java/mdisc/sprintc/datasets/us18_points_names.csv";
+        String matrixFile = "src/main/java/mdisc/sprintc/datasets/us18_matrix.csv";
+        String outputFile = "src/main/java/mdisc/sprintc/output/output_us18.csv";
 
         List<String> points = readPoints(pointsFile);
         int[][] matrix = readMatrix(matrixFile, points.size());
 
-        String userPoint = getUserInput();
-        if (points.contains(userPoint)) {
-            Path shortestPath = calculateShortestPath(points, matrix, userPoint, endPoint);
-            writeShortestPath("src/main/java/mdisc/sprintc/output/us17_output.csv", userPoint, shortestPath);
-        } else {
-            System.out.println("The point you entered does not exist.");
-        }
-
         Map<String, Path> shortestPaths = new HashMap<>();
         for (String startPoint : points) {
-            if (!startPoint.equals(endPoint)) {
-                shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint, endPoint));
+            if (!startPoint.startsWith("AP")) {
+                shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint));
             }
         }
         writeShortestPaths(outputFile, shortestPaths);
     }
 
-
-    private Path calculateShortestPath(List<String> points, int[][] matrix, String start, String end) {
+    private Path calculateShortestPath(List<String> points, int[][] matrix, String start) {
         int size = points.size();
         int startIndex = points.indexOf(start);
-        int endIndex = points.indexOf(end);
 
         int[] distances = new int[size];
         Arrays.fill(distances, Integer.MAX_VALUE);
@@ -81,14 +70,24 @@ public class US17 {
             }
         }
 
+        int minDistance = Integer.MAX_VALUE;
+        String nearestAP = null;
+        for (String point : points) {
+            if (point.startsWith("AP")) {
+                int apIndex = points.indexOf(point);
+                if (distances[apIndex] < minDistance) {
+                    minDistance = distances[apIndex];
+                    nearestAP = point;
+                }
+            }
+        }
+
         List<String> path = new ArrayList<>();
-        for (String point = end; point != null; point = predecessors[points.indexOf(point)]) {
+        for (String point = nearestAP; point != null; point = predecessors[points.indexOf(point)]) {
             path.add(0, point);
         }
 
-        int totalDistance = distances[endIndex];
-
-        return new Path(path, totalDistance);
+        return new Path(path, minDistance);
     }
 
     private static void writeShortestPaths(String filename, Map<String, Path> shortestPaths) throws IOException {
@@ -108,7 +107,7 @@ public class US17 {
         return Arrays.asList(content.split(DELIMITER));
     }
 
-    public static int findMinimumDistance(int[] distances, boolean[] visited) {
+    private static int findMinimumDistance(int[] distances, boolean[] visited) {
         int minIndex = -1;
         for (int i = 0; i < distances.length; i++) {
             if (!visited[i] && (minIndex == -1 || distances[i] < distances[minIndex])) {
@@ -135,18 +134,4 @@ public class US17 {
 
         return matrix;
     }
-
-    private String getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the name of the point: ");
-        return scanner.nextLine();
-    }
-
-    private void writeShortestPath(String filename, String point, Path shortestPath) throws IOException {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
-            String path = String.join(",", shortestPath.getPoints());
-            writer.write(String.format(OUTPUT_FORMAT, path, shortestPath.getDistance()));
-        }
-    }
-
 }
