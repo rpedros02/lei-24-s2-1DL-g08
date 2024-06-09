@@ -50,7 +50,7 @@ public class CSVReader {
 
 
             for (Aresta aresta : tree) {
-                writer.append(aresta.getStart() + ";" + aresta.getEnd() + ";" + aresta.getWeight() + "\n");
+                writer.append(aresta.getStartVertice() + ";" + aresta.getEndVertice() + ";" + aresta.getCost() + "\n");
             }
 
             // Write a line with the minimum cost of the minimum spanning tree

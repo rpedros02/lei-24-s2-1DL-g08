@@ -189,6 +189,8 @@ public class Main {
         gp.print();
     }
 
+
+
     private static void calculateShortestPathForEvacuation(Scanner scanner) {
         System.out.print("Enter the name of the matrix .csv file: ");
         String matrixFileName = scanner.nextLine();
@@ -197,6 +199,8 @@ public class Main {
         String assemblyPointsFileName = scanner.nextLine();
 
         List<File> files = searchFilesByBaseName(matrixFileName);
+
+        System.out.printf(matrixFileName);
         if (files.isEmpty()) {
             System.out.println("No files found with the provided base name.");
             return;
@@ -206,15 +210,15 @@ public class Main {
         for (File file : files) {
             ArrayList<Object[]> csvData = csvReader.readCsv(file.getPath());
 
-            Grafo graph = new Grafo();
+            Grafo grafico = new Grafo();
             for (Object[] row : csvData) {
                 String startVerticeName = (String) row[0];
                 String endVerticeName = (String) row[1];
                 double arestaWeight = (double) row[2];
 
-                graph.addVertice(startVerticeName);
-                graph.addVertice(endVerticeName);
-                graph.addAresta(startVerticeName, endVerticeName, arestaWeight);
+                grafico.addVertice(startVerticeName);
+                grafico.addVertice(endVerticeName);
+                grafico.addAresta(startVerticeName, endVerticeName, arestaWeight);
             }
 
             List<Pair<Vertice, Vertice>> assemblyPoints = csvReader.readAssemblyPointsCsv(assemblyPointsFileName);
@@ -223,7 +227,7 @@ public class Main {
             for (Pair<Vertice, Vertice> assemblyPoint : assemblyPoints) {
                 List<Vertice> assemblyPointsList = new ArrayList<>();
                 assemblyPointsList.add(assemblyPoint.getRight());
-                List<Vertice> shortestPath = graph.shortestPathToNearestAssemblyPoint(assemblyPoint.getLeft(), assemblyPointsList);
+                List<Vertice> shortestPath = grafico.shortestPathToNearestAssemblyPoint(assemblyPoint.getLeft(), assemblyPointsList);
                 shortestPaths.add(shortestPath);
             }
 
@@ -231,7 +235,10 @@ public class Main {
             csvReader.writePathsCSV(shortestPaths, shortestPathsFileName);
 
             for (List<Vertice> shortestPath : shortestPaths) {
-                GraphPrinter.printShortestPath(shortestPath, "shortest_path_" + file.getName());
+                String filename = "shortest_path" + file.getName();
+                GraphPrinter.printShortestPath(shortestPath, filename);
+                String path = "./lei-24-s2-1DL-g08" + filename + ".csv";
+                grafico.graphPng(filename, path);
             }
         }
     }

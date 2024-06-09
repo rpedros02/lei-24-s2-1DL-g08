@@ -1,18 +1,35 @@
 package mdisc;
 
+import java.util.Objects;
+
 public class Vertice {
-    private final String name;
 
-    public Vertice(String name) {
-        this.name = name;
+    private String vertice;
+
+    public Vertice(String vertice) {    // construtor
+        this.vertice = vertice;
     }
 
-    public String getName() {
-        return name;
+    public String getVertice() {
+        return vertice;
     }
 
-    @Override
+    public void setVertice(String vertice) {
+        this.vertice = vertice;
+    }
+
     public String toString() {
-        return name;
+        return getVertice();
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Vertice other = (Vertice) obj;
+        return Objects.equals(vertice, other.vertice);
     }
 }

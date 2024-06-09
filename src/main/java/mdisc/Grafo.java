@@ -1,4 +1,5 @@
 package mdisc;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public class Grafo {
 
     public boolean verticeExists(String verticeName) {
         for (Vertice vertice : vertices) {
-            if (vertice.getName().equals(verticeName)) {
+            if (vertice.getVertice().equals(verticeName)) {
                 return true;
             }
         }
@@ -40,7 +41,7 @@ public class Grafo {
 
     public Vertice findVertice(String verticeName) {
         for (Vertice vertice : vertices) {
-            if (vertice.getName().equals(verticeName)) {
+            if (vertice.getVertice().equals(verticeName)) {
                 return vertice;
             }
         }
@@ -84,7 +85,7 @@ public class Grafo {
 
         for (int i = 0; i < sortedArestas.size() - 1; i++) {
             for (int j = 0; j < sortedArestas.size() - i - 1; j++) {
-                if (sortedArestas.get(j).getWeight() > sortedArestas.get(j + 1).getWeight()) {
+                if (sortedArestas.get(j).getCost() > sortedArestas.get(j + 1).getCost()) {
                     Aresta temp = sortedArestas.get(j);
                     sortedArestas.set(j, sortedArestas.get(j + 1));
                     sortedArestas.set(j + 1, temp);
@@ -95,8 +96,8 @@ public class Grafo {
         DisjointSet disjointSet = new DisjointSet(this.vertices.size());
 
         for (Aresta aresta : sortedArestas) {
-            Vertice start = aresta.getStart();
-            Vertice end = aresta.getEnd();
+            Vertice start = aresta.getStartVertice();
+            Vertice end = aresta.getEndVertice();
 
             int indexStart = vertices.indexOf(start);
             int indexEnd = vertices.indexOf(end);
@@ -105,7 +106,7 @@ public class Grafo {
                     disjointSet.find(vertices.indexOf(start)) !=
                             disjointSet.find(vertices.indexOf(end))) {
                 spanningTree.add(aresta);
-                totalCost += aresta.getWeight();
+                totalCost += aresta.getCost();
                 disjointSet.union(vertices.indexOf(start), vertices.indexOf(end));
             }
         }
@@ -115,12 +116,12 @@ public class Grafo {
 
     public boolean arestaExists(String startVerticeName, String endVerticeName) {
         for (Aresta aresta : aresta) {
-            Vertice start = aresta.getStart();
-            Vertice end = aresta.getEnd();
-            if (start.getName().equals(startVerticeName) && end.getName().equals(endVerticeName)) {
+            Vertice start = aresta.getStartVertice();
+            Vertice end = aresta.getEndVertice();
+            if (start.getVertice().equals(startVerticeName) && end.getVertice().equals(endVerticeName)) {
                 return true;
             }
-            if (start.getName().equals(endVerticeName) && end.getName().equals(startVerticeName)) {
+            if (start.getVertice().equals(endVerticeName) && end.getVertice().equals(startVerticeName)) {
                 return true;
             }
         }
@@ -137,9 +138,9 @@ public class Grafo {
             Vertice current = queue.poll();
 
             for (Aresta edge : aresta) {
-                if (edge.getStart().equals(current)) {
-                    Vertice neighbor = edge.getEnd();
-                    double newDistance = shortestDistances.get(current) + edge.getWeight();
+                if (edge.getStartVertice().equals(current)) {
+                    Vertice neighbor = edge.getEndVertice();
+                    double newDistance = shortestDistances.get(current) + edge.getCost();
 
                     if (!shortestDistances.containsKey(neighbor) || newDistance < shortestDistances.get(neighbor)) {
                         shortestDistances.put(neighbor, newDistance);
@@ -153,7 +154,7 @@ public class Grafo {
         return previousVertices;
     }
 
-    public HashMap<Vertice, Vertice> dijkstraMultipleSources(List<Vertice> sources) {
+    public HashMap<Vertice, Vertice> DAColumnEntry(List<Vertice> sources) {
         HashMap<Vertice, Double> shortestDistances = new HashMap<>();
         HashMap<Vertice, Vertice> previousVertices = new HashMap<>();
         PriorityQueue<Vertice> queue = new PriorityQueue<>(Comparator.comparingDouble(shortestDistances::get));
@@ -167,9 +168,9 @@ public class Grafo {
             Vertice current = queue.poll();
 
             for (Aresta edge : aresta) {
-                if (edge.getStart().equals(current)) {
-                    Vertice neighbor = edge.getEnd();
-                    double newDistance = shortestDistances.get(current) + edge.getWeight();
+                if (edge.getStartVertice().equals(current)) {
+                    Vertice neighbor = edge.getEndVertice();
+                    double newDistance = shortestDistances.get(current) + edge.getCost();
 
                     if (!shortestDistances.containsKey(neighbor) || newDistance < shortestDistances.get(neighbor)) {
                         shortestDistances.put(neighbor, newDistance);
@@ -183,8 +184,8 @@ public class Grafo {
         return previousVertices;
     }
 
-    public List<Vertice> shortestPathToNearestAssemblyPoint(Vertice start, List<Vertice> assemblyPoints) {
-        List<Vertice> shortestPath = null;
+    public ArrayList<Vertice> shortestPathToNearestAssemblyPoint(Vertice start, List<Vertice> assemblyPoints) {
+        ArrayList<Vertice> shortestPath = null;
         double shortestDistance = Double.MAX_VALUE;
 
         for (Vertice assemblyPoint : assemblyPoints) {
@@ -194,7 +195,7 @@ public class Grafo {
 
             if (distance < shortestDistance) {
                 shortestDistance = distance;
-                shortestPath = path;
+                shortestPath = new ArrayList<>(path);
             }
         }
 
@@ -229,12 +230,30 @@ public class Grafo {
 
     public double getEdgeWeight(Vertice v1, Vertice v2) {
         for (Aresta edge : aresta) {
-            if ((edge.getStart().equals(v1) && edge.getEnd().equals(v2)) ||
-                    (edge.getStart().equals(v2) && edge.getEnd().equals(v1))) {
-                return edge.getWeight();
+            if ((edge.getStartVertice().equals(v1) && edge.getEndVertice().equals(v2)) ||
+                    (edge.getStartVertice().equals(v2) && edge.getEndVertice().equals(v1))) {
+                return edge.getCost();
             }
         }
         return 0.0;
     }
+
+    public void graphPng(String filename, String path) {
+        try {
+            String command = "dot -Tpng " + path + filename + ".dot -o " + path + filename + ".png";
+            Process process = Runtime.getRuntime().exec(command);
+
+            int exitCode = process.waitFor();
+
+            if (exitCode == 0) {
+                System.out.println("New PNG file added");
+            } else {
+                System.out.println("Error executing the command. Exit code: " + exitCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("An error occurred while executing the command: " + e.getMessage());
+        }
+    }
+
 }
 
