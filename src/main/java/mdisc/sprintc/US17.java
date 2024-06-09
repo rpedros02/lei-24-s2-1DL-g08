@@ -58,7 +58,13 @@ public class US17 {
             }
         }
         writeShortestWays(outputFile, shortestWays);
-
+        GraphGenerator graphGenerator = new GraphGenerator();
+        try {
+            graphGenerator.generateGraph("src/main/java/mdisc/sprintc/output/us17_allpoints.csv", "AllPoints");
+            graphGenerator.generateGraph("src/main/java/mdisc/sprintc/output/us17_output.csv", "Output");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

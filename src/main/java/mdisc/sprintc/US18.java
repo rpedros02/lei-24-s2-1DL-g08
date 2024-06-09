@@ -56,6 +56,13 @@ public class US18 {
 
         writeShortestPaths(outputFile, shortestPaths);
 
+        GraphGenerator graphGenerator = new GraphGenerator();
+        try {
+            graphGenerator.generateGraph("src/main/java/mdisc/sprintc/output/us18_allpoints.csv", "AllPoints");
+            graphGenerator.generateGraph("src/main/java/mdisc/sprintc/output/us18_output.csv", "Output");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 

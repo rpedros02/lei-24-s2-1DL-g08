@@ -1,0 +1,5 @@
+digraph Output {
+rankdir=LR;
+"Vertex: Capela" -> "Vertex: Topo" [label="13"];
+"Vertex: Topo" -> "Vertex: AP" [label="13"];
+}
