@@ -1,6 +1,5 @@
 package pt.ipp.isep.dei.esoft.project.application.controller;
 
-import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
@@ -9,11 +8,17 @@ import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.util.Optional;
 
+/**
+ * The controller for handling vehicle check-up operations.
+ */
 public class VehicleCheckupController {
     private final OrganizationRepository organizationRepository;
     private final VehicleCheckupRepository vehicleCheckupRepository;
     private final VehicleRepository vehicleRepository;
 
+    /**
+     * Constructs a new VehicleCheckupController.
+     */
     public VehicleCheckupController() {
         this.organizationRepository = OrganizationRepository.getInstance();
         this.vehicleCheckupRepository = new VehicleCheckupRepository();

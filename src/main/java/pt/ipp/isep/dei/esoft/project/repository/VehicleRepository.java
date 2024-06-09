@@ -1,3 +1,6 @@
+/**
+ * This class represents a repository for vehicles.
+ */
 package pt.ipp.isep.dei.esoft.project.repository;
 
 import pt.ipp.isep.dei.esoft.project.domain.Date;
@@ -11,10 +14,29 @@ public class VehicleRepository {
 
     private final List<Vehicle> vehicles;
 
+    /**
+     * Instantiates a new Vehicle repository.
+     */
     public VehicleRepository() {
         this.vehicles = new ArrayList<>();
     }
 
+    /**
+     * Adds a new vehicle to the repository.
+     *
+     * @param plateId             the plate id
+     * @param brand               the brand
+     * @param model               the model
+     * @param type                the type
+     * @param tare                the tare
+     * @param weight              the weight
+     * @param mileage             the mileage
+     * @param lastVehicleCheckupKm the last vehicle checkup km
+     * @param register_date       the register date
+     * @param acquisition_date    the acquisition date
+     * @param maintenance_frequency the maintenance frequency
+     * @return true if the vehicle was added successfully, false otherwise
+     */
     public boolean add(String plateId, String brand, String model, String type, double tare, double weight, int mileage, int lastVehicleCheckupKm, Date register_date, Date acquisition_date, int maintenance_frequency) {
         if (vehicles.isEmpty()) {
             Vehicle newVehicle = new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastVehicleCheckupKm, register_date, acquisition_date, maintenance_frequency);
@@ -25,10 +47,22 @@ public class VehicleRepository {
         return vehicles.add(new Vehicle(plateId, brand, model, type, tare, weight, mileage,lastVehicleCheckupKm, register_date, acquisition_date, maintenance_frequency));
     }
 
+    /**
+     * Gets all vehicles in the repository.
+     *
+     * @return the list of vehicles
+     */
     public List<Vehicle> getVehicles() {
         return this.vehicles;
     }
 
+    /**
+     * Updates the plate id of a vehicle.
+     *
+     * @param oldPlateId the old plate id
+     * @param newPlateId the new plate id
+     * @return true if the plate id was updated successfully, false otherwise
+     */
     public boolean updatePlateId(String oldPlateId, String newPlateId) {
         for (Vehicle vehicle : vehicles) {
             if (exists(oldPlateId)) {
@@ -49,6 +83,12 @@ public class VehicleRepository {
         return false;
     }
 
+    /**
+     * Updates a vehicle with new information.
+     *
+     * @param updatedVehicle the updated vehicle
+     * @return true if the vehicle was updated successfully, false otherwise
+     */
     public boolean updateVehicle(Vehicle updatedVehicle) {
         for (int i = 0; i < vehicles.size(); i++) {
             if (vehicles.get(i).hasPlate(updatedVehicle.getPlateId())) {
