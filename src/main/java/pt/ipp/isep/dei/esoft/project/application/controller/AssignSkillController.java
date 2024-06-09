@@ -6,12 +6,11 @@ import pt.ipp.isep.dei.esoft.project.repository.CollaboratorRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AssignSkillController {
-    private SkillsRepository skillsRepository;
-    private CollaboratorRepository collaboratorRepository;
+    private final  SkillsRepository skillsRepository;
+    private final CollaboratorRepository collaboratorRepository;
 
     public AssignSkillController() {
         Repositories repositories = Repositories.getInstance();
@@ -31,5 +30,13 @@ public class AssignSkillController {
 
     public void assignSkills(Collaborator collaborator, List<Skill> skills) {
         collaboratorRepository.assignSkills(collaborator, skills);
+    }
+
+    public Collaborator getCollaboratorByEmail(String value) {
+        return collaboratorRepository.getCollaboratorByEmail(value);
+    }
+
+    public Skill getSkillByName(String value) {
+        return skillsRepository.getSkillByName(value);
     }
 }

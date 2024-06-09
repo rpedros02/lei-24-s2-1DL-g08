@@ -83,7 +83,7 @@ public class Bootstrap implements Runnable {
             if (optionalOrganization.isPresent()) {
                 Organization organization = optionalOrganization.get();
                 GreenSpaceTypeRepository type = GreenSpaceTypeRepository.GARDEN;
-                Double area = (double) (i * 100 + 100);
+                double area = i * 100 + 100;
 
                 Address address = new Address("Rua Green", i + 1, "4100-100", "Porto", "Porto");
 
@@ -96,28 +96,29 @@ public class Bootstrap implements Runnable {
     private void addAgendaEntries() {
         ToDoListRepository toDoListRepository = Repositories.getInstance().getToDoListRepository();
         GreenSpaceRepository greenSpaceRepository = Repositories.getInstance().getGreenSpaceRepository();
-        TeamRepository teamRepository = Repositories.getInstance().getTeamRepository();
+        Optional<Organization> optionalOrganization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
 
         Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgency.HIGH, new Date(12, 6, 2024), new Date(14, 6, 2024), EStatus.PLANNED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"));
         Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgency.MEDIUM, new Date(22, 6, 2024), new Date(27, 6, 2024), EStatus.PLANNED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"));
         Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgency.LOW, new Date(25, 6, 2024), new Date(14, 7, 2024), EStatus.FINISHED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"));
 
-        ToDoList toDoList = new ToDoList();
+        ToDoList toDoList = toDoListRepository.getToDoList();
         toDoList.addEntry(entry1);
         toDoList.addEntry(entry2);
         toDoList.addEntry(entry3);
 
-        // Create a few agenda entries
-        Agenda agenda1 = new Agenda();
-        // Add the agenda entries to the AgendaRepository
-        if (!agenda1.addEntry(entry1) || !agenda1.addEntry(entry2) || !agenda1.addEntry(entry3)) {
-            System.out.println("Bootstrap: Failed to add entries to the agenda");
+        Agenda agenda = new Agenda();
+        if (optionalOrganization.isPresent()) {
+            agenda = optionalOrganization.get().getAgenda();
+            if (!agenda.addEntry(entry1) || !agenda.addEntry(entry2) || !agenda.addEntry(entry3)) {
+                System.out.println("Bootstrap: Failed to add entries to the agenda");
+            }
         }
 
-        Optional<Organization> optionalOrganization = Repositories.getInstance().getOrganizationRepository().getOrganizationByVatNumber("505244123");
+
         if (optionalOrganization.isPresent()) {
             Organization organization = optionalOrganization.get();
-            organization.setAgenda(agenda1);
+            organization.setAgenda(agenda);
             organization.setToDoList(toDoList);
         } else {
             System.out.println("Bootstrap: Organization not found by VAT number");
@@ -128,10 +129,10 @@ public class Bootstrap implements Runnable {
         OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
         Organization organization = new Organization("505244123");
         organization.addCollaborator(new Collaborator(new Email("admin@this.app")));
-        organization.addCollaborator(new Collaborator("Employee", new Date(12,4,2002), new Date(23,12,2023), 919919919, "employee@this.app", 123456780, IdDocType.CC, "123456780", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Employee"), new Task("Task")));
-        organization.addCollaborator(new Collaborator("GSM", new Date(12,4,2002), new Date(23,12,2023), 919919919, "gsm@this.app", 123456781, IdDocType.CC, "123456781", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("GSM"), new Task("Task")));
-        organization.addCollaborator(new Collaborator("HRM", new Date(12,4,2002), new Date(23,12,2023), 919919919, "hrm@this.app", 123456782, IdDocType.CC, "123456782", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("HRM"), new Task("Task")));
-        organization.addCollaborator(new Collaborator("VFM", new Date(12,4,2002), new Date(23,12,2023), 919919919, "vfm@this.app", 123456783, IdDocType.CC, "123456783", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("VFM"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("Employee", new Date(12, 4, 2002), new Date(23, 12, 2023), 919919919, "employee@this.app", 123456780, IdDocType.CC, "123456780", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Employee"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("GSM", new Date(12, 4, 2002), new Date(23, 12, 2023), 919919919, "gsm@this.app", 123456781, IdDocType.CC, "123456781", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("GSM"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("HRM", new Date(12, 4, 2002), new Date(23, 12, 2023), 919919919, "hrm@this.app", 123456782, IdDocType.CC, "123456782", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("HRM"), new Task("Task")));
+        organization.addCollaborator(new Collaborator("VFM", new Date(12, 4, 2002), new Date(23, 12, 2023), 919919919, "vfm@this.app", 123456783, IdDocType.CC, "123456783", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("VFM"), new Task("Task")));
         organizationRepository.add(organization);
     }
 
@@ -155,11 +156,8 @@ public class Bootstrap implements Runnable {
         authenticationRepository.addUserRole(AuthenticationController.ROLE_VFM, AuthenticationController.ROLE_VFM);
         authenticationRepository.addUserRole(AuthenticationController.ROLE_COLLABORATOR, AuthenticationController.ROLE_COLLABORATOR);
 
-        authenticationRepository.addUserWithRole("US12 Administrator", "admin@this.app", "admin",
+        authenticationRepository.addUserWithRole("Administrator", "admin@this.app", "admin",
                 AuthenticationController.ROLE_ADMIN);
-
-        authenticationRepository.addUserWithRole("Employee", "employee@this.app", "pwd",
-                AuthenticationController.ROLE_EMPLOYEE);
 
         authenticationRepository.addUserWithRole("HRM", "hrm@this.app", "hrm",
                 AuthenticationController.ROLE_HRM);
@@ -227,10 +225,9 @@ public class Bootstrap implements Runnable {
 
     private void addCollaborator() {
         CollaboratorRepository collaboratorRepository = Repositories.getInstance().getCollaboratorRepository();
-        JobRepository jobRepository = Repositories.getInstance().getJobRepository();
-        collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
-        collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
-        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
-        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12,04,2002), new Date(23,12,2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"),new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12, 04, 2002), new Date(23, 12, 2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"), new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny boy", new Date(12, 04, 2002), new Date(23, 12, 2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"), new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12, 04, 2002), new Date(23, 12, 2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"), new Task("Task")));
+        collaboratorRepository.addCollaborator(new Collaborator("Johny girl", new Date(12, 04, 2002), new Date(23, 12, 2023), 919919919, "email@this.app", 123456789, IdDocType.CC, "123456789", new Address("rua rua", 12, "4425-299", "City", "District"), new Job("Gardener"), new Task("Task")));
     }
 }

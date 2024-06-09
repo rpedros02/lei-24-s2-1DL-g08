@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 public class AdminGUI {
 
@@ -13,30 +13,22 @@ public class AdminGUI {
 
     @FXML
     public void handleHrm() {
-        Stage stage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/HrmGUI.fxml");
-        stage.close();
+        handleHRM(btnMainMenu);
     }
 
     @FXML
     public void handleVfm() {
-        Stage stage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/VfmGUI.fxml");
-        stage.close();
+        handleVFM(btnMainMenu);
     }
 
     @FXML
     public void handleGsm() {
-        Stage stage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/GsmGUI.fxml");
-        stage.close();
+        handleGSM(btnMainMenu);
     }
 
     @FXML
     public void handleCollaboratorMenu() {
-        Stage currentStage = (Stage) btnMainMenu.getScene().getWindow();
-        loadUI("/CollaboratorMenuGUI.fxml");
-        currentStage.close();
+        handleCollaborator(btnMainMenu);
     }
 
     @FXML
