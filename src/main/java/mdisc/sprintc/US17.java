@@ -1,7 +1,9 @@
 package mdisc.sprintc;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class US17 {
@@ -23,14 +25,11 @@ public class US17 {
             return distance;
         }
     }
+
     private static final String DELIMITER = ";";
     private static final String OUTPUT_FORMAT = "%s;%d%n";
 
     public void main(String[] args) throws IOException {
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the point name: ");
-        String startpoint = scanner.nextLine();
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us17_points_names.csv";
         String matrixFile = "src/main/java/mdisc/sprintc/datasets/us17_matrix.csv";
@@ -39,6 +38,14 @@ public class US17 {
 
         List<String> points = readPoints(pointsFile);
         int[][] matrix = readMatrix(matrixFile, points.size());
+
+        String userPoint = getUserInput();
+        if (points.contains(userPoint)) {
+            Path shortestPath = calculateShortestPath(points, matrix, userPoint, endPoint);
+            writeShortestPath("src/main/java/mdisc/sprintc/output/us17_output.csv", userPoint, shortestPath);
+        } else {
+            System.out.println("The point you entered does not exist.");
+        }
 
         Map<String, Path> shortestPaths = new HashMap<>();
         for (String startPoint : points) {
@@ -92,8 +99,12 @@ public class US17 {
             }
         }
     }
+
     private static List<String> readPoints(String filename) throws IOException {
         String content = Files.readString(Paths.get(filename));
+        if (content.startsWith("\uFEFF")) {
+            content = content.substring(1);
+        }
         return Arrays.asList(content.split(DELIMITER));
     }
 
@@ -106,6 +117,7 @@ public class US17 {
         }
         return minIndex;
     }
+
     private static int[][] readMatrix(String filename, int size) throws IOException {
         int[][] matrix = new int[size][size];
         List<String> lines = Files.readAllLines(Paths.get(filename));
@@ -124,5 +136,18 @@ public class US17 {
         return matrix;
     }
 
+    private String getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the name of the point: ");
+        return scanner.nextLine();
+    }
 
+    private void writeShortestPath(String filename, String point, Path shortestPath) throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
+            String path = String.join(",", shortestPath.getPoints());
+            writer.write(String.format(OUTPUT_FORMAT, path, shortestPath.getDistance()));
+        }
+
+
+    }
 }
