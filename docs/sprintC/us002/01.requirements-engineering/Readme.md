@@ -11,7 +11,7 @@ As an HRM, I want to register a job that a collaborator need to have.
 
 **From the specifications document:**
 
->	"Thus, an employee has a main occupation (job) and  a set of skills that enable him to perform/take on certain tasks/responsibilities, for example, driving vehicles of different types (e.g. light, or heavy), operating machines such
+>	"Thus, an  employee has a main occupation (job) and  a set of skills that enable him to perform/take on certain tasks/responsibilities, for example, driving vehicles of different types (e.g. light, or heavy), operating machines such
 as backhoes or tractors; tree pruning; application of agriculture phytopharmaceuticals." 
 
 >	"Collaborator is a person who is an employee of the organization and carries out
