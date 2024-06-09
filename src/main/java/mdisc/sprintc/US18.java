@@ -33,10 +33,18 @@ public class US18 {
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us18_points_names.csv";
         String matrixFile = "src/main/java/mdisc/sprintc/datasets/us18_matrix.csv";
-        String outputFile = "src/main/java/mdisc/sprintc/output/output_us18.csv";
+        String outputFile = "src/main/java/mdisc/sprintc/output/us18_allpoints.csv";
 
         List<String> points = readPoints(pointsFile);
         int[][] matrix = readMatrix(matrixFile, points.size());
+
+        String userPoint = getUserInput();
+        if (points.contains(userPoint)) {
+            Path shortestPath = calculateShortestPath(points, matrix, userPoint);
+            writeShortestPath("src/main/java/mdisc/sprintc/output/us18_output.csv", userPoint, shortestPath);
+        } else {
+            System.out.println("The point you entered does not exist.");
+        }
 
         Map<String, Path> shortestPaths = new HashMap<>();
         for (String startPoint : points) {
@@ -46,6 +54,7 @@ public class US18 {
         }
         writeShortestPaths(outputFile, shortestPaths);
     }
+
 
     private Path calculateShortestPath(List<String> points, int[][] matrix, String start) {
         int size = points.size();
@@ -131,7 +140,20 @@ public class US18 {
                 matrix[i][j] = Integer.parseInt(value);
             }
         }
-
         return matrix;
+    }
+
+
+    private String getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the number of the point: ");
+        return scanner.nextLine();
+    }
+
+    private void writeShortestPath(String filename, String point, Path shortestPath) throws IOException {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
+            String path = String.join(",", shortestPath.getPoints());
+            writer.write(String.format(OUTPUT_FORMAT, path, shortestPath.getDistance()));
+        }
     }
 }
