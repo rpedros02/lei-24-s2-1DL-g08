@@ -15,27 +15,38 @@ import java.util.Optional;
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 /**
- * The GUI for assigning a team to an entry.
+ * This class provides a user interface for assigning a team to an entry.
  */
 public class AssignTeamToEntryGUI {
 
     @FXML
+    // TextField for inputting the entry title
     private TextField entryTitleTextField;
     @FXML
+    // TextField for inputting the team name
     private TextField teamNameTextField;
     @FXML
+    // Button for going back
     private Button btnBack;
     @FXML
+    /**
+     * Handles the action of navigating to the GSM user interface.
+     * It is triggered when the GSM button is clicked.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
+    // Controller for the to-do list
     private final ToDoListController toDoListController;
+    // Controller for the agenda
     private final AgendaController agendaController;
+    // Service for sending emails
     private final EmailService emailService;
 
     /**
-     * Constructs a new AssignTeamToEntryGUI instance.
+     * Constructs a new instance of AssignTeamToEntryGUI.
+     * It initializes the controllers and the email service.
      */
     public AssignTeamToEntryGUI() {
         this.toDoListController = new ToDoListController();
@@ -44,6 +55,11 @@ public class AssignTeamToEntryGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of assigning a team to an entry.
+     * It validates the input data and assigns the team to the entry if it is valid.
+     * It also sends a notification to the team members.
+     */
     private void handleAssignTeam() {
         String entryTitle = entryTitleTextField.getText();
         if (entryTitle == null || entryTitle.isEmpty()) {
@@ -78,6 +94,10 @@ public class AssignTeamToEntryGUI {
         sendNotificationToTeamMembers(team);
     }
 
+    /**
+     * Sends a notification to the members of a team.
+     * @param team the team to which the notification is sent
+     */
     private void sendNotificationToTeamMembers(Team team) {
         StringBuilder notificationMessage = new StringBuilder("Sending notification to team members:\n");
         for (String member : team.getMembers()) {
@@ -87,6 +107,12 @@ public class AssignTeamToEntryGUI {
         showAlert(AlertType.INFORMATION, "Notifications", notificationMessage.toString());
     }
 
+    /**
+     * Displays an alert with the specified type, title, and message.
+     * @param alertType the type of the alert
+     * @param title the title of the alert
+     * @param message the message of the alert
+     */
     private void showAlert(AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

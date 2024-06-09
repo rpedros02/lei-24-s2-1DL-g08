@@ -21,55 +21,100 @@ import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
+/**
+ * This class provides a user interface for registering a collaborator.
+ */
 public class RegisterCollaboratorGUI {
 
     @FXML
+    // TextField for entering the collaborator's name
     private TextField txtName;
+
     @FXML
+    // TextField for entering the collaborator's birth date
     private TextField txtBirthDate;
+
     @FXML
+    // TextField for entering the collaborator's admission date
     private TextField txtAdmissionDate;
+
     @FXML
+    // TextField for entering the collaborator's mobile number
     private TextField txtMobileNumber;
+
     @FXML
+    // TextField for entering the collaborator's email
     private TextField txtEmail;
+
     @FXML
+    // TextField for entering the collaborator's tax payer number
     private TextField txtTaxPayerNumber;
+
     @FXML
+    // ComboBox for selecting the collaborator's ID document type
     private ComboBox<IdDocType> cbIdType;
+
     @FXML
+    // TextField for entering the collaborator's ID number
     private TextField txtIdNumber;
+
     @FXML
+    // TextField for entering the collaborator's street
     private TextField txtStreet;
+
     @FXML
+    // TextField for entering the collaborator's street number
     private TextField txtStreetNumber;
+
     @FXML
+    // TextField for entering the collaborator's postal code
     private TextField txtPostalCode;
+
     @FXML
+    // TextField for entering the collaborator's city
     private TextField txtCity;
+
     @FXML
+    // TextField for entering the collaborator's district
     private TextField txtDistrict;
+
     @FXML
+    // ComboBox for selecting the collaborator's job
     private ComboBox<String> cbJob;
+
     @FXML
+    // Button for going back to the previous user interface
     private Button btnBack;
 
+    // Controller for creating a collaborator
     private final CreateCollaboratorController createCollaboratorController;
 
+    // Repository for accessing jobs
     private final JobRepository jobRepository;
 
     @FXML
+    /**
+     * Handles the action of returning to the HRM user interface.
+     * It is triggered when the Back button is clicked.
+     */
     public void handleReturn() {
         UtilsGUI.handleHRM(btnBack);
     }
 
-
+    /**
+     * Constructs a RegisterCollaboratorGUI with a CreateCollaboratorController and a JobRepository.
+     */
     public RegisterCollaboratorGUI() {
         this.createCollaboratorController = new CreateCollaboratorController();
         this.jobRepository = Repositories.getInstance().getJobRepository();
     }
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * This method is called after all @FXML annotated members have been injected.
+     * It sets up the ComboBoxes with the available ID document types and jobs.
+     */
     public void initialize() {
         cbIdType.getItems().addAll(IdDocType.values());
         List<Job> jobs = jobRepository.getJobs();
@@ -83,6 +128,11 @@ public class RegisterCollaboratorGUI {
     }
 
     @FXML
+    /**
+     * Handles the action of registering a collaborator.
+     * It is triggered when the corresponding button is clicked.
+     * It validates the input, creates a collaborator if the input is valid, and displays a message indicating the result.
+     */
     public void handleRegisterCollaborator() {
         if (txtName.getText().isEmpty() || txtBirthDate.getText().isEmpty() || txtAdmissionDate.getText().isEmpty() || txtMobileNumber.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTaxPayerNumber.getText().isEmpty() || cbIdType.getValue() == null || txtIdNumber.getText().isEmpty() || txtStreet.getText().isEmpty() || txtStreetNumber.getText().isEmpty() || txtPostalCode.getText().isEmpty() || txtCity.getText().isEmpty() || txtDistrict.getText().isEmpty() || cbJob.getValue() == null) {
             UtilsGUI.showAlert("All fields are mandatory.").showAndWait();

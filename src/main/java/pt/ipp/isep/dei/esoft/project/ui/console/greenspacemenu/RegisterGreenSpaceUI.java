@@ -11,18 +11,28 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class provides the user interface for registering a Green Space.
+ * It implements the Runnable interface, allowing it to be used in a separate thread.
+ */
 public class RegisterGreenSpaceUI implements Runnable {
+    /**
+     * The controller that handles the registration of Green Spaces.
+     */
     private GreenSpaceController controller;
 
     /**
-     * Creates an instance of RegisterGreenSpaceUI.
+     * Constructs a new instance of RegisterGreenSpaceUI.
+     * It initializes the controller.
      */
     public RegisterGreenSpaceUI() {
         this.controller = new GreenSpaceController();
     }
 
     /**
-     * Starts the Register Green Space UI.
+     * Starts the user interface for registering a Green Space.
+     * It prompts the user to enter the name, type, area, and address of the Green Space, and the email of the GSM.
+     * It then registers the Green Space and prints a success message if the registration was successful, or an error message otherwise.
      */
     @Override
     public void run() {
@@ -41,12 +51,16 @@ public class RegisterGreenSpaceUI implements Runnable {
         }
     }
 
+    /**
+     * Requests the GSM collaborator by prompting the user to enter the GSM email.
+     * It then retrieves the collaborator with the entered email from the organization repository.
+     *
+     * @return the collaborator with the entered email
+     */
     private Collaborator requestCollaborator() {
         Scanner input = new Scanner(System.in);
         System.out.println("Type the GSM email:");
         String email = input.nextLine();
         return OrganizationRepository.getInstance().getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
     }
-
-
 }

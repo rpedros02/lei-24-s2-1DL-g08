@@ -7,25 +7,42 @@ import javafx.scene.control.ListView;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
+/**
+ * This class provides a user interface for recording the completion of a task.
+ */
 public class RecordTheCompletionOfTaskGUI {
 
     @FXML
+    // ComboBox for selecting an entry
     private ComboBox<Entry> cbEntries;
 
     @FXML
+    // ListView for displaying the entries
     private ListView<Entry> agendaListView;
 
+    // Controller for managing the agenda
     private final AgendaController agendaController = new AgendaController();
 
     @FXML
+    /**
+     * Initializes the user interface.
+     * This method is called after all @FXML annotated members have been injected.
+     * It sets up the ComboBox with the available tasks.
+     */
     public void initialize() {
-        // Carregar tarefas disponíveis
-        cbEntries.getItems().addAll(/* Chame o método adequado para obter as tarefas disponíveis */);
+        // Load available tasks
+        cbEntries.getItems().addAll(/* Call the appropriate method to get the available tasks */);
     }
 
     @FXML
+    /**
+     * Handles the action of recording the completion of a task.
+     * It is triggered when the corresponding button is clicked.
+     * It gets the selected entry from the ComboBox and records its completion.
+     * @param event the action event
+     */
     void handleRecordTheCompletionOfTask(ActionEvent event) {
         Entry selectedEntry = cbEntries.getValue();
-        // Chame o método adequado do controller para registrar a conclusão da tarefa selecionada
+        // Call the appropriate method of the controller to record the completion of the selected task
     }
 }

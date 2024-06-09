@@ -17,53 +17,74 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
+/**
+ * This class provides a user interface for registering a green space.
+ */
 public class RegisterGreenSpaceGUI {
 
     @FXML
+    // TextField for entering the green space's name
     private TextField txtName;
 
     @FXML
+    // ComboBox for selecting the green space's type
     private ComboBox<String> cbType;
 
     @FXML
+    // TextField for entering the green space's area
     private TextField txtArea;
 
     @FXML
+    // TextField for entering the green space's street
     private TextField txtStreet;
 
     @FXML
+    // TextField for entering the green space's street number
     private TextField txtStreetNumber;
 
     @FXML
+    // TextField for entering the green space's postal code
     private TextField txtPostalCode;
 
     @FXML
+    // TextField for entering the green space's city
     private TextField txtCity;
 
     @FXML
+    // TextField for entering the green space's district
     private TextField txtDistrict;
 
     @FXML
+    /**
+     * Handles the action of going back to the GSM user interface.
+     * It is triggered when the Back button is clicked.
+     * It closes the current stage and loads the GsmGUI.
+     */
     public void handleGsm() {
         loadUI("/GsmGUI.fxml");
     }
 
-
+    // Repository for accessing authentication data
     private final AuthenticationRepository authenticationRepository;
 
+    // Controller for managing green spaces
     private final GreenSpaceController controller;
 
+    /**
+     * Constructs a RegisterGreenSpaceGUI with a GreenSpaceController and an AuthenticationRepository.
+     */
     public RegisterGreenSpaceGUI() {
         this.controller = new GreenSpaceController();
         this.authenticationRepository = Repositories.getInstance().getAuthenticationRepository();
     }
 
     @FXML
-    public void initialize() {
-        cbType.getItems().addAll(GreenSpaceTypeRepository.getGreenSpaceTypes());
-    }
+    /**
+     * Initializes the user interface.
+     * This method is called after all @FXML annotated members have been injected.
+     * It sets up the ComboBox with the available green space types.
+     */
 
-    @FXML
     public void handleRegisterGreenSpace() {
         String name = txtName.getText();
         String typeName = cbType.getValue();

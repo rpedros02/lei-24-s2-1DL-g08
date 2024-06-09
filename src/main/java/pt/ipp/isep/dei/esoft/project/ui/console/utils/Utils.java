@@ -19,8 +19,16 @@ import pt.ipp.isep.dei.esoft.project.domain.Date;
  *     <p>
  *     Updated by Rui Silva 1231501@isep.ipp.pt
  */
+/**
+ * Utility class for console input and output operations.
+ */
 public class Utils {
 
+    /**
+     * Reads a line of text from the console.
+     * @param prompt the prompt to display before reading the input
+     * @return the line of text read from the console, or null if an error occurred
+     */
     static public String readLineFromConsole(String prompt) {
         try {
             System.out.print("\n" + prompt);
@@ -35,6 +43,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Reads an integer from the console.
+     * @param prompt the prompt to display before reading the input
+     * @return the integer read from the console
+     */
     static public int readIntegerFromConsole(String prompt) {
         do {
             try {
@@ -47,6 +60,11 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Reads a double from the console.
+     * @param prompt the prompt to display before reading the input
+     * @return the double read from the console, or -1 if an error occurred
+     */
     static public double readDoubleFromConsole(String prompt) {
         do {
             try {
@@ -60,6 +78,11 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Reads a date from the console.
+     * @param prompt the prompt to display before reading the input
+     * @return the date read from the console, or null if an error occurred
+     */
     static public Date readDateFromConsole(String prompt) {
         do {
             String date = readLineFromConsole(prompt);
@@ -76,6 +99,11 @@ public class Utils {
         } while (true);
     }
 
+    /**
+     * Confirms a message with the user.
+     * @param message the message to confirm
+     * @return true if the user confirmed the message, false otherwise
+     */
     static public boolean confirm(String message) {
         String input;
         do {
@@ -85,16 +113,33 @@ public class Utils {
         return input.equalsIgnoreCase("s");
     }
 
+    /**
+     * Displays a list of options and prompts the user to select one.
+     * @param list the list of options
+     * @param header the header to display before the list of options
+     * @return the selected option
+     */
     static public Object showAndSelectOne(List list, String header) {
         showList(list, header);
         return selectsObject(list);
     }
 
+    /**
+     * Displays a list of options and prompts the user to select one.
+     * @param list the list of options
+     * @param header the header to display before the list of options
+     * @return the index of the selected option
+     */
     static public int showAndSelectIndex(List list, String header) {
         showList(list, header);
         return selectsIndex(list);
     }
 
+    /**
+     * Displays a list of options.
+     * @param list the list of options
+     * @param header the header to display before the list of options
+     */
     static public void showList(List list, String header) {
         System.out.println(header);
 
@@ -108,6 +153,11 @@ public class Utils {
         System.out.println("  0 - Return\n");
     }
 
+    /**
+     * Prompts the user to select an option from a list.
+     * @param list the list of options
+     * @return the selected option, or null if the user selected to return
+     */
     static public Object selectsObject(List list) {
         String input;
         int value;
@@ -123,6 +173,11 @@ public class Utils {
         }
     }
 
+    /**
+     * Prompts the user to select an option from a list.
+     * @param list the list of options
+     * @return the index of the selected option
+     */
     static public int selectsIndex(List list) {
         String input;
         int value;
@@ -138,6 +193,11 @@ public class Utils {
         return value - 1;
     }
 
+    /**
+     * Prompts the user to answer a yes/no question.
+     * @param header the question to ask
+     * @return true if the user answered yes, false otherwise
+     */
     public static boolean getBooleanAnswer(String header) {
         ArrayList<String> yes_or_no = new ArrayList<>();
         yes_or_no.add("Yes");
@@ -147,6 +207,11 @@ public class Utils {
         return in == 0;
     }
 
+    /**
+     * Converts a string to a date.
+     * @param sDate the string to convert
+     * @return the converted date
+     */
     public static Date dateFromString(String sDate){
         String day = sDate.substring(0, 2);
         String month = sDate.substring(3, 5);
@@ -154,6 +219,10 @@ public class Utils {
         return new Date(Integer.parseInt(day), Integer.parseInt(month), Integer.parseInt(year));
     }
 
+    /**
+     * Prompts the user to input an address.
+     * @return the input address
+     */
     public static Address requestAddress() {
         Scanner input = new Scanner(System.in);
         System.out.println("\n--Address--\n");
