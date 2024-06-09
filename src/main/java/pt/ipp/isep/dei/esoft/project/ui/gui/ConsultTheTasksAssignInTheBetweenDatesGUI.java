@@ -4,14 +4,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class ConsultTheTasksAssignInTheBetweenDatesGUI {
 
@@ -27,7 +30,7 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
     private Button btnBack;
     @FXML
     public void handleCollaboratorMenu() {
-        handleCollaborator(btnBack);
+        loadUI("/CollaboratorMenuGUI.fxml");
     }
 
     private final AgendaController agendaController = new AgendaController();
@@ -38,7 +41,7 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
         LocalDate endDate = endDatePicker.getValue();
 
         if (initialDate == null || endDate == null) {
-            showAlert("Please select both dates.");
+            showAlert("Error", "Please select both dates.", AlertType.ERROR);
             return;
         }
 
@@ -50,7 +53,7 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
         agendaListView.getItems().clear();
 
         if (entries.isEmpty()) {
-            showAlert("No tasks found between the given dates.");
+            showAlert("No Entries", "No tasks found between the given dates.", AlertType.INFORMATION);
         } else {
             for (Entry entry : entries) {
                 agendaListView.getItems().add(entry.toString());
@@ -58,5 +61,15 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
         }
     }
 
+    private Date convertToDate(LocalDate localDate) {
+        return new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
+    }
 
+    private void showAlert(String title, String message, AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

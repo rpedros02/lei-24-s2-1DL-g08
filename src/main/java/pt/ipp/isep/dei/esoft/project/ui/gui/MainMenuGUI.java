@@ -50,6 +50,8 @@ public class MainMenuGUI {
 
         boolean loginSuccessful = ctrl.doLogin(id, password);
         if (loginSuccessful) {
+            new Alert(Alert.AlertType.INFORMATION);
+            Alert alert;
             List<UserRoleDTO> roles = ctrl.getUserRoles();
             if ((roles == null) || (roles.isEmpty())) {
                 showAlert("No roles found.");
@@ -59,31 +61,43 @@ public class MainMenuGUI {
                 switch (role.getDescription()) {
                     case AuthenticationController.ROLE_HRM:
                         loadHrmMenu();
+
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_VFM:
                         loadVfmMenu();
+
+                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_GSM:
                         loadGsmMenu();
+                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_COLLABORATOR:
                         handleCollaboratorMenu();
+
+                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     case AuthenticationController.ROLE_ADMIN:
                         loadAdminMenu();
+
+                        stage = (Stage) btnDevTeam.getScene().getWindow();
                         stage.close();
                         break;
                     default:
-                        showAlert("Role not recognized.").showAndWait();
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Role not recognized.");
+                        alert.showAndWait();
                         break;
                 }
             }
         } else {
-            showAlert("Login failed. Double-check your credentials.").showAndWait();
+            showAlert("Login failed. Double-check your credentials.");
         }
         txtLoginId.clear();
         txtPassword.clear();
@@ -106,7 +120,9 @@ public class MainMenuGUI {
      * Loads the VFM menu.
      */
     private void loadVfmMenu() {
-        UtilsGUI.handleVFM(btnDevTeam);
+        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
+        loadUI("/VfmGUI.fxml");
+        stage.close();
     }
 
     /**
@@ -123,12 +139,16 @@ public class MainMenuGUI {
      * Loads the GSM menu.
      */
     private void loadGsmMenu() {
-        UtilsGUI.handleGSM(btnDevTeam);
+        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
+        loadUI("/GsmGUI.fxml");
+        stage.close();
     }
 
     @FXML
     public void handleCollaboratorMenu() {
-        UtilsGUI.handleCollaborator(btnDevTeam);
+        Stage stage = (Stage) btnDevTeam.getScene().getWindow();
+        loadUI("/CollaboratorMenuGUI.fxml");
+        stage.close();
     }
 
 }

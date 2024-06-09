@@ -17,7 +17,7 @@ public class VehicleCheckupRepository {
     public Optional<VehicleCheckup> registerVehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
         VehicleCheckup newVehicleCheckup = new VehicleCheckup(plate, date, lastVehicleCheckupKm);
         for (VehicleCheckup existingVehicleCheckup : vehicleCheckups) {
-            if (existingVehicleCheckup.getPlate().equals(plate) && existingVehicleCheckup.getDate().isEqual(date)) {
+            if (existingVehicleCheckup.getPlate().equals(plate) && existingVehicleCheckup.getDate().equals(date)) {
                 return Optional.empty();
             }
         }
@@ -29,3 +29,6 @@ public class VehicleCheckupRepository {
     }
 
 }
+
+
+

@@ -1,4 +1,4 @@
- package mdisc.sprintb;
+package mdisc;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,7 +7,7 @@ public class GNUPlothGraph {
 
     public static void generateGNUPlotGraph(String dataFilePath, String outputFilePath) {
         try {
-            // Create GNUPplot file
+
             File scriptFile = new File("plot_script.gnu");
             FileWriter scriptWriter = new FileWriter(scriptFile);
             scriptWriter.write("set terminal png size 800,600\n");
@@ -21,13 +21,13 @@ public class GNUPlothGraph {
             scriptWriter.write("set yrange [0:*]\n");
             scriptWriter.close();
 
-            // Execution of the GNUPplot script
+
             ProcessBuilder pb = new ProcessBuilder("gnuplot", "plot_script.gnu");
-            pb.directory(new File(System.getProperty("user.dir"))); // Define the working directory
+            pb.directory(new File(System.getProperty("user.dir")));
             Process process = pb.start();
             process.waitFor();
 
-            // Check if the execution was successful
+
             if (process.exitValue() == 0) {
                 System.out.println("Graph generated successfully!");
             } else {
@@ -36,5 +36,9 @@ public class GNUPlothGraph {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+
+
     }
 }
+
+

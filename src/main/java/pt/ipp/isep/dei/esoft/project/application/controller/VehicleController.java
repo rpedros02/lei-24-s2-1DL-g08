@@ -5,9 +5,15 @@ import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
+/**
+ * The controller for handling vehicle-related operations.
+ */
 public class VehicleController {
     private VehicleRepository vehicleRepository;
 
+    /**
+     * Constructs a new VehicleController.
+     */
     public VehicleController() {
         getVehicleRepository();
     }
@@ -15,7 +21,6 @@ public class VehicleController {
     public VehicleRepository getVehicleRepository() {
         if (vehicleRepository == null) {
             Repositories repositories = Repositories.getInstance();
-
             vehicleRepository = repositories.getVehicleRepository();
         }
         return vehicleRepository;
@@ -31,5 +36,4 @@ public class VehicleController {
             return null;
         }
     }
-
 }

@@ -1,10 +1,22 @@
 package pt.ipp.isep.dei.esoft.project.domain;
 
+import java.util.Date;
+
+/**
+ * Represents a vehicle check-up.
+ */
 public class VehicleCheckup {
     private String plate;
     private Date date;
     private int lastVehicleCheckupKm;
 
+    /**
+     * Constructs a new vehicle check-up.
+     *
+     * @param plate              the plate number of the vehicle
+     * @param date               the date of the check-up
+     * @param lastVehicleCheckupKm the last check-up kilometers
+     */
     public VehicleCheckup(String plate, Date date, int lastVehicleCheckupKm) {
         this.plate = plate;
         this.date = date;
@@ -27,11 +39,11 @@ public class VehicleCheckup {
         this.date = date;
     }
 
-    public double getLastVehicleCheckupKm() {
+    public int getLastVehicleCheckupKm() {
         return lastVehicleCheckupKm;
     }
 
-    public void setLastVehicleCheckupKm(int lastCheckUpKm) {
+    public void setLastVehicleCheckupKm(int lastVehicleCheckupKm) {
         this.lastVehicleCheckupKm = lastVehicleCheckupKm;
     }
 }

@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class represents an Entry in the system.
+ * It has several fields including title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task, and assignedTeam.
+ */
 public class Entry {
     private String title;
     private String description;
@@ -20,11 +24,31 @@ public class Entry {
     private Task task;
     private Team assignedTeam;
 
-    // Constructors
+    /**
+     * Constructs an Entry object with the specified title.
+     *
+     * @param title the title of the entry
+     */
     public Entry(String title) {
         this.title = title;
     }
 
+    /**
+     * Constructs an Entry object with the specified title, description, degreeOfUrgency, dateBegin, dateEnd,
+     * status, greenSpace, team, vehicles, and task.
+     * If the entry is not valid, it does not set the fields.
+     *
+     * @param title           the title of the entry
+     * @param description     the description of the entry
+     * @param degreeOfUrgency the degree of urgency of the entry
+     * @param dateBegin       the date of the beginning of the entry
+     * @param dateEnd         the date of the end of the entry
+     * @param status          the status of the entry
+     * @param greenSpace      the green space of the entry
+     * @param team            the team of the entry
+     * @param vehicles        the vehicles of the entry
+     * @param task            the task of the entry
+     */
     public Entry(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd,
                  EStatus status, GreenSpace greenSpace, Team team, List<Vehicle> vehicles, Task task) {
         if (isValid(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, task)) {
@@ -41,6 +65,19 @@ public class Entry {
         }
     }
 
+    /**
+     * Constructs an Entry object with the specified title, description, degreeOfUrgency, dateBegin, dateEnd,
+     * status, and greenSpace.
+     * If the entry is not valid, it throws an IllegalArgumentException.
+     *
+     * @param title                  the title of the entry
+     * @param description            the description of the entry
+     * @param degreeOfUrgency        the degree of urgency of the entry
+     * @param dateBegin              the date of the beginning of the entry
+     * @param dateEnd                the date of the end of the entry
+     * @param status                 the status of the entry
+     * @param greenSpace             the green space of the entry
+     */
     public Entry(String title, String description, DegreeOfUrgency degreeOfUrgencyRepository, Date dateBegin, Date dateEnd,
                  EStatus status, GreenSpace greenSpace) {
         boolean valid = isValid(title, description, degreeOfUrgencyRepository, dateBegin, dateEnd, status, greenSpace, null, null, null);
@@ -59,6 +96,11 @@ public class Entry {
         this.task = null;
     }
 
+    /**
+     * Returns the team assigned to this Entry.
+     *
+     * @return the team assigned to this Entry
+     */
     public Team getAssignedTeam() {
         return assignedTeam;
     }
@@ -165,21 +207,21 @@ public class Entry {
     }
     //END GETTERS AND SETTERS
 
+
     // VALIDATIONS
     /**
-     * @param title           title of the entry
-     * @param description     description of the entry
-     * @param degreeOfUrgency degree of urgency of the entry
-     * @param dateBegin       date of the beginning of the entry
-     * @param dateEnd         date of the end of the entry
-     * @param status          status of the entry
-     * @param greenSpace      green space of the entry
-     * @param team            team of the entry
-     * @param vehicles        vehicles of the entry
-     * @param task            task of the entry
-     *                        <p>
-     *                        Validates the entry
-     *                        <p>
+     * Checks if the specified title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace, team, vehicles, and task form a valid Entry.
+     *
+     * @param title           the title of the entry
+     * @param description     the description of the entry
+     * @param degreeOfUrgency the degree of urgency of the entry
+     * @param dateBegin       the date of the beginning of the entry
+     * @param dateEnd         the date of the end of the entry
+     * @param status          the status of the entry
+     * @param greenSpace      the green space of the entry
+     * @param team            the team of the entry
+     * @param vehicles        the vehicles of the entry
+     * @param task            the task of the entry
      * @return true if the entry is valid, false otherwise
      */
     private boolean isValid(String title, String description, DegreeOfUrgency degreeOfUrgency, Date dateBegin, Date dateEnd,
@@ -195,12 +237,10 @@ public class Entry {
     }
 
     /**
-     * @param title title of the entry
-     *              <p>
-     *              Validates the title of the entry
-     *              <p>
-     *              The title must contain only letters and spaces and have a maximum length of 25 characters
-     *              <p>
+     * Checks if the specified title is valid.
+     * The title must contain only letters and spaces and have a maximum length of 25 characters.
+     *
+     * @param title the title of the entry
      * @return true if the title is valid, false otherwise
      */
     private boolean validateTitle(String title) {
@@ -208,27 +248,22 @@ public class Entry {
     }
 
     /**
-     * @param description description of the entry
-     *                    <p>
-     *                    Validates the description of the entry
-     *                    <p>
-     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
-     *                    <p>
-     *                    The description must contain only letters and spaces and have a maximum length of 255 characters
-     *                    <p>
+     * Checks if the specified description is valid.
+     * The description must contain only letters and spaces and have a maximum length of 255 characters.
+     *
+     * @param description the description of the entry
      * @return true if the description is valid, false otherwise
      */
     private boolean validateDescription(String description) {
         return description != null && description.length() <= 255;
     }
 
+
     /**
-     * @param degreeOfUrgency degree of urgency of the entry
-     *                        <p>
-     *                        Validates the degree of urgency of the entry
-     *                        <p>
-     *                        The degree of urgency must not be null
-     *                        <p>
+     * Checks if the specified degreeOfUrgency is valid.
+     * The degreeOfUrgency must not be null.
+     *
+     * @param degreeOfUrgency the degree of urgency of the entry
      * @return true if the degree of urgency is valid, false otherwise
      */
     private boolean validateDegreeOfUrgency(DegreeOfUrgency degreeOfUrgency) {
@@ -236,12 +271,23 @@ public class Entry {
     }
     // END VALIDATIONS
 
+    /**
+     * Creates and returns a copy of this Entry.
+     *
+     * @return a clone of this instance
+     */
     @Override
     public Entry clone() {
         return new Entry(this.title, this.description, this.degreeOfUrgency, this.dateBegin, this.dateEnd, this.status,
                 this.greenSpace, this.team, this.vehicles, this.task);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -254,11 +300,21 @@ public class Entry {
                 Objects.equals(greenSpace, entry.greenSpace);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return a hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(title, description, degreeOfUrgency, dateBegin, dateEnd, status, greenSpace);
     }
 
+    /**
+     * Postpones the end date of this Entry.
+     *
+     * @param newDate the new end date
+     */
     public void postponeEntry(Date newDate) {
         if (newDate == null) {
             return;
@@ -266,18 +322,24 @@ public class Entry {
         this.dateEnd = newDate;
     }
 
-
-
-
+    /**
+     * Adds a vehicle to this Entry.
+     *
+     * @param vehicle the vehicle to be added
+     */
     public void addVehicle(Vehicle vehicle) {
         if (!vehicles.contains(vehicle)) {
             vehicles.add(vehicle);
         }
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return a string representation of the object
+     */
     @Override
     public String toString() {
         return STR."Entry{title='\{title}', description='\{description}', degreeOfUrgency=\{degreeOfUrgency.toString()}, dateBegin=\{dateBegin.toString()}, dateEnd=\{dateEnd.toString()}, status=\{status.toString()}, greenSpace=\{greenSpace.toString()}}";
     }
 }
-
