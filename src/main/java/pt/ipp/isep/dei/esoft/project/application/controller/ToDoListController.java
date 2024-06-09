@@ -160,4 +160,9 @@ public class ToDoListController {
             return Optional.empty();
         }
     }
+
+    public boolean updateStatus(Entry selectedEntry, EStatus eStatus)
+    {
+        return selectedEntry.updateStatus(eStatus);
+    }
 }

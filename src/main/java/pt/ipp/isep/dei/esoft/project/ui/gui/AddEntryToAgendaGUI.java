@@ -56,23 +56,23 @@ public class AddEntryToAgendaGUI {
         this.organizationRepository = Repositories.getInstance().getOrganizationRepository();
     }
 
-    @FXML
     /**
      * Initializes the user interface.
      * It populates the ComboBox with the titles of the entries from the to-do list.
      */
+    @FXML
     private void initialize() {
-        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(ApplicationSession.getInstance().getCurrentSession().getUserEmail()).getEntriesFromToDoList();
+        List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getEntriesFromToDoList();
         for (Entry entry : toDoListEntries) {
             cbEntries.getItems().add(entry.getTitle());
         }
     }
 
-    @FXML
     /**
      * Handles the action of adding an entry to the agenda.
      * It validates the selected entry and adds it to the agenda if it is valid.
      */
+    @FXML
     private void handleAddEntryToAgenda() {
         Stage stage = (Stage) cbEntries.getScene().getWindow();
         String entryTitle = cbEntries.getValue();

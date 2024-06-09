@@ -126,4 +126,8 @@ public class UtilsGUI {
         loadUI("/CollaboratorMenuGUI.fxml");
         stage.close();
     }
+
+    public static String getLoggedInUserEmail(){
+        return ApplicationSession.getInstance().getCurrentSession().getUserEmail();
+    }
 }

@@ -1,10 +1,8 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
@@ -12,10 +10,8 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 /**
  * This class provides a user interface for generating a team proposal.
@@ -43,14 +39,23 @@ public class GenerateTeamProposalGUI {
     private Button btnBack;
 
     @FXML
+    private CheckBox chbSkills;
+
+
     /**
      * Handles the action of navigating to the HRM user interface.
      * It is triggered when the Back button is clicked.
      */
+    @FXML
     public void handleHrm() {
-        loadUI("/HrmGUI.fxml");
+        handleHRM(btnBack);
     }
 
+    @FXML
+    public void handleReturn() {
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
+    }
     // Controller for generating a team
     private final GenerateTeamController controller;
 
@@ -65,11 +70,11 @@ public class GenerateTeamProposalGUI {
         this.skillsRepository = Repositories.getInstance().getSkillsRepository();
     }
 
-    @FXML
     /**
      * Initializes the user interface.
      * It populates the ComboBox with the names of all skills.
      */
+    @FXML
     private void initialize() {
         List<Skill> skills = skillsRepository.getAllSkills();
         for (Skill skill : skills) {
@@ -77,13 +82,19 @@ public class GenerateTeamProposalGUI {
         }
     }
 
-    @FXML
+    public List<Skill> handleAddSkills() {
+        loadUI("SelectSkills.fxml");
+        return Repositories.getInstance().getSkillsRepository().getAllSkills();
+    }
+
+
     /**
      * Handles the action of generating a team proposal.
-     * It is triggered when the Generate button is clicked.
-     * It validates the entered team sizes and selected skill, generates a team with the specified sizes and skill, and registers the team.
-     * It displays a success message if the team is successfully generated and registered, or an error message if an error occurs.
+     * <p>
+     * It is triggered when the Generate Team Proposal button is clicked.
+     * It reads the minimum and maximum team sizes and the selected skill.
      */
+    @FXML
     private void handleGenerateTeamProposal() {
         try {
             int minTeamSize = Integer.parseInt(txtMinTeamSize.getText());
@@ -100,13 +111,15 @@ public class GenerateTeamProposalGUI {
 
             Team team = controller.generateTeam(minTeamSize, maxTeamSize, teamSkills);
 
-            controller.registerTeam(team);
-
-            lblMessage.setText("Team successfully generated and registered!");
+            if(controller.registerTeam(team)){
+                showSuccess("Team successfully generated and registered.");
+            } else {
+                showAlert("Error generating team.");
+            }
         } catch (NumberFormatException e) {
-            lblMessage.setText("Please enter valid numbers for team sizes.");
+            showAlert("Please enter valid team sizes.");
         } catch (Exception e) {
-            lblMessage.setText("Error generating team: " + e.getMessage());
+            showAlert(e.getMessage());
         }
     }
 }
