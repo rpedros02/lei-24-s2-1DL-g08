@@ -13,7 +13,8 @@ public class Main {
         System.out.println("Choose an option: ");
         System.out.println("1. Calculate the minimum cost tree");
         System.out.println("2. Calculate execution time for multiple files");
-        System.out.println("3. Generate the shortest path for evacuation.");
+        System.out.println("3. Route to the Assembly Poin.");
+        System.out.println("4. Route to the closest Assembly Point");
 
 
         int option = Integer.parseInt(scanner.nextLine());
@@ -23,8 +24,15 @@ public class Main {
             calculateMinimumCostTree(scanner);
         } else if (option == 2) {
             calculateExecutionTimeMultipleFiles(scanner);
-        } else if (option == 3) {
-            calculateShortestPathForEvacuation(scanner);
+
+        } else if (option == 3 || option == 4) {
+            String path;
+
+            if (option == 3) {
+                path = "./src/main/java/mdisc/us17";
+            } else {
+                path = "./src/main/java/mdisc/us18";
+            }
         } else {
 
             System.out.println("Invalid option. The program will terminate.");
@@ -190,7 +198,6 @@ public class Main {
     }
 
 
-
     private static void calculateShortestPathForEvacuation(Scanner scanner) {
         System.out.print("Enter the name of the matrix .csv file: ");
         String matrixFileName = scanner.nextLine();
@@ -214,32 +221,47 @@ public class Main {
             for (Object[] row : csvData) {
                 String startVerticeName = (String) row[0];
                 String endVerticeName = (String) row[1];
-                double arestaWeight = (double) row[2];
+                double cost= (double) row[2];
 
                 grafico.addVertice(startVerticeName);
                 grafico.addVertice(endVerticeName);
-                grafico.addAresta(startVerticeName, endVerticeName, arestaWeight);
+                grafico.addAresta(startVerticeName, endVerticeName, cost);
             }
 
-            List<Pair<Vertice, Vertice>> assemblyPoints = csvReader.readAssemblyPointsCsv(assemblyPointsFileName);
-
-            List<List<Vertice>> shortestPaths = new ArrayList<>();
-            for (Pair<Vertice, Vertice> assemblyPoint : assemblyPoints) {
-                List<Vertice> assemblyPointsList = new ArrayList<>();
-                assemblyPointsList.add(assemblyPoint.getRight());
-                List<Vertice> shortestPath = grafico.shortestPathToNearestAssemblyPoint(assemblyPoint.getLeft(), assemblyPointsList);
-                shortestPaths.add(shortestPath);
-            }
-
-            String shortestPathsFileName = "shortest_paths.csv";
-            csvReader.writePathsCSV(shortestPaths, shortestPathsFileName);
-
-            for (List<Vertice> shortestPath : shortestPaths) {
-                String filename = "shortest_path" + file.getName();
-                GraphPrinter.printShortestPath(shortestPath, filename);
-                String path = "./lei-24-s2-1DL-g08" + filename + ".csv";
-                grafico.graphPng(filename);
-            }
         }
     }
+
+    public static List<File> listFilesInDirectory(String directoryPath) {
+        List<File> fileList = new ArrayList<>();
+
+        File directory = new File(directoryPath);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        fileList.add(file);
+                    }
+                }
+                fileList.sort(Comparator.comparingLong(File::length));
+            }
+        } else {
+            System.err.println("Directory does not exist or is not a directory.");
+        }
+
+        return fileList;
+    }
+
+    public static List<String> getNames(String filename, String path) {
+        CSVReader importer = new CSVReader();
+        List<String> names = new ArrayList<>();
+        try {
+            names = importer.importNames(path + filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return names;
+
+    }
 }
+

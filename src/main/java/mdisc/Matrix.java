@@ -26,7 +26,6 @@ public class Matrix {
         List<DijkstraAlgorithm> dijkstraEntries = new ArrayList<>();
         List<Integer> asterisk = new ArrayList<>();
 
-        //Simulation of the first line of the Dijkstra Algorithm solution
 
         int i = 0;
         for (List<Integer> pointCosts : matrix){
@@ -38,13 +37,10 @@ public class Matrix {
             i++;
         }
 
-        // ---------------------------
-
         int size = i;
         int selectedPoint = startIndex;
         asterisk.add(selectedPoint);
 
-        // Dijkstra's algorithm
 
         for (i = 0; i < size - 1; i++) {
             int minCost = Integer.MAX_VALUE;
@@ -67,7 +63,6 @@ public class Matrix {
                 }
             }
 
-            // Check if minCostIndex is valid
             if (minCostIndex != -1) {
                 asterisk.add(minCostIndex);
                 selectedPoint = minCostIndex;

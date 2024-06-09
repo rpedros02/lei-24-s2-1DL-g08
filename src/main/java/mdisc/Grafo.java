@@ -172,23 +172,6 @@ public class Grafo {
     }
 
 
-    public ArrayList<Vertice> shortestPathToNearestAssemblyPoint(Vertice start, List<Vertice> assemblyPoints) {
-        ArrayList<Vertice> shortestPath = null;
-        double shortestDistance = Double.MAX_VALUE;
-
-        for (Vertice assemblyPoint : assemblyPoints) {
-            HashMap<Vertice, Vertice> previousVertices = dijkstra(start);
-            List<Vertice> path = reconstructPath(previousVertices, assemblyPoint);
-            double distance = calculateDistance(path);
-
-            if (distance < shortestDistance) {
-                shortestDistance = distance;
-                shortestPath = new ArrayList<>(path);
-            }
-        }
-
-        return shortestPath;
-    }
 
     public List<Vertice> reconstructPath(HashMap<Vertice, Vertice> previousVertices, Vertice destination) {
         List<Vertice> path = new ArrayList<>();
@@ -224,6 +207,16 @@ public class Grafo {
             }
         }
         return 0.0;
+    }
+    public void writeCSVFile(String filename) {
+        StringBuilder csvContent = new StringBuilder();
+        float totalCost = 0;
+
+        for (Aresta aresta : this.aresta) {
+            float cost = (float) aresta.getCost();
+            csvContent.append(aresta.getStartVertice().getVertice()).append(";").append(aresta.getEndVertice().getVertice()).append(";").append(cost).append("\n");
+            totalCost += cost;
+        }
     }
 
     public void writeDotFile(String filename) {
