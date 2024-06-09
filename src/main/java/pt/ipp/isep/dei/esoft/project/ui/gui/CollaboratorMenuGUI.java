@@ -23,36 +23,36 @@ public class CollaboratorMenuGUI {
     // Button for navigating to the main menu
     private Button btnMainMenu;
 
-    @FXML
     /**
      * Handles the action of consulting the tasks assigned in the between dates.
      * It is triggered when the Consult The Tasks Assign In The Between Dates button is clicked.
      * It closes the current stage and loads the Consult The Tasks Assign In The Between Dates user interface.
      */
+    @FXML
     public void handleConsultTheTasksAssignInTheBetweenDates() {
         Stage stage = (Stage) btnConsultTheTasksAssignInTheBetweenDates.getScene().getWindow();
         loadUI("/ConsultTheTasksAssignInTheBetweenDatesGUI.fxml");
         stage.close();
     }
 
-    @FXML
     /**
      * Handles the action of recording the completion of a task.
      * It is triggered when the Record The Completion Of Task button is clicked.
      * It closes the current stage and loads the Record The Completion Of Task user interface.
      */
+    @FXML
     public void handleRecordTheCompletionOfTask() {
         Stage stage = (Stage) btnRecordTheCompletionOfTask.getScene().getWindow();
         loadUI("/RecordTheCompletionOfTaskGUI.fxml");
         stage.close();
     }
 
-    @FXML
     /**
      * Handles the action of navigating to the main menu.
      * It is triggered when the Main Menu button is clicked.
      * It closes the current stage and loads the main menu user interface.
      */
+    @FXML
     public void handleMainMenu( ) {
         Stage stage = (Stage) btnMainMenu.getScene().getWindow();
         loadUI(UtilsGUI.getCurrentRoleXml());

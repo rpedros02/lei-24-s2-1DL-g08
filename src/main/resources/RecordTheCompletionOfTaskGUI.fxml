@@ -3,16 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RecordTheCompletionOfTaskGUI">
-   <children>
-      <VBox alignment="CENTER" fillWidth="false" prefHeight="600.0" prefWidth="600.0" spacing="10" style="-fx-background-color: #DDA0DD;">
-          <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="93.0" prefWidth="369.0" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #7B68EE;" text="Record the Completion of a Task" textAlignment="CENTER" />
-      
-          <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Task:" />
-         <ComboBox fx:id="cbEntries" prefHeight="29.0" prefWidth="171.0" style="-fx-font-size: 14;" />
-      
-          <Button onAction="#handleRecordTheCompletionOfTask" style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="Complete Task" />
-          <Button fx:id="btnBack" onAction="#handleCollaborator" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
-      </VBox>
-   </children>
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.RecordTheCompletionOfTaskGUI">
+    <VBox alignment="CENTER" fillWidth="false" prefHeight="600.0" prefWidth="600.0" spacing="10"
+          style="-fx-background-color: #DDA0DD;">
+        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="93.0" prefWidth="369.0"
+               style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #7B68EE;"
+               text="Record the Completion of a Task" textAlignment="CENTER"/>
+
+        <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Task:"/>
+        <ComboBox fx:id="cbEntries" prefHeight="29.0" prefWidth="171.0" style="-fx-font-size: 14;"/>
+
+        <Button onAction="#handleRecordTheCompletionOfTask"
+                style="-fx-background-color: #7B68EE; -fx-text-fill: white; -fx-font-size: 16;" text="Complete Task"/>
+        <Button fx:id="btnBack" onAction="#handleCollaborator"
+                style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE"/>
+    </VBox>
 </AnchorPane>

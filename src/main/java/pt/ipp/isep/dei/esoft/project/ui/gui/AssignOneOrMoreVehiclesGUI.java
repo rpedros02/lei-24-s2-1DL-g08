@@ -8,7 +8,7 @@ import pt.ipp.isep.dei.esoft.project.application.controller.AssignVehicleAgendaC
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.handleGSM;
 
 /**
  * This class provides a user interface for assigning one or more vehicles to an agenda entry.
@@ -27,17 +27,17 @@ public class AssignOneOrMoreVehiclesGUI {
     // Button for going back
     private Button btnBack;
 
-    @FXML
     /**
      * Handles the action of navigating to the GSM user interface.
      * It is triggered when the GSM button is clicked.
      */
+    @FXML
     public void handleGsm() {
-        loadUI("/GsmGUI.fxml");
+       handleGSM(btnBack);
     }
 
     // Controller for assigning vehicles to agenda entries
-    private AssignVehicleAgendaController controller;
+    private final AssignVehicleAgendaController controller;
 
     /**
      * Constructs a new instance of AssignOneOrMoreVehiclesGUI.
@@ -47,21 +47,21 @@ public class AssignOneOrMoreVehiclesGUI {
         controller = new AssignVehicleAgendaController();
     }
 
-    @FXML
     /**
      * Initializes the user interface.
      * It populates the ComboBoxes with the vehicles and agenda entries.
      */
+    @FXML
     public void initialize() {
         cbVehicles.setItems(FXCollections.observableArrayList(controller.getVehicles()));
         cbAgendaEntry.setItems(FXCollections.observableArrayList(controller.getAgenda().getEntries()));
     }
 
-    @FXML
     /**
      * Handles the action of assigning one or more vehicles to an agenda entry.
      * It validates the selected vehicle and agenda entry and assigns the vehicle to the entry if they are valid.
      */
+    @FXML
     private void handleAssignOneOrMoreVehicles() {
         Vehicle selectedVehicle = cbVehicles.getSelectionModel().getSelectedItem();
         Entry selectedEntry = cbAgendaEntry.getSelectionModel().getSelectedItem();

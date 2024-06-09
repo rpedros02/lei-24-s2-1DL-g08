@@ -128,7 +128,7 @@ public class Bootstrap implements Runnable {
 
         Entry entry1 = new Entry("Entry 1", "Description 1", DegreeOfUrgency.HIGH, new Date(12, 6, 2024), new Date(14, 6, 2024), EStatus.PLANNED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 1"));
         Entry entry2 = new Entry("Entry 2", "Description 2", DegreeOfUrgency.MEDIUM, new Date(22, 6, 2024), new Date(27, 6, 2024), EStatus.PLANNED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 2"));
-        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgency.LOW, new Date(25, 6, 2024), new Date(14, 7, 2024), EStatus.FINISHED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"));
+        Entry entry3 = new Entry("Entry 3", "Description 3", DegreeOfUrgency.LOW, new Date(25, 6, 2024), new Date(14, 7, 2024), EStatus.PLANNED, greenSpaceRepository.getGreenSpaceByName("GreenSpace 3"));
 
         ToDoList toDoList = toDoListRepository.getToDoList();
         toDoList.addEntry(entry1);
