@@ -8,9 +8,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.session.ApplicationSession;
+import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.isep.lei.esoft.auth.domain.model.UserRole;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * This class provides utility methods for the GUI.
@@ -129,5 +131,16 @@ public class UtilsGUI {
 
     public static String getLoggedInUserEmail(){
         return ApplicationSession.getInstance().getCurrentSession().getUserEmail();
+    }
+
+    /**
+     * @param localDate the local date to be converted
+     *                  <p>
+     *                  Converts a local date to a date
+     *                  <p>
+     * @return the date
+     */
+    public static Date convertToDate(LocalDate localDate) {
+        return new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
     }
 }

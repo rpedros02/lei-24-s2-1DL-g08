@@ -29,11 +29,11 @@ public class AssignSkillsToCollaboratorGUI {
     // Controller for assigning skills
     private final AssignSkillController controller;
 
-    @FXML
     /**
      * Handles the action of returning to the previous user interface.
      * It is triggered when the Back button is clicked.
      */
+    @FXML
     public void handleReturn() {
         UtilsGUI.handleHRM(btnBack);
     }
@@ -46,11 +46,11 @@ public class AssignSkillsToCollaboratorGUI {
         this.controller = new AssignSkillController();
     }
 
-    @FXML
     /**
      * Initializes the user interface.
      * It populates the ComboBoxes with the collaborators and skills.
      */
+    @FXML
     public void initialize() {
         List<Collaborator> collaborators = controller.getCollabortorList();
         for ( Collaborator collaborator : collaborators
@@ -64,11 +64,11 @@ public class AssignSkillsToCollaboratorGUI {
         }
     }
 
-    @FXML
     /**
      * Handles the action of assigning skills to a collaborator.
      * It validates the selected collaborator and skill and assigns the skill to the collaborator if they are valid.
      */
+    @FXML
     private void handleAssignSkillsToCollaborator() {
 
         Collaborator selectedCollaborator = controller.getCollaboratorByEmail(cbCollaborator.getValue().split(" - ")[1].trim());

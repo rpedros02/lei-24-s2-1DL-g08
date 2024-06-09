@@ -16,6 +16,7 @@ import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
 
 /**
  * The GUI for adding an entry to the agenda.
@@ -64,7 +65,9 @@ public class AddEntryToAgendaGUI {
     private void initialize() {
         List<Entry> toDoListEntries = organizationRepository.getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getEntriesFromToDoList();
         for (Entry entry : toDoListEntries) {
-            cbEntries.getItems().add(entry.getTitle());
+            if (!entry.getStatus().toString().equals("Canceled")) {
+                cbEntries.getItems().add(entry.getTitle());
+            }
         }
     }
 
@@ -77,45 +80,32 @@ public class AddEntryToAgendaGUI {
         Stage stage = (Stage) cbEntries.getScene().getWindow();
         String entryTitle = cbEntries.getValue();
         if (entryTitle == null || entryTitle.isEmpty()) {
-            showAlert(AlertType.ERROR, "Error", "Please select an entry.");
+            showAlert("Please select an entry.");
             return;
         }
 
         Entry entry = toDoListController.getToDoListEntry(entryTitle);
         if (entry == null) {
-            showAlert(AlertType.ERROR, "Error", "Entry not found in the To-Do List.");
+            showAlert("Entry not found in the To-Do List.");
             return;
         }
 
         if (agendaController.exists(entryTitle)) {
-            showAlert(AlertType.WARNING, "Warning", "Entry already exists in the Agenda.");
+            showAlert("Entry already exists in the Agenda.");
             return;
         }
 
         if (entry.getGreenSpace().isManagedByGSM()) {
             boolean success = agendaController.addEntry(entry);
             if (success) {
-                showAlert(AlertType.INFORMATION, "Success", "Entry added to the Agenda successfully.");
+                showAlert("Entry added to the Agenda successfully.");
             } else {
-                showAlert(AlertType.ERROR, "Error", "Failed to add entry to the Agenda.");
+                showAlert("Failed to add entry to the Agenda.");
             }
         } else {
-            showAlert(AlertType.WARNING, "Warning", "Entry is not associated with a green space managed by the GSM.");
+            showAlert("Entry is not associated with a green space managed by the GSM.");
         }
         stage.close();
     }
 
-    /**
-     * Displays an alert with the specified type, title, and message.
-     * @param alertType the type of the alert
-     * @param title the title of the alert
-     * @param message the message of the alert
-     */
-    private void showAlert(AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

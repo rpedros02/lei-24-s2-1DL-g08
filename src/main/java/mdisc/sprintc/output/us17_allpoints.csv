@@ -1,17 +1,17 @@
-Fontaine,Miradouro,Topo,AP;20
-ParqueInfantil,Topo,AP;16
-Capela,Topo,AP;13
-Torreao,Miradouro,Topo,AP;21
-CasaRoseiral,Escadas2,Escadas1,AP;17
-Miradouro,Topo,AP;12
-Biblioteca,AP;10
-Sentimentos,Escadas2,Escadas1,AP;20
-Escadas1,AP;10
-Teatro,AP;7
-JardimRoseiral,Escadas2,Escadas1,AP;16
-Macieirinha,ParqueInfantil,Topo,AP;26
-Lago,AP;9
-Escadas3,Escadas2,Escadas1,AP;18
-Escadas2,Escadas1,AP;13
-Topo,AP;9
-Pavilhao,AP;5
+(Vertex: Fontaine, Vertex: Miradouro, Vertex: Topo, Vertex: AP); Cost: 20
+(Vertex: ParqueInfantil, Vertex: Topo, Vertex: AP); Cost: 16
+(Vertex: Capela, Vertex: Topo, Vertex: AP); Cost: 13
+(Vertex: Torreao, Vertex: Miradouro, Vertex: Topo, Vertex: AP); Cost: 21
+(Vertex: CasaRoseiral, Vertex: Escadas2, Vertex: Escadas1, Vertex: AP); Cost: 17
+(Vertex: Miradouro, Vertex: Topo, Vertex: AP); Cost: 12
+(Vertex: Biblioteca, Vertex: AP); Cost: 10
+(Vertex: Sentimentos, Vertex: Escadas2, Vertex: Escadas1, Vertex: AP); Cost: 20
+(Vertex: Escadas1, Vertex: AP); Cost: 10
+(Vertex: Teatro, Vertex: AP); Cost: 7
+(Vertex: JardimRoseiral, Vertex: Escadas2, Vertex: Escadas1, Vertex: AP); Cost: 16
+(Vertex: Macieirinha, Vertex: ParqueInfantil, Vertex: Topo, Vertex: AP); Cost: 26
+(Vertex: Lago, Vertex: AP); Cost: 9
+(Vertex: Escadas3, Vertex: Escadas2, Vertex: Escadas1, Vertex: AP); Cost: 18
+(Vertex: Escadas2, Vertex: Escadas1, Vertex: AP); Cost: 13
+(Vertex: Topo, Vertex: AP); Cost: 9
+(Vertex: Pavilhao, Vertex: AP); Cost: 5

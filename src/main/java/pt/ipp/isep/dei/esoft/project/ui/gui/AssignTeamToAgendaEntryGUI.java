@@ -17,7 +17,7 @@ import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 /**
  * This class provides a user interface for assigning a team to an entry.
  */
-public class AssignTeamToAgendaEntryGUI {
+public class AssignTeamToEntryGUI {
 
     @FXML
     // TextField for inputting the entry title
@@ -48,19 +48,19 @@ public class AssignTeamToAgendaEntryGUI {
      * Constructs a new instance of AssignTeamToEntryGUI.
      * It initializes the controllers and the email service.
      */
-    public AssignTeamToAgendaEntryGUI() {
+    public AssignTeamToEntryGUI() {
         this.toDoListController = new ToDoListController();
         this.agendaController = new AgendaController();
         this.emailService = EmailServiceController.createEmailServiceFromConfig();
     }
 
-    @FXML
     /**
      * Handles the action of assigning a team to an entry.
      * It validates the input data and assigns the team to the entry if it is valid.
      * It also sends a notification to the team members.
      */
-    private void handleAssignTeamToAgendaEntry() {
+    @FXML
+    private void handleAssignTeam() {
         String entryTitle = entryTitleTextField.getText();
         if (entryTitle == null || entryTitle.isEmpty()) {
             showAlert(AlertType.ERROR, "Error", "Please enter the title of the entry.");

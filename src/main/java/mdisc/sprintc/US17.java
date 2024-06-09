@@ -1,18 +1,21 @@
 package mdisc.sprintc;
+import mdisc.sprintb.GNUPlothGraph;
+import mdisc.sprintb.GraphPrinter;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class US17 {
 
-    public static class Path {
+    public static class Way {
         private final List<String> points;
         private final int distance;
 
-        public Path(List<String> points, int distance) {
+        public Way(List<String> points, int distance) {
             this.points = points;
             this.distance = distance;
         }
@@ -29,6 +32,7 @@ public class US17 {
     private static final String DELIMITER = ";";
     private static final String OUTPUT_FORMAT = "%s;%d%n";
 
+
     public void main(String[] args) throws IOException {
 
         String pointsFile = "src/main/java/mdisc/sprintc/datasets/us17_points_names.csv";
@@ -41,23 +45,24 @@ public class US17 {
 
         String userPoint = getUserInput();
         if (points.contains(userPoint)) {
-            Path shortestPath = calculateShortestPath(points, matrix, userPoint, endPoint);
-            writeShortestPath("src/main/java/mdisc/sprintc/output/us17_output.csv", userPoint, shortestPath);
+            Way shortestWay = calculateShortestWay(points, matrix, userPoint, endPoint);
+            writeShortestWay("src/main/java/mdisc/sprintc/output/us17_output.csv", userPoint, shortestWay);
         } else {
             System.out.println("The point you entered does not exist.");
         }
 
-        Map<String, Path> shortestPaths = new HashMap<>();
+        Map<String, Way> shortestWays = new HashMap<>();
         for (String startPoint : points) {
             if (!startPoint.equals(endPoint)) {
-                shortestPaths.put(startPoint, calculateShortestPath(points, matrix, startPoint, endPoint));
+                shortestWays.put(startPoint, calculateShortestWay(points, matrix, startPoint, endPoint));
             }
         }
-        writeShortestPaths(outputFile, shortestPaths);
+        writeShortestWays(outputFile, shortestWays);
+
     }
 
 
-    private Path calculateShortestPath(List<String> points, int[][] matrix, String start, String end) {
+    private Way calculateShortestWay(List<String> points, int[][] matrix, String start, String end) {
         int size = points.size();
         int startIndex = points.indexOf(start);
         int endIndex = points.indexOf(end);
@@ -88,17 +93,21 @@ public class US17 {
 
         int totalDistance = distances[endIndex];
 
-        return new Path(path, totalDistance);
+        return new Way(path, totalDistance);
     }
 
-    private static void writeShortestPaths(String filename, Map<String, Path> shortestPaths) throws IOException {
+
+    private static void writeShortestWays(String filename, Map<String, Way> shortestWays) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
-            for (Map.Entry<String, Path> entry : shortestPaths.entrySet()) {
-                String path = String.join(",", entry.getValue().getPoints());
-                writer.write(String.format(OUTPUT_FORMAT, path, entry.getValue().getDistance()));
+            for (Map.Entry<String, Way> entry : shortestWays.entrySet()) {
+                String path = entry.getValue().getPoints().stream()
+                        .map(point -> "Vertex: " + point)
+                        .collect(Collectors.joining(", "));
+                writer.write(String.format("(%s); Cost: %d%n", path, entry.getValue().getDistance()));
             }
         }
     }
+
 
     private static List<String> readPoints(String filename) throws IOException {
         String content = Files.readString(Paths.get(filename));
@@ -142,11 +151,17 @@ public class US17 {
         return scanner.nextLine();
     }
 
-    private void writeShortestPath(String filename, String point, Path shortestPath) throws IOException {
+    private void writeShortestWay(String filename, String point, Way shortestWay) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
-            String path = String.join(",", shortestPath.getPoints());
-            writer.write(String.format(OUTPUT_FORMAT, path, shortestPath.getDistance()));
+            String path = shortestWay.getPoints().stream()
+                    .map(p -> "Vertex: " + p)
+                    .collect(Collectors.joining(", "));
+            writer.write(String.format("(%s); Cost: %d%n", path, shortestWay.getDistance()));
         }
+    }
+
+    private static List<String> readData(String filename) throws IOException {
+        return Files.readAllLines(Paths.get(filename));
     }
 
 }
