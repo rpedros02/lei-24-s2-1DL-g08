@@ -13,7 +13,8 @@ public class Main {
         System.out.println("Choose an option: ");
         System.out.println("1. Calculate the minimum cost tree");
         System.out.println("2. Calculate execution time for multiple files");
-        System.out.println("3. Generate the shortest path for evacuation.");
+        System.out.println("3. Route to the Assembly Poin.");
+        System.out.println("4. Route to the closest Assembly Point");
 
 
         int option = Integer.parseInt(scanner.nextLine());
@@ -23,8 +24,15 @@ public class Main {
             calculateMinimumCostTree(scanner);
         } else if (option == 2) {
             calculateExecutionTimeMultipleFiles(scanner);
-        } else if (option == 3) {
-            calculateShortestPathForEvacuation(scanner);
+
+        } else if (option == 3 || option == 4) {
+            String path;
+
+            if (option == 3) {
+                path = "./src/main/java/mdisc/us17";
+            } else {
+                path = "./src/main/java/mdisc/us18";
+            }
         } else {
 
             System.out.println("Invalid option. The program will terminate.");
@@ -183,11 +191,12 @@ public class Main {
 
         gp.addln("label=\"Cost of a minimum spanning tree = " + minimumCost + "\";");
         for (Aresta aresta : arestas) {
-            gp.addln(aresta.getStart() + " -- " + aresta.getEnd() + "[label=" + aresta.getWeight() + "]");
+            gp.addln(aresta.getStartVertice() + " -- " + aresta.getEndVertice() + "[label=" + aresta.getCost() + "]");
         }
 
         gp.print();
     }
+
 
     private static void calculateShortestPathForEvacuation(Scanner scanner) {
         System.out.print("Enter the name of the matrix .csv file: ");
@@ -197,6 +206,8 @@ public class Main {
         String assemblyPointsFileName = scanner.nextLine();
 
         List<File> files = searchFilesByBaseName(matrixFileName);
+
+        System.out.printf(matrixFileName);
         if (files.isEmpty()) {
             System.out.println("No files found with the provided base name.");
             return;
@@ -206,33 +217,51 @@ public class Main {
         for (File file : files) {
             ArrayList<Object[]> csvData = csvReader.readCsv(file.getPath());
 
-            Grafo graph = new Grafo();
+            Grafo grafico = new Grafo();
             for (Object[] row : csvData) {
                 String startVerticeName = (String) row[0];
                 String endVerticeName = (String) row[1];
-                double arestaWeight = (double) row[2];
+                double cost= (double) row[2];
 
-                graph.addVertice(startVerticeName);
-                graph.addVertice(endVerticeName);
-                graph.addAresta(startVerticeName, endVerticeName, arestaWeight);
+                grafico.addVertice(startVerticeName);
+                grafico.addVertice(endVerticeName);
+                grafico.addAresta(startVerticeName, endVerticeName, cost);
             }
 
-            List<Pair<Vertice, Vertice>> assemblyPoints = csvReader.readAssemblyPointsCsv(assemblyPointsFileName);
-
-            List<List<Vertice>> shortestPaths = new ArrayList<>();
-            for (Pair<Vertice, Vertice> assemblyPoint : assemblyPoints) {
-                List<Vertice> assemblyPointsList = new ArrayList<>();
-                assemblyPointsList.add(assemblyPoint.getRight());
-                List<Vertice> shortestPath = graph.shortestPathToNearestAssemblyPoint(assemblyPoint.getLeft(), assemblyPointsList);
-                shortestPaths.add(shortestPath);
-            }
-
-            String shortestPathsFileName = "shortest_paths.csv";
-            csvReader.writePathsCSV(shortestPaths, shortestPathsFileName);
-
-            for (List<Vertice> shortestPath : shortestPaths) {
-                GraphPrinter.printShortestPath(shortestPath, "shortest_path_" + file.getName());
-            }
         }
     }
+
+    public static List<File> listFilesInDirectory(String directoryPath) {
+        List<File> fileList = new ArrayList<>();
+
+        File directory = new File(directoryPath);
+        if (directory.exists() && directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        fileList.add(file);
+                    }
+                }
+                fileList.sort(Comparator.comparingLong(File::length));
+            }
+        } else {
+            System.err.println("Directory does not exist or is not a directory.");
+        }
+
+        return fileList;
+    }
+
+    public static List<String> getNames(String filename, String path) {
+        CSVReader importer = new CSVReader();
+        List<String> names = new ArrayList<>();
+        try {
+            names = importer.importNames(path + filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return names;
+
+    }
 }
+

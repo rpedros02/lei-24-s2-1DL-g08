@@ -45,15 +45,55 @@ public class CSVReader {
         return data;
     }
 
+    public List<Aresta> importEdges(String csvFilePath) throws FileNotFoundException {
+        List<Aresta> arestas = new ArrayList<>();
+        File file = new File(csvFilePath);
+        Scanner scanner = new Scanner(file);
+
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] column = line.split(";");
+            String startVertice1 = column[0];
+            String endVertice2 = column[1];
+            Float cost = Float.parseFloat(column[2]);
+
+            Vertice startVertice = new Vertice(startVertice1);
+            Vertice endVertice = new Vertice(endVertice2);
+            Aresta aresta = new Aresta(startVertice, endVertice, cost);
+            arestas.add(aresta);
+        }
+
+        scanner.close();
+        return arestas;
+    }
+
+
+    public List<String> importNames(String csvFilePath) throws FileNotFoundException {
+        List<String> rowData = new ArrayList<>();
+        File file = new File(csvFilePath);
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] columns = line.split(";");
+
+            for (String column : columns) {
+                rowData.add(column.trim());
+            }
+        }
+
+        scanner.close();
+        return rowData;
+    }
+
     public static void writeCSV(ArrayList<Aresta> tree, String fileName, double minimumCost) {
         try (FileWriter writer = new FileWriter(fileName)) {
 
 
             for (Aresta aresta : tree) {
-                writer.append(aresta.getStart() + ";" + aresta.getEnd() + ";" + aresta.getWeight() + "\n");
+                writer.append(aresta.getStartVertice() + ";" + aresta.getEndVertice() + ";" + aresta.getCost() + "\n");
             }
 
-            // Write a line with the minimum cost of the minimum spanning tree
             writer.write("\nCost of a minimum spanning tree = " + minimumCost);
 
             System.out.println("CSV file generated successfully!");
@@ -62,21 +102,32 @@ public class CSVReader {
         }
     }
 
-    public List<Pair<Vertice, Vertice>> readAssemblyPointsCsv(String fileName) {
-        List<Pair<Vertice, Vertice>> assemblyPoints = new ArrayList<>();
+    public Matrix importMatrix(String csvFilePath) throws FileNotFoundException {
+        Matrix matrix = new Matrix();
+        File file = new File(csvFilePath);
+        Scanner scanner = new Scanner(file);
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] fields = line.split(";");
-                assemblyPoints.add(new Pair<>(new Vertice(fields[0]), new Vertice(fields[1])));
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+
+            line = line.replaceAll("^[^0-9]+", "");
+
+            String[] values = line.split(";");
+            List<Integer> row = new ArrayList<>();
+            for (String value : values) {
+                try {
+                    row.add(Integer.parseInt(value.trim()));
+                } catch (NumberFormatException e) {
+                    System.err.println("Skipping invalid number: " + value);
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            matrix.add(row);
         }
 
-        return assemblyPoints;
+        scanner.close();
+        return matrix;
     }
+
 
 
     public static void writePathsCSV(List<List<Vertice>> paths, String fileName) {
@@ -84,7 +135,7 @@ public class CSVReader {
 
             for (List<Vertice> path : paths) {
                 for (int i = 0; i < path.size(); i++) {
-                    writer.append(path.get(i).getName());
+                    writer.append(path.get(i).getVertice());
                     if (i < path.size() - 1) {
                         writer.append(";");
                     }

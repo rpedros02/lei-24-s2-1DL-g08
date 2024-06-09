@@ -13,13 +13,13 @@ public class JobRepository {
         jobs = new ArrayList<>();
     }
 
-    public Optional<Job> getJobsByDescription(String jobDescription) {
+    public Job getJobByName(String jobDescription) {
         for (Job job : jobs) {
             if (job.getNameOfJob().equals(jobDescription)) {
-                return Optional.of(job);
+                return job;
             }
         }
-        return Optional.empty();
+        return null;
     }
 
     public Optional<Job> add(String nameOfJob) {

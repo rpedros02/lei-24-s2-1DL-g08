@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
 import pt.ipp.isep.dei.esoft.project.application.controller.SkillController;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.handleHRM;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.showAlert;
 
 public class RegisterSkillGUI {
 
@@ -16,17 +16,17 @@ public class RegisterSkillGUI {
 
     @FXML
     private TextField txtSkillName;
-
     @FXML
     private Label lblMessage;
     @FXML
     private Button btnBack;
-    @FXML
-    public void handleHrm() {
-        loadUI("/HrmGUI.fxml");
-    }
 
     private final SkillController controller = new SkillController();
+
+    @FXML
+    public void handleReturn() {
+        handleHRM(btnBack);
+    }
 
     @FXML
     private void handleRegisterSkill() {
@@ -53,11 +53,4 @@ public class RegisterSkillGUI {
         }
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

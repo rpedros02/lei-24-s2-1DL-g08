@@ -9,6 +9,12 @@ import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 public class CollaboratorMenuGUI {
 
     @FXML
+    private Button btnConsultTheTasksAssignInTheBetweenDates;
+
+    @FXML
+    private Button btnRecordTheCompletionOfTask;
+
+    @FXML
     private Button btnMainMenu;
 
     /**
@@ -16,7 +22,9 @@ public class CollaboratorMenuGUI {
      */
     @FXML
     public void handleConsultTheTasksAssignInTheBetweenDates() {
+        Stage stage = (Stage) btnConsultTheTasksAssignInTheBetweenDates.getScene().getWindow();
         loadUI("/ConsultTheTasksAssignInTheBetweenDatesGUI.fxml");
+        stage.close();
     }
 
     /**
@@ -24,7 +32,9 @@ public class CollaboratorMenuGUI {
      */
     @FXML
     public void handleRecordTheCompletionOfTask() {
+        Stage stage = (Stage) btnRecordTheCompletionOfTask.getScene().getWindow();
         loadUI("/RecordTheCompletionOfTaskGUI.fxml");
+        stage.close();
     }
 
 

@@ -7,18 +7,19 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pt.ipp.isep.dei.esoft.project.application.controller.CreateCollaboratorController;
+import pt.ipp.isep.dei.esoft.project.domain.Address;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
+import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
+import pt.ipp.isep.dei.esoft.project.domain.Job;
 import pt.ipp.isep.dei.esoft.project.domain.Task;
 import pt.ipp.isep.dei.esoft.project.repository.JobRepository;
-import pt.ipp.isep.dei.esoft.project.domain.Address;
-import pt.ipp.isep.dei.esoft.project.domain.Job;
-import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 public class RegisterCollaboratorGUI {
 
@@ -49,39 +50,42 @@ public class RegisterCollaboratorGUI {
     @FXML
     private TextField txtDistrict;
     @FXML
-    private TextField txtTask;
-    @FXML
-    private ComboBox<Job> cbJob;
+    private ComboBox<String> cbJob;
     @FXML
     private Button btnBack;
+
+    private final CreateCollaboratorController createCollaboratorController;
+
+    private final JobRepository jobRepository;
+
     @FXML
-    public void handleHrm() {
-        loadUI("/HrmGUI.fxml");
+    public void handleReturn() {
+        UtilsGUI.handleHRM(btnBack);
     }
 
 
-    private CreateCollaboratorController createCollaboratorController;
-    private JobRepository jobRepository;
-
     public RegisterCollaboratorGUI() {
         this.createCollaboratorController = new CreateCollaboratorController();
-        this.jobRepository = new JobRepository();
+        this.jobRepository = Repositories.getInstance().getJobRepository();
     }
 
     @FXML
     public void initialize() {
         cbIdType.getItems().addAll(IdDocType.values());
-        cbJob.getItems().addAll(jobRepository.getJobs());
+        List<Job> jobs = jobRepository.getJobs();
+        if(jobs.isEmpty()) {
+            showAlert("There are no jobs registered. Please register a job before registering a collaborator.").showAndWait();
+            handleHRM(btnBack);
+        }
+        for (Job job : jobs) {
+            cbJob.getItems().add(job.getNameOfJob());
+        }
     }
 
     @FXML
     public void handleRegisterCollaborator() {
-        if (txtName.getText().isEmpty() || txtBirthDate.getText().isEmpty() || txtAdmissionDate.getText().isEmpty() || txtMobileNumber.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTaxPayerNumber.getText().isEmpty() || cbIdType.getValue() == null || txtIdNumber.getText().isEmpty() ||  txtStreet.getText().isEmpty() || txtStreetNumber.getText().isEmpty() ||txtPostalCode.getText().isEmpty() || txtCity.getText().isEmpty() ||  txtDistrict.getText().isEmpty() ||cbJob.getValue() == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("All fields must be filled");
-            alert.showAndWait();
+        if (txtName.getText().isEmpty() || txtBirthDate.getText().isEmpty() || txtAdmissionDate.getText().isEmpty() || txtMobileNumber.getText().isEmpty() || txtEmail.getText().isEmpty() || txtTaxPayerNumber.getText().isEmpty() || cbIdType.getValue() == null || txtIdNumber.getText().isEmpty() || txtStreet.getText().isEmpty() || txtStreetNumber.getText().isEmpty() || txtPostalCode.getText().isEmpty() || txtCity.getText().isEmpty() || txtDistrict.getText().isEmpty() || cbJob.getValue() == null) {
+            UtilsGUI.showAlert("All fields are mandatory.").showAndWait();
             return;
         }
 
@@ -89,11 +93,7 @@ public class RegisterCollaboratorGUI {
         String idNumber = txtIdNumber.getText();
 
         if (createCollaboratorController.getCollaborator(idNumber) != null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("A Collaborator with this ID number already exists.");
-            alert.showAndWait();
+            UtilsGUI.showAlert("A collaborator with the same ID already exists. Please enter a different ID.").showAndWait();
             return;
         }
 
@@ -102,22 +102,14 @@ public class RegisterCollaboratorGUI {
         Date admissionDate;
         try {
             birthDate = Utils.dateFromString(txtBirthDate.getText());
-            admissionDate = Utils.dateFromString(txtBirthDate.getText());
+            admissionDate = Utils.dateFromString(txtAdmissionDate.getText());
         } catch (DateTimeParseException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid date format. Please enter the date in the format yyyy-mm-dd.");
-            alert.showAndWait();
+            UtilsGUI.showAlert("Invalid date format. Please enter the date in the format yyyy-mm-dd.").showAndWait();
             return;
         }
 
-        if (!admissionDate.isAfter(birthDate.plusYears(16))){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Admission date must be at least 16 years after birth date. Please enter a valid admission date.");
-            alert.showAndWait();
+        if (!admissionDate.isAfter(birthDate.plusYears(18))) {
+            UtilsGUI.showAlert("Admission date must be at least 18 years after birth date. Please enter a valid admission date.").showAndWait();
             return;
         }
 
@@ -125,11 +117,8 @@ public class RegisterCollaboratorGUI {
         int streetNumber = Integer.parseInt(txtStreetNumber.getText());
         String postalCode = txtPostalCode.getText();
         if (!postalCode.matches("[0-9]{4}-[0-9]{3}")) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid zip code. It should be in the format ´0000-000`.");
-            alert.showAndWait();
+            UtilsGUI.showAlert("Invalid zip code. It should be in the format ´0000-000`.").showAndWait();
+
             return;
         }
         String city = txtCity.getText();
@@ -138,25 +127,21 @@ public class RegisterCollaboratorGUI {
         int mobileNumber = Integer.parseInt(txtMobileNumber.getText());
         String email = txtEmail.getText();
         int taxPayerNumber = Integer.parseInt(txtTaxPayerNumber.getText());
-        Job job = cbJob.getValue();
+        Job job =  jobRepository.getJobByName(cbJob.getValue());
         Task task = new Task();
 
-        if (createCollaboratorController.createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber,idDocType, idNumber,address, job, task) != null) {
+        if (createCollaboratorController.createCollaborator(name, birthDate, admissionDate, mobileNumber, email, taxPayerNumber, idDocType, idNumber, address, job, task).isPresent()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");
             alert.setHeaderText(null);
             alert.setContentText("Collaborator registered successfully");
             alert.showAndWait();
 
-            // Close the current stage
             Stage stage = (Stage) cbIdType.getScene().getWindow();
+            loadUI("/HrmGUI.fxml");
             stage.close();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Collaborator not registered");
-            alert.showAndWait();
+            UtilsGUI.showAlert("An error occurred while registering the collaborator. Please try again.").showAndWait();
         }
     }
 }
