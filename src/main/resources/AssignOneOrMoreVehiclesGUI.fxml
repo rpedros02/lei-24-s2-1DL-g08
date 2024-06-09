@@ -5,15 +5,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="356.0" prefWidth="445.0" spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignOneOrMoreVehiclesGUI">
-    <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;" text="GSM: Assign Vehicles To Entry" textAlignment="CENTER" />
+<VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="356.0" prefWidth="445.0"
+      spacing="10" style="-fx-background-color: #93DB70;" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="pt.ipp.isep.dei.esoft.project.ui.gui.AssignOneOrMoreVehiclesGUI">
+    <Label alignment="CENTER" contentDisplay="CENTER"
+           style="-fx-font-weight: bold; -fx-font-size: 24; -fx-text-fill: #215E21;"
+           text="GSM: Assign Vehicles To Entry" textAlignment="CENTER"/>
 
-    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Vehicle:" />
-    <ComboBox fx:id="cbVehicles" prefHeight="29.0" prefWidth="170.0" style="-fx-font-size: 14;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select a Vehicle:"/>
+    <ComboBox fx:id="cbVehicles" prefHeight="29.0" prefWidth="170.0" style="-fx-font-size: 14;"/>
 
-    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select an Agenda Entry:" />
-    <ComboBox fx:id="cbAgendaEntry" prefHeight="29.0" prefWidth="168.0" style="-fx-font-size: 14;" />
+    <Label style="-fx-font-size: 16; -fx-text-fill: #333;" text="Select an Agenda Entry:"/>
+    <ComboBox fx:id="cbAgendaEntry" prefHeight="29.0" prefWidth="168.0" style="-fx-font-size: 14;"/>
 
-    <Button onAction="#handleAssignOneOrMoreVehicles" style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Assign Vehicle" />
-    <Button fx:id="btnBack" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
+    <Button onAction="#handleAssignOneOrMoreVehicles"
+            style="-fx-background-color: #215E21; -fx-text-fill: white; -fx-font-size: 16;" text="Assign Vehicle"/>
+    <Button fx:id="btnBack" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;"
+            text="Back" textFill="WHITE"/>
 </VBox>
