@@ -1,17 +1,13 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleCheckupController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 
-import java.time.LocalDate;
-
-import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
 /**
  * This class provides a user interface for registering a vehicle checkup.
@@ -24,28 +20,24 @@ public class RegisterVehicleCheckupGUI {
 
     @FXML
     // DatePicker for selecting the checkup's register date
-    private DatePicker dpRegisterDate1;
+    private DatePicker dpRegisterDate;
 
     @FXML
     // TextField for entering the last vehicle checkup's kilometer count
     private TextField txtLastVehicleCheckUpKm;
 
     @FXML
-    // Label for displaying messages
-    private Label lblMessage;
-
-    @FXML
     // Button for going back to the previous user interface
     private Button btnBack;
 
-    @FXML
     /**
      * Handles the action of returning to the Vfm user interface.
      * It is triggered when the Back button is clicked.
      * It closes the current stage and loads the VfmGUI.
      */
+    @FXML
     public void handleVfm() {
-        loadUI("/VfmGUI.fxml");
+        handleVFM(btnBack);
     }
 
     // Controller for managing vehicle checkups
@@ -58,24 +50,23 @@ public class RegisterVehicleCheckupGUI {
         this.controller = new VehicleCheckupController();
     }
 
-    @FXML
     /**
      * Handles the action of registering a vehicle checkup.
      * It is triggered when the corresponding button is clicked.
      * It validates the input, creates a vehicle checkup if the input is valid, and displays a message indicating the result.
      */
-    private void handleRegisterVehicleCheckup(ActionEvent event) {
+    @FXML
+    private void handleRegisterVehicleCheckup() {
         String plateId = txtPlateId.getText();
-        LocalDate localDate = dpRegisterDate1.getValue();
-        Date date = new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
+        Date date = convertToDate(dpRegisterDate.getValue());
         int lastVehicleCheckUpKm = Integer.parseInt(txtLastVehicleCheckUpKm.getText());
 
         boolean success = controller.registerVehicleCheckup(plateId, date, lastVehicleCheckUpKm);
 
         if (success) {
-            lblMessage.setText("Check-Up registered successfully!");
+            showSuccess("Check-Up registered successfully.").showAndWait();
         } else {
-            lblMessage.setText("Failed to register Check-Up. Please try again.");
+            showAlert("An error occurred while registering the check-up.").showAndWait();
         }
     }
 }

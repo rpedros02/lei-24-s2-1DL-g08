@@ -1,14 +1,16 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.GenerateTeamController;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 import pt.ipp.isep.dei.esoft.project.domain.Team;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
@@ -28,19 +30,11 @@ public class GenerateTeamProposalGUI {
 
     @FXML
     // ComboBox for selecting the type of skill
-    private ComboBox<String> cbType;
-
-    @FXML
-    // Label for displaying messages
-    private Label lblMessage;
+    private ComboBox<String> cbSkills;
 
     @FXML
     // Button for going back
     private Button btnBack;
-
-    @FXML
-    private CheckBox chbSkills;
-
 
     /**
      * Handles the action of navigating to the HRM user interface.
@@ -51,11 +45,6 @@ public class GenerateTeamProposalGUI {
         handleHRM(btnBack);
     }
 
-    @FXML
-    public void handleReturn() {
-        Stage stage = (Stage) btnBack.getScene().getWindow();
-        stage.close();
-    }
     // Controller for generating a team
     private final GenerateTeamController controller;
 
@@ -78,48 +67,40 @@ public class GenerateTeamProposalGUI {
     private void initialize() {
         List<Skill> skills = skillsRepository.getAllSkills();
         for (Skill skill : skills) {
-            cbType.getItems().add(skill.getName());
+            cbSkills.getItems().add(skill.getName());
         }
     }
 
-    public List<Skill> handleAddSkills() {
-        loadUI("SelectSkills.fxml");
-        return Repositories.getInstance().getSkillsRepository().getAllSkills();
-    }
-
-
     /**
      * Handles the action of generating a team proposal.
-     * <p>
-     * It is triggered when the Generate Team Proposal button is clicked.
-     * It reads the minimum and maximum team sizes and the selected skill.
+     * It is triggered when the Generate button is clicked.
+     * It validates the entered team sizes and selected skill, generates a team with the specified sizes and skill, and registers the team.
+     * It displays a success message if the team is successfully generated and registered, or an error message if an error occurs.
      */
     @FXML
     private void handleGenerateTeamProposal() {
         try {
             int minTeamSize = Integer.parseInt(txtMinTeamSize.getText());
             int maxTeamSize = Integer.parseInt(txtMaxTeamSize.getText());
-            String selectedSkill = cbType.getValue();
+            String selectedSkill = cbSkills.getValue();
 
             if (selectedSkill == null || selectedSkill.isEmpty()) {
-                showAlert("Please select a skill.");
+                showAlert("Please select a skill.").showAndWait();
                 return;
             }
 
             Skill skill = skillsRepository.getSkillByName(selectedSkill);
-            List<Skill> teamSkills = List.of(skill);
+            List<Skill> teamSkills = new ArrayList<>(List.of(skill));
 
             Team team = controller.generateTeam(minTeamSize, maxTeamSize, teamSkills);
 
-            if(controller.registerTeam(team)){
-                showSuccess("Team successfully generated and registered.");
-            } else {
-                showAlert("Error generating team.");
-            }
+            controller.registerTeam(team);
+
+            showSuccess("Team generated and registered successfully.").showAndWait();
         } catch (NumberFormatException e) {
-            showAlert("Please enter valid team sizes.");
+            showAlert("Please enter valid team sizes.").showAndWait();
         } catch (Exception e) {
-            showAlert(e.getMessage());
+            showAlert(e.getMessage()).showAndWait();
         }
     }
 }
