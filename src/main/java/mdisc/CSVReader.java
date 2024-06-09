@@ -62,21 +62,9 @@ public class CSVReader {
         }
     }
 
-    public List<Pair<Vertice, Vertice>> readAssemblyPointsCsv(String fileName) {
-        List<Pair<Vertice, Vertice>> assemblyPoints = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] fields = line.split(";");
-                assemblyPoints.add(new Pair<>(new Vertice(fields[0]), new Vertice(fields[1])));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return assemblyPoints;
-    }
+
 
 
     public static void writePathsCSV(List<List<Vertice>> paths, String fileName) {
@@ -84,7 +72,7 @@ public class CSVReader {
 
             for (List<Vertice> path : paths) {
                 for (int i = 0; i < path.size(); i++) {
-                    writer.append(path.get(i).getName());
+                    writer.append(path.get(i).getVertice());
                     if (i < path.size() - 1) {
                         writer.append(";");
                     }

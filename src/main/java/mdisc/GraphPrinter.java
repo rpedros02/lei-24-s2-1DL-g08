@@ -76,7 +76,7 @@ public class GraphPrinter {
         GraphPrinter gp = new GraphPrinter(fileName);
 
         for (int i = 0; i < path.size() - 1; i++) {
-            gp.addln(path.get(i).getName() + " -- " + path.get(i + 1).getName());
+            gp.addln(path.get(i).getVertice() + " -- " + path.get(i + 1).getVertice());
         }
 
         gp.print();

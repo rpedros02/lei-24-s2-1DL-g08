@@ -1,4 +1,5 @@
 package mdisc;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -46,6 +47,19 @@ public class Grafo {
             }
         }
         return null;
+    }
+
+    public void sort(List<Aresta> arestas) {
+        int n = arestas.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arestas.get(j).compareTo(arestas.get(j + 1)) > 0) {
+                    Aresta temp = arestas.get(j);
+                    arestas.set(j, arestas.get(j + 1));
+                    arestas.set(j + 1, temp);
+                }
+            }
+        }
     }
 
     public int getNumVertices() {
@@ -114,6 +128,9 @@ public class Grafo {
         return new KruskalResult(spanningTree, totalCost);
     }
 
+
+
+
     public boolean arestaExists(String startVerticeName, String endVerticeName) {
         for (Aresta aresta : aresta) {
             Vertice start = aresta.getStartVertice();
@@ -154,35 +171,6 @@ public class Grafo {
         return previousVertices;
     }
 
-    public HashMap<Vertice, Vertice> DAColumnEntry(List<Vertice> sources) {
-        HashMap<Vertice, Double> shortestDistances = new HashMap<>();
-        HashMap<Vertice, Vertice> previousVertices = new HashMap<>();
-        PriorityQueue<Vertice> queue = new PriorityQueue<>(Comparator.comparingDouble(shortestDistances::get));
-
-        for (Vertice source : sources) {
-            shortestDistances.put(source, 0.0);
-            queue.add(source);
-        }
-
-        while (!queue.isEmpty()) {
-            Vertice current = queue.poll();
-
-            for (Aresta edge : aresta) {
-                if (edge.getStartVertice().equals(current)) {
-                    Vertice neighbor = edge.getEndVertice();
-                    double newDistance = shortestDistances.get(current) + edge.getCost();
-
-                    if (!shortestDistances.containsKey(neighbor) || newDistance < shortestDistances.get(neighbor)) {
-                        shortestDistances.put(neighbor, newDistance);
-                        previousVertices.put(neighbor, current);
-                        queue.add(neighbor);
-                    }
-                }
-            }
-        }
-
-        return previousVertices;
-    }
 
     public ArrayList<Vertice> shortestPathToNearestAssemblyPoint(Vertice start, List<Vertice> assemblyPoints) {
         ArrayList<Vertice> shortestPath = null;
@@ -238,9 +226,37 @@ public class Grafo {
         return 0.0;
     }
 
-    public void graphPng(String filename, String path) {
+    public void writeDotFile(String filename) {
+        StringBuilder dotContent = new StringBuilder();
+
+        dotContent.append("graph Graph1 {\n");
+        dotContent.append("  fontname=\"Helvetica,Arial,sans-serif\"\n");
+        dotContent.append("  node [fontname=\"Helvetica,Arial,sans-serif\"]\n");
+        dotContent.append("  edge [fontname=\"Helvetica,Arial,sans-serif\"]\n");
+        dotContent.append("  layout=neato\n");
+
+        for (Aresta aresta : this.aresta) {
+            dotContent.append("  ").append(aresta.getStartVertice()).append(" -- ").append(aresta.getEndVertice()).append(" [label=").append(aresta.getCost()).append("]\n");
+        }
+
+        dotContent.append("}\n");
+
+        String outputFilePath = "./scr/main/java/mdisc/us17" + filename + ".dot";
+
+        try (FileWriter writer = new FileWriter(outputFilePath)) {
+            writer.write(dotContent.toString());
+            System.out.println("Dot file written successfully!");
+        } catch (IOException e) {
+            System.err.println("Error writing dot file: " + e.getMessage());
+        }
+
+        graphPng(filename);
+    }
+
+
+    public void graphPng(String filename) {
         try {
-            String command = "dot -Tpng " + path + filename + ".dot -o " + path + filename + ".png";
+            String command =  "dot -Tpng ./scr/main/java/mdisc/us17" + filename + ".dot -o ./scr/main/java/mdisc/us17" + filename + ".png";
             Process process = Runtime.getRuntime().exec(command);
 
             int exitCode = process.waitFor();

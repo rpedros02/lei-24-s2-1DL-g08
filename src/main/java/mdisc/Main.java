@@ -183,7 +183,7 @@ public class Main {
 
         gp.addln("label=\"Cost of a minimum spanning tree = " + minimumCost + "\";");
         for (Aresta aresta : arestas) {
-            gp.addln(aresta.getStart() + " -- " + aresta.getEnd() + "[label=" + aresta.getWeight() + "]");
+            gp.addln(aresta.getStartVertice() + " -- " + aresta.getEndVertice() + "[label=" + aresta.getCost() + "]");
         }
 
         gp.print();
@@ -238,7 +238,7 @@ public class Main {
                 String filename = "shortest_path" + file.getName();
                 GraphPrinter.printShortestPath(shortestPath, filename);
                 String path = "./lei-24-s2-1DL-g08" + filename + ".csv";
-                grafico.graphPng(filename, path);
+                grafico.graphPng(filename);
             }
         }
     }
