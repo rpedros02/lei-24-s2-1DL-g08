@@ -24,7 +24,7 @@ public class UtilsGUI {
         } else if (role.hasId("vfm")) {
             return("/VfmGUI.fxml");
         } else{
-            return("/CollaboratorGUI.fxml");
+            return("/CollaboratorMenuGUI.fxml");
         }
     }
 

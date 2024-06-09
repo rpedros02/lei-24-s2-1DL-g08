@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.PostponeAnEntryController;
@@ -13,6 +14,8 @@ import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 
 import java.util.InputMismatchException;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class PostPoneAnEntryGUI {
 
@@ -28,6 +31,12 @@ public class PostPoneAnEntryGUI {
 
     @FXML
     private TextField txtYear;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleGsm() {
+        loadUI("/GsmGUI.fxml");
+    }
 
 
     private PostponeAnEntryController controller;

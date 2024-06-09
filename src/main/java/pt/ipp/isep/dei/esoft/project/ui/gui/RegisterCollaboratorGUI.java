@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -16,6 +17,8 @@ import pt.ipp.isep.dei.esoft.project.ui.console.utils.Utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class RegisterCollaboratorGUI {
 
@@ -49,6 +52,12 @@ public class RegisterCollaboratorGUI {
     private TextField txtTask;
     @FXML
     private ComboBox<Job> cbJob;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleHrm() {
+        loadUI("/HrmGUI.fxml");
+    }
 
 
     private CreateCollaboratorController createCollaboratorController;

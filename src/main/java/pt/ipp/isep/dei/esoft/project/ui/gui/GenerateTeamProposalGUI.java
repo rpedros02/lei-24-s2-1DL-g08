@@ -1,6 +1,7 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +12,8 @@ import pt.ipp.isep.dei.esoft.project.repository.SkillsRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class GenerateTeamProposalGUI {
 
@@ -25,6 +28,12 @@ public class GenerateTeamProposalGUI {
 
     @FXML
     private Label lblMessage;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleHrm() {
+        loadUI("/HrmGUI.fxml");
+    }
 
     private final GenerateTeamController controller;
     private final SkillsRepository skillsRepository;
@@ -37,10 +46,10 @@ public class GenerateTeamProposalGUI {
     @FXML
     private void initialize() {
         // Initialize ComboBox with skills
-        List<String> skills = skillsRepository.getAllSkills().stream()
-                .map(Skill::getName)
-                .collect(Collectors.toList());
-        cbType.getItems().addAll(skills);
+        List<Skill> skills = skillsRepository.getAllSkills();
+        for (Skill skill : skills) {
+            cbType.getItems().add(skill.getName());
+        }
     }
 
     @FXML

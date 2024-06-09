@@ -2,6 +2,7 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import pt.ipp.isep.dei.esoft.project.application.controller.AssignSkillController;
@@ -9,6 +10,8 @@ import pt.ipp.isep.dei.esoft.project.domain.Collaborator;
 import pt.ipp.isep.dei.esoft.project.domain.Skill;
 
 import java.util.List;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class AssignSkillsToCollaboratorGUI {
 
@@ -20,6 +23,12 @@ public class AssignSkillsToCollaboratorGUI {
 
     @FXML
     private Label lblMessage;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleHrm() {
+        loadUI("/HrmGUI.fxml");
+    }
 
     private final AssignSkillController controller;
 

@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -13,6 +14,8 @@ import pt.ipp.isep.dei.esoft.project.repository.AuthenticationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.GreenSpaceTypeRepository;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
 import pt.ipp.isep.dei.esoft.project.repository.Repositories;
+
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
 
 public class RegisterGreenSpaceGUI {
 
@@ -39,6 +42,12 @@ public class RegisterGreenSpaceGUI {
 
     @FXML
     private TextField txtDistrict;
+
+    @FXML
+    public void handleGsm() {
+        loadUI("/GsmGUI.fxml");
+    }
+
 
     private final AuthenticationRepository authenticationRepository;
 
@@ -102,7 +111,8 @@ public class RegisterGreenSpaceGUI {
 
         GreenSpaceTypeRepository type = GreenSpaceTypeRepository.valueOf(typeName.toUpperCase().replace(" ", "_"));
         String email = this.authenticationRepository.getCurrentUserSession().getUserId().getEmail();
-        Collaborator gsm = OrganizationRepository.getInstance().getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
+        OrganizationRepository organizationRepository = Repositories.getInstance().getOrganizationRepository();
+        Collaborator gsm = organizationRepository.getOrganizationByEmployeeEmail(email).getCollaboratorByEmail(email);
 
         if (controller.registerGreenSpace(name, type, area, address, gsm)) {
             Alert alert = new Alert(AlertType.INFORMATION);
@@ -121,5 +131,7 @@ public class RegisterGreenSpaceGUI {
             alert.setContentText("Failed to add green space. Green space already exists.");
             alert.showAndWait();
         }
+        UtilsGUI.loadUI("/GsmGUI.fxml");
     }
+
 }

@@ -1,16 +1,23 @@
 package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Entry;
-import pt.ipp.isep.dei.esoft.project.application.controller.AgendaController;
 
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.loadUI;
+
 public class ConsultTheTasksAssignInTheBetweenDatesGUI {
+
     @FXML
     private DatePicker initialDatePicker;
 
@@ -18,27 +25,51 @@ public class ConsultTheTasksAssignInTheBetweenDatesGUI {
     private DatePicker endDatePicker;
 
     @FXML
-    private ListView<Entry> agendaListView;
-
-    private final AgendaController agendaController;
-
-    public ConsultTheTasksAssignInTheBetweenDatesGUI() {
-        this.agendaController = new AgendaController();
+    private ListView<String> agendaListView;
+    @FXML
+    private Button btnBack;
+    @FXML
+    public void handleCollaboratorMenu() {
+        loadUI("/CollaboratorMenuGUI.fxml");
     }
+
+    private final AgendaController agendaController = new AgendaController();
 
     @FXML
     private void handleConsultTheTasksAssignInTheBetweenDates() {
-        Date beginDate = getDateFromDatePicker(initialDatePicker);
-        Date endDate = getDateFromDatePicker(endDatePicker);
+        LocalDate initialDate = initialDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
 
-        List<Entry> entries = agendaController.getEntriesBetweenDates(beginDate, endDate);
-        agendaListView.getItems().setAll(entries);
+        if (initialDate == null || endDate == null) {
+            showAlert("Error", "Please select both dates.", AlertType.ERROR);
+            return;
+        }
+
+        Date beginDate = convertToDate(initialDate);
+        Date endDateDomain = convertToDate(endDate);
+
+        List<Entry> entries = agendaController.getEntriesBetweenDates(beginDate, endDateDomain);
+
+        agendaListView.getItems().clear();
+
+        if (entries.isEmpty()) {
+            showAlert("No Entries", "No tasks found between the given dates.", AlertType.INFORMATION);
+        } else {
+            for (Entry entry : entries) {
+                agendaListView.getItems().add(entry.toString());
+            }
+        }
     }
 
-    private Date getDateFromDatePicker(DatePicker datePicker) {
-        int day = datePicker.getValue().getDayOfMonth();
-        int month = datePicker.getValue().getMonthValue();
-        int year = datePicker.getValue().getYear();
-        return new Date(day, month, year);
+    private Date convertToDate(LocalDate localDate) {
+        return new Date(localDate.getDayOfMonth(), localDate.getMonthValue(), localDate.getYear());
+    }
+
+    private void showAlert(String title, String message, AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

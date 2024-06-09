@@ -15,6 +15,7 @@
                 <Label text="Enter the name of the team to assign:"/>
                 <TextField fx:id="teamNameTextField"/>
                 <Button text="Assign Team" onAction="#handleAssignTeam"/>
+                <Button fx:id="btnMainMenu" onAction="#handleGsm" style="-fx-background-color: rgb(153,102,51); -fx-font-size: 12;" text="Back" textFill="WHITE" />
             </children>
         </VBox>
     </children>

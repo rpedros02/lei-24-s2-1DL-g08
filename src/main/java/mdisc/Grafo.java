@@ -1,5 +1,12 @@
 package mdisc;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.PriorityQueue;
+import java.util.List;
+import java.util.Collections;
 
 public class Grafo {
     private ArrayList<Vertice> vertices;
@@ -11,7 +18,6 @@ public class Grafo {
     }
 
     public void addVertice(String verticeName) {
-        // Checks if the vertex already exists before adding it
         if (!verticeExists(verticeName)) {
             vertices.add(new Vertice(verticeName));
         }
@@ -27,7 +33,7 @@ public class Grafo {
 
     public boolean verticeExists(String verticeName) {
         for (Vertice vertice : vertices) {
-            if (vertice.getName().equals(verticeName)) {
+            if (vertice.getVertice().equals(verticeName)) {
                 return true;
             }
         }
@@ -36,11 +42,24 @@ public class Grafo {
 
     public Vertice findVertice(String verticeName) {
         for (Vertice vertice : vertices) {
-            if (vertice.getName().equals(verticeName)) {
+            if (vertice.getVertice().equals(verticeName)) {
                 return vertice;
             }
         }
         return null;
+    }
+
+    public void sort(List<Aresta> arestas) {
+        int n = arestas.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arestas.get(j).compareTo(arestas.get(j + 1)) > 0) {
+                    Aresta temp = arestas.get(j);
+                    arestas.set(j, arestas.get(j + 1));
+                    arestas.set(j + 1, temp);
+                }
+            }
+        }
     }
 
     public int getNumVertices() {
@@ -78,11 +97,9 @@ public class Grafo {
         ArrayList<Aresta> sortedArestas = new ArrayList<>(this.aresta);
         double totalCost = 0.0;
 
-        // Manual sorting of edges by weight
         for (int i = 0; i < sortedArestas.size() - 1; i++) {
             for (int j = 0; j < sortedArestas.size() - i - 1; j++) {
-                if (sortedArestas.get(j).getWeight() > sortedArestas.get(j + 1).getWeight()) {
-                    // Swap edges positions
+                if (sortedArestas.get(j).getCost() > sortedArestas.get(j + 1).getCost()) {
                     Aresta temp = sortedArestas.get(j);
                     sortedArestas.set(j, sortedArestas.get(j + 1));
                     sortedArestas.set(j + 1, temp);
@@ -90,14 +107,12 @@ public class Grafo {
             }
         }
 
-        // Set to store visited vertices
         DisjointSet disjointSet = new DisjointSet(this.vertices.size());
 
         for (Aresta aresta : sortedArestas) {
-            Vertice start = aresta.getStart();
-            Vertice end = aresta.getEnd();
+            Vertice start = aresta.getStartVertice();
+            Vertice end = aresta.getEndVertice();
 
-            // Check that adding this edge doesn't create a cycle
             int indexStart = vertices.indexOf(start);
             int indexEnd = vertices.indexOf(end);
 
@@ -105,7 +120,7 @@ public class Grafo {
                     disjointSet.find(vertices.indexOf(start)) !=
                             disjointSet.find(vertices.indexOf(end))) {
                 spanningTree.add(aresta);
-                totalCost += aresta.getWeight();
+                totalCost += aresta.getCost();
                 disjointSet.union(vertices.indexOf(start), vertices.indexOf(end));
             }
         }
@@ -113,18 +128,141 @@ public class Grafo {
         return new KruskalResult(spanningTree, totalCost);
     }
 
+
+
+
     public boolean arestaExists(String startVerticeName, String endVerticeName) {
         for (Aresta aresta : aresta) {
-            Vertice start = aresta.getStart();
-            Vertice end = aresta.getEnd();
-            if (start.getName().equals(startVerticeName) && end.getName().equals(endVerticeName)) {
+            Vertice start = aresta.getStartVertice();
+            Vertice end = aresta.getEndVertice();
+            if (start.getVertice().equals(startVerticeName) && end.getVertice().equals(endVerticeName)) {
                 return true;
             }
-            // If the edges are bidirectional (origin->destination and destination->origin), we can also check if the aresta exists in the opposite direction.
-            if (start.getName().equals(endVerticeName) && end.getName().equals(startVerticeName)) {
+            if (start.getVertice().equals(endVerticeName) && end.getVertice().equals(startVerticeName)) {
                 return true;
             }
         }
         return false;
     }
+
+    public HashMap<Vertice, Vertice> dijkstra(Vertice source) {
+        HashMap<Vertice, Double> shortestDistances = new HashMap<>();
+        HashMap<Vertice, Vertice> previousVertices = new HashMap<>();
+        PriorityQueue<Vertice> queue = new PriorityQueue<>(Comparator.comparingDouble(shortestDistances::get));
+        shortestDistances.put(source, 0.0);
+
+        while (!queue.isEmpty()) {
+            Vertice current = queue.poll();
+
+            for (Aresta edge : aresta) {
+                if (edge.getStartVertice().equals(current)) {
+                    Vertice neighbor = edge.getEndVertice();
+                    double newDistance = shortestDistances.get(current) + edge.getCost();
+
+                    if (!shortestDistances.containsKey(neighbor) || newDistance < shortestDistances.get(neighbor)) {
+                        shortestDistances.put(neighbor, newDistance);
+                        previousVertices.put(neighbor, current);
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return previousVertices;
+    }
+
+
+
+    public List<Vertice> reconstructPath(HashMap<Vertice, Vertice> previousVertices, Vertice destination) {
+        List<Vertice> path = new ArrayList<>();
+        Vertice current = destination;
+
+        while (current != null) {
+            path.add(current);
+            current = previousVertices.get(current);
+        }
+
+        Collections.reverse(path);
+
+        return path;
+    }
+
+    public double calculateDistance(List<Vertice> path) {
+        double distance = 0.0;
+
+        for (int i = 0; i < path.size() - 1; i++) {
+            Vertice v1 = path.get(i);
+            Vertice v2 = path.get(i + 1);
+            distance += getEdgeWeight(v1, v2);
+        }
+
+        return distance;
+    }
+
+    public double getEdgeWeight(Vertice v1, Vertice v2) {
+        for (Aresta edge : aresta) {
+            if ((edge.getStartVertice().equals(v1) && edge.getEndVertice().equals(v2)) ||
+                    (edge.getStartVertice().equals(v2) && edge.getEndVertice().equals(v1))) {
+                return edge.getCost();
+            }
+        }
+        return 0.0;
+    }
+    public void writeCSVFile(String filename) {
+        StringBuilder csvContent = new StringBuilder();
+        float totalCost = 0;
+
+        for (Aresta aresta : this.aresta) {
+            float cost = (float) aresta.getCost();
+            csvContent.append(aresta.getStartVertice().getVertice()).append(";").append(aresta.getEndVertice().getVertice()).append(";").append(cost).append("\n");
+            totalCost += cost;
+        }
+    }
+
+    public void writeDotFile(String filename) {
+        StringBuilder dotContent = new StringBuilder();
+
+        dotContent.append("graph Graph1 {\n");
+        dotContent.append("  fontname=\"Helvetica,Arial,sans-serif\"\n");
+        dotContent.append("  node [fontname=\"Helvetica,Arial,sans-serif\"]\n");
+        dotContent.append("  edge [fontname=\"Helvetica,Arial,sans-serif\"]\n");
+        dotContent.append("  layout=neato\n");
+
+        for (Aresta aresta : this.aresta) {
+            dotContent.append("  ").append(aresta.getStartVertice()).append(" -- ").append(aresta.getEndVertice()).append(" [label=").append(aresta.getCost()).append("]\n");
+        }
+
+        dotContent.append("}\n");
+
+        String outputFilePath = "./scr/main/java/mdisc/us17" + filename + ".dot";
+
+        try (FileWriter writer = new FileWriter(outputFilePath)) {
+            writer.write(dotContent.toString());
+            System.out.println("Dot file written successfully!");
+        } catch (IOException e) {
+            System.err.println("Error writing dot file: " + e.getMessage());
+        }
+
+        graphPng(filename);
+    }
+
+
+    public void graphPng(String filename) {
+        try {
+            String command =  "dot -Tpng ./scr/main/java/mdisc/us17" + filename + ".dot -o ./scr/main/java/mdisc/us17" + filename + ".png";
+            Process process = Runtime.getRuntime().exec(command);
+
+            int exitCode = process.waitFor();
+
+            if (exitCode == 0) {
+                System.out.println("New PNG file added");
+            } else {
+                System.out.println("Error executing the command. Exit code: " + exitCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("An error occurred while executing the command: " + e.getMessage());
+        }
+    }
+
 }
+
