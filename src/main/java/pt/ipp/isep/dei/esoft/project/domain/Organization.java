@@ -3,6 +3,7 @@ package pt.ipp.isep.dei.esoft.project.domain;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.EStatus;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.IdDocType;
 import pt.ipp.isep.dei.esoft.project.domain.Enums.DegreeOfUrgency;
+import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class Organization {
     private String phone;
     private String email;
     private final List<Team> teams;
+    private final VehicleCheckupRepository checkupRepository;
 
     /**
      * Constructs an Organization object with the specified vatNumber.
@@ -43,6 +45,7 @@ public class Organization {
         agenda = new Agenda();
         toDoList = new ToDoList();
         teams = new ArrayList<>();
+        checkupRepository = new VehicleCheckupRepository();
     }
 
     /**
@@ -515,5 +518,13 @@ public class Organization {
 
     public List<Task> getTasks() {
         return tasks;
+    }
+
+    public VehicleRepository getVehicles() {
+        return vehicles;
+    }
+
+    public VehicleCheckupRepository getVehicleCheckups() {
+        return checkupRepository;
     }
 }

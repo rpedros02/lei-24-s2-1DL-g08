@@ -13,29 +13,16 @@ public class VehicleController {
     /**
      * The VehicleRepository object.
      */
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
 
     /**
      * Constructs a new VehicleController.
      * It initializes the vehicleRepository by calling the getVehicleRepository method.
      */
     public VehicleController() {
-        getVehicleRepository();
+        this.vehicleRepository = Repositories.getInstance().getVehicleRepository();
     }
 
-    /**
-     * Returns the VehicleRepository object.
-     * If the vehicleRepository is null, it retrieves the VehicleRepository from the Repositories singleton and assigns it to vehicleRepository.
-     *
-     * @return the VehicleRepository object
-     */
-    public VehicleRepository getVehicleRepository() {
-        if (vehicleRepository == null) {
-            Repositories repositories = Repositories.getInstance();
-            vehicleRepository = repositories.getVehicleRepository();
-        }
-        return vehicleRepository;
-    }
 
     /**
      * Creates a new Vehicle and adds it to the VehicleRepository.
@@ -65,6 +52,10 @@ public class VehicleController {
         } else {
             return null;
         }
+    }
+
+    public VehicleRepository getVehicleRepository() {
+        return vehicleRepository;
     }
 }
 

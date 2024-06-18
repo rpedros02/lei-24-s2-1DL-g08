@@ -25,9 +25,7 @@ public class GraphPrinter {
     public void add(String text) {
         graphBuilder.append(text);
     }
-    public void addnewln() {
-        graphBuilder.append("\n");
-    }
+
     /**
      * Creates an output dot file and uses that to create graphviz png output using following command
      * dot -Tpng <filePrefix>.dot -o <filePrefix>.png

@@ -17,7 +17,7 @@ public class PostponeAnEntryControllerTest {
 
     public void setUp() {
         agenda = new Agenda(new ArrayList<>());
-    controller = new PostponeAnEntryController(agenda);
+    controller = new PostponeAnEntryController();
 
     Entry entry = new Entry(
             "Test Entry", "Test Description", DegreeOfUrgency.LOW,

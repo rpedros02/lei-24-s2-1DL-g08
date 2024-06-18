@@ -29,7 +29,6 @@ public class Bootstrap implements Runnable {
         addJobs();
         addUsers();
         addVehicle();
-        addVehicleMaintenance();
         addGreenSpaces();
         addAgendaEntries();
     }
@@ -56,6 +55,7 @@ public class Bootstrap implements Runnable {
                     i * 5000
             );
             vehicleRepository.addVehicle(vehicle);
+            addVehicleMaintenance(vehicle);
         }
     }
 
@@ -73,11 +73,10 @@ public class Bootstrap implements Runnable {
     /**
      * This method adds some default vehicle checkups to the application.
      */
-    private void addVehicleMaintenance() {
+    private void addVehicleMaintenance(Vehicle vehicle) {
         VehicleCheckupRepository checkupRepository = Repositories.getInstance().getVehicleCheckupRepository();
-        Random random = new Random();
-        for (int i = 1; i <= 10; i++) {
-            String vehicleId = generatePlateId(random);
+        for (int i = 1; i <= 3; i++) {
+            String vehicleId = vehicle.getPlateId();
             VehicleCheckup vehicleCheckup = new VehicleCheckup(
                     vehicleId,
                     new Date(12, 6, 2024),

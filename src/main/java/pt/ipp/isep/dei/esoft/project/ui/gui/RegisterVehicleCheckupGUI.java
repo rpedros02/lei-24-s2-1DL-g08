@@ -2,10 +2,13 @@ package pt.ipp.isep.dei.esoft.project.ui.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import pt.ipp.isep.dei.esoft.project.application.controller.VehicleCheckupController;
+import pt.ipp.isep.dei.esoft.project.application.controller.VehicleController;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
+import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 
 import static pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI.*;
 
@@ -16,7 +19,7 @@ public class RegisterVehicleCheckupGUI {
 
     @FXML
     // TextField for entering the vehicle's plate ID
-    private TextField txtPlateId;
+    private ChoiceBox<String> cbPlateId;
 
     @FXML
     // DatePicker for selecting the checkup's register date
@@ -41,13 +44,17 @@ public class RegisterVehicleCheckupGUI {
     }
 
     // Controller for managing vehicle checkups
-    private final VehicleCheckupController controller;
+    private final VehicleCheckupController controller = new VehicleCheckupController();
+    private final VehicleController vehicleController = new VehicleController();;
 
     /**
-     * Constructs a RegisterVehicleCheckupGUI with a VehicleCheckupController.
+     * Initializes the controller's choice box with the vehicle's plate IDs.
      */
-    public RegisterVehicleCheckupGUI() {
-        this.controller = new VehicleCheckupController();
+    @FXML
+    public void initialize() {
+        for (Vehicle v :vehicleController.getVehicleRepository().getVehicles()) {
+            cbPlateId.getItems().add(v.getPlateId());
+        }
     }
 
     /**
@@ -57,7 +64,7 @@ public class RegisterVehicleCheckupGUI {
      */
     @FXML
     private void handleRegisterVehicleCheckup() {
-        String plateId = txtPlateId.getText();
+        String plateId = cbPlateId.getValue();
         Date date = convertToDate(dpRegisterDate.getValue());
         int lastVehicleCheckUpKm = Integer.parseInt(txtLastVehicleCheckUpKm.getText());
 
@@ -69,4 +76,6 @@ public class RegisterVehicleCheckupGUI {
             showAlert("An error occurred while registering the check-up.").showAndWait();
         }
     }
+
+
 }

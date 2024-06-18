@@ -3,8 +3,10 @@ package pt.ipp.isep.dei.esoft.project.application.controller;
 import pt.ipp.isep.dei.esoft.project.domain.Date;
 import pt.ipp.isep.dei.esoft.project.domain.Vehicle;
 import pt.ipp.isep.dei.esoft.project.repository.OrganizationRepository;
+import pt.ipp.isep.dei.esoft.project.repository.Repositories;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleCheckupRepository;
 import pt.ipp.isep.dei.esoft.project.repository.VehicleRepository;
+import pt.ipp.isep.dei.esoft.project.ui.gui.UtilsGUI;
 
 /**
  * This class represents a VehicleCheckupController in the system.
@@ -31,9 +33,9 @@ public class VehicleCheckupController {
      * and the vehicleRepository as a new VehicleRepository object.
      */
     public VehicleCheckupController() {
-        this.organizationRepository = OrganizationRepository.getInstance();
-        this.vehicleCheckupRepository = new VehicleCheckupRepository();
-        this.vehicleRepository = new VehicleRepository();
+        this.organizationRepository = Repositories.getInstance().getOrganizationRepository();
+        this.vehicleCheckupRepository = organizationRepository.getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getVehicleCheckups();
+        this.vehicleRepository = organizationRepository.getOrganizationByEmployeeEmail(UtilsGUI.getLoggedInUserEmail()).getVehicles();
     }
 
     /**
